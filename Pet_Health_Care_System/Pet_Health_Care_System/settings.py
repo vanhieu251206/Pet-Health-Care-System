@@ -75,8 +75,12 @@ WSGI_APPLICATION = 'Pet_Health_Care_System.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',  # Sử dụng MySQL
+        'NAME': 'pet_health_care_system',  # Tên cơ sở dữ liệu của bạn
+        'USER': 'root',  # Tên người dùng MySQL
+        'PASSWORD': 'VanHieu25122006',  # Mật khẩu người dùng MySQL
+        'HOST': 'localhost',  # Địa chỉ máy chủ (nếu dùng MySQL cục bộ)
+        'PORT': '3306',  # Cổng MySQL (mặc định là 3306)
     }
 }
 
