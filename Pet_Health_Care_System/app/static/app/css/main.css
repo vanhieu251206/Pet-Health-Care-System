@@ -1,0 +1,175 @@
+body{
+	background-color: hsl(0, 0%, 98%);
+}
+
+h1,h2,h3,h4,h5,h6{
+	color:hsl(0, 0%, 30%);
+}
+
+
+
+.box-element{
+	padding: 10px;
+    background-color: #fff;
+    border: 1px solid hsl(0, 0%, 85%);
+    border-radius: 5px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.thumbnail{
+	width: 100%; /* Tự động phù hợp với kích thước của khung */
+    max-width: 250px; /* Giới hạn chiều rộng tối đa */
+    height: auto; /* Giữ tỷ lệ ảnh */
+    margin: 0 auto 10px; /* Căn giữa và thêm khoảng cách bên dưới */
+    border-radius: 5px; /* Bo góc ảnh */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Đổ bóng nhẹ */
+}
+
+.product{
+	border-radius: 0 0 4px 4px;
+}
+
+.bg-dark{
+	background-color: #4f868c !important;
+}
+
+#cart-icon{
+	width:25px;
+	display: inline-block;
+	margin-left: 15px;
+}
+
+#cart-total{
+	display: block;
+	text-align: center;
+	color:#fff;
+	background-color: red;
+	width: 20px;
+	height: 25px;
+	border-radius: 50%;
+	font-size: 14px;
+}
+
+.col-lg-3, .col-lg-4, .col-lg-6, .col-lg-8, .col-lg-12{
+	margin-top: 20px;
+}
+
+.btn{
+	border-radius: 0;
+}
+
+.row-image{
+	width: 100px;
+}
+
+.form-field{
+	width:250px;
+	display: inline-block;
+	padding: 5px;
+}
+
+.cart-row{
+	display: flex;
+    align-items: flex-stretch;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #ececec;
+
+}
+
+.quantity{
+	display: inline-block;
+	font-weight: 700;
+	padding-right:10px;
+	
+
+}
+
+.chg-quantity{
+	width: 12px;
+	cursor: pointer;
+	display: block;
+	margin-top: 5px;
+	transition:.1s;
+}
+
+.chg-quantity:hover{
+	opacity: .6;
+}
+
+
+.hidden{
+	display: none!important;
+}
+
+/* Định dạng sản phẩm tổng quát */
+.col-lg-3 {
+    margin-top: 20px;
+    text-align: center; /* Căn giữa nội dung trong cột */
+}
+
+/* Định dạng hình ảnh sản phẩm */
+.thumbnail {
+    width: 100%; /* Tự động phù hợp với kích thước của khung */
+    max-width: 250px; /* Giới hạn chiều rộng tối đa */
+    height: auto; /* Giữ tỷ lệ ảnh */
+    margin: 0 auto 10px; /* Căn giữa và thêm khoảng cách bên dưới */
+    border-radius: 5px; /* Bo góc ảnh */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Đổ bóng nhẹ */
+}
+
+/* Khung chi tiết sản phẩm */
+.box-element {
+    padding: 10px;
+    background-color: #fff;
+    border: 1px solid hsl(0, 0%, 85%);
+    border-radius: 5px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Tên sản phẩm */
+.box-element h6 {
+    font-size: 16px;
+    color: hsl(0, 0%, 30%);
+    margin-bottom: 10px;
+}
+
+/* Đường kẻ ngang */
+.box-element hr {
+    border: none;
+    border-top: 1px solid hsl(0, 0%, 85%);
+    margin: 10px 0;
+}
+
+/* Nút bấm */
+.box-element .btn {
+    margin: 5px;
+    padding: 5px 10px;
+    font-size: 14px;
+    border-radius: 5px;
+}
+
+/* Giá sản phẩm */
+.box-element h4 {
+    font-size: 18px;
+    margin-top: 10px;
+    color: hsl(0, 0%, 0%);
+}
+
+.search-bar .input-group {
+    width: 100%;
+    max-width: 300px; /* Tùy chỉnh kích thước thanh tìm kiếm */
+    margin: 0 auto; /* Căn giữa thanh tìm kiếm */
+}
+
+.search-bar .form-control {
+    border-radius: 5px 0 0 5px; /* Bo tròn bên trái */
+}
+
+.search-bar .btn {
+    border-radius: 0 5px 5px 0; /* Bo tròn bên phải */
+    padding: 5px 20px; /* Tùy chỉnh khoảng cách bên trong nút */
+}
+
+
+  
