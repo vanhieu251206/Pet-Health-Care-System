@@ -43,7 +43,7 @@
               <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                   <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Trang chủ</a>
+                    <a class="nav-link active" aria-current="page" href="{% url "guest_page" %}">Trang chủ</a>
                   </li>
                   <li class="nav-item dropdown">
                     <a class="nav-link  dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -85,7 +85,7 @@
                   </a>
                   <ul class="dropdown-menu">
                     <li><a class="dropdown-item" href="#">Đăng ký</a></li>
-                    <li><a class="dropdown-item" href="{% url "login_page" %}">Đăng nhập</a></li>
+                    <li><a class="dropdown-item" href="{% url "select_role" %}">Đăng nhập</a></li>
                   </ul>
                 </li>
                 <li class="nav-item">
@@ -101,7 +101,8 @@
         {% block cart_content %} {% endblock cart_content %}
         {% block checkout_content %} {% endblock checkout_content %} 
         {% block login_page %}{% endblock login_page %}
-
+        {% block select_role %}{% endblock select_role %}
+        {% block bashboard_customer %}{% endblock bashboard_customer %}
         <!-- footer -->
         <footer>
           <div class="footer-container">

@@ -92,8 +92,11 @@
 <div class="login-page-container">
     <div class="login-container">
         <h2>Đăng Nhập</h2>
-        <form action="{% url 'login_page' %}" method="POST">
+        <form action="{% url 'login_view' %}" method="POST">
             {% csrf_token %}
+            <!-- Input hidden để lưu vai trò -->
+            <input type="hidden" name="role" value="{{ role }}">
+            
             <div class="mb-3">
                 <label for="username" class="form-label">Tên đăng nhập</label>
                 <input type="text" id="username" name="username" class="form-control" placeholder="Nhập tên đăng nhập" required>
@@ -106,6 +109,7 @@
                 <a href="#">Quên mật khẩu?</a>
             </div>
             <button type="submit" class="btn btn-primary">Đăng Nhập</button>
+        </form>
         </form>
         <p class="text-center mt-3">Chưa có tài khoản? <a href="#">Đăng ký</a></p>
     </div>
