@@ -2,5 +2,7 @@ from django.urls import path,include
 from . import views
 
 urlpatterns = [
-    path('', views.guest_page, name = "guest_page"),
+    path('', views.index, name = "index"),
+    path('login/', views.login, name = "login"),
+    path('quenmk/', views.quenmk, name = "quenmk"),
 ]
