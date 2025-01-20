@@ -1,6 +1,9 @@
 import os
 from dotenv import load_dotenv
 from pathlib import Path
+import pymysql
+pymysql.install_as_MySQLdb()
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -73,12 +76,12 @@ load_dotenv()
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',  
-        'NAME': os.getenv('DB_NAME'), 
-        'USER': os.getenv('DB_USER'),  
-        'PASSWORD': os.getenv('DB_PASSWORD'),  
-        'HOST': os.getenv('DB_HOST'), 
-        'PORT': os.getenv('DB_PORT'),  
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': os.getenv('DB_NAME', 'DBase'),  # Tên cơ sở dữ liệu
+        'USER': os.getenv('DB_USER', 'abc'),                # Người dùng MySQL
+        'PASSWORD': os.getenv('DB_PASSWORD', 'petscare'),            # Mật khẩu MySQL
+        'HOST': os.getenv('DB_HOST', '127.0.0.1'),           # Máy chủ MySQL
+        'PORT': os.getenv('DB_PORT', '3306'),                # Cổng MySQL
     }
 }
 
