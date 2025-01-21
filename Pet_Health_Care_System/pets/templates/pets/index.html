@@ -1,294 +1,267 @@
-{% load static %}
-<html lang="en">
+<html lang="vi">
  <head>
   <meta charset="utf-8"/>
   <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
   <title>
-   Pets Care
+   Pet Health Care System
   </title>
   <script src="https://cdn.tailwindcss.com">
   </script>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&amp;display=swap" rel="stylesheet"/>
+  <script>
+   document.addEventListener('DOMContentLoaded', function () {
+     const toggleButtons = document.querySelectorAll('.toggle-submenu');
+     toggleButtons.forEach(button => {
+       button.addEventListener('click', function () {
+         const submenu = this.nextElementSibling;
+         submenu.classList.toggle('hidden');
+         const icon = this.querySelector('i');
+         icon.classList.toggle('fa-plus');
+         icon.classList.toggle('fa-minus');
+       });
+     });
+   });
+  </script>
  </head>
- <body class="bg-gray-100 font-sans antialiased">
-  <div class="flex">
-   <!-- Sidebar -->
-   <div class="bg-white text-white w-64 min-h-screen">
-    <div class="p-4 flex items-center">
-     <img alt="Logo" class="mr-2" src="{% static "pets/img/logo.png" %}" width="50px" height="50px"/>
-     <span class="text-xl font-bold text-[#ff914d]">
-      Pets Care
-     </span>
+ <body class="font-roboto bg-gray-100">
+  <header class="bg-orange-600 text-white p-4">
+   <div class="container mx-auto flex justify-between items-center">
+    <div class="flex items-center space-x-4">
+     <img alt="Logo của hệ thống chăm sóc thú cưng" class="h-10" height="100" src="" width="100"/>
+     <h1 class="text-2xl font-bold">
+      Pet Health Care System
+     </h1>
     </div>
-    <!-- Menu -->
-    <nav class="mt-4">
-      <ul class="text-black">
-        <li class="px-4 py-2 hover:bg-orange-300 cursor-pointer">
-        Trang chủ
-        </li>
-        <li class="relative">
-            <div
-              class="flex justify-between items-center px-4 py-2 hover:bg-orange-300 cursor-pointer"
-              onclick="toggleDropdown('services-menu-1', 'toggle-icon-1')"
-            >
-              <span>Dịch vụ khám chữa bệnh</span>
-              <span id="toggle-icon-1" class="font-bold text-lg cursor-pointer">+</span>
-            </div>
-            <ul id="services-menu-1" class="hidden">
-              <li class="px-6 py-2 hover:bg-orange-300 cursor-pointer"><a href="#">Đặt lịch khám</a></li>
-              <li class="px-6 py-2 hover:bg-orange-300 cursor-pointer">Danh sách bác sĩ/thú y</li>
-              <li class="px-6 py-2 hover:bg-orange-300 cursor-pointer">
-                Các gói dịch vụ (khám tổng quát, tiêm phòng, điều trị bệnh...)
-              </li>
-            </ul>
-          </li>
-          <li class="relative">
-            <div
-              class="flex justify-between items-center px-4 py-2 hover:bg-orange-300 cursor-pointer"
-              onclick="toggleDropdown('services-menu-2', 'toggle-icon-2')"
-            >
-              <span>Sản phẩm cho thú cưng</span>
-              <span id="toggle-icon-2" class="font-bold text-lg cursor-pointer">+</span>
-            </div>
-            <ul id="services-menu-2" class="hidden">
-              <li class="px-6 py-2 hover:bg-orange-300 cursor-pointer">Thức ăn</li>
-              <li class="px-6 py-2 hover:bg-orange-300 cursor-pointer">Đồ chơi</li>
-              <li class="px-6 py-2 hover:bg-orange-300 cursor-pointer">Phụ kiện (vòng cổ, quần áo...)</li>
-              <li class="px-6 py-2 hover:bg-orange-300 cursor-pointer">
-                Dược phẩm và sản phẩm chăm sóc sức khỏe
-              </li>
-            </ul>
-          </li>
-          <li class="px-4 py-2 hover:bg-orange-300 cursor-pointer">
-            <a href="{% url 'gioithieu'%}">Giới thiệu</a>
-          </li>
-      </ul>
+   </div>
+   <nav class="mt-4">
+    <ul class="flex justify-center space-x-4">
+     <li>
+      <a class="hover:underline" href="#">
+       Trang chủ
+      </a>
+     </li>
+     <li>
+      <a class="hover:underline" href="/dichvu">
+       Dịch vụ
+      </a>
+     </li>
+     <li>
+      <!-- Liên kết -->
+<a class="hover:underline" href="/gioithieu">Giới thiệu</a>
 
-      <script>
-        function toggleDropdown(menuId, iconId) {
-            const menu = document.getElementById(menuId);
-            const icon = document.getElementById(iconId);
-          
-            if (menu.classList.contains("hidden")) {
-              menu.classList.remove("hidden"); // Hiển thị menu
-              icon.textContent = "-"; // Đổi dấu thành trừ
-            } else {
-              menu.classList.add("hidden"); // Ẩn menu
-              icon.textContent = "+"; // Đổi dấu thành cộng
-            }
-          }          
-      </script>
+     </li>
+     <li>
+      <a class="hover:underline" href="/lienhe">
+       Liên hệ
+      </a>
+     </li>
+     <li>
+      <!-- Liên kết -->
+<a class="hover:underline" href="/login">Đăng nhập/</a>
+<a class="hover:underline" href="/dangki">Đăng ký</a>
+     </li>
+    </ul>
+   </nav>
+  </header>
+  <div class="container mx-auto p-4 flex">
+   <aside class="w-1/4 bg-white p-6 rounded-lg shadow-lg">
+    <h2 class="text-xl font-bold mb-4">
+     Danh mục
+    </h2>
+    <ul class="space-y-2">
+      <li>
+        <!-- Thay button bằng thẻ <a> có liên kết -->
+        <a 
+            class="hover:underline focus:outline-none w-full text-left flex items-center justify-between" 
+            href="/muasam"
+        >
+            <span>Mua sắm</span>
+            <i class="fas fa-plus"></i>
+        </a>
+        <!-- Danh sách con -->
+        <ul class="pl-4 space-y-1 hidden">
+            <li>
+                <a class="hover:underline" href="thuc-an-thu-cung.html">
+                    Thức ăn cho thú cưng
+                </a>
+            </li>
+            <li>
+                <a class="hover:underline" href="do-choi-phu-kien.html">
+                    Đồ chơi và phụ kiện
+                </a>
+            </li>
+        </ul>
+    </li>
     
-    <div class="mt-auto p-4">
-     <div class="flex justify-between">
-      <img alt="App Store" class="mr-2" src="https://placehold.co/100x40"/>
-      <img alt="Google Play" src="https://placehold.co/100x40"/>
-     </div>
-    </div>
-   </div>
-   <!-- Main Content -->
-   <div class="flex-1 p-6">
-    <div class="flex justify-end items-center mb-4">
-     <div class="flex items-center">
-      <button class="mr-4">
-       Hỗ trợ
+      </ul>
+     </li>
+     <li>
+      <button class="toggle-submenu hover:underline focus:outline-none w-full text-left flex items-center justify-between">
+       <span>Dịch vụ khám chữa bệnh</span>
+       <i class="fas fa-plus"></i>
       </button>
-      <button class="mr-4">
-       Góp ý
-      </button>
-      <button class="mr-4">
-       EN
-      </button>
-      <button class="mr-4">
-       VI
-      </button>
-      <div class="flex items-center">
-       <img alt="User Avatar" class="rounded-full mr-2" src="{% static "pets/img/guest_avatar.jpg" %}" width="30px" height="30px" />
-       <a href="{% url'login'%}">Đăng nhập</a>
-      </div>
-     </div>
-    </div>
-    <div class="grid grid-cols-3 gap-4 mb-6">
-     <div class="bg-white p-4 rounded shadow">
-      <div class="flex items-center">
-       <i class="fas fa-exclamation-circle text-red-500 mr-2">
-       </i>
-       <span class="text-lg font-bold">
-        0
-       </span>
-      </div>
-      <div>
-       Đơn chờ xác nhận
-      </div>
-     </div>
-     <div class="bg-white p-4 rounded shadow">
-      <div class="flex items-center">
-       <i class="fas fa-exclamation-circle text-red-500 mr-2">
-       </i>
-       <span class="text-lg font-bold">
-        19
-       </span>
-      </div>
-      <div>
-       Đơn đang giao
-      </div>
-     </div>
-     <div class="bg-white p-4 rounded shadow">
-      <div class="flex items-center">
-       <i class="fas fa-exclamation-circle text-red-500 mr-2">
-       </i>
-       <span class="text-lg font-bold">
-        0
-       </span>
-      </div>
-      <div>
-       Đơn chưa thanh toán
-      </div>
-     </div>
-     <div class="bg-white p-4 rounded shadow">
-      <div class="flex items-center">
-       <i class="fas fa-check-circle text-green-500 mr-2">
-       </i>
-       <span class="text-lg font-bold">
-        2
-       </span>
-      </div>
-      <div>
-       Sản phẩm hết hàng
-      </div>
-     </div>
-     <div class="bg-white p-4 rounded shadow">
-      <div class="flex items-center">
-       <i class="fas fa-check-circle text-green-500 mr-2">
-       </i>
-       <span class="text-lg font-bold">
-        1
-       </span>
-      </div>
-      <div>
-       Sản phẩm tồn kho thấp
-      </div>
-     </div>
-     <div class="bg-white p-4 rounded shadow">
-      <div class="flex items-center">
-       <i class="fas fa-exclamation-triangle text-yellow-500 mr-2">
-       </i>
-       <span class="text-lg font-bold">
-        8
-       </span>
-      </div>
-      <div>
-       Khách chưa có lịch nhắc nợ
-      </div>
-     </div>
-     <div class="bg-white p-4 rounded shadow">
-      <div class="flex items-center">
-       <i class="fas fa-exclamation-triangle text-yellow-500 mr-2">
-       </i>
-       <span class="text-lg font-bold">
-        0
-       </span>
-      </div>
-      <div>
-       Khách hàng cần nhắc nợ
-      </div>
-     </div>
-     <div class="bg-white p-4 rounded shadow">
-      <div class="flex items-center">
-       <i class="fas fa-exclamation-triangle text-yellow-500 mr-2">
-       </i>
-       <span class="text-lg font-bold">
-        23.370.000
-       </span>
-      </div>
-      <div>
-       Cần thu nợ
-      </div>
-     </div>
-    </div>
-    <div class="text-xl font-bold mb-4">
-     Thao tác nhanh
-    </div>
-    <div class="grid grid-cols-3 gap-4">
-     <div>
-      <div class="text-lg font-bold mb-2">
-       BÁN HÀNG
-      </div>
-      <ul>
-       <li class="flex items-center mb-2">
-        <i class="fas fa-plus-circle text-blue-500 mr-2">
-        </i>
-        <span>
-         Tạo đơn hàng
-        </span>
+      <ul class="pl-4 space-y-1 hidden">
+       <li>
+        <a class="hover:underline" href="#">
+         Kiểm tra sức khỏe định kỳ
+        </a>
        </li>
-       <li class="flex items-center mb-2">
-        <i class="fas fa-plus-circle text-blue-500 mr-2">
-        </i>
-        <span>
-         Tạo đơn tại bàn
-        </span>
+       <li>
+        <a class="hover:underline" href="#">
+         Tiêm phòng
+        </a>
+       </li>
+       <li>
+        <a class="hover:underline" href="#">
+         Điều trị bệnh
+        </a>
+       </li>
+       <li>
+        <a class="hover:underline" href="#">
+         Chăm sóc sau phẫu thuật
+        </a>
        </li>
       </ul>
-     </div>
-     <div>
-      <div class="text-lg font-bold mb-2">
-       HÀNG HÓA
-      </div>
-      <ul>
-       <li class="flex items-center mb-2">
-        <i class="fas fa-plus-circle text-blue-500 mr-2">
-        </i>
-        <span>
-         Tạo sản phẩm mới
-        </span>
+     </li>
+     <li>
+      <button class="toggle-submenu hover:underline focus:outline-none w-full text-left flex items-center justify-between">
+       <span>Dịch vụ spa</span>
+       <i class="fas fa-plus"></i>
+      </button>
+      <ul class="pl-4 space-y-1 hidden">
+       <li>
+        <a class="hover:underline" href="#">
+         Tắm rửa
+        </a>
        </li>
-       <li class="flex items-center mb-2">
-        <i class="fas fa-plus-circle text-blue-500 mr-2">
-        </i>
-        <span>
-         Nhập kho
-        </span>
+       <li>
+        <a class="hover:underline" href="#">
+         Cắt tỉa lông
+        </a>
        </li>
-       <li class="flex items-center mb-2">
-        <i class="fas fa-plus-circle text-blue-500 mr-2">
-        </i>
-        <span>
-         Kiểm kho
-        </span>
+       <li>
+        <a class="hover:underline" href="#">
+         Chăm sóc móng
+        </a>
        </li>
-      </ul>
-     </div>
-     <div>
-      <div class="text-lg font-bold mb-2">
-       TÀI CHÍNH
-      </div>
-      <ul>
-       <li class="flex items-center mb-2">
-        <i class="fas fa-plus-circle text-blue-500 mr-2">
-        </i>
-        <span>
-         Tạo khoản thu
-        </span>
+       <li>
+        <a class="hover:underline" href="#">
+         Chăm sóc tai
+        </a>
        </li>
-       <li class="flex items-center mb-2">
-        <i class="fas fa-plus-circle text-blue-500 mr-2">
-        </i>
-        <span>
-         Tạo khoản chi
-        </span>
-       </li>
-       <li class="flex items-center mb-2">
-        <i class="fas fa-plus-circle text-blue-500 mr-2">
-        </i>
-        <span>
-         Tạo nợ khách hàng
-        </span>
+       <li>
+        <a class="hover:underline" href="#">
+         Massage thư giãn
+        </a>
        </li>
       </ul>
+     </li>
+     <li>
+      <button class="toggle-submenu hover:underline focus:outline-none w-full text-left flex items-center justify-between">
+       <span>Dịch vụ dinh dưỡng</span>
+       <i class="fas fa-plus"></i>
+      </button>
+      <ul class="pl-4 space-y-1 hidden">
+       <li>
+        <a class="hover:underline" href="#">
+         Tư vấn dinh dưỡng
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li>
+      <button class="toggle-submenu hover:underline focus:outline-none w-full text-left flex items-center justify-between">
+       <span>Dịch vụ tư vấn</span>
+       <i class="fas fa-plus"></i>
+      </button>
+      <ul class="pl-4 space-y-1 hidden">
+       <li>
+        <a class="hover:underline" href="#">
+         Tư vấn chăm sóc thú cưng
+        </a>
+       </li>
+      </ul>
+     </li>
+    </ul>
+   </aside>
+   <main class="w-3/4 bg-white p-6 rounded-lg shadow-lg ml-4">
+    <h2 class="text-xl font-bold mb-4">
+     Các sản phẩm cho thú cưng
+    </h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+     <div class="bg-gray-50 p-4 rounded-lg shadow-md">
+      <img alt="Hình ảnh thức ăn cho chó" class="w-full h-48 object-cover rounded-lg mb-4" height="200" src="" width="300"/>
+      <h3 class="text-lg font-semibold mb-2">
+       Thức ăn cho chó
+      </h3>
+      <p>
+       Các loại thức ăn dinh dưỡng và an toàn cho chó.
+      </p>
+     </div>
+     <div class="bg-gray-50 p-4 rounded-lg shadow-md">
+      <img alt="Hình ảnh thức ăn cho mèo" class="w-full h-48 object-cover rounded-lg mb-4" height="200" src="" width="300"/>
+      <h3 class="text-lg font-semibold mb-2">
+       Thức ăn cho mèo
+      </h3>
+      <p>
+       Các loại thức ăn dinh dưỡng và an toàn cho mèo.
+      </p>
+     </div>
+     <div class="bg-gray-50 p-4 rounded-lg shadow-md">
+      <img alt="Hình ảnh đồ chơi cho chó" class="w-full h-48 object-cover rounded-lg mb-4" height="200" src="" width="300"/>
+      <h3 class="text-lg font-semibold mb-2">
+       Đồ chơi cho chó
+      </h3>
+      <p>
+       Các loại đồ chơi giúp chó vui chơi và phát triển.
+      </p>
+     </div>
+     <div class="bg-gray-50 p-4 rounded-lg shadow-md">
+      <img alt="Hình ảnh đồ chơi cho mèo" class="w-full h-48 object-cover rounded-lg mb-4" height="200" src="" width="300"/>
+      <h3 class="text-lg font-semibold mb-2">
+       Đồ chơi cho mèo
+      </h3>
+      <p>
+       Các loại đồ chơi giúp mèo vui chơi và phát triển.
+      </p>
+     </div>
+     <div class="bg-gray-50 p-4 rounded-lg shadow-md">
+      <img alt="Hình ảnh phụ kiện cho chó" class="w-full h-48 object-cover rounded-lg mb-4" height="200" src="" width="300"/>
+      <h3 class="text-lg font-semibold mb-2">
+       Phụ kiện cho chó
+      </h3>
+      <p>
+       Các loại phụ kiện như vòng cổ, dây dắt, và nhiều hơn nữa.
+      </p>
+     </div>
+     <div class="bg-gray-50 p-4 rounded-lg shadow-md">
+      <img alt="Hình ảnh phụ kiện cho mèo" class="w-full h-48 object-cover rounded-lg mb-4" height="200" src="" width="300"/>
+      <h3 class="text-lg font-semibold mb-2">
+       Phụ kiện cho mèo
+      </h3>
+      <p>
+       Các loại phụ kiện như vòng cổ, đồ chơi, và nhiều hơn nữa.
+      </p>
      </div>
     </div>
-   </div>
+   </main>
   </div>
+  <footer class="bg-orange-600 text-white p-4 mt-6">
+   <div class="container mx-auto text-center">
+    <p>
+     © 2023 Hệ thống chăm sóc thú cưng. All rights reserved.
+    </p>
+    <p>
+     Địa chỉ: 123 Đường ABC, Quận 1, TP. Hồ Chí Minh
+    </p>
+    <p>
+     Điện thoại: 0123 456 789
+    </p>
+    <p>
+     Email: info@chamsoc-thucung.com
+    </p>
+   </div>
+  </footer>
  </body>
 </html>
