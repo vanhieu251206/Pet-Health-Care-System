@@ -39,3 +39,14 @@ def dichvu(request):
 def muasam(request):
     context = {}
     return render(request, 'pets/muasam.html', context)
+
+# Trang kham benh 
+def dichvukhambenh(request):
+    context = {}
+    return render(request, 'pets/dichvukhambenh.html', context)
+
+# Trang spa
+def spa(request):
+    context = {}
+    return render(request, 'pets/spa.html', context)
+

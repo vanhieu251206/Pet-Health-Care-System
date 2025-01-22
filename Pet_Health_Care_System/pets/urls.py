@@ -29,4 +29,10 @@ urlpatterns = [
 
     # Đường dẫn mua sam
     path('muasam/', views.muasam, name='muasam'),
+
+    # Đường dẫn kham benh
+    path('dichvukhambenh/', views.dichvukhambenh, name='dichvukhambenh'),
+
+    # Đường dẫn spa
+    path('spa/', views.spa, name='spa'),
 ]
