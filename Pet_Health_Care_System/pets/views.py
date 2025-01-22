@@ -1,9 +1,9 @@
 from django.shortcuts import render
 
 # Create your views here.
-def index(request):
+def guest_dashboard(request):
     context = {}
-    return render(request, 'pets/index.html', context)
+    return render(request, 'pets/guest_dashboard .html', context)
 
 def login(request):
     context = {}
