@@ -35,4 +35,7 @@ urlpatterns = [
 
     # Đường dẫn spa
     path('spa/', views.spa, name='spa'),
+
+     # Đường dẫn dat lich
+    path('datlich/', views.datlich, name='datlich'),
 ]

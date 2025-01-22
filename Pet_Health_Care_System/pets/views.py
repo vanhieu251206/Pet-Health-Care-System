@@ -50,3 +50,8 @@ def spa(request):
     context = {}
     return render(request, 'pets/spa.html', context)
 
+# Trang dat lich
+def datlich(request):
+    context = {}
+    return render(request, 'pets/datlich.html', context)
+
