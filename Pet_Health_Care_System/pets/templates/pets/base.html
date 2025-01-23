@@ -78,6 +78,8 @@
             <a href="#">Liên hệ</a>
           </li>
       </ul>
+
+      
       
       <script>
         function toggleDropdown(menuId, iconId) {
@@ -93,7 +95,7 @@
             }
           }          
       </script>
-    
+  
       <div class="mt-auto p-4">
     </div>
   </div>
@@ -122,58 +124,44 @@
           <a href="login">Đăng nhập</a>
         </div>
       </div>
-      
-      
     </div>
   </div>
-  
-  <!-- footer -->
-    <div class="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 px-6">
-      <!-- Cột 1: Thông tin liên hệ -->
-      <div class="text-center md:text-left">
-        <h4 class="text-lg font-semibold mb-3">Thông tin liên hệ</h4>
-        <p>Pets Care</p>
-        <p>Địa chỉ: 123 Đường ABC, Quận XYZ, TP.HCM</p>
-        <p>Email: support@petscare.com</p>
-        <p>Hotline: 1900-123-456</p>
+  <!-- Footer -->
+  <footer class="bg-gray-800 py-8">
+    <div class="max-w-6xl mx-auto px-4">
+     <div class="flex flex-col md:flex-row justify-between items-center">
+      <div class="text-white text-center md:text-left">
+       <h3 class="text-2xl font-bold">
+        Pet Lovers
+       </h3>
+       <p class="mt-2">
+        Your one-stop destination for all things pets.
+       </p>
       </div>
-  
-      <!-- Cột 2: Liên kết nhanh -->
-      <div class="text-center md:text-left">
-        <h4 class="text-lg font-semibold mb-3">Liên kết nhanh</h4>
-        <ul class="space-y-2">
-          <li><a href="{% url 'guest_dashboard' %}" class="hover:underline">Trang chủ</a></li>
-          <li><a href="#" class="hover:underline">Dịch vụ khám chữa bệnh</a></li>
-          <li><a href="#" class="hover:underline">Sản phẩm cho thú cưng</a></li>
-          <li><a href="#" class="hover:underline">Giới thiệu</a></li>
-          <li><a href="#" class="hover:underline">Liên hệ</a></li>
-        </ul>
+      <div class="mt-4 md:mt-0">
+       <a class="text-gray-400 hover:text-white mx-2" href="#">
+        <i class="fab fa-facebook-f">
+        </i>
+       </a>
+       <a class="text-gray-400 hover:text-white mx-2" href="#">
+        <i class="fab fa-twitter">
+        </i>
+       </a>
+       <a class="text-gray-400 hover:text-white mx-2" href="#">
+        <i class="fab fa-instagram">
+        </i>
+       </a>
+       <a class="text-gray-400 hover:text-white mx-2" href="#">
+        <i class="fab fa-linkedin-in">
+        </i>
+       </a>
       </div>
-  
-      <!-- Cột 3: Kết nối với chúng tôi -->
-      <div class="text-center md:text-left">
-        <h4 class="text-lg font-semibold mb-3">Kết nối với chúng tôi</h4>
-        <div class="flex justify-center md:justify-start space-x-4">
-          <a href="#" class="hover:opacity-75">
-            <img src="{% static 'pets/icons/facebook.svg' %}" alt="Facebook" width="24" height="24">
-          </a>
-          <a href="#" class="hover:opacity-75">
-            <img src="{% static 'pets/icons/instagram.svg' %}" alt="Instagram" width="24" height="24">
-          </a>
-          <a href="#" class="hover:opacity-75">
-            <img src="{% static 'pets/icons/twitter.svg' %}" alt="Twitter" width="24" height="24">
-          </a>
-        </div>
-      </div>
+     </div>
+     <div class="mt-8 text-gray-400 text-center">
+      © 2023 Pet Lovers. All rights reserved.
+     </div>
     </div>
-  
-    <!-- Dòng bản quyền -->
-    <div class="text-center mt-6 text-sm border-t border-gray-700 pt-4">
-      © 2025 Pets Care. All rights reserved.
-    </div>
-  
-  
-
+   </footer>
 
   {% endblock navbar %}
 
