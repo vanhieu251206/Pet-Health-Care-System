@@ -1,72 +1,61 @@
-from django.shortcuts import render, redirect
-from django.http import HttpResponse, HttpResponseBadRequest
-from rest_framework.views import APIView
-from rest_framework.response import Response
-from rest_framework import status
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth import authenticate, login
-from django.contrib import messages
-from .models import Pet
-from .serializers import PetSerializer
+from django.shortcuts import render
 
+# Trang chủ
+def index(request):
+    context = {}  # Dữ liệu truyền vào template (hiện tại để trống)
+    return render(request, 'pets/index.html', context)
 
-# Create your views here.
-def guest_page(request):
+# Trang đăng nhập
+def login(request):  
     context = {}
-    return render(request, 'pets/guest_page.html', context)
+    return render(request, 'pets/login.html', context)
 
-def login_page(request):
+# Trang quên mật khẩu
+def quenmk(request):  
     context = {}
-    return render(request, 'pets/login_page.html', context)
+    return render(request, 'pets/quenmk.html', context)
 
-def select_role(request):
+# Trang giới thiệu
+def gioithieu(request):  
     context = {}
-    return render(request, 'pets/select_role.html', context)
+    return render(request, 'pets/gioithieu.html', context)
 
-def dashboard_customer(request):
+# Trang dangkidangki
+def dangki(request):
     context = {}
-    return render(request, 'pets/dashboard_customer.html', context)
+    return render(request, 'pets/dangki.html', context)
 
-def cart(request):
+# Trang lien he
+def lienhe(request):
     context = {}
-    return render(request, 'pets/cart.html', context)
+    return render(request, 'pets/lienhe.html', context)
 
-def checkout(request):
+# Trang dich vu
+def dichvu(request):
     context = {}
-    return render(request, 'pets/checkout.html', context)
+    return render(request, 'pets/dichvu.html', context)
 
-def login_view(request):
-    if request.method == 'POST':
-        username = request.POST['username']
-        password = request.POST['password']
-        role = request.POST['role']  # Vai trò đã được gửi từ form
+# Trang mua sam
+def muasam(request):
+    context = {}
+    return render(request, 'pets/muasam.html', context)
 
-        # Xác thực người dùng
-        user = authenticate(request, username=username, password=password)
-        
-        if user is not None:
-            # Kiểm tra xem vai trò có đúng không
-            if role == 'customer' and user.userprofile.role == 'customer':
-                login(request, user)
-                return redirect('customer_dashboard')  # Chuyển tới trang dành cho khách hàng
-            elif role == 'staff' and user.userprofile.role == 'staff':
-                login(request, user)
-                return redirect('staff_dashboard')  # Chuyển tới trang dành cho nhân viên
-            elif role == 'vet' and user.userprofile.role == 'vet':
-                login(request, user)
-                return redirect('vet_dashboard')  # Chuyển tới trang dành cho bác sĩ
-            elif role == 'admin' and user.userprofile.role == 'admin':
-                login(request, user)
-                return redirect('admin_dashboard')  # Chuyển tới trang dành cho quản trị viên
-            else:
-                messages.error(request, "Tài khoản không phù hợp với vai trò đã chọn.")
-        else:
-            messages.error(request, "Sai tên đăng nhập hoặc mật khẩu.")
+# Trang kham benh 
+def dichvukhambenh(request):
+    context = {}
+    return render(request, 'pets/dichvukhambenh.html', context)
 
-    return render(request, 'pets/login_page.html')
+# Trang spa
+def spa(request):
+    context = {}
+    return render(request, 'pets/spa.html', context)
 
-from django.contrib.auth.decorators import login_required
+# Trang dat lich
+def datlich(request):
+    context = {}
+    return render(request, 'pets/datlich.html', context)
 
+<<<<<<< HEAD
 @login_required
 def customer_dashboard(request):
     return render(request, 'pets/customer_dashboard.html')
@@ -109,3 +98,5 @@ class PetList(APIView):
         context = {'pets': pets}  # Truyền dữ liệu thú cưng vào template
         return render(request, 'pets/dog_products.html', context)
   
+=======
+>>>>>>> ca318054cb536b5f1be4088af93423818228af37
