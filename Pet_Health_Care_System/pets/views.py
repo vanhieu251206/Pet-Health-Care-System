@@ -102,3 +102,10 @@ class PetList(APIView):
             serializer.save()  # Lưu thú cưng mới vào cơ sở dữ liệu
             return Response(serializer.data, status=status.HTTP_201_CREATED)  # Trả về thông tin thú cưng mới
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)  # Trả về lỗi nếu dữ liệu không hợp lệ
+    
+        @login_required
+    def dog_products(request):
+        pets = Pet.objects.all()  # Lấy danh sách thú cưng từ cơ sở dữ liệu
+        context = {'pets': pets}  # Truyền dữ liệu thú cưng vào template
+        return render(request, 'pets/dog_products.html', context)
+  

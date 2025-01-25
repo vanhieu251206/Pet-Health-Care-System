@@ -35,3 +35,18 @@ class User(AbstractUser):
         related_name='pet_user_permission',
         blank=True
     )
+
+from django.db import models
+
+class PetProduct(models.Model):
+    name = models.CharField(max_length=255)  # Tên sản phẩm
+    description = models.TextField()  # Mô tả sản phẩm
+    price = models.DecimalField(max_digits=10, decimal_places=2)  # Giá sản phẩm
+    image = models.ImageField(upload_to='products/')  # Hình ảnh sản phẩm
+
+    def __str__(self):
+        return self.name
+
+
+
+     

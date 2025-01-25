@@ -12,6 +12,7 @@ urlpatterns = [
     path('select_role_view/', views.select_role_view, name='select_role_view'), 
     path('dashboard_customer/', views.dashboard_customer, name='customer_dashboard'),
     path('login_view/', views.login_view, name="login_view")
+    path('dog_products/', views.dog_products, name='dog_products'),
     #path('dashboard/staff/', views.dashboard_staff, name='staff_dashboard'),
     #path('dashboard/vet/', views.dashboard_vet, name='vet_dashboard'),
     #path('dashboard/admin/', views.dashboard_admin, name='admin_dashboard'),
