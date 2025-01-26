@@ -9,95 +9,103 @@ from django.contrib import messages
 from .models import Pet
 from .serializers import PetSerializer
 
-# Create your views here.
+# Guest page view
 def guest_page(request):
-    context = {}
-    return render(request, 'pets/guest_page.html', context)
+    return render(request, 'pets/guest_page.html')
 
+# Login page view
 def login_page(request):
-    context = {}
-    return render(request, 'pets/login_page.html', context)
+    return render(request, 'pets/login_page.html')
 
+# Role selection view
 def select_role(request):
-    context = {}
-    return render(request, 'pets/select_role.html', context)
+    return render(request, 'pets/select_role.html')
 
+# Customer dashboard view
 @login_required
 def dashboard_customer(request):
-    context = {}
-    return render(request, 'pets/dashboard_customer.html', context)
+    return render(request, 'pets/dashboard_customer.html')
 
+# Shopping cart view
 def cart(request):
-    context = {}
-    return render(request, 'pets/cart.html', context)
+    return render(request, 'pets/cart.html')
 
+# Checkout page view
 def checkout(request):
-    context = {}
-    return render(request, 'pets/checkout.html', context)
+    return render(request, 'pets/checkout.html')
 
+# Login processing view
 def login_view(request):
     if request.method == 'POST':
-        username = request.POST['username']
-        password = request.POST['password']
-        role = request.POST['role']  # Vai trò đã được gửi từ form
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        role = request.POST.get('role')  # Role from form
 
-        # Xác thực người dùng
+        # Authenticate user
         user = authenticate(request, username=username, password=password)
-        
+
         if user is not None:
-            # Kiểm tra xem vai trò có đúng không
-            if role == 'customer' and user.userprofile.role == 'customer':
+            # Check if the role matches the user's role
+            if role == user.userprofile.role:
                 login(request, user)
-                return redirect('customer_dashboard')  # Chuyển tới trang dành cho khách hàng
-            elif role == 'staff' and user.userprofile.role == 'staff':
-                login(request, user)
-                return redirect('staff_dashboard')  # Chuyển tới trang dành cho nhân viên
-            elif role == 'vet' and user.userprofile.role == 'vet':
-                login(request, user)
-                return redirect('vet_dashboard')  # Chuyển tới trang dành cho bác sĩ
-            elif role == 'admin' and user.userprofile.role == 'admin':
-                login(request, user)
-                return redirect('admin_dashboard')  # Chuyển tới trang dành cho quản trị viên
+                if role == 'customer':
+                    return redirect('customer_dashboard')
+                elif role == 'staff':
+                    return redirect('staff_dashboard')
+                elif role == 'vet':
+                    return redirect('vet_dashboard')
+                elif role == 'admin':
+                    return redirect('admin_dashboard')
             else:
                 messages.error(request, "Tài khoản không phù hợp với vai trò đã chọn.")
         else:
             messages.error(request, "Sai tên đăng nhập hoặc mật khẩu.")
-
     return render(request, 'pets/login_page.html')
 
+# Staff dashboard view
 @login_required
 def staff_dashboard(request):
-    context = {}
-    return render(request, 'pets/staff_dashboard.html', context)
+    return render(request, 'pets/staff_dashboard.html')
 
+# Role redirection view
 def select_role_view(request):
     role = request.GET.get('role', None)
     if role == 'customer':
-        return redirect('customer_dashboard') 
+        return redirect('customer_dashboard')
     elif role == 'staff':
-        return redirect('staff_dashboard')    
+        return redirect('staff_dashboard')
     elif role == 'vet':
-        return redirect('vet_dashboard')      
+        return redirect('vet_dashboard')
     elif role == 'admin':
-        return redirect('admin_dashboard')    
+        return redirect('admin_dashboard')
     else:
         return HttpResponseBadRequest("Vai trò không hợp lệ.")
 
+# About page view
 def introduce(request):
-    context = {}
-    return render(request, 'pets/introduce.html', context)
+    return render(request, 'pets/introduce.html')
 
+# Contact page view
+def contact_page(request):
+    # Context không bị ràng buộc bởi role
+    context = {
+        "email": "GroupOne@gmail.com",
+        "hotline": "+84 382 771 491",
+        "address": "70 Tô Ký, Tân Chánh Hiệp, Quận 12, TP. HCM",
+    }
+    return render(request, 'pets/contact.html', context)
+
+
+# API view for Pet model
 class PetList(APIView):
-    queryset = Pet.objects.all()
-
     def get(self, request):  
         pets = Pet.objects.all()  
         serializer = PetSerializer(pets, many=True)  
-        return Response(serializer.data) 
-    
-    def post(self, request):  # Thêm thú cưng mới
+        return Response(serializer.data)
+
+    def post(self, request):  # Add a new pet
         serializer = PetSerializer(data=request.data)
         if serializer.is_valid():
-            serializer.save()  # Lưu thú cưng mới vào cơ sở dữ liệu
-            return Response(serializer.data, status=status.HTTP_201_CREATED)  # Trả về thông tin thú cưng mới
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)  # Trả về lỗi nếu dữ liệu không hợp lệ
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

@@ -1,0 +1,37 @@
+{% extends 'pets/base.html' %}
+{% load static %}
+{% block title %}Liên Hệ - Pet Health Care System{% endblock %}
+{% block content %}
+<div class="main-content py-5">
+    <h1 class="text-center mb-4">Liên Hệ</h1>
+    <div class="row justify-content-center">
+        <!-- Hiển thị thông tin liên hệ -->
+        <div class="col-md-4 text-center">
+            <div class="contact-option bg-white p-4 rounded shadow-sm">
+                <i class="fas fa-envelope fa-3x text-success mb-3"></i>
+                <h3>Gửi Tin Nhắn</h3>
+                <p>Email: {{ email }}</p>
+            </div>
+        </div>
+        <div class="col-md-4 text-center">
+            <div class="contact-option bg-white p-4 rounded shadow-sm">
+                <i class="fas fa-phone fa-3x text-success mb-3"></i>
+                <h3>Gọi Điện</h3>
+                <p>Hotline: {{ hotline }}</p>
+            </div>
+        </div>
+        <div class="col-md-4 text-center">
+            <div class="contact-option bg-white p-4 rounded shadow-sm">
+                <i class="fas fa-comments fa-3x text-success mb-3"></i>
+                <h3>Chat Trực Tiếp</h3>
+                <p>Nhấp vào đây để bắt đầu chat</p>
+            </div>
+        </div>
+    </div>
+    <div class="text-center mt-5">
+        <h3>Trò Chuyện Ẩn Danh</h3>
+        <p>Nhấp vào nút dưới đây để bắt đầu trò chuyện ẩn danh với chúng tôi.</p>
+        <button class="btn btn-success px-5 py-2">Bắt Đầu Trò Chuyện Ẩn Danh</button>
+    </div>
+</div>
+{% endblock %}

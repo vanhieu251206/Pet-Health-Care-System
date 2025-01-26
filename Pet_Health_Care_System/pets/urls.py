@@ -1,4 +1,4 @@
-from django.urls import path, include
+from django.urls import path
 from . import views
 from .views import PetList
 
@@ -11,11 +11,11 @@ urlpatterns = [
     path('api/pets/', PetList.as_view(), name='pet-list'),
     path('select_role_view/', views.select_role_view, name='select_role_view'),
     path('dashboard_customer/', views.dashboard_customer, name='customer_dashboard'),
-    path('login_view/', views.login_view, name="login_view"),  # Thêm dấu phẩy ở đây
-    path('introduce/', views.introduce, name='introduce'),  # Thêm dấu phẩy ở đây
+    path('login_view/', views.login_view, name="login_view"),  
+    path('introduce/', views.introduce, name='introduce'), 
+    path('contact/', views.contact_page, name='contact_page'),
     # Các URL khác có thể thêm nếu cần
     # path('dashboard/staff/', views.dashboard_staff, name='staff_dashboard'),
     # path('dashboard/vet/', views.dashboard_vet, name='vet_dashboard'),
     # path('dashboard/admin/', views.dashboard_admin, name='admin_dashboard'),
-    # path('dashboard_customer/', views.dashboard_customer, name="dashboard_customer"),
 ]
