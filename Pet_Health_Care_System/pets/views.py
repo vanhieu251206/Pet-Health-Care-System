@@ -9,7 +9,6 @@ from django.contrib import messages
 from .models import Pet
 from .serializers import PetSerializer
 
-
 # Create your views here.
 def guest_page(request):
     context = {}
@@ -23,6 +22,7 @@ def select_role(request):
     context = {}
     return render(request, 'pets/select_role.html', context)
 
+@login_required
 def dashboard_customer(request):
     context = {}
     return render(request, 'pets/dashboard_customer.html', context)
@@ -65,15 +65,10 @@ def login_view(request):
 
     return render(request, 'pets/login_page.html')
 
-from django.contrib.auth.decorators import login_required
-
-@login_required
-def customer_dashboard(request):
-    return render(request, 'pets/customer_dashboard.html')
-
 @login_required
 def staff_dashboard(request):
-    return render(request, 'pets/staff_dashboard.html')
+    context = {}
+    return render(request, 'pets/staff_dashboard.html', context)
 
 def select_role_view(request):
     role = request.GET.get('role', None)
@@ -87,6 +82,10 @@ def select_role_view(request):
         return redirect('admin_dashboard')    
     else:
         return HttpResponseBadRequest("Vai trò không hợp lệ.")
+
+def introduce(request):
+    context = {}
+    return render(request, 'pets/introduce.html', context)
 
 class PetList(APIView):
     queryset = Pet.objects.all()
