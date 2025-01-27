@@ -1,32 +1,179 @@
 {% extends "pets/base.html" %}
 {% load static %}
 {% block about_us %}
-<main class="bg-white text-gray-800">
-    <div class="max-w-4xl mx-auto p-4">
-        <h1 class="text-3xl font-bold text-center mb-4">Giới thiệu</h1>
-        <div class="w-12 h-1 bg-gray-300 mx-auto mb-6"></div>
-        <p class="text-lg mb-4">
-            <strong>GroupOne Pet Shop</strong> là cửa hàng thú cưng chuyên cung cấp : thức ăn, Pate, bánh thưởng, sữa, cát vệ sinh, thực phẩm chức năng, phụ kiện, đồ dùng, đồ chơi, ...v.v... các sản phẩm dành cho Chó, Mèo.
-        </p>
-        <p class="text-lg mb-4">
-            Ngoài ra GroupOne Pet Shop còn có các dịch vụ :
-        </p>
-        <ul class="list-none space-y-2 mb-8">
-            <li class="mb-2">🏡 Lưu Trú -Trông Giữ Thú Cưng 🐕🐈</li>
-            <li class="mb-2">🛁 Grooming – Spa Thú cưng 🐩🐈</li>
-            <li class="mb-2">🐕 Mở Phối các dòng : Pug, Bull, Poodle, Chihuahua, Sammoy ...</li>
-            <li class="mb-2">Mua – bán Cún con : Pug, Bull Pháp, Poodle, Alaska,....</li>
-        </ul>
-        <p class="text-lg mb-4">
-            👉 <strong>GroupOne Pet Shop</strong> cam kết:
-        </p>
-        <ul class="list-none space-y-2 mb-8">
-            <li class="mb-2">🍀 Sản phẩm an toàn và chính hãng.</li>
-            <li class="mb-2">🍀 Nói không với hàng giả, hàng nhái.</li>
-            <li class="mb-2">🍀 Giá thành hợp lí với chất lượng sản phẩm.</li>
-            <li class="mb-2">🍀 Luôn đem đến sự “HÀI LÒNG” dành cho khách hàng !</li>
-            <li class="mb-2">💕 Cảm ơn Quý khách hàng đã tin dùng và ủng hộ sản phẩm của Shop.</li>
-        </ul>
+    <style>
+        /* Tổng thể trang */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9; /* Nền tổng thể */
+        }
+
+        /* Phần chính */
+        .section {
+            color: #333;
+            line-height: 1.8;
+            padding: 20px;
+            background-color: #ffffff;
+            max-width: 900px; /* Đặt bề ngang tối đa */
+            margin: 20px auto; /* Căn giữa phần nội dung */
+            border-radius: 10px; /* Bo góc khung */
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Bóng mờ */
+            border: 1px solid #ddd; /* Viền nhẹ */
+        }
+
+        /* Tiêu đề lớn */
+        .section-title {
+            text-align: center;
+            font-size: 28px;
+            color: #ffffff; /* Màu chữ trắng nổi bật */
+            margin-bottom: 20px;
+            padding: 12px; /* Khoảng cách bên trong khung */
+            background-color: #4CAF50; /* Nền xanh lá */
+            border-radius: 10px; /* Bo góc khung */
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Bóng mờ để tạo hiệu ứng nổi */
+            font-weight: bold; /* Làm chữ đậm */
+            border: 2px solid #388E3C; /* Viền màu xanh đậm */
+        }
+
+        /* Nội dung văn bản */
+        .content-box {
+            padding: 10px 20px; /* Khoảng cách bên trong khung nội dung */
+        }
+
+        .content-box p {
+            font-size: 16px;
+            color: #666;
+            text-align: justify; /* Căn đều hai bên */
+            margin-bottom: 15px;
+        }
+
+        .content-box ul {
+            margin: 10px 0 20px 20px; /* Khoảng cách và thụt lề cho danh sách */
+            color: #555;
+            font-size: 16px;
+        }
+
+        .content-box ul li {
+            margin-bottom: 10px; /* Khoảng cách giữa các mục */
+        }
+
+        /* Hình ảnh */
+        .image-box {
+            text-align: center;
+            margin: 20px auto;
+            padding: 10px;
+            background-color: #f3f3f3;
+            border-radius: 10px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            border: 1px solid #ddd;
+        }
+
+        .image-box img {
+            max-width: 100%; /* Ảnh tự co giãn để không vượt quá khung */
+            height: auto; /* Giữ tỷ lệ ảnh gốc */
+            max-height: 400px; /* Giới hạn chiều cao tối đa */
+            object-fit: contain; /* Đảm bảo ảnh không bị cắt */
+            border-radius: 8px; /* Bo góc ảnh */
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Phần Về Chúng Tôi -->
+    <div class="section">
+        <h2 class="section-title">Về Chúng Tôi</h2>
+        <div class="content-box">
+            <p><strong>Chào mừng bạn đến với Pet Health Care System!</strong></p>
+            <p>
+                Chúng tôi là một hệ thống chăm sóc sức khỏe thú cưng hiện đại, được xây dựng dựa trên sự tận tâm và tình yêu thương dành cho các "thành viên nhỏ" trong gia đình bạn. 
+                Với sứ mệnh mang đến sự chăm sóc toàn diện và chất lượng nhất cho thú cưng, chúng tôi tự hào là người bạn đồng hành đáng tin cậy của hàng nghìn gia đình.
+            </p>
+            <h3>Tại sao chọn chúng tôi?</h3>
+            <ul>
+                <li><strong>Đội ngũ chuyên gia hàng đầu:</strong> Bao gồm các bác sĩ thú y giàu kinh nghiệm, chuyên gia dinh dưỡng và nhân viên chăm sóc thú cưng được đào tạo chuyên sâu.</li>
+                <li><strong>Dịch vụ đa dạng:</strong> Từ khám chữa bệnh, tiêm phòng, đến chăm sóc sắc đẹp (tắm, cắt tỉa lông) và tư vấn dinh dưỡng, chúng tôi đảm bảo đáp ứng mọi nhu cầu của thú cưng.</li>
+                <li><strong>Trang thiết bị hiện đại:</strong> Sử dụng công nghệ tiên tiến nhất để đảm bảo thú cưng của bạn nhận được dịch vụ tối ưu.</li>
+                <li><strong>Tận tâm và yêu thương:</strong> Mỗi thú cưng không chỉ là vật nuôi, mà là thành viên trong gia đình.</li>
+            </ul>
+            <h3>Tầm nhìn & Sứ mệnh</h3>
+            <p>Pet Health Care System hướng đến việc xây dựng một cộng đồng yêu thương và bảo vệ thú cưng, mang đến cho thú cưng cuộc sống khỏe mạnh và hạnh phúc.</p>
+            <div class="image-box">
+                <img src="{% static 'pets/images/about_us_intro.png' %}" alt="Hình ảnh về dịch vụ chăm sóc thú cưng">
+            </div>
+        </div>
     </div>
-</main>
+
+    <!-- Phần Dịch Vụ Của Chúng Tôi -->
+    <div class="section">
+        <h2 class="section-title">Dịch Vụ Của Chúng Tôi</h2>
+        <div class="content-box">
+            <p><strong>Chúng tôi cung cấp các dịch vụ chăm sóc thú cưng bao gồm:</strong></p>
+            <ul>
+                <li><strong>Khám bệnh và điều trị:</strong> Kiểm tra sức khỏe định kỳ và điều trị các vấn đề sức khỏe của thú cưng.</li>
+                <li><strong>Tiêm phòng:</strong> Bảo vệ thú cưng khỏi các bệnh nguy hiểm.</li>
+                <li><strong>Chăm sóc sắc đẹp:</strong> Tắm rửa, cắt tỉa lông và chăm sóc móng.</li>
+                <li><strong>Tư vấn dinh dưỡng:</strong> Gợi ý chế độ ăn uống khoa học và phù hợp.</li>
+                <li><strong>Dịch vụ lưu trú:</strong> Phòng lưu trú an toàn và tiện nghi cho thú cưng.</li>
+            </ul>
+            <div class="image-box">
+                <img src="{% static 'pets/images/services_intro.png' %}" alt="Hình ảnh về dịch vụ chăm sóc thú cưng">
+            </div>
+        </div>
+    </div>
+
+    <!-- Phần Đội Ngũ Chuyên Gia -->
+<div class="section">
+    <h2 class="section-title">Đội Ngũ Chuyên Gia</h2>
+    <div class="content-box">
+        <p><strong>Đội ngũ chuyên gia của chúng tôi - Trái tim của Pet Health Care System</strong></p>
+        <p>
+            Tại <strong>Pet Health Care System</strong>, chúng tôi tự hào sở hữu một đội ngũ chuyên gia tận tâm, giàu kinh nghiệm, 
+            và luôn đặt sức khỏe của thú cưng lên hàng đầu. Đội ngũ của chúng tôi bao gồm các bác sĩ thú y, chuyên gia dinh dưỡng, 
+            và nhân viên chăm sóc thú cưng đã được đào tạo bài bản.
+        </p>
+
+        <h3>Tại sao đội ngũ của chúng tôi nổi bật?</h3>
+        <ul>
+            <li><strong>Đội ngũ bác sĩ thú y hàng đầu:</strong> Với nhiều năm kinh nghiệm trong lĩnh vực chẩn đoán và điều trị các vấn đề sức khỏe của thú cưng, các bác sĩ của chúng tôi luôn áp dụng những phương pháp hiện đại nhất để mang lại kết quả tối ưu.</li>
+            <li><strong>Chuyên gia dinh dưỡng:</strong> Đưa ra những lời khuyên về chế độ ăn uống, bổ sung dinh dưỡng phù hợp với từng giống loài và từng giai đoạn phát triển của thú cưng.</li>
+            <li><strong>Nhân viên chăm sóc thú cưng chuyên nghiệp:</strong> Được đào tạo kỹ năng chuyên sâu về việc chăm sóc, tắm rửa, và làm đẹp cho thú cưng, giúp các bạn nhỏ bốn chân luôn thoải mái và tự tin.</li>
+        </ul>
+        <div class="image-box">
+            <img src="{% static 'pets/images/career_intro.png' %}" alt="Hình ảnh đội ngũ chuyên gia">
+        </div>
+    </div>
+</div>
+
+
+   <!-- Phần Cam Kết Của Chúng Tôi -->
+<div class="section">
+    <h2 class="section-title">Cam Kết Của Chúng Tôi</h2>
+    <div class="content-box">
+        <p><strong>Cam Kết Của Pet Health Care System - Tận Tâm Vì Sức Khỏe Thú Cưng</strong></p>
+        <p>
+            Tại <strong>Pet Health Care System</strong>, chúng tôi không chỉ cung cấp dịch vụ, mà còn mang đến sự yên tâm và tin tưởng tuyệt đối 
+            cho bạn và thú cưng của bạn. Những cam kết của chúng tôi không chỉ là lời nói, mà là trách nhiệm và giá trị cốt lõi trong từng hành động.
+        </p>
+        
+        <h3>Các cam kết của chúng tôi:</h3>
+        <ul>
+            <li><strong>Chất lượng dịch vụ hàng đầu:</strong> Chúng tôi luôn không ngừng cải thiện và nâng cấp dịch vụ để mang đến trải nghiệm tốt nhất cho thú cưng của bạn.</li>
+            <li><strong>Đội ngũ chuyên gia tận tâm:</strong> Đội ngũ của chúng tôi làm việc với trái tim yêu thương, luôn sẵn sàng lắng nghe và hỗ trợ bạn trong mọi tình huống.</li>
+            <li><strong>Trang thiết bị hiện đại:</strong> Sử dụng công nghệ tiên tiến nhất, đảm bảo mọi quy trình chăm sóc sức khỏe cho thú cưng được thực hiện chính xác và an toàn.</li>
+            <li><strong>Giá cả hợp lý:</strong> Cam kết cung cấp dịch vụ với mức chi phí phù hợp, minh bạch và rõ ràng.</li>
+            <li><strong>Sự yêu thương và quan tâm:</strong> Mỗi thú cưng được xem như một thành viên trong gia đình, được chăm sóc tận tình và chu đáo.</li>
+        </ul>
+        
+        <p><strong>Hãy để Pet Health Care System đồng hành cùng bạn trong hành trình chăm sóc sức khỏe và hạnh phúc cho thú cưng yêu quý của bạn!</strong></p>
+        <div class="image-box">
+            <img src="{% static 'pets/images/reputa_intro.png' %}" alt="Hình ảnh cam kết chất lượng">
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
 {% endblock about_us %}
+  
