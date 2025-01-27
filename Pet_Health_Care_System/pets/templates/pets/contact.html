@@ -1,6 +1,38 @@
-{% extends "pets/base.html"%}
+{% extends "pets/base.html" %}
 {% load static %}
 {% block contact %}
-
+<!-- Main Content -->
+<main class="main-content py-5 bg-light">
+  <div class="container">
+    <h1 class="text-center mb-5">Liên Hệ</h1>
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="contact-option p-4 text-center bg-white rounded shadow-sm">
+          <i class="fas fa-envelope fa-3x text-success mb-3"></i>
+          <h3>Gửi Tin Nhắn</h3>
+          <p>Email: GroupOne@gmail.com</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="contact-option p-4 text-center bg-white rounded shadow-sm">
+          <i class="fas fa-phone fa-3x text-success mb-3"></i>
+          <h3>Gọi Điện</h3>
+          <p>Hotline: +84 382 771 491</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="contact-option p-4 text-center bg-white rounded shadow-sm">
+          <i class="fas fa-comments fa-3x text-success mb-3"></i>
+          <h3>Chat Trực Tiếp</h3>
+          <p>Nhấp vào đây để bắt đầu chat</p>
+        </div>
+      </div>
+    </div>
+    <div class="anonymous-chat text-center bg-white p-4 rounded shadow-sm mt-5">
+      <h3>Trò Chuyện Ẩn Danh</h3>
+      <p>Nhấp vào nút dưới đây để bắt đầu trò chuyện ẩn danh với chúng tôi.</p>
+      <button class="btn btn-success">Bắt Đầu Trò Chuyện Ẩn Danh</button>
+    </div>
+  </div>
+</main>
 {% endblock contact %}
-
