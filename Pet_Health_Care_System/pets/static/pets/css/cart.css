@@ -1,0 +1,55 @@
+  /* Chỉnh sửa ô số lượng */
+  .quantity-input {
+    width: 50px; /* Chiều rộng của ô */
+    height: 50px; /* Chiều cao của ô */
+    padding: 0;
+    text-align: center;
+    font-size: 16px; /* Kích thước chữ */
+    border-radius: 4px; /* Bo góc nhẹ */
+    border: 1px solid #ddd;
+  }
+
+  /* Nút tăng giảm số lượng */
+  .quantity-control button {
+    width: 35px;
+    height: 35px;
+    font-size: 18px; /* Kích thước chữ */
+    padding: 0;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  /* Căn chỉnh các hàng trong giỏ hàng */
+  .cart-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    padding: 10px 0;
+    border-bottom: 1px solid #ddd;
+  }
+
+  .row-image {
+    max-width: 100px;
+    height: auto;
+    object-fit: cover;
+  }
+
+  /* Nút trở lại cửa hàng và thanh toán */
+  .btn-outline-dark,
+  .btn-success {
+    font-size: 14px;
+    padding: 10px 20px;
+  }
+
+  /* Tiêu đề các cột */
+  .cart-row strong {
+    font-size: 16px;
+  }
+
+  /* Định dạng giá */
+  .cart-row p {
+    font-size: 14px;
+    margin: 0;
+  }

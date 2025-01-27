@@ -1,0 +1,53 @@
+{% extends "pets/base.html" %}
+{% load static %}
+{% block periodic_health_checkups %}
+<main class="container mx-auto px-6 py-8 mt-8">
+    <section class="shadow-md rounded-lg p-6 mb-16">
+      <h3 class="text-2xl font-semibold text-gray-700 mb-4">Khám sức khỏe định kỳ cho thú cưng và tầm quan trọng cần biết</h3>
+      <p class="text-gray-600 mb-4">Khám sức khỏe định kỳ là một phương pháp quan trọng giúp đảm bảo thú cưng có cuộc sống khỏe mạnh và hạnh phúc. Quy trình này bao gồm việc phát hiện sớm các vấn đề sức khỏe, đề xuất phác đồ điều trị kịp thời, và duy trì tâm sinh lý tốt nhất cho thú cưng của bạn.</p>
+
+      <h4 class="text-xl font-medium text-gray-700 mb-3">Lợi ích của khám sức khỏe định kỳ</h4>
+      <ul class="list-disc pl-6 mb-4">
+        <li class="text-gray-600">Phát hiện sớm các bệnh lý nguy hiểm để đề xuất hướng điều trị phù hợp.</li>
+        <li class="text-gray-600">Theo dõi tình trạng sức khỏe tổng quát và điều chỉnh chế độ dinh dưỡng.</li>
+        <li class="text-gray-600">Ngăn ngừa sự lây lan các bệnh truyền nhiễm trong gia đình và công đồng.</li>
+      </ul>
+
+      <h4 class="text-xl font-medium text-gray-700 mb-3">Quy trình khám sức khỏe định kỳ</h4>
+      <table class="table-auto w-full mb-4 border-collapse border border-gray-300">
+        <thead>
+          <tr class="bg-gray-100">
+            <th class="border border-gray-300 px-4 py-2">Giai đoạn</th>
+            <th class="border border-gray-300 px-4 py-2">Hình thức</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="border border-gray-300 px-4 py-2">Khám toàn thân</td>
+            <td class="border border-gray-300 px-4 py-2">Kiểm tra lâm sàng từ mũi, mắt, tai đến bình thường tim mạch.</td>
+          </tr>
+          <tr>
+            <td class="border border-gray-300 px-4 py-2">Khám huyết học</td>
+            <td class="border border-gray-300 px-4 py-2">Phân tích các chỉ số huyết học và sinh hóa.</td>
+          </tr>
+          <tr>
+            <td class="border border-gray-300 px-4 py-2">Khám xương khớp</td>
+            <td class="border border-gray-300 px-4 py-2">Chụp X-quang hoặc siêu âm, kiểm tra đều mỏ, khám khớp.</td>
+          </tr>
+          <tr>
+            <td class="border border-gray-300 px-4 py-2">Khám dịch vị</td>
+            <td class="border border-gray-300 px-4 py-2">Kiểm tra ký sinh trùng trong máu, nước tiểu và phân.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h4 class="text-xl font-medium text-gray-700 mb-3">Lưu ý trong khám sức khỏe</h4>
+      <ul class="list-disc pl-6 mb-4">
+        <li class="text-gray-600">Luôn đặt lịch hẹn trước để đảm bảo đủ thời gian khám.</li>
+        <li class="text-gray-600">Chọn cơ sở khám thú y uy tín và đầy đủ trang thiết bị.</li>
+        <li class="text-gray-600">Theo dõi sức khỏe thú cưng thường xuyên và báo cáo ngay khi phát hiện bất thường.</li>
+      </ul>
+    </section>
+  </main>
+</br>
+{% endblock periodic_health_checkups %}

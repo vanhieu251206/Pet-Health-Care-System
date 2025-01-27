@@ -9,9 +9,11 @@ from django.contrib import messages
 from .models import Pet
 from .serializers import PetSerializer
 
-# Guest page view
-def guest_page(request):
-    return render(request, 'pets/guest_page.html')
+
+# Create your views here.
+def guest_dashboard(request):
+    context = {}
+    return render(request, 'pets/guest_dashboard.html', context)
 
 # Login page view
 def login_page(request):
@@ -34,7 +36,26 @@ def cart(request):
 def checkout(request):
     return render(request, 'pets/checkout.html')
 
-# Login processing view
+def vaccination(request):
+    context = {}
+    return render(request, 'pets/vaccination.html', context)
+
+def periodic_health_checkups(request):
+    context = {}
+    return render(request, 'pets/periodic_health_checkups.html', context)
+
+def about_us(request):
+    context ={}
+    return render(request, 'pets/about_us.html', context)
+
+def contact(request):
+    context ={}
+    return render(request, 'pets/contact.html', context)
+
+def shop(request):
+    context ={}
+    return render(request, 'pets/shop.html', context)
+
 def login_view(request):
     if request.method == 'POST':
         username = request.POST.get('username')

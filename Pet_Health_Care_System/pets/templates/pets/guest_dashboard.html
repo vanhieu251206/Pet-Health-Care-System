@@ -1,0 +1,86 @@
+{% extends "pets/base.html" %}
+{% load static %}
+{% block banner_slider %}
+<div id="carouselExampleDark" class="carousel carousel-dark slide">
+    <div class="carousel-indicators">
+        <button type="button" data-bs-target="0" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="1" data-bs-slide-to="1" aria-label="Slide 2"></button>
+    </div>
+    <div class="carousel-inner">
+        <div class="carousel-item active" data-bs-interval="10000">
+            <img src="{% static 'pets/images/banner/banner1.png' %}" class="d-block w-100" alt="..." height="480">
+        </div>
+        <div class="carousel-item" data-bs-interval="2000">
+            <img src="{% static 'app/images/banner/b2.jpg' %}" class="d-block w-100" alt="..." height="480">
+        </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>
+{% endblock banner_slider %}
+{% block guest_page %}
+<!-- Main Content -->
+<main class="container mx-auto px-6 py-8">
+    <!-- Hero Section -->
+    <section class="bg-orange-100 rounded-lg shadow-md p-8 text-center">
+        <h2 class="text-3xl font-bold text-gray-800 mb-4 mt-6">Chăm sóc thú cưng toàn diện!</h2>
+        <p class="text-gray-600 mb-6">Từ thức ăn, phụ kiện đến dịch vụ khám chữa bệnh, chúng tôi luôn đồng hành cùng bạn để mang lại cuộc sống tốt nhất cho thú cưng của mình.</p>
+        <a href="#services" class="bg-orange-500 text-white px-6 py-3 rounded-lg hover:bg-orange-600">Khám phá ngay</a>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="mt-12">
+        <h3 class="text-2xl font-bold text-gray-800 mb-6">Dịch vụ của chúng tôi</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="bg-white rounded-lg shadow-md p-6 text-center">
+                <img src="{% static "pets/images/khambenh.png" %}" alt="Khám chữa bệnh" class="h-20 mx-auto mb-4">
+                <h4 class="text-xl font-bold text-orange-500">Khám chữa bệnh</h4>
+                <p class="text-gray-600">Dịch vụ khám tổng quát, tiêm phòng, và điều trị bệnh chuyên nghiệp cho thú cưng.</p>
+            </div>
+            <div class="bg-white rounded-lg shadow-md p-6 text-center">
+                <img src="{% static "pets/images/spa.png" %}" alt="Spa & Grooming" class="h-20 mx-auto mb-4">
+                <h4 class="text-xl font-bold text-orange-500">Spa & Grooming</h4>
+                <p class="text-gray-600">Dịch vụ làm đẹp, tắm gội, và chăm sóc lông chuyên nghiệp.</p>
+            </div>
+            <div class="bg-white rounded-lg shadow-md p-6 text-center">
+                <img src="{% static "pets/images/tu_van_dinh_duong.png" %}" alt="Tư vấn dinh dưỡng" class="h-20 mx-auto mb-4">
+                <h4 class="text-xl font-bold text-orange-500">Tư vấn dinh dưỡng</h4>
+                <p class="text-gray-600">Hỗ trợ lựa chọn thực phẩm và chế độ ăn uống phù hợp cho thú cưng của bạn.</p>
+            </div>
+            <div class="bg-white rounded-lg shadow-md p-6 text-center">
+                <img src="{% static "pets/images/huan-luyen.png" %}" alt="Huấn luyện thú cưng" class="h-20 mx-auto mb-4">
+                <h4 class="text-xl font-bold text-orange-500">Huấn luyện thú cưng</h4>
+                <p class="text-gray-600">Dịch vụ huấn luyện cơ bản và nâng cao để thú cưng luôn nghe lời và thân thiện.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section id="products" class="mt-12">
+        <h3 class="text-2xl font-bold text-gray-800 mb-6">Sản phẩm nổi bật</h3>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="bg-white rounded-lg shadow-md p-6 text-center">
+                <img src="{% static "pets/images/thuc-an.png" %}" alt="Thức ăn" class="h-20 mx-auto mb-4">
+                <h4 class="text-xl font-bold text-orange-500">Thức ăn thú cưng</h4>
+                <p class="text-gray-600">Đa dạng các loại thức ăn giàu dinh dưỡng cho chó và mèo.</p>
+            </div>
+            <div class="bg-white rounded-lg shadow-md p-6 text-center">
+                <img src="{% static "pets/images/do-choi.png" %}" alt="Đồ chơi" class="h-20 mx-auto mb-4">
+                <h4 class="text-xl font-bold text-orange-500">Đồ chơi</h4>
+                <p class="text-gray-600">Các loại đồ chơi giúp thú cưng của bạn luôn năng động và vui vẻ.</p>
+            </div>
+            <div class="bg-white rounded-lg shadow-md p-6 text-center">
+                <img src="{% static "pets/images/duoc-pham.png" %}" alt="Dược phẩm" class="h-20 mx-auto mb-4">
+                <h4 class="text-xl font-bold text-orange-500">Dược phẩm</h4>
+                <p class="text-gray-600">Sản phẩm chăm sóc sức khỏe thú cưng từ các thương hiệu uy tín.</p>
+            </div>
+        </div>
+    </section>
+</main>
+{% endblock guest_page %}
