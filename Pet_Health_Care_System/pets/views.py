@@ -51,6 +51,10 @@ def contact(request):
     context ={}
     return render(request, 'pets/contact.html', context)
 
+def shop(request):
+    context ={}
+    return render(request, 'pets/shop.html', context)
+
 def login_view(request):
     if request.method == 'POST':
         username = request.POST['username']

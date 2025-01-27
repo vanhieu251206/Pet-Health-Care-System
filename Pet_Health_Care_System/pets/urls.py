@@ -18,6 +18,7 @@ urlpatterns = [
     path('periodic_health_checkups/', views.periodic_health_checkups, name="periodic_health_checkups"),
     path('about_us/', views.about_us, name='about_us'),
     path('contact/', views.contact, name='contact'),
+    path('shop/', views.shop, name='shop'),
     #path('dashboard/staff/', views.dashboard_staff, name='staff_dashboard'),
     #path('dashboard/vet/', views.dashboard_vet, name='vet_dashboard'),
     #path('dashboard/admin/', views.dashboard_admin, name='admin_dashboard'),
