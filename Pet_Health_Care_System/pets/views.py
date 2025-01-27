@@ -11,9 +11,9 @@ from .serializers import PetSerializer
 
 
 # Create your views here.
-def guest_page(request):
+def guest_dashboard(request):
     context = {}
-    return render(request, 'pets/guest_page.html', context)
+    return render(request, 'pets/guest_dashboard.html', context)
 
 def login_page(request):
     context = {}
@@ -34,6 +34,22 @@ def cart(request):
 def checkout(request):
     context = {}
     return render(request, 'pets/checkout.html', context)
+
+def vaccination(request):
+    context = {}
+    return render(request, 'pets/vaccination.html', context)
+
+def periodic_health_checkups(request):
+    context = {}
+    return render(request, 'pets/periodic_health_checkups.html', context)
+
+def about_us(request):
+    context ={}
+    return render(request, 'pets/about_us.html', context)
+
+def contact(request):
+    context ={}
+    return render(request, 'pets/contact.html', context)
 
 def login_view(request):
     if request.method == 'POST':

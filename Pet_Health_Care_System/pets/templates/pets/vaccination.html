@@ -1,0 +1,68 @@
+{% extends "pets/base.html" %}
+{% load static %}
+<script src="https://cdn.tailwindcss.com"></script>
+{% block vaccination %}
+<main class="container mx-auto px-6 py-8 mt-8">
+    <section class="shadow-md rounded-lg p-6 mb-16">
+      <h3 class="text-2xl font-semibold text-gray-700 mb-4">Tiêm phòng vacxin cho thú cưng và những điều lưu ý cần thiết</h3>
+      <p class="text-gray-600 mb-4">Thời gian gần đây, việc nuôi thú cảnh đã trở nên quen thuộc với nhiều người dân ở cả thành thị và nông thôn. Tiêm vacxin phòng bệnh là việc thiết yếu để bảo vệ sức khỏe cho thú cưng, gia đình bạn và cộng đồng.</p>
+  
+      <h4 class="text-xl font-medium text-gray-700 mb-3">Tại sao phải tiêm phòng vacxin?</h4>
+      <p class="text-gray-600 mb-4">Tiêm vacxin giúp thú cưng phòng chống các bệnh nguy hiểm, không có thuốc chữa hoặc truyền nhiễm, đảm bảo sức khỏe và tránh các thiệt hại về kinh tế và tính mạng.</p>
+  
+      <h4 class="text-xl font-medium text-gray-700 mb-3">Một số loại vacxin phổ biến</h4>
+      <ul class="list-disc pl-6 mb-4">
+        <li class="text-gray-600">Vacxin 5 bệnh: Care virus, Parvo virus, Viêm gan truyền nhiễm, Ho cũi chó, Phó cúm.</li>
+        <li class="text-gray-600">Vacxin 6 bệnh: Vacxin 5 bệnh và thêm Leptospria.</li>
+        <li class="text-gray-600">Vacxin 7 bệnh: Vacxin 6 bệnh và thêm bệnh Coronavirus.</li>
+      </ul>
+  
+      <h4 class="text-xl font-medium text-gray-700 mb-3">Bảo quản vacxin</h4>
+      <ul class="list-disc pl-6 mb-4">
+        <li class="text-gray-600">Bảo quản ở nhiệt độ 2-7 độ C.</li>
+        <li class="text-gray-600">Tránh ánh sáng trực tiếp và va đập mạnh.</li>
+      </ul>
+  
+      <h4 class="text-xl font-medium text-gray-700 mb-3">Liệu trình tiêm vacxin</h4>
+      <table class="table-auto w-full mb-4 border-collapse border border-gray-300">
+        <thead>
+          <tr class="bg-gray-100">
+            <th class="border border-gray-300 px-4 py-2">Tuổi</th>
+            <th class="border border-gray-300 px-4 py-2">Loại vacxin</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="border border-gray-300 px-4 py-2">3 tuần tuổi</td>
+            <td class="border border-gray-300 px-4 py-2">1 mũi vacxin 5 bệnh</td>
+          </tr>
+          <tr>
+            <td class="border border-gray-300 px-4 py-2">6 tuần tuổi</td>
+            <td class="border border-gray-300 px-4 py-2">1 mũi vacxin 5 bệnh hoặc 7 bệnh</td>
+          </tr>
+          <tr>
+            <td class="border border-gray-300 px-4 py-2">9 tuần tuổi</td>
+            <td class="border border-gray-300 px-4 py-2">1 mũi vacxin 5 bệnh hoặc 7 bệnh</td>
+          </tr>
+          <tr>
+            <td class="border border-gray-300 px-4 py-2">7-8 tháng</td>
+            <td class="border border-gray-300 px-4 py-2">1 mũi vacxin dại</td>
+          </tr>
+          <tr>
+            <td class="border border-gray-300 px-4 py-2">Hằng năm</td>
+            <td class="border border-gray-300 px-4 py-2">Nhắc lại 1 mũi 5 hoặc 7 bệnh</td>
+          </tr>
+        </tbody>
+      </table>
+  
+      <h4 class="text-xl font-medium text-gray-700 mb-3">Lưu ý khi tiêm vacxin</h4>
+      <ul class="list-disc pl-6 mb-4">
+        <li class="text-gray-600">Chỉ tiêm khi thú cưng khỏe mạnh, không có biểu hiện bệnh lý hoặc sốt.</li>
+        <li class="text-gray-600">Đưa thú cưng đến phòng khám thú y để được tư vấn và tiêm đúng cách.</li>
+        <li class="text-gray-600">Chăm sóc thú cưng sau tiêm, tránh tắm hoặc ăn thức ăn nhiều dầu mỡ, sữa, đồ tanh trong vòng 1 tuần.</li>
+        <li class="text-gray-600">Tẩy giun sau tiêm phòng 1 tuần để đảm bảo hiệu quả.</li>
+      </ul>
+    </section>
+  </main>
+</br>
+{% endblock vaccination %}

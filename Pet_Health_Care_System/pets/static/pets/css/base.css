@@ -92,8 +92,8 @@ footer {
 
 .navbar .dropdown-toggle::after {
     display: none; /* Ẩn biểu tượng mũi tên */
-  }
+}
 
-  .search-bar {
+.search-bar {
     margin-right: 10px; /* Khoảng cách giữa thanh tìm kiếm và menu Tài khoản */
-  }
+}
