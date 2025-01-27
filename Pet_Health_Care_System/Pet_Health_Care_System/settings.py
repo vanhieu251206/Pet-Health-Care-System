@@ -1,6 +1,6 @@
 import os
-from pathlib import Path
 from dotenv import load_dotenv
+from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -32,7 +32,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'pets',
     'rest_framework',
-    'customer',
+    'staff',
 ]
 
 MIDDLEWARE = [
@@ -73,12 +73,15 @@ load_dotenv()
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',  
-        'NAME': os.getenv('DB_NAME'), 
-        'USER': os.getenv('DB_USER'),  
-        'PASSWORD': os.getenv('DB_PASSWORD'),  
-        'HOST': os.getenv('DB_HOST'), 
-        'PORT': os.getenv('DB_PORT'),  
+'default': {
+     'ENGINE': 'django.db.backends.mysql',  # Sử dụng MySQL
+     'NAME': os.getenv('DB_NAME'),  # Tên cơ sở dữ liệu
+     'USER': os.getenv('DB_USER'),  # Người dùng MySQL
+     'PASSWORD': os.getenv('DB_PASSWORD'),  # Mật khẩu MySQL
+     'HOST': os.getenv('DB_HOST'),  # Máy chủ MySQL
+     'PORT': os.getenv('DB_PORT'),  # Cổng MySQL
+ }
+
     }
 }
 
@@ -118,7 +121,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = 'static/'
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'pets/static')]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
