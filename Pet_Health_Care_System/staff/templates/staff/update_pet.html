@@ -1,0 +1,350 @@
+<html>
+ <head>
+  <title>
+   Theo dõi và cập nhật tình trạng của thú cưng
+  </title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&amp;display=swap" rel="stylesheet"/>
+  <script src="https://cdn.tailwindcss.com">
+  </script>
+  <script>
+   function toggleDetails(id) {
+            var details = document.getElementById(id);
+            if (details.style.display === 'none' || details.style.display === '') {
+                details.style.display = 'block';
+            } else {
+                details.style.display = 'none';
+            }
+        }
+
+        function enableEditing(id) {
+            var inputs = document.querySelectorAll(`#${id} input, #${id} textarea`);
+            inputs.forEach(input => input.removeAttribute('disabled'));
+            document.getElementById(`save-${id}`).style.display = 'inline-block';
+        }
+
+        function saveDetails(id) {
+            var inputs = document.querySelectorAll(`#${id} input, #${id} textarea`);
+            inputs.forEach(input => input.setAttribute('disabled', 'true'));
+            document.getElementById(`save-${id}`).style.display = 'none';
+            alert('Thông tin thú cưng đã được lưu!');
+        }
+
+        function deletePet(id) {
+            var petRow = document.getElementById(id);
+            petRow.remove();
+            alert('Thú cưng đã được xóa!');
+        }
+
+        function addPet() {
+            var addPetForm = document.getElementById('add-pet-form');
+            addPetForm.style.display = 'block';
+        }
+
+        function saveNewPet() {
+            var petList = document.getElementById('pet-list');
+            var newPetId = `pet-${Date.now()}`;
+            var ownerName = document.getElementById('new-owner-name').value;
+            var phone = document.getElementById('new-phone').value;
+            var address = document.getElementById('new-address').value;
+            var email = document.getElementById('new-email').value;
+            var petName = document.getElementById('new-pet-name').value;
+            var petType = document.getElementById('new-pet-type').value;
+            var breed = document.getElementById('new-breed').value;
+            var age = document.getElementById('new-age').value;
+            var examDate = document.getElementById('new-exam-date').value;
+            var disease = document.getElementById('new-disease').value;
+            var healthStatus = document.getElementById('new-health-status').value;
+
+            var newPetRow = `
+                <tr id="${newPetId}">
+                    <td class="py-2 px-4 border-b border-gray-200 text-center">New</td>
+                    <td class="py-2 px-4 border-b border-gray-200">${petName}</td>
+                    <td class="py-2 px-4 border-b border-gray-200">${petType}</td>
+                    <td class="py-2 px-4 border-b border-gray-200 text-center">
+                        <button class="bg-green-600 text-white py-1 px-2 rounded" onclick="toggleDetails('${newPetId}-details')">Xem chi tiết</button>
+                    </td>
+                </tr>
+                <tr class="hidden" id="${newPetId}-details">
+                    <td class="py-2 px-4 border-b border-gray-200" colspan="4">
+                        <div class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+                            <div class="bg-white p-6 rounded-lg shadow-lg w-3/4">
+                                <h3 class="text-lg font-bold mb-2">Chi tiết thú cưng</h3>
+                                <div class="grid grid-cols-2 gap-4">
+                                    <div>
+                                        <p><strong><i class="fas fa-user mr-2 text-green-600"></i>Tên chủ nhân:</strong> <input class="w-full border border-gray-300 rounded p-2" type="text" value="${ownerName}" disabled/></p>
+                                        <p><strong><i class="fas fa-phone-alt mr-2 text-green-600"></i>Số điện thoại:</strong> <input class="w-full border border-gray-300 rounded p-2" type="text" value="${phone}" disabled/></p>
+                                        <p><strong><i class="fas fa-map-marker-alt mr-2 text-green-600"></i>Địa chỉ:</strong> <input class="w-full border border-gray-300 rounded p-2" type="text" value="${address}" disabled/></p>
+                                        <p><strong><i class="fas fa-envelope mr-2 text-green-600"></i>Email:</strong> <input class="w-full border border-gray-300 rounded p-2" type="text" value="${email}" disabled/></p>
+                                    </div>
+                                    <div>
+                                        <p><strong><i class="fas fa-paw mr-2 text-green-600"></i>Tên thú cưng:</strong> <input class="w-full border border-gray-300 rounded p-2" type="text" value="${petName}" disabled/></p>
+                                        <p><strong><i class="fas fa-dog mr-2 text-green-600"></i>Loại:</strong> <input class="w-full border border-gray-300 rounded p-2" type="text" value="${petType}" disabled/></p>
+                                        <p><strong><i class="fas fa-bone mr-2 text-green-600"></i>Giống:</strong> <input class="w-full border border-gray-300 rounded p-2" type="text" value="${breed}" disabled/></p>
+                                        <p><strong><i class="fas fa-birthday-cake mr-2 text-green-600"></i>Tuổi:</strong> <input class="w-full border border-gray-300 rounded p-2" type="text" value="${age}" disabled/></p>
+                                    </div>
+                                </div>
+                                <p><strong><i class="fas fa-calendar-alt mr-2 text-green-600"></i>Ngày khám:</strong> <input class="w-full border border-gray-300 rounded p-2" type="text" value="${examDate}" disabled/></p>
+                                <p><strong><i class="fas fa-stethoscope mr-2 text-green-600"></i>Loại bệnh:</strong> <input class="w-full border border-gray-300 rounded p-2" type="text" value="${disease}" disabled/></p>
+                                <p><strong><i class="fas fa-heartbeat mr-2 text-green-600"></i>Tình trạng sức khỏe hiện tại:</strong> <textarea class="w-full border border-gray-300 rounded p-2" disabled>${healthStatus}</textarea></p>
+                                <div class="mt-4 flex justify-end">
+                                    <button class="bg-yellow-500 text-white py-2 px-4 rounded mr-2" onclick="enableEditing('${newPetId}-details')">Chỉnh sửa</button>
+                                    <button class="bg-green-600 text-white py-2 px-4 rounded" id="save-${newPetId}-details" onclick="saveDetails('${newPetId}-details')" style="display: none;">Lưu</button>
+                                </div>
+                                <button class="bg-red-600 text-white py-2 px-4 rounded mt-4" onclick="deletePet('${newPetId}')">Xóa</button>
+                                <button class="bg-green-600 text-white py-2 px-4 rounded mt-4" onclick="toggleDetails('${newPetId}-details')">Đóng</button>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            `;
+            petList.insertAdjacentHTML('beforeend', newPetRow);
+            document.getElementById('add-pet-form').style.display = 'none';
+        }
+  </script>
+ </head>
+ <body class="bg-green-100 font-roboto">
+  <div class="bg-green-600 text-white p-4 flex justify-between items-center rounded-lg mx-4 my-4 max-w-5xl mx-auto">
+   <h1 class="text-2xl ml-4 flex-grow text-left">
+    Theo dõi và cập nhật tình trạng của thú cưng
+   </h1>
+   <button class="bg-white text-green-600 py-2 px-4 rounded" onclick="addPet()">
+    Thêm thú cưng
+   </button>
+  </div>
+  <div class="max-w-5xl mx-auto p-4">
+   <div class="bg-white rounded-lg shadow-lg p-4 mb-4">
+    <h2 class="text-xl font-bold mb-4">
+     Danh sách thú cưng
+    </h2>
+    <table class="min-w-full bg-white">
+     <thead>
+      <tr>
+       <th class="py-2 px-4 border-b border-gray-200">
+        STT
+       </th>
+       <th class="py-2 px-4 border-b border-gray-200">
+        Tên thú cưng
+       </th>
+       <th class="py-2 px-4 border-b border-gray-200">
+        Loại
+       </th>
+       <th class="py-2 px-4 border-b border-gray-200">
+        Hành động
+       </th>
+      </tr>
+     </thead>
+     <tbody id="pet-list">
+      <tr id="pet-1">
+       <td class="py-2 px-4 border-b border-gray-200 text-center">
+        1
+       </td>
+       <td class="py-2 px-4 border-b border-gray-200">
+        Pet 1
+       </td>
+       <td class="py-2 px-4 border-b border-gray-200">
+        Dog
+       </td>
+       <td class="py-2 px-4 border-b border-gray-200 text-center">
+        <button class="bg-green-600 text-white py-1 px-2 rounded" onclick="toggleDetails('pet-1-details')">
+         Xem chi tiết
+        </button>
+       </td>
+      </tr>
+      <tr class="hidden" id="pet-1-details">
+       <td class="py-2 px-4 border-b border-gray-200" colspan="4">
+        <div class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+         <div class="bg-white p-6 rounded-lg shadow-lg w-3/4">
+          <h3 class="text-lg font-bold mb-2">
+           Chi tiết thú cưng
+          </h3>
+          <div class="grid grid-cols-2 gap-4">
+           <div>
+            <p>
+             <strong>
+              <i class="fas fa-user mr-2 text-green-600">
+              </i>
+              Tên chủ nhân:
+             </strong>
+             <input class="w-full border border-gray-300 rounded p-2" disabled="" type="text" value="Owner 1"/>
+            </p>
+            <p>
+             <strong>
+              <i class="fas fa-phone-alt mr-2 text-green-600">
+              </i>
+              Số điện thoại:
+             </strong>
+             <input class="w-full border border-gray-300 rounded p-2" disabled="" type="text" value="0123456789"/>
+            </p>
+            <p>
+             <strong>
+              <i class="fas fa-map-marker-alt mr-2 text-green-600">
+              </i>
+              Địa chỉ:
+             </strong>
+             <input class="w-full border border-gray-300 rounded p-2" disabled="" type="text" value="Address 1"/>
+            </p>
+            <p>
+             <strong>
+              <i class="fas fa-envelope mr-2 text-green-600">
+              </i>
+              Email:
+             </strong>
+             <input class="w-full border border-gray-300 rounded p-2" disabled="" type="text" value="owner1@example.com"/>
+            </p>
+           </div>
+           <div>
+            <p>
+             <strong>
+              <i class="fas fa-paw mr-2 text-green-600">
+              </i>
+              Tên thú cưng:
+             </strong>
+             <input class="w-full border border-gray-300 rounded p-2" disabled="" type="text" value="Pet 1"/>
+            </p>
+            <p>
+             <strong>
+              <i class="fas fa-dog mr-2 text-green-600">
+              </i>
+              Loại:
+             </strong>
+             <input class="w-full border border-gray-300 rounded p-2" disabled="" type="text" value="Dog"/>
+            </p>
+            <p>
+             <strong>
+              <i class="fas fa-bone mr-2 text-green-600">
+              </i>
+              Giống:
+             </strong>
+             <input class="w-full border border-gray-300 rounded p-2" disabled="" type="text" value="Breed 1"/>
+            </p>
+            <p>
+             <strong>
+              <i class="fas fa-birthday-cake mr-2 text-green-600">
+              </i>
+              Tuổi:
+             </strong>
+             <input class="w-full border border-gray-300 rounded p-2" disabled="" type="text" value="3"/>
+            </p>
+           </div>
+          </div>
+          <p>
+           <strong>
+            <i class="fas fa-calendar-alt mr-2 text-green-600">
+            </i>
+            Ngày khám:
+           </strong>
+           <input class="w-full border border-gray-300 rounded p-2" disabled="" type="text" value="01/01/2024"/>
+          </p>
+          <p>
+           <strong>
+            <i class="fas fa-stethoscope mr-2 text-green-600">
+            </i>
+            Loại bệnh:
+           </strong>
+           <input class="w-full border border-gray-300 rounded p-2" disabled="" type="text" value="Disease 1"/>
+          </p>
+          <p>
+           <strong>
+            <i class="fas fa-heartbeat mr-2 text-green-600">
+            </i>
+            Tình trạng sức khỏe hiện tại:
+           </strong>
+           <textarea class="w-full border border-gray-300 rounded p-2" disabled="">Healthy</textarea>
+          </p>
+          <div class="mt-4 flex justify-end">
+           <button class="bg-yellow-500 text-white py-2 px-4 rounded mr-2" onclick="enableEditing('pet-1-details')">
+            Chỉnh sửa
+           </button>
+           <button class="bg-green-600 text-white py-2 px-4 rounded" id="save-pet-1-details" onclick="saveDetails('pet-1-details')" style="display: none;">
+            Lưu
+           </button>
+          </div>
+          <button class="bg-red-600 text-white py-2 px-4 rounded mt-4" onclick="deletePet('pet-1')">
+           Xóa
+          </button>
+          <button class="bg-green-600 text-white py-2 px-4 rounded mt-4" onclick="toggleDetails('pet-1-details')">
+           Đóng
+          </button>
+         </div>
+        </div>
+       </td>
+      </tr>
+      <tr id="pet-2">
+       <td class="py-2 px-4 border-b border-gray-200 text-center">
+        2
+       </td>
+       <td class="py-2 px-4 border-b border-gray-200">
+        Pet 2
+       </td>
+       <td class="py-2 px-4 border-b border-gray-200">
+        Cat
+       </td>
+       <td class="py-2 px-4 border-b border-gray-200 text-center">
+        <button class="bg-green-600 text-white py-1 px-2 rounded" onclick="toggleDetails('pet-2-details')">
+         Xem chi tiết
+        </button>
+       </td>
+      </tr>
+      <tr class="hidden" id="pet-2-details">
+       <td class="py-2 px-4 border-b border-gray-200" colspan="4">
+        <div class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+         <div class="bg-white p-6 rounded-lg shadow-lg w-3/4">
+          <h3 class="text-lg font-bold mb-2">
+           Chi tiết thú cưng
+          </h3>
+          <div class="grid grid-cols-2 gap-4">
+           <div>
+            <p>
+             <strong>
+              <i class="fas fa-user mr-2 text-green-600">
+              </i>
+              Tên chủ nhân:
+             </strong>
+             <input class="w-full border border-gray-300 rounded p-2" disabled="" type="text" value="Owner 2"/>
+            </p>
+            <p>
+             <strong>
+              <i class="fas fa-phone-alt mr-2 text-green-600">
+              </i>
+              Số điện thoại:
+             </strong>
+             <input class="w-full border border-gray-300 rounded p-2" disabled="" type="text" value="0987654321"/>
+            </p>
+            <p>
+             <strong>
+              <i class="fas fa-map-marker-alt mr-2 text-green-600">
+              </i>
+              Địa chỉ:
+             </strong>
+             <input class="w-full border border-gray-300 rounded p-2" disabled="" type="text" value="Address 2"/>
+            </p>
+            <p>
+             <strong>
+              <i class="fas fa-envelope mr-2 text-green-600">
+              </i>
+              Email:
+             </strong>
+             <input class="w-full border border-gray-300 rounded p-2" disabled="" type="text" value="owner2@example.com"/>
+            </p>
+           </div>
+           <div>
+            <p>
+             <strong>
+              <i class="fas fa-paw mr-2 text-green-600">
+              </i>
+              Tên thú cưng:
+             </strong>
+             <input class="w-full border border-gray-300 rounded p-2" disabled="" type="text" value="Pet 2"/>
+            </p>
+            <p>
+             <strong>
+              <i class="fas fa-dog mr-2 text-green-600">
+              </i>
+              Loại:
+             </strong>
+             <input class="w-full border border-gray-300 rounded p-2" disabled="" type="text" value="Cat"/>
+            </p>
+            <p>
+             <strong>
+              <i class="fas fa-bone mr-2 text

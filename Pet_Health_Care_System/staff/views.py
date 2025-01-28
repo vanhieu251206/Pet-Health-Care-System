@@ -10,4 +10,7 @@ def Manage_cancellations(request):
 def Manage_Doctor(request):
     return render(request, 'staff/Manage_Doctor.html')
 
+def update_pet(request):
+    return render(request, 'staff/update_pet.html')
+
 
