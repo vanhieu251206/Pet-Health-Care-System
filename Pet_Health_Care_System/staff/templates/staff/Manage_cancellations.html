@@ -1,0 +1,463 @@
+<html>
+ <head>
+  <title>
+   Quản lí các trường hợp hủy hẹn lịch
+  </title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&amp;display=swap" rel="stylesheet"/>
+  <script src="https://cdn.tailwindcss.com">
+  </script>
+  <script>
+   function toggleDetails(id) {
+            var details = document.getElementById(id);
+            if (details.style.display === 'none' || details.style.display === '') {
+                details.style.display = 'block';
+            } else {
+                details.style.display = 'none';
+            }
+        }
+
+        function toggleUserDetails() {
+            var userDetails = document.getElementById('user-details');
+            if (userDetails.style.display === 'none' || userDetails.style.display === '') {
+                userDetails.style.display = 'block';
+            } else {
+                userDetails.style.display = 'none';
+            }
+        }
+
+        function logout() {
+            alert('Đăng xuất thành công!');
+        }
+  </script>
+ </head>
+ <body class="bg-green-100 font-roboto">
+  <div class="bg-green-600 text-white p-4 flex justify-between items-center rounded-lg mx-4 my-4 max-w-5xl mx-auto">
+   <div class="flex items-center">
+    <button class="bg-white text-green-600 p-2 rounded-full" onclick="history.back()">
+     <i class="fas fa-arrow-left">
+     </i>
+    </button>
+    <img alt="Company Logo" class="rounded-lg ml-4" src="https://placehold.co/50x50"/>
+   </div>
+   <h1 class="text-2xl ml-4 flex-grow text-left">
+    Quản lí các trường hợp hủy hẹn lịch
+   </h1>
+   <div class="relative flex items-center">
+    <span class="mr-2">
+     Tên người dùng
+    </span>
+    <img alt="User Avatar" class="rounded-lg cursor-pointer" onclick="toggleUserDetails()" src="https://placehold.co/50x50"/>
+    <div class="absolute top-16 right-0 bg-white text-black border border-gray-300 rounded-lg p-4 shadow-lg w-64 hidden" id="user-details">
+     <div class="flex items-center mb-4">
+      <img alt="User Avatar" class="rounded-lg w-12 h-12 mr-4" src="https://placehold.co/50x50"/>
+      <div>
+       <p class="font-bold">
+        Tên người dùng
+       </p>
+       <p class="text-sm text-gray-600">
+        user@example.com
+       </p>
+      </div>
+     </div>
+     <p class="mb-2">
+      <i class="fas fa-phone-alt mr-2 text-green-600">
+      </i>
+      0123456789
+     </p>
+     <p class="mb-2">
+      <i class="fas fa-briefcase mr-2 text-green-600">
+      </i>
+      Nhân viên
+     </p>
+     <p class="mb-2">
+      <i class="fas fa-id-badge mr-2 text-green-600">
+      </i>
+      Mã nhân viên: 123456
+     </p>
+     <button class="bg-green-600 text-white py-2 px-4 rounded mt-2 w-full" onclick="logout()">
+      Đăng xuất
+     </button>
+    </div>
+   </div>
+  </div>
+  <div class="max-w-5xl mx-auto p-4">
+   <div class="bg-white rounded-lg shadow-lg p-4 mb-4">
+    <h2 class="text-xl font-bold mb-4">
+     Danh sách các trường hợp hủy hẹn lịch
+    </h2>
+    <table class="min-w-full bg-white">
+     <thead>
+      <tr>
+       <th class="py-2 px-4 border-b border-gray-200">
+        STT
+       </th>
+       <th class="py-2 px-4 border-b border-gray-200">
+        Tên khách hàng
+       </th>
+       <th class="py-2 px-4 border-b border-gray-200">
+        Ngày hẹn
+       </th>
+       <th class="py-2 px-4 border-b border-gray-200">
+        Lý do hủy
+       </th>
+       <th class="py-2 px-4 border-b border-gray-200">
+        Hành động
+       </th>
+      </tr>
+     </thead>
+     <tbody>
+      <tr>
+       <td class="py-2 px-4 border-b border-gray-200 text-center">
+        1
+       </td>
+       <td class="py-2 px-4 border-b border-gray-200">
+        Nguyễn Văn A
+       </td>
+       <td class="py-2 px-4 border-b border-gray-200">
+        01/01/2024
+       </td>
+       <td class="py-2 px-4 border-b border-gray-200">
+        Bận công việc đột xuất
+       </td>
+       <td class="py-2 px-4 border-b border-gray-200 text-center">
+        <button class="bg-green-600 text-white py-1 px-2 rounded" onclick="toggleDetails('details-1')">
+         Xem chi tiết
+        </button>
+       </td>
+      </tr>
+      <tr class="hidden" id="details-1">
+       <td class="py-2 px-4 border-b border-gray-200" colspan="5">
+        <div class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+         <div class="bg-white p-6 rounded-lg shadow-lg w-1/2">
+          <h3 class="text-lg font-bold mb-2">
+           Chi tiết lịch hẹn
+          </h3>
+          <p>
+           <strong>
+            Tên khách hàng:
+           </strong>
+           Nguyễn Văn A
+          </p>
+          <p>
+           <strong>
+            Ngày hẹn:
+           </strong>
+           01/01/2024
+          </p>
+          <p>
+           <strong>
+            Lý do hủy:
+           </strong>
+           Bận công việc đột xuất
+          </p>
+          <p>
+           <strong>
+            Dịch vụ đã đặt:
+           </strong>
+           Khám sức khỏe định kỳ cho thú cưng
+          </p>
+          <p>
+           <strong>
+            Bác sĩ phụ trách:
+           </strong>
+           Dr. John Doe
+          </p>
+          <p>
+           <strong>
+            Ghi chú thêm:
+           </strong>
+           Khách hàng yêu cầu dời lịch sang tuần sau.
+          </p>
+          <button class="bg-green-600 text-white py-2 px-4 rounded mt-4" onclick="toggleDetails('details-1')">
+           Đóng
+          </button>
+         </div>
+        </div>
+       </td>
+      </tr>
+      <tr>
+       <td class="py-2 px-4 border-b border-gray-200 text-center">
+        2
+       </td>
+       <td class="py-2 px-4 border-b border-gray-200">
+        Trần Thị B
+       </td>
+       <td class="py-2 px-4 border-b border-gray-200">
+        02/01/2024
+       </td>
+       <td class="py-2 px-4 border-b border-gray-200">
+        Lý do cá nhân
+       </td>
+       <td class="py-2 px-4 border-b border-gray-200 text-center">
+        <button class="bg-green-600 text-white py-1 px-2 rounded" onclick="toggleDetails('details-2')">
+         Xem chi tiết
+        </button>
+       </td>
+      </tr>
+      <tr class="hidden" id="details-2">
+       <td class="py-2 px-4 border-b border-gray-200" colspan="5">
+        <div class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+         <div class="bg-white p-6 rounded-lg shadow-lg w-1/2">
+          <h3 class="text-lg font-bold mb-2">
+           Chi tiết lịch hẹn
+          </h3>
+          <p>
+           <strong>
+            Tên khách hàng:
+           </strong>
+           Trần Thị B
+          </p>
+          <p>
+           <strong>
+            Ngày hẹn:
+           </strong>
+           02/01/2024
+          </p>
+          <p>
+           <strong>
+            Lý do hủy:
+           </strong>
+           Lý do cá nhân
+          </p>
+          <p>
+           <strong>
+            Dịch vụ đã đặt:
+           </strong>
+           Tiêm phòng cho thú cưng
+          </p>
+          <p>
+           <strong>
+            Bác sĩ phụ trách:
+           </strong>
+           Dr. Jane Smith
+          </p>
+          <p>
+           <strong>
+            Ghi chú thêm:
+           </strong>
+           Khách hàng sẽ liên hệ lại để đặt lịch mới.
+          </p>
+          <button class="bg-green-600 text-white py-2 px-4 rounded mt-4" onclick="toggleDetails('details-2')">
+           Đóng
+          </button>
+         </div>
+        </div>
+       </td>
+      </tr>
+      <tr>
+       <td class="py-2 px-4 border-b border-gray-200 text-center">
+        3
+       </td>
+       <td class="py-2 px-4 border-b border-gray-200">
+        Lê Văn C
+       </td>
+       <td class="py-2 px-4 border-b border-gray-200">
+        03/01/2024
+       </td>
+       <td class="py-2 px-4 border-b border-gray-200">
+        Không có phương tiện di chuyển
+       </td>
+       <td class="py-2 px-4 border-b border-gray-200 text-center">
+        <button class="bg-green-600 text-white py-1 px-2 rounded" onclick="toggleDetails('details-3')">
+         Xem chi tiết
+        </button>
+       </td>
+      </tr>
+      <tr class="hidden" id="details-3">
+       <td class="py-2 px-4 border-b border-gray-200" colspan="5">
+        <div class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+         <div class="bg-white p-6 rounded-lg shadow-lg w-1/2">
+          <h3 class="text-lg font-bold mb-2">
+           Chi tiết lịch hẹn
+          </h3>
+          <p>
+           <strong>
+            Tên khách hàng:
+           </strong>
+           Lê Văn C
+          </p>
+          <p>
+           <strong>
+            Ngày hẹn:
+           </strong>
+           03/01/2024
+          </p>
+          <p>
+           <strong>
+            Lý do hủy:
+           </strong>
+           Không có phương tiện di chuyển
+          </p>
+          <p>
+           <strong>
+            Dịch vụ đã đặt:
+           </strong>
+           Khám bệnh cho thú cưng
+          </p>
+          <p>
+           <strong>
+            Bác sĩ phụ trách:
+           </strong>
+           Dr. Emily Johnson
+          </p>
+          <p>
+           <strong>
+            Ghi chú thêm:
+           </strong>
+           Khách hàng yêu cầu tư vấn trực tuyến.
+          </p>
+          <button class="bg-green-600 text-white py-2 px-4 rounded mt-4" onclick="toggleDetails('details-3')">
+           Đóng
+          </button>
+         </div>
+        </div>
+       </td>
+      </tr>
+      <tr>
+       <td class="py-2 px-4 border-b border-gray-200 text-center">
+        4
+       </td>
+       <td class="py-2 px-4 border-b border-gray-200">
+        Phạm Thị D
+       </td>
+       <td class="py-2 px-4 border-b border-gray-200">
+        04/01/2024
+       </td>
+       <td class="py-2 px-4 border-b border-gray-200">
+        Thay đổi kế hoạch
+       </td>
+       <td class="py-2 px-4 border-b border-gray-200 text-center">
+        <button class="bg-green-600 text-white py-1 px-2 rounded" onclick="toggleDetails('details-4')">
+         Xem chi tiết
+        </button>
+       </td>
+      </tr>
+      <tr class="hidden" id="details-4">
+       <td class="py-2 px-4 border-b border-gray-200" colspan="5">
+        <div class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+         <div class="bg-white p-6 rounded-lg shadow-lg w-1/2">
+          <h3 class="text-lg font-bold mb-2">
+           Chi tiết lịch hẹn
+          </h3>
+          <p>
+           <strong>
+            Tên khách hàng:
+           </strong>
+           Phạm Thị D
+          </p>
+          <p>
+           <strong>
+            Ngày hẹn:
+           </strong>
+           04/01/2024
+          </p>
+          <p>
+           <strong>
+            Lý do hủy:
+           </strong>
+           Thay đổi kế hoạch
+          </p>
+          <p>
+           <strong>
+            Dịch vụ đã đặt:
+           </strong>
+           Tư vấn dinh dưỡng cho thú cưng
+          </p>
+          <p>
+           <strong>
+            Bác sĩ phụ trách:
+           </strong>
+           Dr. Michael Brown
+          </p>
+          <p>
+           <strong>
+            Ghi chú thêm:
+           </strong>
+           Khách hàng sẽ đặt lại lịch vào tháng sau.
+          </p>
+          <button class="bg-green-600 text-white py-2 px-4 rounded mt-4" onclick="toggleDetails('details-4')">
+           Đóng
+          </button>
+         </div>
+        </div>
+       </td>
+      </tr>
+      <tr>
+       <td class="py-2 px-4 border-b border-gray-200 text-center">
+        5
+       </td>
+       <td class="py-2 px-4 border-b border-gray-200">
+        Hoàng Văn E
+       </td>
+       <td class="py-2 px-4 border-b border-gray-200">
+        05/01/2024
+       </td>
+       <td class="py-2 px-4 border-b border-gray-200">
+        Lý do sức khỏe
+       </td>
+       <td class="py-2 px-4 border-b border-gray-200 text-center">
+        <button class="bg-green-600 text-white py-1 px-2 rounded" onclick="toggleDetails('details-5')">
+         Xem chi tiết
+        </button>
+       </td>
+      </tr>
+      <tr class="hidden" id="details-5">
+       <td class="py-2 px-4 border-b border-gray-200" colspan="5">
+        <div class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+         <div class="bg-white p-6 rounded-lg shadow-lg w-1/2">
+          <h3 class="text-lg font-bold mb-2">
+           Chi tiết lịch hẹn
+          </h3>
+          <p>
+           <strong>
+            Tên khách hàng:
+           </strong>
+           Hoàng Văn E
+          </p>
+          <p>
+           <strong>
+            Ngày hẹn:
+           </strong>
+           05/01/2024
+          </p>
+          <p>
+           <strong>
+            Lý do hủy:
+           </strong>
+           Lý do sức khỏe
+          </p>
+          <p>
+           <strong>
+            Dịch vụ đã đặt:
+           </strong>
+           Khám sức khỏe tổng quát cho thú cưng
+          </p>
+          <p>
+           <strong>
+            Bác sĩ phụ trách:
+           </strong>
+           Dr. Sarah Lee
+          </p>
+          <p>
+           <strong>
+            Ghi chú thêm:
+           </strong>
+           Khách hàng sẽ đặt lại lịch khi sức khỏe ổn định.
+          </p>
+          <button class="bg-green-600 text-white py-2 px-4 rounded mt-4" onclick="toggleDetails('details-5')">
+           Đóng
+          </button>
+         </div>
+        </div>
+       </td>
+      </tr>
+     </tbody>
+    </table>
+   </div>
+  </div>
+  <div class="bg-green-600 text-white text-center p-4 fixed bottom-0 w-full">
+   © 2024 GroupOne. Tất cả các quyền được bảo lưu.
+  </div>
+ </body>
+</html>

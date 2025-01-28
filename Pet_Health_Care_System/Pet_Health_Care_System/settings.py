@@ -2,27 +2,18 @@ import os
 from dotenv import load_dotenv
 from pathlib import Path
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
+# Load environment variables
+load_dotenv()
+
+# Build paths inside the project
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
+# Security settings
 SECRET_KEY = 'django-insecure-ri%o8nq8)3tmf*rt**+$b31g6(*99ivyn+tv1p^_s_#)@asjsx'
-
-# SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 
-ALLOWED_HOSTS = [
-    # IP, Hostname
-
-] #Cho phép các ứng dụng bên t3 truy cập vào application của mình
-
-
-# Application definition
-
+# Installed apps
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -35,6 +26,7 @@ INSTALLED_APPS = [
     'staff',
 ]
 
+# Middleware
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -45,13 +37,15 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+# URL configuration
 ROOT_URLCONF = 'Pet_Health_Care_System.urls'
 
+# Templates
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
-        'APP_DIRS': True,
+        'DIRS': [],  # Không cần chỉ định DIRS cho static files
+        'APP_DIRS': True,  # Phải bật để Django tìm các static files trong app
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
@@ -63,71 +57,45 @@ TEMPLATES = [
     },
 ]
 
+
+# WSGI application
 WSGI_APPLICATION = 'Pet_Health_Care_System.wsgi.application'
 
-
-# Database
-# https://docs.djangoproject.com/en/4.1/ref/settings/#databases
-
-load_dotenv()
-
+# Database configuration
 DATABASES = {
     'default': {
-'default': {
-     'ENGINE': 'django.db.backends.mysql',  # Sử dụng MySQL
-     'NAME': os.getenv('DB_NAME'),  # Tên cơ sở dữ liệu
-     'USER': os.getenv('DB_USER'),  # Người dùng MySQL
-     'PASSWORD': os.getenv('DB_PASSWORD'),  # Mật khẩu MySQL
-     'HOST': os.getenv('DB_HOST'),  # Máy chủ MySQL
-     'PORT': os.getenv('DB_PORT'),  # Cổng MySQL
- }
-
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': os.getenv('DB_NAME', 'DBase'),
+        'USER': os.getenv('DB_USER', 'root'),
+        'PASSWORD': os.getenv('DB_PASSWORD', 'petscare'),
+        'HOST': os.getenv('DB_HOST', '127.0.0.1'),
+        'PORT': os.getenv('DB_PORT', '3306'),
     }
 }
 
-
-# Password validation
-# https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
-
+# Authentication
 AUTH_PASSWORD_VALIDATORS = [
-    {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
+    {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
+    {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator'},
+    {'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator'},
+    {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'},
 ]
 
-
-# Internationalization
-# https://docs.djangoproject.com/en/4.1/topics/i18n/
-
+# Localization
 LANGUAGE_CODE = 'en-us'
-
 TIME_ZONE = 'UTC'
-
 USE_I18N = True
-
 USE_TZ = True
 
+# Static files
+STATIC_URL = '/static/'  # Đường dẫn URL để truy cập tệp tĩnh
+STATICFILES_DIRS = []  # Không sử dụng thư mục static ở gốc project
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/4.1/howto/static-files/
-
-STATIC_URL = 'static/'
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'pets/static')]
 
 # Default primary key field type
-# https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
-
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+# Django REST framework
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
