@@ -44,10 +44,10 @@
         }
   </script>
  </head>
- <body class="bg-blue-100 font-roboto">
-  <div class="bg-blue-600 text-white p-4 flex justify-between items-center rounded-lg mx-4 my-4 max-w-5xl mx-auto">
+ <body class="bg-green-100 font-roboto">
+  <div class="bg-green-600 text-white p-4 flex justify-between items-center rounded-lg mx-4 my-4 max-w-5xl mx-auto">
    <div class="flex items-center">
-    <button class="bg-white text-blue-600 p-2 rounded-full" onclick="history.back()">
+    <button class="bg-white text-green-600 p-2 rounded-full" onclick="history.back()">
      <i class="fas fa-arrow-left">
      </i>
     </button>
@@ -74,21 +74,21 @@
       </div>
      </div>
      <p class="mb-2">
-      <i class="fas fa-phone-alt mr-2 text-blue-600">
+      <i class="fas fa-phone-alt mr-2 text-green-600">
       </i>
       0123456789
      </p>
      <p class="mb-2">
-      <i class="fas fa-briefcase mr-2 text-blue-600">
+      <i class="fas fa-briefcase mr-2 text-green-600">
       </i>
       Nhân viên
      </p>
      <p class="mb-2">
-      <i class="fas fa-id-badge mr-2 text-blue-600">
+      <i class="fas fa-id-badge mr-2 text-green-600">
       </i>
       Mã nhân viên: 123456
      </p>
-     <button class="bg-blue-600 text-white py-2 px-4 rounded mt-2 w-full" onclick="logout()">
+     <button class="bg-green-600 text-white py-2 px-4 rounded mt-2 w-full" onclick="logout()">
       Đăng xuất
      </button>
     </div>
@@ -134,7 +134,7 @@
         01/01/2024, 08:00 - 12:00
        </td>
        <td class="py-2 px-4 border-b border-gray-200 text-center">
-        <button class="bg-blue-600 text-white py-1 px-2 rounded" onclick="toggleDetails('details-1')">
+        <button class="bg-green-600 text-white py-1 px-2 rounded" onclick="toggleDetails('details-1')">
          Xem chi tiết
         </button>
        </td>
@@ -274,11 +274,11 @@
            <button class="bg-yellow-500 text-white py-2 px-4 rounded mr-2" onclick="enableEditing('schedule-1')">
             Chỉnh sửa
            </button>
-           <button class="bg-blue-600 text-white py-2 px-4 rounded" id="save-schedule-1" onclick="saveSchedule('schedule-1')" style="display: none;">
+           <button class="bg-green-600 text-white py-2 px-4 rounded" id="save-schedule-1" onclick="saveSchedule('schedule-1')" style="display: none;">
             Lưu
            </button>
           </div>
-          <button class="bg-blue-600 text-white py-2 px-4 rounded mt-4" onclick="toggleDetails('details-1')">
+          <button class="bg-green-600 text-white py-2 px-4 rounded mt-4" onclick="toggleDetails('details-1')">
            Đóng
           </button>
          </div>
@@ -286,114 +286,113 @@
        </td>
       </tr>
       <tr>
-       <td class="py-2 px-4 border-b border-gray-200 text-center">
-        2
-       </td>
-       <td class="py-2 px-4 border-b border-gray-200 text-center">
-        <img alt="Avatar of Dr. Jane Smith" class="rounded-full w-12 h-12 mx-auto" src="https://placehold.co/50x50"/>
-       </td>
-       <td class="py-2 px-4 border-b border-gray-200">
-        Dr. Jane Smith
-       </td>
-       <td class="py-2 px-4 border-b border-gray-200">
-        02/01/2024, 13:00 - 17:00
-       </td>
-       <td class="py-2 px-4 border-b border-gray-200 text-center">
-        <button class="bg-blue-600 text-white py-1 px-2 rounded" onclick="toggleDetails('details-2')">
-         Xem chi tiết
-        </button>
-       </td>
-      </tr>
-      <tr class="hidden" id="details-2">
-       <td class="py-2 px-4 border-b border-gray-200" colspan="5">
-        <div class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-         <div class="bg-white p-6 rounded-lg shadow-lg w-3/4">
-          <h3 class="text-lg font-bold mb-2">
-           Chi tiết lịch làm việc
-          </h3>
-          <p>
-           <strong>
-            Tên bác sĩ:
-           </strong>
-           Dr. Jane Smith
-          </p>
-          <table class="min-w-full bg-white mt-4">
-           <thead>
-            <tr>
-             <th class="py-2 px-4 border-b border-gray-200">
-              Ngày
-             </th>
-             <th class="py-2 px-4 border-b border-gray-200">
-              Thời gian bắt đầu
-             </th>
-             <th class="py-2 px-4 border-b border-gray-200">
-              Thời gian kết thúc
-             </th>
-             <th class="py-2 px-4 border-b border-gray-200">
-              Công việc
-             </th>
-            </tr>
-           </thead>
-           <tbody>
-            <tr id="schedule-2">
-             <td class="py-2 px-4 border-b border-gray-200">
-              Thứ Hai
-             </td>
-             <td class="py-2 px-4 border-b border-gray-200">
-              <input class="w-full" disabled="" type="text" value="08:00"/>
-             </td>
-             <td class="py-2 px-4 border-b border-gray-200">
-              <input class="w-full" disabled="" type="text" value="12:00"/>
-             </td>
-             <td class="py-2 px-4 border-b border-gray-200">
-              <input class="w-full" disabled="" type="text" value="Khám sức khỏe định kỳ cho thú cưng"/>
-             </td>
-            </tr>
-            <tr id="schedule-2">
-             <td class="py-2 px-4 border-b border-gray-200">
-              Thứ Ba
-             </td>
-             <td class="py-2 px-4 border-b border-gray-200">
-              <input class="w-full" disabled="" type="text" value="13:00"/>
-             </td>
-             <td class="py-2 px-4 border-b border-gray-200">
-              <input class="w-full" disabled="" type="text" value="17:00"/>
-             </td>
-             <td class="py-2 px-4 border-b border-gray-200">
-              <input class="w-full" disabled="" type="text" value="Tiêm phòng cho thú cưng"/>
-             </td>
-            </tr>
-            <tr id="schedule-2">
-             <td class="py-2 px-4 border-b border-gray-200">
-              Thứ Tư
-             </td>
-             <td class="py-2 px-4 border-b border-gray-200">
-              <input class="w-full" disabled="" type="text" value="08:00"/>
-             </td>
-             <td class="py-2 px-4 border-b border-gray-200">
-              <input class="w-full" disabled="" type="text" value="12:00"/>
-             </td>
-             <td class="py-2 px-4 border-b border-gray-200">
-              <input class="w-full" disabled="" type="text" value="Khám bệnh cho thú cưng"/>
-             </td>
-            </tr>
-            <tr id="schedule-2">
-             <td class="py-2 px-4 border-b border-gray-200">
-              Thứ Năm
-             </td>
-             <td class="py-2 px-4 border-b border-gray-200">
-              &lt;input class="w-full" disabled
-             </td>
-            </tr>
-           </tbody>
-          </table>
-         </div>
-        </div>
-       </td>
-      </tr>
-     </tbody>
-    </table>
-   </div>
-  </div>
+        <tr class="hidden" id="details-2">
+            <td class="py-2 px-4 border-b border-gray-200" colspan="5">
+              <div class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+                <div class="bg-white p-6 rounded-lg shadow-lg w-3/4">
+                  <h3 class="text-lg font-bold mb-2">Chi tiết lịch làm việc</h3>
+                  <p>
+                    <strong>Tên bác sĩ:</strong> Dr. Jane Smith
+                  </p>
+                  <table class="min-w-full bg-white mt-4">
+                    <thead>
+                      <tr>
+                        <th class="py-2 px-4 border-b border-gray-200">Ngày</th>
+                        <th class="py-2 px-4 border-b border-gray-200">Thời gian bắt đầu</th>
+                        <th class="py-2 px-4 border-b border-gray-200">Thời gian kết thúc</th>
+                        <th class="py-2 px-4 border-b border-gray-200">Công việc</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr id="schedule-2-monday">
+                        <td class="py-2 px-4 border-b border-gray-200">Thứ Hai</td>
+                        <td class="py-2 px-4 border-b border-gray-200">
+                          <input class="w-full" disabled type="text" value="08:00" />
+                        </td>
+                        <td class="py-2 px-4 border-b border-gray-200">
+                          <input class="w-full" disabled type="text" value="12:00" />
+                        </td>
+                        <td class="py-2 px-4 border-b border-gray-200">
+                          <input class="w-full" disabled type="text" value="Khám sức khỏe định kỳ cho thú cưng" />
+                        </td>
+                      </tr>
+                      <tr id="schedule-2-tuesday">
+                        <td class="py-2 px-4 border-b border-gray-200">Thứ Ba</td>
+                        <td class="py-2 px-4 border-b border-gray-200">
+                          <input class="w-full" disabled type="text" value="13:00" />
+                        </td>
+                        <td class="py-2 px-4 border-b border-gray-200">
+                          <input class="w-full" disabled type="text" value="17:00" />
+                        </td>
+                        <td class="py-2 px-4 border-b border-gray-200">
+                          <input class="w-full" disabled type="text" value="Tiêm phòng cho thú cưng" />
+                        </td>
+                      </tr>
+                      <tr id="schedule-2-wednesday">
+                        <td class="py-2 px-4 border-b border-gray-200">Thứ Tư</td>
+                        <td class="py-2 px-4 border-b border-gray-200">
+                          <input class="w-full" disabled type="text" value="08:00" />
+                        </td>
+                        <td class="py-2 px-4 border-b border-gray-200">
+                          <input class="w-full" disabled type="text" value="12:00" />
+                        </td>
+                        <td class="py-2 px-4 border-b border-gray-200">
+                          <input class="w-full" disabled type="text" value="Khám bệnh cho thú cưng" />
+                        </td>
+                      </tr>
+                      <tr id="schedule-2-thursday">
+                        <td class="py-2 px-4 border-b border-gray-200">Thứ Năm</td>
+                        <td class="py-2 px-4 border-b border-gray-200">
+                          <input class="w-full" disabled type="text" value="13:00" />
+                        </td>
+                        <td class="py-2 px-4 border-b border-gray-200">
+                          <input class="w-full" disabled type="text" value="17:00" />
+                        </td>
+                        <td class="py-2 px-4 border-b border-gray-200">
+                          <input class="w-full" disabled type="text" value="Tư vấn dinh dưỡng cho thú cưng" />
+                        </td>
+                      </tr>
+                      <tr id="schedule-2-friday">
+                        <td class="py-2 px-4 border-b border-gray-200">Thứ Sáu</td>
+                        <td class="py-2 px-4 border-b border-gray-200">
+                          <input class="w-full" disabled type="text" value="08:00" />
+                        </td>
+                        <td class="py-2 px-4 border-b border-gray-200">
+                          <input class="w-full" disabled type="text" value="12:00" />
+                        </td>
+                        <td class="py-2 px-4 border-b border-gray-200">
+                          <input class="w-full" disabled type="text" value="Tư vấn sức khỏe" />
+                        </td>
+                      </tr>
+                      <tr id="schedule-2-saturday">
+                        <td class="py-2 px-4 border-b border-gray-200">Thứ Bảy</td>
+                        <td class="py-2 px-4 border-b border-gray-200">
+                          <input class="w-full" disabled type="text" value="09:00" />
+                        </td>
+                        <td class="py-2 px-4 border-b border-gray-200">
+                          <input class="w-full" disabled type="text" value="12:00" />
+                        </td>
+                        <td class="py-2 px-4 border-b border-gray-200">
+                          <input class="w-full" disabled type="text" value="Khám chữa bệnh cho thú cưng" />
+                        </td>
+                      </tr>
+                      <tr id="schedule-2-sunday">
+                        <td class="py-2 px-4 border-b border-gray-200">Chủ Nhật</td>
+                        <td class="py-2 px-4 border-b border-gray-200">
+                          <input class="w-full" disabled type="text" value="10:00" />
+                        </td>
+                        <td class="py-2 px-4 border-b border-gray-200">
+                          <input class="w-full" disabled type="text" value="14:00" />
+                        </td>
+                        <td class="py-2 px-4 border-b border-gray-200">
+                          <input class="w-full" disabled type="text" value="Tư vấn chăm sóc thú cưng" />
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </td>
+          </tr>          
  </body>
 </html>
