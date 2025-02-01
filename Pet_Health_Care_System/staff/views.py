@@ -1,8 +1,8 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required, user_passes_test
 
-def base1(request):
-    return render(request, 'staff/base1.html')  # Hiển thị giao diện base1
+def basehome(request):
+    return render(request, 'staff/basehome.html')  # Hiển thị giao diện base1
 
 def Manage_cancellations(request):
     return render(request, 'staff/Manage_cancellations.html')

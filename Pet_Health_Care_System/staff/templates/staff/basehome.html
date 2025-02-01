@@ -1,0 +1,162 @@
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   Employee Dashboard
+  </title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&amp;display=swap" rel="stylesheet"/>
+  <script src="https://cdn.tailwindcss.com">
+  </script>
+  <script>
+   function toggleUserDetails() {
+            const userDetails = document.getElementById('user-details');
+            userDetails.classList.toggle('hidden');
+        }
+
+        function logout() {
+            alert('Đăng xuất thành công');
+        }
+  </script>
+ </head>
+ <body class="bg-green-100 font-roboto">
+  <!-- Header -->
+  <header class="bg-green-600 text-white p-4 flex justify-between items-center rounded-lg mx-4 my-4 max-w-5xl mx-auto">
+   <img alt="Company Logo" class="rounded-lg" height="50" src="https://storage.googleapis.com/a1aa/image/IPVPceau8CisoQ2bHgAl8lR1mzFwx2oe34MOBIiYMxA.jpg" width="50"/>
+   <h1 class="text-2xl ml-4 flex-grow text-left">
+    Employee Dashboard
+   </h1>
+   <div class="relative flex items-center">
+    <span class="mr-2">
+     Tên người dùng
+    </span>
+    <img alt="User Avatar" class="rounded-lg cursor-pointer" height="50" onclick="toggleUserDetails()" src="https://storage.googleapis.com/a1aa/image/KdckCxfpFGIG66h4GnqIvgrRsSdNsta68ZLO6hxubU8.jpg" width="50"/>
+    <div class="absolute top-16 right-0 bg-white text-black border border-gray-300 rounded-lg p-4 shadow-lg w-64 hidden" id="user-details">
+     <div class="flex items-center mb-4">
+      <img alt="User Avatar" class="rounded-lg w-12 h-12 mr-4" height="50" src="https://storage.googleapis.com/a1aa/image/KdckCxfpFGIG66h4GnqIvgrRsSdNsta68ZLO6hxubU8.jpg" width="50"/>
+      <div>
+       <p class="font-bold">
+        Tên người dùng
+       </p>
+       <p class="text-sm text-gray-600">
+        user@example.com
+       </p>
+      </div>
+     </div>
+     <p class="mb-2">
+      <i class="fas fa-phone-alt mr-2 text-green-600">
+      </i>
+      0123456789
+     </p>
+     <p class="mb-2">
+      <i class="fas fa-briefcase mr-2 text-green-600">
+      </i>
+      Nhân viên
+     </p>
+     <p class="mb-2">
+      <i class="fas fa-id-badge mr-2 text-green-600">
+      </i>
+      Mã nhân viên: 123456
+     </p>
+     <button class="bg-green-600 text-white py-2 px-4 rounded mt-2 w-full" onclick="logout()">
+      Đăng xuất
+     </button>
+    </div>
+   </div>
+  </header>
+  <!-- Main -->
+  <div class="flex max-w-5xl mx-auto">
+   <!-- Sidebar -->
+   <aside class="w-1/4 bg-white rounded-lg shadow-lg p-4">
+    <div class="text-center mb-4">
+     <button class="bg-green-600 text-white py-2 px-4 rounded hover:bg-green-700 w-full" onclick="window.location.href='/Manage_cancellations';">
+      Quản lí các trường hợp hủy hẹn lịch
+     </button>
+    </div>
+    <div class="text-center mb-4">
+     <button class="bg-green-600 text-white py-2 px-4 rounded hover:bg-green-700 w-full" onclick="window.location.href='/Manage_cancellations';">
+      Quản lí lịch làm việc của bác sĩ
+     </button>
+    </div>
+    <div class="text-center mb-4">
+     <button class="bg-green-600 text-white py-2 px-4 rounded hover:bg-green-700 w-full" onclick="window.location.href='/update_pet';">
+      Petstatus
+     </button>
+    </div>
+    <div class="text-center mb-4">
+     <button class="bg-green-600 text-white py-2 px-4 rounded hover:bg-green-700 w-full">
+      Cập nhật thông tin
+     </button>
+    </div>
+   </aside>
+   <!-- Main Content -->
+   <main class="w-3/4 bg-white rounded-lg shadow-lg p-4 ml-4">
+    <h2 class="text-2xl mb-4">
+     Thông tin cơ bản của nhân viên
+    </h2>
+    <div class="flex flex-col items-center mb-4">
+     <div class="border-4 border-green-600 rounded-lg p-2 mb-4">
+      <img alt="User Avatar" class="rounded-lg" height="150" src="https://storage.googleapis.com/a1aa/image/KdckCxfpFGIG66h4GnqIvgrRsSdNsta68ZLO6hxubU8.jpg" width="150"/>
+     </div>
+     <div class="w-full">
+      <p class="text-lg flex items-center mb-2">
+       <i class="fas fa-user mr-2 text-green-600">
+       </i>
+       <strong>
+        Tên:
+       </strong>
+       <span class="ml-2">
+        Tên người dùng
+       </span>
+      </p>
+      <p class="text-lg flex items-center mb-2">
+       <i class="fas fa-envelope mr-2 text-green-600">
+       </i>
+       <strong>
+        Email:
+       </strong>
+       <span class="ml-2">
+        user@example.com
+       </span>
+      </p>
+      <p class="text-lg flex items-center mb-2">
+       <i class="fas fa-phone-alt mr-2 text-green-600">
+       </i>
+       <strong>
+        Số điện thoại:
+       </strong>
+       <span class="ml-2">
+        0123456789
+       </span>
+      </p>
+      <p class="text-lg flex items-center mb-2">
+       <i class="fas fa-briefcase mr-2 text-green-600">
+       </i>
+       <strong>
+        Chức vụ:
+       </strong>
+       <span class="ml-2">
+        Nhân viên
+       </span>
+      </p>
+      <p class="text-lg flex items-center mb-2">
+       <i class="fas fa-id-badge mr-2 text-green-600">
+       </i>
+       <strong>
+        Mã nhân viên:
+       </strong>
+       <span class="ml-2">
+        123456
+       </span>
+      </p>
+     </div>
+    </div>
+   </main>
+  </div>
+  <!-- Footer -->
+  <footer class="bg-green-600 text-white text-center p-4 fixed bottom-0 w-full text-sm">
+   © 2024 GroupOne. Tất cả các quyền được bảo lưu.
+  </footer>
+ </body>
+</html>
