@@ -24,5 +24,6 @@ urlpatterns = [
     path('pets', include('pets.urls')),           # URL: /pets/
     path('api/', include(router.urls)),            # URL: /api/users/ (thay vì /router/users/)
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),  # URL: /api-auth/
-    path('', include('staff.urls')),               # URL mặc định ("/") trỏ đến staff.urls
+    path('staff/', include('staff.urls')),               # URL mặc định ("/") trỏ đến staff.urls
+    path('', include('doctor.urls')),
 ]

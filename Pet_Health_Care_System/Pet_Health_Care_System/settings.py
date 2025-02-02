@@ -24,6 +24,7 @@ INSTALLED_APPS = [
     'pets',
     'rest_framework',
     'staff',
+    'doctor',
 ]
 
 # Middleware
