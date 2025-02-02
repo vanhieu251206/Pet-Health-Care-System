@@ -1,0 +1,383 @@
+{% extends 'staff/base.html' %}
+{% load static %}
+{% block content %}
+   <!-- Main Content -->
+   <main class="w-full bg-white rounded-lg shadow-lg p-4 mt-4">
+    <h2 class="text-2xl mb-4 text-center">
+     Các lịch hẹn đã hủy
+    </h2>
+    <div class="overflow-x-auto">
+     <table class="min-w-full bg-white">
+      <thead>
+       <tr>
+        <th class="py-2 px-4 border-b-2 border-gray-300 text-left leading-tight">
+         STT
+        </th>
+        <th class="py-2 px-4 border-b-2 border-gray-300 text-left leading-tight">
+         Tên khách hàng
+        </th>
+        <th class="py-2 px-4 border-b-2 border-gray-300 text-left leading-tight">
+         Ngày hẹn
+        </th>
+        <th class="py-2 px-4 border-b-2 border-gray-300 text-left leading-tight">
+         Lý do hủy
+        </th>
+        <th class="py-2 px-4 border-b-2 border-gray-300 text-left leading-tight">
+         Hành động
+        </th>
+       </tr>
+      </thead>
+      <tbody>
+       <tr>
+        <td class="py-2 px-4 border-b border-gray-300">
+         1
+        </td>
+        <td class="py-2 px-4 border-b border-gray-300">
+         Nguyễn Văn A
+        </td>
+        <td class="py-2 px-4 border-b border-gray-300">
+         01/01/2024
+        </td>
+        <td class="py-2 px-4 border-b border-gray-300">
+         Bận công việc đột xuất
+        </td>
+        <td class="py-2 px-4 border-b border-gray-300">
+         <button class="bg-green-600 text-white py-1 px-2 rounded" onclick="showDetails('details-1')">
+          Xem chi tiết
+         </button>
+        </td>
+       </tr>
+       <tr id="details-1" class="hidden">
+        <td colspan="5" class="py-2 px-4 border-b border-gray-300">
+         <div class="bg-gray-100 p-4 rounded-lg">
+          <p class="mb-2">
+           <i class="fas fa-user mr-2 text-green-600">
+           </i>
+           <strong>
+            Thông tin chủ nhân:
+           </strong>
+          </p>
+          <p>
+           <strong>
+            Tên:
+           </strong>
+           Nguyễn Văn A
+          </p>
+          <p>
+           <strong>
+            Số điện thoại:
+           </strong>
+           0123456789
+          </p>
+          <p>
+           <strong>
+            Email:
+           </strong>
+           nguyenvana@example.com
+          </p>
+          <p class="mt-4 mb-2">
+           <i class="fas fa-paw mr-2 text-green-600">
+           </i>
+           <strong>
+            Thông tin thú cưng:
+           </strong>
+          </p>
+          <p>
+           <strong>
+            Tên thú cưng:
+           </strong>
+           Mèo Tom
+          </p>
+          <p>
+           <strong>
+            Loại thú cưng:
+           </strong>
+           Mèo
+          </p>
+          <p>
+           <strong>
+            Tuổi thú cưng:
+           </strong>
+           2 năm
+          </p>
+          <p class="mt-4 mb-2">
+           <i class="fas fa-user-md mr-2 text-green-600">
+           </i>
+           <strong>
+            Bác sĩ phụ trách:
+           </strong>
+          </p>
+          <p>
+           Dr. John Doe
+          </p>
+          <p class="mt-4 mb-2">
+           <i class="fas fa-info-circle mr-2 text-green-600">
+           </i>
+           <strong>
+            Lý do hủy chi tiết:
+           </strong>
+          </p>
+          <p>
+           Bận công việc đột xuất, không thể đưa thú cưng đến khám.
+          </p>
+          <button class="bg-red-600 text-white py-1 px-2 rounded mt-2 float-right" onclick="closeDetails('details-1')">
+           Đóng
+          </button>
+         </div>
+        </td>
+       </tr>
+       <tr>
+        <td class="py-2 px-4 border-b border-gray-300">
+         2
+        </td>
+        <td class="py-2 px-4 border-b border-gray-300">
+         Trần Thị B
+        </td>
+        <td class="py-2 px-4 border-b border-gray-300">
+         02/01/2024
+        </td>
+        <td class="py-2 px-4 border-b border-gray-300">
+         Không thể sắp xếp thời gian
+        </td>
+        <td class="py-2 px-4 border-b border-gray-300">
+         <button class="bg-green-600 text-white py-1 px-2 rounded" onclick="showDetails('details-2')">
+          Xem chi tiết
+         </button>
+        </td>
+       </tr>
+       <tr id="details-2" class="hidden">
+        <td colspan="5" class="py-2 px-4 border-b border-gray-300">
+         <div class="bg-gray-100 p-4 rounded-lg">
+          <p class="mb-2">
+           <i class="fas fa-user mr-2 text-green-600">
+           </i>
+           <strong>
+            Thông tin chủ nhân:
+           </strong>
+          </p>
+          <p>
+           <strong>
+            Tên:
+           </strong>
+           Trần Thị B
+          </p>
+          <p>
+           <strong>
+            Số điện thoại:
+           </strong>
+           0987654321
+          </p>
+          <p>
+           <strong>
+            Email:
+           </strong>
+           tranthib@example.com
+          </p>
+          <p class="mt-4 mb-2">
+           <i class="fas fa-paw mr-2 text-green-600">
+           </i>
+           <strong>
+            Thông tin thú cưng:
+           </strong>
+          </p>
+          <p>
+           <strong>
+            Tên thú cưng:
+           </strong>
+           Chó Max
+          </p>
+          <p>
+           <strong>
+            Loại thú cưng:
+           </strong>
+           Chó
+          </p>
+          <p>
+           <strong>
+            Tuổi thú cưng:
+           </strong>
+           3 năm
+          </p>
+          <p class="mt-4 mb-2">
+           <i class="fas fa-user-md mr-2 text-green-600">
+           </i>
+           <strong>
+            Bác sĩ phụ trách:
+           </strong>
+          </p>
+          <p>
+           Dr. Jane Smith
+          </p>
+          <p class="mt-4 mb-2">
+           <i class="fas fa-info-circle mr-2 text-green-600">
+           </i>
+           <strong>
+            Lý do hủy chi tiết:
+           </strong>
+          </p>
+          <p>
+           Không thể sắp xếp thời gian, cần dời lịch hẹn.
+          </p>
+          <button class="bg-red-600 text-white py-1 px-2 rounded mt-2 float-right" onclick="closeDetails('details-2')">
+           Đóng
+          </button>
+         </div>
+        </td>
+       </tr>
+       <tr>
+        <td class="py-2 px-4 border-b border-gray-300">
+         3
+        </td>
+        <td class="py-2 px-4 border-b border-gray-300">
+         Lê Văn C
+        </td>
+        <td class="py-2 px-4 border-b border-gray-300">
+         03/01/2024
+        </td>
+        <td class="py-2 px-4 border-b border-gray-300">
+         Lý do cá nhân
+        </td>
+        <td class="py-2 px-4 border-b border-gray-300">
+         <button class="bg-green-600 text-white py-1 px-2 rounded" onclick="showDetails('details-3')">
+          Xem chi tiết
+         </button>
+        </td>
+       </tr>
+       <tr id="details-3" class="hidden">
+        <td colspan="5" class="py-2 px-4 border-b border-gray-300">
+         <div class="bg-gray-100 p-4 rounded-lg">
+          <p class="mb-2">
+           <i class="fas fa-user mr-2 text-green-600">
+           </i>
+           <strong>
+            Thông tin chủ nhân:
+           </strong>
+          </p>
+          <p>
+           <strong>
+            Tên:
+           </strong>
+           Lê Văn C
+          </p>
+          <p>
+           <strong>
+            Số điện thoại:
+           </strong>
+           0123456789
+          </p>
+          <p>
+           <strong>
+            Email:
+           </strong>
+           levanc@example.com
+          </p>
+          <p class="mt-4 mb-2">
+           <i class="fas fa-paw mr-2 text-green-600">
+           </i>
+           <strong>
+            Thông tin thú cưng:
+           </strong>
+          </p>
+          <p>
+           <strong>
+            Tên thú cưng:
+           </strong>
+           Thỏ Bunny
+          </p>
+          <p>
+           <strong>
+            Loại thú cưng:
+           </strong>
+           Thỏ
+          </p>
+          <p>
+           <strong>
+            Tuổi thú cưng:
+           </strong>
+           1 năm
+          </p>
+          <p class="mt-4 mb-2">
+           <i class="fas fa-user-md mr-2 text-green-600">
+           </i>
+           <strong>
+            Bác sĩ phụ trách:
+           </strong>
+          </p>
+          <p>
+           Dr. Emily Johnson
+          </p>
+          <p class="mt-4 mb-2">
+           <i class="fas fa-info-circle mr-2 text-green-600">
+           </i>
+           <strong>
+            Lý do hủy chi tiết:
+           </strong>
+          </p>
+          <p>
+           Lý do cá nhân, không thể đưa thú cưng đến khám.
+          </p>
+          <button class="bg-red-600 text-white py-1 px-2 rounded mt-2 float-right" onclick="closeDetails('details-3')">
+           Đóng
+          </button>
+         </div>
+        </td>
+       </tr>
+       <tr>
+        <td class="py-2 px-4 border-b border-gray-300">
+         4
+        </td>
+        <td class="py-2 px-4 border-b border-gray-300">
+         Phạm Thị D
+        </td>
+        <td class="py-2 px-4 border-b border-gray-300">
+         04/01/2024
+        </td>
+        <td class="py-2 px-4 border-b border-gray-300">
+         Bệnh đột xuất
+        </td>
+        <td class="py-2 px-4 border-b border-gray-300">
+         <button class="bg-green-600 text-white py-1 px-2 rounded" onclick="showDetails('details-4')">
+          Xem chi tiết
+         </button>
+        </td>
+       </tr>
+       <tr id="details-4" class="hidden">
+        <td colspan="5" class="py-2 px-4 border-b border-gray-300">
+         <div class="bg-gray-100 p-4 rounded-lg">
+          <p class="mb-2">
+           <i class="fas fa-user mr-2 text-green-600">
+           </i>
+           <strong>
+            Thông tin chủ nhân:
+           </strong>
+          </p>
+          <p>
+           <strong>
+            Tên:
+           </strong>
+           Phạm Thị D
+          </p>
+          <p>
+           <strong>
+            Số điện thoại:
+           </strong>
+           0987654321
+          </p>
+          <p>
+           <strong>
+            Email:
+           </strong>
+           phamthid@example.com
+          </p>
+          <p class="mt-4 mb-2">
+           <i class="fas fa-paw mr-2 text-green-600">
+           </i>
+           <strong>
+            Thông tin thú cưng:
+           </strong>
+          </p>
+          <p>
+           <strong>
+            Tên thú cưng:
+           </strong>
+           {% endblock %}
