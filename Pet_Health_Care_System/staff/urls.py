@@ -6,4 +6,5 @@ urlpatterns = [
     path('Manage_cancellations/', views.Manage_cancellations, name='Manage_cancellations'),  # Liên kết lịch hủy
     path('Manage_Doctor/', views.Manage_Doctor, name='Manage_Doctor'),  # Liên kết lịch làm
     path('update_pet/', views.update_pet, name='update_pet'),
+    path('update_info/', views.update_info, name='update_info'),
 ]

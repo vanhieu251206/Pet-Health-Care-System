@@ -1,0 +1,212 @@
+{% extends 'staff/base.html' %}
+{% load static %}
+{% block content %}
+ <body class="font-roboto bg-green-100">
+  <main class="container mx-auto p-4">
+   <section class="mb-8">
+    <h2 class="text-xl font-bold mb-4">
+     <i class="fas fa-edit"></i> Cập Nhật Thông Tin Thú Cưng
+    </h2>
+    <form class="bg-white p-6 rounded-lg shadow-lg mb-8" id="petForm">
+     <div class="mb-4">
+      <label class="block text-gray-700 text-sm font-bold mb-2" for="petName">
+       Tên Thú Cưng
+      </label>
+      <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="petName" type="text" placeholder="Nhập tên thú cưng"/>
+     </div>
+     <div class="mb-4">
+      <label class="block text-gray-700 text-sm font-bold mb-2" for="petType">
+       Loại Thú Cưng
+      </label>
+      <select class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="petType">
+       <option>
+        Chó
+       </option>
+       <option>
+        Mèo
+       </option>
+       <option>
+        Thỏ
+       </option>
+       <option>
+        Vẹt
+       </option>
+       <option>
+        Chuột Hamster
+       </option>
+      </select>
+     </div>
+     <div class="mb-4">
+      <label class="block text-gray-700 text-sm font-bold mb-2" for="petAge">
+       Tuổi Thú Cưng
+      </label>
+      <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="petAge" type="number" placeholder="Nhập tuổi thú cưng"/>
+     </div>
+     <div class="mb-4">
+      <label class="block text-gray-700 text-sm font-bold mb-2" for="petWeight">
+       Cân Nặng Thú Cưng (kg)
+      </label>
+      <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="petWeight" type="number" placeholder="Nhập cân nặng thú cưng"/>
+     </div>
+     <div class="mb-4">
+      <label class="block text-gray-700 text-sm font-bold mb-2" for="petStatus">
+       Tình Trạng Sức Khỏe
+      </label>
+      <textarea class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="petStatus" placeholder="Nhập tình trạng sức khỏe của thú cưng" rows="4">
+      </textarea>
+     </div>
+     <div class="mb-4">
+      <label class="block text-gray-700 text-sm font-bold mb-2" for="ownerName">
+       Tên Chủ Nhân
+      </label>
+      <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="ownerName" type="text" placeholder="Nhập tên chủ nhân"/>
+     </div>
+     <div class="mb-4">
+      <label class="block text-gray-700 text-sm font-bold mb-2" for="ownerPhone">
+       Số Điện Thoại Chủ Nhân
+      </label>
+      <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="ownerPhone" type="text" placeholder="Nhập số điện thoại chủ nhân"/>
+     </div>
+     <div class="mb-4">
+      <label class="block text-gray-700 text-sm font-bold mb-2" for="ownerAddress">
+       Địa Chỉ Chủ Nhân
+      </label>
+      <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="ownerAddress" type="text" placeholder="Nhập địa chỉ chủ nhân"/>
+     </div>
+     <div class="flex items-center justify-between">
+      <button class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 focus:outline-none focus:shadow-outline" type="button" onclick="savePet()">
+       Lưu
+      </button>
+      <button class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 focus:outline-none focus:shadow-outline" type="button" onclick="clearForm()">
+       Hủy
+      </button>
+     </div>
+    </form>
+   </section>
+   <section>
+    <h2 class="text-xl font-bold mb-4">
+     <i class="fas fa-list"></i> Danh Sách Thú Cưng Được Cập Nhật
+    </h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+     <div class="bg-white p-4 rounded-lg shadow cursor-pointer" onclick="openPetDetails('Buddy', 'Chó', 3, 15, 'Buddy đang hồi phục tốt sau ca phẫu thuật. Chú đang ăn uống bình thường.', 'John Doe', '0123456789', '123 Đường ABC, Quận XYZ, TP. HCM')">
+      <div class="flex items-center mb-4">
+       <img alt="Hình ảnh một chú chó màu nâu với vòng cổ" class="w-16 h-16 rounded-full mr-4" height="100" src="https://storage.googleapis.com/a1aa/image/Djz5a72NtJ-L1Bm70e7dXOWbWw8d1s0wm09rmkrCRag.jpg" width="100"/>
+       <div>
+        <h3 class="text-lg font-bold">
+         Buddy
+        </h3>
+        <p class="text-gray-600">
+         Chó
+        </p>
+       </div>
+      </div>
+      <p class="text-gray-800">
+       Buddy đang hồi phục tốt sau ca phẫu thuật. Chú đang ăn uống bình thường.
+      </p>
+     </div>
+     <div class="bg-white p-4 rounded-lg shadow cursor-pointer" onclick="openPetDetails('Whiskers', 'Mèo', 2, 4, 'Whiskers rất năng động và không có dấu hiệu bệnh tật.', 'Jane Smith', '0987654321', '456 Đường DEF, Quận UVW, TP. HCM')">
+      <div class="flex items-center mb-4">
+       <img alt="Hình ảnh một chú mèo trắng với đôi mắt xanh lá cây" class="w-16 h-16 rounded-full mr-4" height="100" src="https://storage.googleapis.com/a1aa/image/azHhTigu5zuKj4anoqppWd9ZAwRbtobi3IaVMe6SGAM.jpg" width="100"/>
+       <div>
+        <h3 class="text-lg font-bold">
+         Whiskers
+        </h3>
+        <p class="text-gray-600">
+         Mèo
+        </p>
+       </div>
+      </div>
+      <p class="text-gray-800">
+       Whiskers rất năng động và không có dấu hiệu bệnh tật.
+      </p>
+     </div>
+     <div class="bg-white p-4 rounded-lg shadow cursor-pointer" onclick="openPetDetails('Thumper', 'Thỏ', 1, 2, 'Thumper đã ăn uống tốt hơn và năng động hơn.', 'Alice Johnson', '0112233445', '789 Đường GHI, Quận RST, TP. HCM')">
+      <div class="flex items-center mb-4">
+       <img alt="Hình ảnh một chú thỏ đen với đôi tai dài" class="w-16 h-16 rounded-full mr-4" height="100" src="https://storage.googleapis.com/a1aa/image/IeE60FymBv9wEbzQ1AhYdZWjwD3me5T6J3nHoEOYThw.jpg" width="100"/>
+       <div>
+        <h3 class="text-lg font-bold">
+         Thumper
+        </h3>
+        <p class="text-gray-600">
+         Thỏ
+        </p>
+       </div>
+      </div>
+      <p class="text-gray-800">
+       Thumper đã ăn uống tốt hơn và năng động hơn.
+      </p>
+     </div>
+     <div class="bg-white p-4 rounded-lg shadow cursor-pointer" onclick="openPetDetails('Max', 'Chó', 1, 10, 'Max đã hoàn thành các mũi tiêm phòng. Chú rất khỏe mạnh và năng động.', 'Bob Brown', '0223344556', '101 Đường JKL, Quận OPQ, TP. HCM')">
+      <div class="flex items-center mb-4">
+       <img alt="Hình ảnh một chú chó con giống golden retriever" class="w-16 h-16 rounded-full mr-4" height="100" src="https://storage.googleapis.com/a1aa/image/xBldouPJlweLEYv8h-vDXWbFfYojY0msSZhfGunvw_M.jpg" width="100"/>
+       <div>
+        <h3 class="text-lg font-bold">
+         Max
+        </h3>
+        <p class="text-gray-600">
+         Chó
+        </p>
+       </div>
+      </div>
+      <p class="text-gray-800">
+       Max đã hoàn thành các mũi tiêm phòng. Chú rất khỏe mạnh và năng động.
+      </p>
+     </div>
+     <div class="bg-white p-4 rounded-lg shadow cursor-pointer" onclick="openPetDetails('Polly', 'Vẹt', 4, 0.5, 'Polly đang nói nhiều hơn và có vẻ rất vui vẻ.', 'Charlie Green', '0334455667', '202 Đường MNO, Quận XYZ, TP. HCM')">
+      <div class="flex items-center mb-4">
+       <img alt="Hình ảnh một chú vẹt xám với đuôi đỏ" class="w-16 h-16 rounded-full mr-4" height="100" src="https://storage.googleapis.com/a1aa/image/2LPbkItfNJ-KqI8aYqkdqU3dJEK-taFQJRzQPjgxvAY.jpg" width="100"/>
+       <div>
+        <h3 class="text-lg font-bold">
+         Polly
+        </h3>
+        <p class="text-gray-600">
+         Vẹt
+        </p>
+       </div>
+      </div>
+      <p class="text-gray-800">
+       Polly đang nói nhiều hơn và có vẻ rất vui vẻ.
+      </p>
+     </div>
+     <div class="bg-white p-4 rounded-lg shadow cursor-pointer" onclick="openPetDetails('Nibbles', 'Chuột Hamster', 1, 0.2, 'Nibbles rất năng động và thích chạy trong bánh xe của mình.', 'Daisy White', '0445566778', '303 Đường PQR, Quận STU, TP. HCM')">
+      <div class="flex items-center mb-4">
+       <img alt="Hình ảnh một chú chuột hamster màu nâu trong bánh xe" class="w-16 h-16 rounded-full mr-4" height="100" src="https://storage.googleapis.com/a1aa/image/aOH_WWHq2TXiAnYZ72TNkQZukp2cJX6kPqFjrn9UhPs.jpg" width="100"/>
+       <div>
+        <h3 class="text-lg font-bold">
+         Nibbles
+        </h3>
+        <p class="text-gray-600">
+         Chuột Hamster
+        </p>
+       </div>
+      </div>
+      <p class="text-gray-800">
+       Nibbles rất năng động và thích chạy trong bánh xe của mình.
+      </p>
+     </div>
+    </div>
+   </section>
+  </main>
+  <script>
+   function openPetDetails(name, type, age, weight, status, ownerName, ownerPhone, ownerAddress) {
+     document.getElementById('petName').value = name;
+     document.getElementById('petType').value = type;
+     document.getElementById('petAge').value = age;
+     document.getElementById('petWeight').value = weight;
+     document.getElementById('petStatus').value = status;
+     document.getElementById('ownerName').value = ownerName;
+     document.getElementById('ownerPhone').value = ownerPhone;
+     document.getElementById('ownerAddress').value = ownerAddress;
+     window.scrollTo(0, 0);
+   }
+
+   function savePet() {
+     alert('Thông tin thú cưng đã được lưu.');
+   }
+
+   function clearForm() {
+     document.getElementById('petForm').reset();
+   }
+  </script>
+ </body>
+ {% endblock %}

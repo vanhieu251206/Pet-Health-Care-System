@@ -13,4 +13,7 @@ def Manage_Doctor(request):
 def update_pet(request):
     return render(request, 'staff/update_pet.html')
 
+def update_info(request):
+    return render(request, 'staff/update_info.html')
+
 
