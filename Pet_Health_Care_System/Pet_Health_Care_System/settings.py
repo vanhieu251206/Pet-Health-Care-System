@@ -45,7 +45,7 @@ ROOT_URLCONF = 'Pet_Health_Care_System.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],  # Không cần chỉ định DIRS cho static files
+        'DIRS': [BASE_DIR / 'templates'], 
         'APP_DIRS': True,  # Phải bật để Django tìm các static files trong app
         'OPTIONS': {
             'context_processors': [

@@ -1,0 +1,339 @@
+
+   <!-- Main Content -->
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   Pet Appointment List
+  </title>
+  <script src="https://cdn.tailwindcss.com">
+  </script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+  <style>
+   .hidden {
+    display: none;
+   }
+  </style>
+ </head>
+ <body class="font-roboto bg-green-100">
+  <div class="container mx-auto p-4">
+   <!-- Header -->
+   {% include 'partials/header.html' %}
+   
+   <div class="flex flex-col items-center max-w-screen-2xl w-full mx-auto mb-10">
+    <!-- Nội dung của bạn ở đây -->
+</div>
+
+    <!-- Sidebar -->
+    {% include 'partials/sidebar.html' %}
+   
+   <div class="bg-white shadow-md rounded-lg overflow-hidden">
+    <ul id="appointmentList">
+     <li class="border-b">
+      <a class="block p-4 hover:bg-green-50 cursor-pointer" onclick="toggleDetails('appointment1')">
+       <div class="flex items-center justify-between">
+        <div>
+         <h2 class="text-xl font-semibold text-green-700">
+          <i class="fas fa-paw mr-2">
+          </i>
+          Lịch Hẹn 1
+         </h2>
+         <p class="text-gray-600">
+          <i class="fas fa-calendar-day mr-1">
+          </i>
+          Ngày: 2023-10-01
+         </p>
+         <p class="text-gray-600">
+          <i class="fas fa-phone mr-1">
+          </i>
+          Số điện thoại: 0123456789
+         </p>
+        </div>
+        <i class="fas fa-chevron-right text-gray-400">
+        </i>
+       </div>
+      </a>
+      <div class="hidden p-4" id="appointment1">
+       <h2 class="text-2xl font-bold mb-4 text-green-800">
+        Chi Tiết Lịch Hẹn 1
+       </h2>
+       <div class="mb-4">
+        <h3 class="text-xl font-semibold text-green-700">
+         <i class="fas fa-user mr-2">
+         </i>
+         Thông Tin Chủ Nhân
+        </h3>
+        <p>
+         Tên: Nguyễn Văn A
+        </p>
+        <p>
+         Số điện thoại: 0123456789
+        </p>
+        <p>
+         Email: nguyenvana@example.com
+        </p>
+       </div>
+       <div class="mb-4">
+        <h3 class="text-xl font-semibold text-green-700">
+         <i class="fas fa-dog mr-2">
+         </i>
+         Thông Tin Thú Cưng
+        </h3>
+        <p>
+         Tên: Mèo Con
+        </p>
+        <p>
+         Loại: Mèo
+        </p>
+        <p>
+         Tuổi: 2
+        </p>
+        <img alt="Hình ảnh của một con mèo con dễ thương" class="mt-2" height="200" src="https://storage.googleapis.com/a1aa/image/Fmq8AqMFzSyzBkMMMsgZKPL1YmArm2ktgvynTUfKh1Q.jpg" width="200"/>
+       </div>
+       <div class="mb-4">
+        <h3 class="text-xl font-semibold text-green-700">
+         <i class="fas fa-concierge-bell mr-2">
+         </i>
+         Dịch Vụ Yêu Cầu
+        </h3>
+        <ul class="list-disc list-inside">
+         <li>
+          Tắm
+         </li>
+         <li>
+          Cắt móng
+         </li>
+         <li>
+          Chải lông
+         </li>
+        </ul>
+       </div>
+       <div>
+        <h3 class="text-xl font-semibold text-green-700">
+         <i class="fas fa-sticky-note mr-2">
+         </i>
+         Ghi Chú
+        </h3>
+        <p>
+         Không có ghi chú thêm.
+        </p>
+       </div>
+       <button class="mt-4 bg-red-500 text-white px-4 py-2 rounded" onclick="toggleDetails('appointment1')">
+        Đóng
+       </button>
+      </div>
+     </li>
+     <li class="border-b">
+      <a class="block p-4 hover:bg-green-50 cursor-pointer" onclick="toggleDetails('appointment2')">
+       <div class="flex items-center justify-between">
+        <div>
+         <h2 class="text-xl font-semibold text-green-700">
+          <i class="fas fa-paw mr-2">
+          </i>
+          Lịch Hẹn 2
+         </h2>
+         <p class="text-gray-600">
+          <i class="fas fa-calendar-day mr-1">
+          </i>
+          Ngày: 2023-10-02
+         </p>
+         <p class="text-gray-600">
+          <i class="fas fa-phone mr-1">
+          </i>
+          Số điện thoại: 0987654321
+         </p>
+        </div>
+        <i class="fas fa-chevron-right text-gray-400">
+        </i>
+       </div>
+      </a>
+      <div class="hidden p-4" id="appointment2">
+       <h2 class="text-2xl font-bold mb-4 text-green-800">
+        Chi Tiết Lịch Hẹn 2
+       </h2>
+       <div class="mb-4">
+        <h3 class="text-xl font-semibold text-green-700">
+         <i class="fas fa-user mr-2">
+         </i>
+         Thông Tin Chủ Nhân
+        </h3>
+        <p>
+         Tên: Trần Thị B
+        </p>
+        <p>
+         Số điện thoại: 0987654321
+        </p>
+        <p>
+         Email: tranthib@example.com
+        </p>
+       </div>
+       <div class="mb-4">
+        <h3 class="text-xl font-semibold text-green-700">
+         <i class="fas fa-dog mr-2">
+         </i>
+         Thông Tin Thú Cưng
+        </h3>
+        <p>
+         Tên: Chó Con
+        </p>
+        <p>
+         Loại: Chó
+        </p>
+        <p>
+         Tuổi: 1
+        </p>
+        <img alt="Hình ảnh của một con chó con dễ thương" class="mt-2" height="200" src="https://storage.googleapis.com/a1aa/image/erN5LrwvNAq1CG4QM-CacQSvDIQ0gisiJBHghrfva14.jpg" width="200"/>
+       </div>
+       <div class="mb-4">
+        <h3 class="text-xl font-semibold text-green-700">
+         <i class="fas fa-concierge-bell mr-2">
+         </i>
+         Dịch Vụ Yêu Cầu
+        </h3>
+        <ul class="list-disc list-inside">
+         <li>
+          Tắm
+         </li>
+         <li>
+          Tiêm phòng
+         </li>
+        </ul>
+       </div>
+       <div>
+        <h3 class="text-xl font-semibold text-green-700">
+         <i class="fas fa-sticky-note mr-2">
+         </i>
+         Ghi Chú
+        </h3>
+        <p>
+         Chú ý không để nước vào tai.
+        </p>
+       </div>
+       <button class="mt-4 bg-red-500 text-white px-4 py-2 rounded" onclick="toggleDetails('appointment2')">
+        Đóng
+       </button>
+      </div>
+     </li>
+     <li class="border-b">
+      <a class="block p-4 hover:bg-green-50 cursor-pointer" onclick="toggleDetails('appointment3')">
+       <div class="flex items-center justify-between">
+        <div>
+         <h2 class="text-xl font-semibold text-green-700">
+          <i class="fas fa-paw mr-2">
+          </i>
+          Lịch Hẹn 3
+         </h2>
+         <p class="text-gray-600">
+          <i class="fas fa-calendar-day mr-1">
+          </i>
+          Ngày: 2023-10-03
+         </p>
+         <p class="text-gray-600">
+          <i class="fas fa-phone mr-1">
+          </i>
+          Số điện thoại: 0912345678
+         </p>
+        </div>
+        <i class="fas fa-chevron-right text-gray-400">
+        </i>
+       </div>
+      </a>
+      <div class="hidden p-4" id="appointment3">
+       <h2 class="text-2xl font-bold mb-4 text-green-800">
+        Chi Tiết Lịch Hẹn 3
+       </h2>
+       <div class="mb-4">
+        <h3 class="text-xl font-semibold text-green-700">
+         <i class="fas fa-user mr-2">
+         </i>
+         Thông Tin Chủ Nhân
+        </h3>
+        <p>
+         Tên: Lê Văn C
+        </p>
+        <p>
+         Số điện thoại: 0912345678
+        </p>
+        <p>
+         Email: levanc@example.com
+        </p>
+       </div>
+       <div class="mb-4">
+        <h3 class="text-xl font-semibold text-green-700">
+         <i class="fas fa-dog mr-2">
+         </i>
+         Thông Tin Thú Cưng
+        </h3>
+        <p>
+         Tên: Thỏ Con
+        </p>
+        <p>
+         Loại: Thỏ
+        </p>
+        <p>
+         Tuổi: 3
+        </p>
+        <img alt="Hình ảnh của một con thỏ con dễ thương" class="mt-2" height="200" src="https://storage.googleapis.com/a1aa/image/tq5uOmVo7H80VWRPFCCX43CZmdGcE_WmM5VAkESJ7UU.jpg" width="200"/>
+       </div>
+       <div class="mb-4">
+        <h3 class="text-xl font-semibold text-green-700">
+         <i class="fas fa-concierge-bell mr-2">
+         </i>
+         Dịch Vụ Yêu Cầu
+        </h3>
+        <ul class="list-disc list-inside">
+         <li>
+          Chải lông
+         </li>
+         <li>
+          Kiểm tra sức khỏe
+         </li>
+        </ul>
+       </div>
+       <div>
+        <h3 class="text-xl font-semibold text-green-700">
+         <i class="fas fa-sticky-note mr-2">
+         </i>
+         Ghi Chú
+        </h3>
+        <p>
+         Thỏ rất nhát, cần nhẹ nhàng.
+        </p>
+       </div>
+       <button class="mt-4 bg-red-500 text-white px-4 py-2 rounded" onclick="toggleDetails('appointment3')">
+        Đóng
+       </button>
+      </div>
+     </li>
+    </ul>
+   </div>
+  </div>
+  <script>
+   function toggleDetails(id) {
+    const element = document.getElementById(id);
+    if (element.classList.contains('hidden')) {
+     element.classList.remove('hidden');
+    } else {
+     element.classList.add('hidden');
+    }
+   }
+
+   function searchAppointments() {
+    const input = document.getElementById('searchInput').value.toLowerCase();
+    const appointments = document.getElementById('appointmentList').getElementsByTagName('li');
+
+    for (let i = 0; i < appointments.length; i++) {
+     const phone = appointments[i].getElementsByTagName('p')[1].textContent.toLowerCase();
+     if (phone.includes(input)) {
+      appointments[i].style.display = '';
+      toggleDetails(appointments[i].getElementsByTagName('div')[1].id);
+     } else {
+      appointments[i].style.display = 'none';
+     }
+    }
+   }
+  </script>
+ </body>
+ 

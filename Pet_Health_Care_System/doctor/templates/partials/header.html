@@ -1,0 +1,69 @@
+<script>
+    function toggleUserDetails() {
+             const userDetails = document.getElementById('user-details');
+             userDetails.classList.toggle('hidden');
+         }
+ 
+         function logout() {
+             alert('Đăng xuất thành công');
+         }
+ 
+         function toggleSidebar() {
+             const sidebar = document.getElementById('sidebar');
+             sidebar.classList.toggle('hidden');
+         }
+ 
+         function showDetails(id) {
+             const details = document.getElementById(id);
+             details.classList.toggle('hidden');
+         }
+ 
+         function closeDetails(id) {
+             const details = document.getElementById(id);
+             details.classList.add('hidden');
+         }
+   </script>
+ <!-- Header -->
+ <header class="bg-green-600 text-white p-4 flex justify-between items-center rounded-lg mx-4 my-4 max-w-5xl mx-auto">
+    <img alt="Company Logo" class="rounded-lg" height="50" src="https://storage.googleapis.com/a1aa/image/hPsTl7LEYWXUEQRQloZhZqT6nH2HKN8uvJUaRxnzVnY.jpg" width="50"/>
+    <h1 class="text-2xl ml-4 flex-grow text-left">
+     Doctor
+    </h1>
+    <div class="relative flex items-center">
+     <span class="mr-2">
+      Tên người dùng
+     </span>
+     <img alt="User Avatar" class="rounded-lg cursor-pointer" height="50" onclick="toggleUserDetails()" src="https://storage.googleapis.com/a1aa/image/Z2bQuMNTgWuMAUyGY9OHPXzkBJClNb5vzRYQjXuEDy8.jpg" width="50"/>
+     <div class="absolute top-16 right-0 bg-white text-black border border-gray-300 rounded-lg p-4 shadow-lg w-64 hidden" id="user-details">
+      <div class="flex items-center mb-4">
+       <img alt="User Avatar" class="rounded-lg w-12 h-12 mr-4" height="50" src="https://storage.googleapis.com/a1aa/image/Z2bQuMNTgWuMAUyGY9OHPXzkBJClNb5vzRYQjXuEDy8.jpg" width="50"/>
+       <div>
+        <p class="font-bold">
+         Tên người dùng
+        </p>
+        <p class="text-sm text-gray-600">
+         user@example.com
+        </p>
+       </div>
+      </div>
+      <p class="mb-2">
+       <i class="fas fa-phone-alt mr-2 text-green-600">
+       </i>
+       0123456789
+      </p>
+      <p class="mb-2">
+       <i class="fas fa-briefcase mr-2 text-green-600">
+       </i>
+       Bác sĩsĩ
+      </p>
+      <p class="mb-2">
+       <i class="fas fa-id-badge mr-2 text-green-600">
+       </i>
+       Mã Bác sĩ: 123456
+      </p>
+      <button class="bg-green-600 text-white py-2 px-4 rounded mt-2 w-full" onclick="logout()">
+       Đăng xuất
+      </button>
+     </div>
+    </div>
+   </header>
