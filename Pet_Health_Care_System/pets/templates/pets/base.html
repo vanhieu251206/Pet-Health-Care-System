@@ -1,134 +1,181 @@
 {% load static %}
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>Pets Care</title>
 
-        <!-- css -->
-        <link rel="stylesheet" href="{% static 'pets/css/base.css' %}">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous"> 
-        <link href="{% static 'pets/css/style.css' %}" rel="stylesheet" />
-        <link href="{% static 'pets/css/owl.carousel.min.css' %}" rel="stylesheet" />
-        <link href="{% static 'pets/css/all.min.css' %}" rel="stylesheet" />
-        
+  <!-- Js -->
+  <script src="https://cdn.tailwindcss.com"></script>
 
-        <link rel="stylesheet" type="text/css" href="{% static 'pets/css/main.css' %}" />
-        <link rel="stylesheet" type="text/css" href="{% static 'pets/css/checkout.css' %}" />
-        <!-- js -->
-        <script src="{% static 'pets/js/main.js' %}"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
-        <script src="{% static 'pets/js/all.min.js' %}"></script>
-        <script src="{% static 'pets/js/myscript.js' %}"></script>
-        <script src="{% static 'pets/js/owl.carousel.min.js' %}"></script>
+  <!-- Google Font -->
 
-        <title>Pet Health Care System</title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="">
-    </head>
-    <body>
-        <!-- Header -->
-        {% block navbar %}
-        <nav class="navbar navbar-expand-lg bg-body-tertiary">
-            <div class="container-fluid">
-              <a class="navbar-brand" href="#"> 
-                <img src=" {% static 'pets/images/logo1.png' %} " width="45" height="45" />
-              </a>
-              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-              </button>
-              <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                  <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="{% url "guest_page" %}">Trang chủ</a>
-                  </li>
-                  <li class="nav-item dropdown">
-                    <a class="nav-link  dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                      Cửa hàng
-                    </a>
-                    <ul class="dropdown-menu">
-                      <li><a class="dropdown-item" href="#">Chó</a></li>
-                      <li><a class="dropdown-item" href="#">Mèo</a></li>
-                    </ul>
-                  </li>
-                  <li class="nav-item dropdown">
-                    <a class="nav-link  dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                      Dịch vụ
-                    </a>
-                    <ul class="dropdown-menu">
-                      <li><a class="dropdown-item" href="#">Tiêm phòng</a></li>
-                      <li><a class="dropdown-item" href="#">Khám sức khỏe định kỳ</a></li>
-                      <li><a class="dropdown-item" href="#">Chăm sóc thú cưng</a></li>
-                    </ul>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="#">Giới thiệu</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="#">Liên hệ</a>
-                  </li>
-                </ul>
-                <form class="search-bar d-flex" role="search">
-                  <div class="input-group">
-                      <input type="text" class="form-control" placeholder="Tìm kiếm sản phẩm..." aria-label="Tìm kiếm sản phẩm">
-                      <button class="btn btn-success" type="submit">Tìm</button>
-                  </div>
-              </form>              
-              </div>
-              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    Tài khoản
-                  </a>
-                  <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="#">Đăng ký</a></li>
-                    <li><a class="dropdown-item" href="{% url "select_role" %}">Đăng nhập</a></li>
-                  </ul>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="{% url 'cart' %}">Giỏ hàng</a>
-                </li>
-              </ul>
+  <!-- Css Styles -->
+  <link rel="stylesheet" href="{% static "pets/css/bootstrap.min.css" %}" type="text/css">
+  <link rel="stylesheet" href="{% static "pets/css/font-awesome.min.css" %}" type="text/css">
+  <link rel="stylesheet" href="{% static "pets/css/elegant-icons.css" %}" type="text/css">
+  <link rel="stylesheet" href="{% static "pets/css/plyr.css" %}" type="text/css">
+  <link rel="stylesheet" href="{% static "pets/css/nice-select.css" %}" type="text/css">
+  <link rel="stylesheet" href="{% static "pets/css/owl.carousel.min.css" %}" type="text/css">
+  <link rel="stylesheet" href="{% static "pets/css/slicknav.min.css" %}" type="text/css">
+  <link rel="stylesheet" href="{% static "pets/css/style.css" %}" type="text/css">
+</head>
+
+<body class="bg-gray-100 font-sans antialiased">
+  {% block navbar %}
+  <div class="flex">
+  <!-- Sidebar -->
+  <div class="bg-white text-white w-64 min-h-screen">
+    <div class="p-4 flex items-center">
+      <img alt="Logo" class="mr-2" src="{% static "pets/img/logo.png" %}" width="50px" height="50px"/>
+      <span class="text-xl font-bold text-[#ff914d]">
+      Pets Care
+      </span>
+    </div>
+  <!-- Menu -->
+    <nav class="mt-4">
+      <ul class="text-black">
+        <li class="px-4 py-2 hover:bg-orange-300 cursor-pointer">
+          <a href="{% url "guest_dashboard" %}">Trang chủ</a>
+        </li>
+        <li class="relative">
+            <div
+              class="flex justify-between items-center px-4 py-2 hover:bg-orange-300 cursor-pointer"
+              onclick="toggleDropdown('services-menu-1', 'toggle-icon-1')"
+            >
+              <span>Dịch vụ khám chữa bệnh</span>
+              <span id="toggle-icon-1" class="font-bold text-lg cursor-pointer">+</span>
             </div>
-          </nav>
-          {% endblock navbar %}
-        <!-- main body -->
-        {% block banner_slider %} {% endblock banner_slider %}
-        {% block main-contain %} {% endblock main-contain %}
-        {% block cart_content %} {% endblock cart_content %}
-        {% block checkout_content %} {% endblock checkout_content %} 
-        {% block login_page %}{% endblock login_page %}
-        {% block select_role %}{% endblock select_role %}
-        {% block bashboard_customer %}{% endblock bashboard_customer %}
-        <!-- footer -->
-        <footer>
-          <div class="footer-container">
-              <div class="footer-column">
-                  <h3>Về Chúng Tôi</h3>
-                  <p>Chúng tôi cung cấp dịch vụ chăm sóc thú cưng chuyên nghiệp. Sức khỏe và hạnh phúc của thú cưng là ưu tiên hàng đầu của chúng tôi!</p>
-              </div>
-              <div class="footer-column">
-                  <h3>Liên Kết Nhanh</h3>
-                  <ul>
-                      <li><a href="{% url "guest_page" %}">Trang Chủ</a></li>
-                      <li><a href="#">Giới Thiệu</a></li>
-                      <li><a href="#">Liên Hệ</a></li>
-                      <li><a href="#">Điều Khoản Dịch Vụ</a></li>
-                  </ul>
-              </div>
-              <div class="footer-column">
-                  <h3>Liên Hệ</h3>
-                  <p>Email: GroupOne@gmail.com</p>
-                  <p>Hotline: +84 382 771 491</p>
-                  <p>Địa chỉ: 70 Tô Ký, Tân Chánh Hiệp, Quận 12, TP. HCM</p>
-              </div>
-          </div>
-          <div class="footer-bottom">
-              <p>&copy; 2024 GroupOne. Tất cả các quyền được bảo lưu.</p>
-          </div>
-        </footer>      
-    </body>
+            <ul id="services-menu-1" class="hidden">
+              <li class="px-6 py-2 hover:bg-orange-300 cursor-pointer"><a href="#">Đặt lịch khám</a></li>
+              <li class="px-6 py-2 hover:bg-orange-300 cursor-pointer">Danh sách bác sĩ/thú y</li>
+              <li class="px-6 py-2 hover:bg-orange-300 cursor-pointer">
+                Các gói dịch vụ (khám tổng quát, tiêm phòng, điều trị bệnh...)
+              </li>
+            </ul>
+          </li>
+          <li class="relative">
+            <div
+              class="flex justify-between items-center px-4 py-2 hover:bg-orange-300 cursor-pointer"
+              onclick="toggleDropdown('services-menu-2', 'toggle-icon-2')"
+            >
+              <span>Sản phẩm cho thú cưng</span>
+              <span id="toggle-icon-2" class="font-bold text-lg cursor-pointer">+</span>
+            </div>
+            <ul id="services-menu-2" class="hidden">
+              <li class="px-6 py-2 hover:bg-orange-300 cursor-pointer">Thức ăn</li>
+              <li class="px-6 py-2 hover:bg-orange-300 cursor-pointer">Đồ chơi</li>
+              <li class="px-6 py-2 hover:bg-orange-300 cursor-pointer">Phụ kiện (vòng cổ, quần áo...)</li>
+              <li class="px-6 py-2 hover:bg-orange-300 cursor-pointer">
+                Dược phẩm và sản phẩm chăm sóc sức khỏe
+              </li>
+            </ul>
+          </li>
+          <li class="px-4 py-2 hover:bg-orange-300 cursor-pointer">
+            <a href="#">Giới thiệu</a>
+          </li>
+          <li class="px-4 py-2 hover:bg-orange-300 cursor-pointer">
+            <a href="#">Liên hệ</a>
+          </li>
+      </ul>
+
+      
+      
+      <script>
+        function toggleDropdown(menuId, iconId) {
+            const menu = document.getElementById(menuId);
+            const icon = document.getElementById(iconId);
+          
+            if (menu.classList.contains("hidden")) {
+              menu.classList.remove("hidden"); // Hiển thị menu
+              icon.textContent = "-"; // Đổi dấu thành trừ
+            } else {
+              menu.classList.add("hidden"); // Ẩn menu
+              icon.textContent = "+"; // Đổi dấu thành cộng
+            }
+          }          
+      </script>
+  
+      <div class="mt-auto p-4">
+    </div>
+  </div>
+  <div class="flex-1 p-6">
+    <div class="flex justify-between items-center mb-4">
+      <!-- Thanh tìm kiếm -->
+      <div class="flex items-center w-full max-w-xl m" style="margin-left: 250px;">
+        <input 
+          type="text" 
+          placeholder="Bạn muốn tìm sản phẩm gì..." 
+          class="border rounded-md px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+          style="height: 40px;"
+        />
+        <button 
+          class="ml-2 bg-orange-500 hover:bg-orange-600 text-white font-medium px-4 rounded-md focus:outline-none"
+          style="height: 40px; width: 120px;"
+        >
+          Tìm kiếm
+        </button>
+      </div>
+      
+      <!-- Phần bên phải: Đăng nhập -->
+      <div class="flex items-center">
+        <div class="flex items-center">
+          <img alt="User Avatar" class="rounded-full mr-2" src="{% static 'pets/img/guest_avatar.jpg' %}" width="30px" height="30px" />
+          <a href="login">Đăng nhập</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Footer -->
+  <footer class="bg-gray-800 py-8">
+    <div class="max-w-6xl mx-auto px-4">
+     <div class="flex flex-col md:flex-row justify-between items-center">
+      <div class="text-white text-center md:text-left">
+       <h3 class="text-2xl font-bold">
+        Pet Lovers
+       </h3>
+       <p class="mt-2">
+        Your one-stop destination for all things pets.
+       </p>
+      </div>
+      <div class="mt-4 md:mt-0">
+       <a class="text-gray-400 hover:text-white mx-2" href="#">
+        <i class="fab fa-facebook-f">
+        </i>
+       </a>
+       <a class="text-gray-400 hover:text-white mx-2" href="#">
+        <i class="fab fa-twitter">
+        </i>
+       </a>
+       <a class="text-gray-400 hover:text-white mx-2" href="#">
+        <i class="fab fa-instagram">
+        </i>
+       </a>
+       <a class="text-gray-400 hover:text-white mx-2" href="#">
+        <i class="fab fa-linkedin-in">
+        </i>
+       </a>
+      </div>
+     </div>
+     <div class="mt-8 text-gray-400 text-center">
+      © 2023 Pet Lovers. All rights reserved.
+     </div>
+    </div>
+   </footer>
+
+  {% endblock navbar %}
+
+  <!-- Main body -->
+  {% block guest_dashboard  %}{% endblock guest_dashboard  %}
+
+  <!-- Js Plugins -->
+  <script src="{% static "pets/js/jquery-3.3.1.min.js" %}"></script>
+  <script src="{% static "pets/js/bootstrap.min.js" %}"></script>
+  <script src="{% static "pets/js/player.js" %}"></script>
+  <script src="{% static "pets/js/jquery.nice-select.min.js" %}"></script>
+  <script src="{% static "pets/js/mixitup.min.js" %}"></script>
+  <script src="{% static "pets/js/jquery.slicknav.js" %}"></script>
+  <script src="{% static "pets/js/owl.carousel.min.js" %}"></script>
+  <script src="{% static "pets/js/main.js" %}"></script>
+</body>
 </html>
