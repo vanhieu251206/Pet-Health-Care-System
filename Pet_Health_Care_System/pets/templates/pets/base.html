@@ -1,0 +1,181 @@
+{% load static %}
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>Pets Care</title>
+
+  <!-- Js -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Google Font -->
+
+  <!-- Css Styles -->
+  <link rel="stylesheet" href="{% static "pets/css/bootstrap.min.css" %}" type="text/css">
+  <link rel="stylesheet" href="{% static "pets/css/font-awesome.min.css" %}" type="text/css">
+  <link rel="stylesheet" href="{% static "pets/css/elegant-icons.css" %}" type="text/css">
+  <link rel="stylesheet" href="{% static "pets/css/plyr.css" %}" type="text/css">
+  <link rel="stylesheet" href="{% static "pets/css/nice-select.css" %}" type="text/css">
+  <link rel="stylesheet" href="{% static "pets/css/owl.carousel.min.css" %}" type="text/css">
+  <link rel="stylesheet" href="{% static "pets/css/slicknav.min.css" %}" type="text/css">
+  <link rel="stylesheet" href="{% static "pets/css/style.css" %}" type="text/css">
+</head>
+
+<body class="bg-gray-100 font-sans antialiased">
+  {% block navbar %}
+  <div class="flex">
+  <!-- Sidebar -->
+  <div class="bg-white text-white w-64 min-h-screen">
+    <div class="p-4 flex items-center">
+      <img alt="Logo" class="mr-2" src="{% static "pets/img/logo.png" %}" width="50px" height="50px"/>
+      <span class="text-xl font-bold text-[#ff914d]">
+      Pets Care
+      </span>
+    </div>
+  <!-- Menu -->
+    <nav class="mt-4">
+      <ul class="text-black">
+        <li class="px-4 py-2 hover:bg-orange-300 cursor-pointer">
+          <a href="{% url "guest_dashboard" %}">Trang chủ</a>
+        </li>
+        <li class="relative">
+            <div
+              class="flex justify-between items-center px-4 py-2 hover:bg-orange-300 cursor-pointer"
+              onclick="toggleDropdown('services-menu-1', 'toggle-icon-1')"
+            >
+              <span>Dịch vụ khám chữa bệnh</span>
+              <span id="toggle-icon-1" class="font-bold text-lg cursor-pointer">+</span>
+            </div>
+            <ul id="services-menu-1" class="hidden">
+              <li class="px-6 py-2 hover:bg-orange-300 cursor-pointer"><a href="#">Đặt lịch khám</a></li>
+              <li class="px-6 py-2 hover:bg-orange-300 cursor-pointer">Danh sách bác sĩ/thú y</li>
+              <li class="px-6 py-2 hover:bg-orange-300 cursor-pointer">
+                Các gói dịch vụ (khám tổng quát, tiêm phòng, điều trị bệnh...)
+              </li>
+            </ul>
+          </li>
+          <li class="relative">
+            <div
+              class="flex justify-between items-center px-4 py-2 hover:bg-orange-300 cursor-pointer"
+              onclick="toggleDropdown('services-menu-2', 'toggle-icon-2')"
+            >
+              <span>Sản phẩm cho thú cưng</span>
+              <span id="toggle-icon-2" class="font-bold text-lg cursor-pointer">+</span>
+            </div>
+            <ul id="services-menu-2" class="hidden">
+              <li class="px-6 py-2 hover:bg-orange-300 cursor-pointer">Thức ăn</li>
+              <li class="px-6 py-2 hover:bg-orange-300 cursor-pointer">Đồ chơi</li>
+              <li class="px-6 py-2 hover:bg-orange-300 cursor-pointer">Phụ kiện (vòng cổ, quần áo...)</li>
+              <li class="px-6 py-2 hover:bg-orange-300 cursor-pointer">
+                Dược phẩm và sản phẩm chăm sóc sức khỏe
+              </li>
+            </ul>
+          </li>
+          <li class="px-4 py-2 hover:bg-orange-300 cursor-pointer">
+            <a href="#">Giới thiệu</a>
+          </li>
+          <li class="px-4 py-2 hover:bg-orange-300 cursor-pointer">
+            <a href="#">Liên hệ</a>
+          </li>
+      </ul>
+
+      
+      
+      <script>
+        function toggleDropdown(menuId, iconId) {
+            const menu = document.getElementById(menuId);
+            const icon = document.getElementById(iconId);
+          
+            if (menu.classList.contains("hidden")) {
+              menu.classList.remove("hidden"); // Hiển thị menu
+              icon.textContent = "-"; // Đổi dấu thành trừ
+            } else {
+              menu.classList.add("hidden"); // Ẩn menu
+              icon.textContent = "+"; // Đổi dấu thành cộng
+            }
+          }          
+      </script>
+  
+      <div class="mt-auto p-4">
+    </div>
+  </div>
+  <div class="flex-1 p-6">
+    <div class="flex justify-between items-center mb-4">
+      <!-- Thanh tìm kiếm -->
+      <div class="flex items-center w-full max-w-xl m" style="margin-left: 250px;">
+        <input 
+          type="text" 
+          placeholder="Bạn muốn tìm sản phẩm gì..." 
+          class="border rounded-md px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+          style="height: 40px;"
+        />
+        <button 
+          class="ml-2 bg-orange-500 hover:bg-orange-600 text-white font-medium px-4 rounded-md focus:outline-none"
+          style="height: 40px; width: 120px;"
+        >
+          Tìm kiếm
+        </button>
+      </div>
+      
+      <!-- Phần bên phải: Đăng nhập -->
+      <div class="flex items-center">
+        <div class="flex items-center">
+          <img alt="User Avatar" class="rounded-full mr-2" src="{% static 'pets/img/guest_avatar.jpg' %}" width="30px" height="30px" />
+          <a href="login">Đăng nhập</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Footer -->
+  <footer class="bg-gray-800 py-8">
+    <div class="max-w-6xl mx-auto px-4">
+     <div class="flex flex-col md:flex-row justify-between items-center">
+      <div class="text-white text-center md:text-left">
+       <h3 class="text-2xl font-bold">
+        Pet Lovers
+       </h3>
+       <p class="mt-2">
+        Your one-stop destination for all things pets.
+       </p>
+      </div>
+      <div class="mt-4 md:mt-0">
+       <a class="text-gray-400 hover:text-white mx-2" href="#">
+        <i class="fab fa-facebook-f">
+        </i>
+       </a>
+       <a class="text-gray-400 hover:text-white mx-2" href="#">
+        <i class="fab fa-twitter">
+        </i>
+       </a>
+       <a class="text-gray-400 hover:text-white mx-2" href="#">
+        <i class="fab fa-instagram">
+        </i>
+       </a>
+       <a class="text-gray-400 hover:text-white mx-2" href="#">
+        <i class="fab fa-linkedin-in">
+        </i>
+       </a>
+      </div>
+     </div>
+     <div class="mt-8 text-gray-400 text-center">
+      © 2023 Pet Lovers. All rights reserved.
+     </div>
+    </div>
+   </footer>
+
+  {% endblock navbar %}
+
+  <!-- Main body -->
+  {% block guest_dashboard  %}{% endblock guest_dashboard  %}
+
+  <!-- Js Plugins -->
+  <script src="{% static "pets/js/jquery-3.3.1.min.js" %}"></script>
+  <script src="{% static "pets/js/bootstrap.min.js" %}"></script>
+  <script src="{% static "pets/js/player.js" %}"></script>
+  <script src="{% static "pets/js/jquery.nice-select.min.js" %}"></script>
+  <script src="{% static "pets/js/mixitup.min.js" %}"></script>
+  <script src="{% static "pets/js/jquery.slicknav.js" %}"></script>
+  <script src="{% static "pets/js/owl.carousel.min.js" %}"></script>
+  <script src="{% static "pets/js/main.js" %}"></script>
+</body>
+</html>
