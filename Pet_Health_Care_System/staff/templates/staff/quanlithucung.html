@@ -1,10 +1,110 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
+    
+<style>
+    .list-item {
+        display: flex;
+        justify-content: space-between; /* Để các phần tử có không gian đều nhau */
+        padding: 10px;
+        background-color: #e9ecef;
+        margin-bottom: 10px;
+        border-radius: 5px;
+    }
+    .list-item span {
+    flex: 1;  /* Đảm bảo rằng mỗi span sẽ chiếm đều không gian */
+    padding: 5px;
+    }
+    .list-item div {
+    display: flex;
+    gap: 10px;  /* Thêm khoảng cách giữa các nút */
+    }
+</style>
+    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TimeTable</title>
+    <title>Quản Lý Thú Cung</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        .header a {
+            text-decoration: none;
+            padding: 10px;
+            background-color: #007BFF;
+            color: white;
+            border-radius: 5px;
+        }
+        .list-section {
+            margin-bottom: 20px;
+        }
+        .list-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+            background-color: #e9ecef;
+            margin-bottom: 10px;
+            border-radius: 5px;
+        }
+        .btn {
+            padding: 5px 10px;
+            background-color: #FF0000;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .btn.add {
+            background-color: #28a745;
+        }
+    </style>
 </head>
 <body>
-    <h1>Thời Khóa Biểu2</h1>
-    
+    <div class="container">
+        <div class="header">
+            <a href="/staff/">TRANG CHỦ</a>
+            <a href="/staff/quanlilich">QUẢN LÝ LỊCH</a>
+            <a href="/staff/hoadon">HÓA ĐƠN</a>
+        </div>
+
+        <div class="list-section">
+            <h3>Danh Sách Thú Cung</h3>
+            <div class="list-item">
+                <span><strong>TÊN</strong> </span>
+                <span><strong> GIỐNG LOÀI</strong></span>
+                <span><STRONG>TUỔI</STRONG></span>
+                <div>
+                    <button class="btn">XÓA</button>
+                    <button class="btn">SỬA</button>
+                </div>
+            </div>
+            {%for Pet in Pets %}
+            <div class="list-item">
+                <span>{{Pet.name}} </span>
+                <span>{{Pet.species}}</span>
+                <span>{{Pet.age}}</span>
+                <div>
+                    <button class="btn">XÓA</button>
+                    <button class="btn">SỬA</button>
+                </div>
+            </div>
+            {% endfor %}
+            
+
+            <button class="btn add">THÊM (+)</button>
+        </div>
+    </div>
+</body>
+</html>

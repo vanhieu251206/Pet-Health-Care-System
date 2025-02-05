@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from .models import TimeTable
+
+from pets.models import Pet 
+
 def staff_dashboard(request):
     context = {}
     return render(request, 'staff/staff_dashboard.html', context)
@@ -14,7 +16,8 @@ def hoadon(request):
     return render(request, 'staff/hoadon.html', context)
     
 def quanlithucung(request):
-    context = {}
+    Pets = Pet.objects.all()
+    context = {'Pets': Pets}
     return render(request, 'staff/quanlithucung.html', context)
 
 
