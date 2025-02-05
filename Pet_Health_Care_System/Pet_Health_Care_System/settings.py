@@ -35,7 +35,6 @@ INSTALLED_APPS = [
     'customer',
     'staff',
 ]
-
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -67,7 +66,6 @@ TEMPLATES = [
 WSGI_APPLICATION = 'Pet_Health_Care_System.wsgi.application'
 
 AUTH_USER_MODEL = 'pets.CustomUser'
-
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases

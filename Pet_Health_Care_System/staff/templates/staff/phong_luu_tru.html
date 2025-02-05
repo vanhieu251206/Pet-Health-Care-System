@@ -1,0 +1,266 @@
+{% extends 'staff/base.html' %}
+{% load static %}
+
+{% block page_title %}
+Phòng lưu trữ
+{% endblock page_title %}
+
+{% block main-contain %}
+<style>
+    .dashboard {
+        margin-left: 270px;
+        padding: 20px;
+    }
+
+    .dashboard h2 {
+        font-size: 24px;
+        margin-bottom: 20px;
+    }
+
+    .cards-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+    }
+
+    .card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background: #ffffff;
+        border-radius: 10px;
+        padding: 20px;
+        text-align: center;
+        text-decoration: none;
+        color: #2c3e50;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .card i {
+        font-size: 40px;
+        margin-bottom: 10px;
+    }
+
+    .card h3 {
+        font-size: 18px;
+        margin-bottom: 8px;
+    }
+
+    .card p {
+        font-size: 16px;
+        color: #7f8c8d;
+    }
+
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+    }
+
+    /* Màu sắc cho từng icon */
+    .card:nth-child(1) i { color: #2ecc71; }  /* Phòng lưu trú - Xanh lá */
+    .card:nth-child(2) i { color: #3498db; }  /* Booking - Xanh dương */
+    .card:nth-child(3) i { color: #f39c12; }  /* Nhập viện - Cam */
+    .card:nth-child(4) i { color: #9b59b6; }  /* Lịch bác sĩ - Tím */
+    .card:nth-child(5) i { color: #e74c3c; }  /* Thông báo - Đỏ */
+
+    /* Bảng */
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 15px;
+    }
+
+    th, td {
+        padding: 12px;
+        border: 1px solid #ddd;
+        text-align: left;
+    }
+
+    th {
+        background-color: #f4f4f4;
+        font-weight: bold;
+    }
+
+    td {
+        background-color: #ffffff;
+    }
+
+    /* Nút ẩn ban đầu, chỉ hiển thị khi hover */
+    .btn-group {
+        display: none;
+    }
+
+    .card:hover .btn-group {
+        display: flex;
+        gap: 10px;
+    }
+
+a.no-underline {
+    text-decoration: none;
+}
+    
+
+</style>
+
+<div class="dashboard">
+    <div class="cards-container">
+        <!-- Card phòng lưu trú -->
+        <div class="card">
+            <h3>Mã phòng: C001</h3>
+            <p>Trạng thái: 🟢 Trống</p>
+            <div class="collapse" id="collapseC001">
+                <div class="card-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Thông tin chi tiết</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Loại chuồng:</strong> Nhỏ</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Tên thú cưng:</strong> Không có</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Ngày nhận:</strong> 2025-02-01</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Ngày trả dự kiến:</strong> 2025-02-07</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="btn-group">
+                                        <a href="#" class="btn btn-primary btn-sm no-underline">✏️ Chỉnh sửa</a>
+                                        <a href="#" class="btn btn-danger btn-sm no-underline">❌ Xóa</a>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card booking -->
+        <div class="card">
+            <h3>Mã phòng: C002</h3>
+            <p>Trạng thái: 🔴 Đã có thú cưng</p>
+            <div class="collapse" id="collapseC002">
+                <div class="card-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Thông tin chi tiết</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Loại chuồng:</strong> Trung bình</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Tên thú cưng:</strong> Meo</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Ngày nhận:</strong> 2025-01-15</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Ngày trả dự kiến:</strong> 2025-02-10</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="btn-group">
+                                        <a href="#" class="btn btn-primary btn-sm no-underline">✏️ Chỉnh sửa</a>
+                                        <a href="#" class="btn btn-danger btn-sm no-underline">❌ Xóa</a>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card thú cưng nhập viện -->
+        <div class="card">
+            <h3>Mã phòng: C003</h3>
+            <p>Trạng thái: 🟢 Trống</p>
+            <div class="collapse" id="collapseC003">
+                <div class="card-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Thông tin chi tiết</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Loại chuồng:</strong> Lớn</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Tên thú cưng:</strong> Không có</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Ngày nhận:</strong> 2025-02-02</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Ngày trả dự kiến:</strong> 2025-02-09</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="btn-group">
+                                        <a href="#" class="btn btn-primary btn-sm no-underline">✏️ Chỉnh sửa</a>
+                                        <a href="#" class="btn btn-danger btn-sm no-underline">❌ Xóa</a>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card lịch bác sĩ -->
+        <div class="card">
+            <h3>Mã phòng: C004</h3>
+            <p>Trạng thái: 🔴 Đã có thú cưng</p>
+            <div class="collapse" id="collapseC004">
+                <div class="card-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Thông tin chi tiết</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Loại chuồng:</strong> Nhỏ</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Tên thú cưng:</strong> Chó</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Ngày nhận:</strong> 2025-02-01</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Ngày trả dự kiến:</strong> 2025-02-15</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="btn-group">
+                                        <a href="#" class="btn btn-primary btn-sm no-underline">✏️ Chỉnh sửa</a>
+                                        <a href="#" class="btn btn-danger btn-sm no-underline">❌ Xóa</a>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock main-contain %}
