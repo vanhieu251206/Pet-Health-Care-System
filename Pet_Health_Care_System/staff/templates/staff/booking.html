@@ -1,0 +1,241 @@
+{% extends 'staff/base.html' %}
+{% load static %}
+
+{% block page_title %}
+    Booking
+{% endblock page_title %}
+
+{% block booking %}
+<style>
+    /* Căn lề toàn bộ giao diện */
+    .container {
+        margin-left: 275px;
+        max-width: 80%;
+        padding: 20px;
+    }
+
+    h2 {
+        text-align: center;
+        font-weight: bold;
+        margin-bottom: 20px;
+        color: #333;
+    }
+
+    /* Khung bảng có chiều cao cố định, chỉ nội dung cuộn */
+    .table-container {
+        max-height: 400px;
+        overflow-y: auto;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        background-color: #f5f5f5;
+    }
+
+    /* Cố định tiêu đề bảng */
+    .table thead {
+        position: sticky;
+        top: 0;
+        background-color: #007bff;
+        color: white;
+        z-index: 2;
+    }
+
+    /* Định dạng bảng */
+    .table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    th, td {
+        text-align: center;
+        padding: 12px;
+        border: 1px solid #ddd;
+    }
+
+    /* Cố định kích thước từng cột */
+    th:nth-child(1), td:nth-child(1) { width: 10%; }  /* Mã booking */
+    th:nth-child(2), td:nth-child(2) { width: 15%; }  /* Tên khách hàng */
+    th:nth-child(3), td:nth-child(3) { width: 15%; }  /* Tên thú cưng */
+    th:nth-child(4), td:nth-child(4) { width: 20%; }  /* Check-in & Check-out */
+    th:nth-child(5), td:nth-child(5) { width: 10%; }  /* Trạng thái */
+    th:nth-child(6), td:nth-child(6) { width: 10%; }  /* Thanh toán */
+    th:nth-child(7), td:nth-child(7) { width: 20%; }  /* Hành động */
+
+    /* Trạng thái */
+    .status {
+        font-weight: bold;
+    }
+
+    /* Bộ lọc trạng thái */
+    .filter-container {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 10px;
+    }
+
+    select {
+        width: 200px;
+        text-align: center;
+    }
+
+    /* Các nút */
+    .btn {
+        padding: 8px 12px;
+        font-size: 14px;
+        font-weight: 500;
+        border-radius: 20px;  /* Bo tròn */
+        transition: all 0.3s ease-in-out;
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        text-align: center;
+        justify-content: center;
+        border: 2px solid transparent;
+        min-width: 120px;
+    }
+
+    /* Khoảng cách giữa các nút */
+    .action-buttons {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    /* Hiệu ứng hover cho nút */
+    .btn-success:hover {
+        background-color: #218838;
+        border-color: #1e7e34;
+    }
+
+    .btn-danger:hover {
+        background-color: #c82333;
+        border-color: #bd2130;
+    }
+
+    .btn-primary:hover {
+        background-color: #0056b3;
+        border-color: #004085;
+    }
+
+    .btn-info:hover {
+        background-color: #138496;
+        border-color: #117a8b;
+    }
+
+</style>
+
+<div class="container">
+    <!-- Bộ lọc trạng thái -->
+    <div class="filter-container">
+        <label for="filter" class="form-label me-2">Trạng thái:</label>
+        <select id="filter" class="form-select" onchange="filterBookings()">
+            <option value="all">Tất cả</option>
+            <option value="pending">🟡 Chờ xác nhận</option>
+            <option value="confirmed">✅ Đã xác nhận</option>
+            <option value="cancelled">❌ Đã hủy</option>
+        </select>
+    </div>
+    
+
+    <!-- Khung bảng cố định -->
+    <div class="table-container">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Mã booking</th>
+                    <th>Tên khách hàng</th>
+                    <th>Tên thú cưng</th>
+                    <th>Check-in & Check-out</th>
+                    <th>Trạng thái</th>
+                    <th>Thanh toán</th>
+                    <th>Hành động</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Dữ liệu nhập sẵn -->
+                <tr class="booking-row" data-status="pending">
+                    <td>BK001</td>
+                    <td>Nguyễn Văn A</td>
+                    <td>Milu</td>
+                    <td>10/02/2025 - 15/02/2025</td>
+                    <td class="status">🟡 Chờ xác nhận</td>
+                    <td>0 VND</td>
+                    <td>
+                        <div class="action-buttons">
+                            <button class="btn btn-success btn-sm confirm-btn" onclick="confirmBooking(this)">✅ Xác nhận</button>
+                            <button class="btn btn-danger btn-sm" onclick="cancelBooking(this)">❌ Hủy</button>
+                            <button class="btn btn-primary btn-sm">📝 Chỉnh sửa</button>
+                        </div>
+                    </td>                    
+                </tr>
+                <tr class="booking-row" data-status="confirmed">
+                    <td>BK002</td>
+                    <td>Trần Thị B</td>
+                    <td>Momo</td>
+                    <td>12/02/2025 - 16/02/2025</td>
+                    <td class="status">✅ Đã xác nhận</td>
+                    <td>500,000 VND</td>
+                    <td>
+                        <div class="action-buttons">
+                            <button class="btn btn-danger btn-sm" onclick="cancelBooking(this)">❌ Hủy</button>
+                            <button class="btn btn-primary btn-sm">📝 Chỉnh sửa</button>
+                        </div>
+                    </td>                    
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- JavaScript để xử lý hành động -->
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Ẩn nút "Xác nhận" nếu không phải "Chờ xác nhận"
+        document.querySelectorAll(".booking-row").forEach(row => {
+            let status = row.getAttribute("data-status");
+            let confirmBtn = row.querySelector(".confirm-btn");
+            if (status !== "pending" && confirmBtn) {
+                confirmBtn.style.display = "none";
+            }
+        });
+    });
+    
+    function confirmBooking(button) {
+        let row = button.closest("tr");
+        row.querySelector(".status").innerHTML = "✅ Đã xác nhận";
+        row.setAttribute("data-status", "confirmed");
+    
+        // Ẩn nút xác nhận sau khi nhấn
+        button.style.display = "none";
+    }
+    
+    function cancelBooking(button) {
+        let row = button.closest("tr");
+        row.querySelector(".status").innerHTML = "❌ Đã hủy";
+        row.setAttribute("data-status", "cancelled");
+    
+        // Ẩn nút xác nhận nếu đã hủy
+        let confirmBtn = row.querySelector(".confirm-btn");
+        if (confirmBtn) {
+            confirmBtn.style.display = "none";
+        }
+    }
+    
+    // Cập nhật bộ lọc trạng thái
+    function filterBookings() {
+        let filterValue = document.getElementById("filter").value;
+        let rows = document.querySelectorAll(".booking-row");
+    
+        rows.forEach(row => {
+            let status = row.getAttribute("data-status");
+            if (filterValue === "all" || status === filterValue) {
+                row.style.display = "";
+            } else {
+                row.style.display = "none";
+            }
+        });
+    }
+    
+</script>
+{% endblock booking %}
