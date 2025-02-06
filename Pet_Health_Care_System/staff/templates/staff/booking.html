@@ -1,0 +1,196 @@
+{% extends 'staff/base.html' %}
+{% load static %}
+
+{% block page_title %}
+    Booking
+{% endblock page_title %}
+
+{% block booking %}
+<style>
+    .container {
+        margin-left: 275px;
+        max-width: 80%;
+        padding: 20px;
+    }
+
+    h2 {
+        text-align: center;
+        font-weight: bold;
+        margin-bottom: 20px;
+        color: #333;
+    }
+
+    .table-container {
+        max-height: 400px;
+        overflow-y: auto;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        background-color: #f5f5f5;
+    }
+
+    .table thead {
+        position: sticky;
+        top: 0;
+        background-color: #007bff;
+        color: white;
+        z-index: 2;
+    }
+
+    .table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    th, td {
+        text-align: center;
+        padding: 12px;
+        border: 1px solid #ddd;
+    }
+
+    .status {
+        font-weight: bold;
+    }
+
+    .filter-container {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 10px;
+    }
+
+    select {
+        width: 200px;
+        text-align: center;
+    }
+
+    .btn {
+        padding: 8px 12px;
+        font-size: 14px;
+        font-weight: 500;
+        border-radius: 20px;
+        transition: all 0.3s ease-in-out;
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        text-align: center;
+        justify-content: center;
+        border: 2px solid transparent;
+        min-width: 120px;
+    }
+
+    .action-buttons {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+    }
+
+</style>
+
+<div class="container">
+    <div class="filter-container">
+        <label for="filter" class="form-label me-2">Trạng thái:</label>
+        <select id="filter" class="form-select" onchange="filterBookings()">
+            <option value="all">Tất cả</option>
+            <option value="cho_xac_nhan">🟡 Chờ xác nhận</option>
+            <option value="da_xac_nhan">✅ Đã xác nhận</option>
+            <option value="huy">❌ Đã hủy</option>
+        </select>
+    </div>
+
+    <div class="table-container">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Mã booking</th>
+                    <th>Tên khách hàng</th>
+                    <th>Tên thú cưng</th>
+                    <th>Check-in & Check-out</th>
+                    <th>Trạng thái</th>
+                    <th>Thanh toán</th>
+                    <th>Hành động</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for booking in bookings %}
+                <tr class="booking-row" data-status="{{ booking.trang_thai }}">
+                    <td>{{ booking.ma_booking }}</td>
+                    <td>{{ booking.ten_khach_hang }}</td>
+                    <td>{{ booking.ten_thu_cung }}</td>
+                    <td>{{ booking.check_in|date:"d/m/Y" }} - {{ booking.check_out|date:"d/m/Y" }}</td>
+                    <td class="status">
+                        {% if booking.trang_thai == "cho_xac_nhan" %}
+                            <span style="color: orange;">🟡</span> Chờ xác nhận
+                        {% elif booking.trang_thai == "da_xac_nhan" %}
+                            <span style="color: green;">✅</span> Đã xác nhận
+                        {% elif booking.trang_thai == "huy" %}
+                            <span style="color: red;">❌</span> Đã hủy
+                        {% endif %}
+                    </td>
+                    <td>{{ booking.thanh_toan|floatformat:"0" }} VNĐ</td>
+                    <td>
+                        <div class="action-buttons">
+                            {% if booking.trang_thai == "cho_xac_nhan" %}
+                                <button class="btn btn-success btn-sm confirm-btn" onclick="confirmBooking(this, '{{ booking.ma_booking }}')">✅ Xác nhận</button>
+                            {% endif %}
+                            {% if booking.trang_thai != "huy" %}
+                                <button class="btn btn-danger btn-sm" onclick="cancelBooking(this, '{{ booking.ma_booking }}')">❌ Hủy</button>
+                            {% endif %}
+                            <button class="btn btn-primary btn-sm">📝 Chỉnh sửa</button>
+                        </div>
+                    </td>                    
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+    function confirmBooking(button, maBooking) {
+        fetch(`/staff/booking/confirm/${maBooking}/`, {
+            method: "POST",
+            headers: { "X-CSRFToken": "{{ csrf_token }}" }
+        }).then(response => {
+            if (response.ok) {
+                let row = button.closest("tr");
+                row.querySelector(".status").innerHTML = "✅ Đã xác nhận";
+                row.setAttribute("data-status", "da_xac_nhan");
+                button.style.display = "none";  // Ẩn nút xác nhận
+            }
+        });
+    }
+
+    function cancelBooking(button, maBooking) {
+        fetch(`/staff/booking/cancel/${maBooking}/`, {
+            method: "POST",
+            headers: { "X-CSRFToken": "{{ csrf_token }}" }
+        }).then(response => {
+            if (response.ok) {
+                let row = button.closest("tr");
+                row.querySelector(".status").innerHTML = "❌ Đã hủy";
+                row.setAttribute("data-status", "huy");
+                let confirmBtn = row.querySelector(".confirm-btn");
+                if (confirmBtn) {
+                    confirmBtn.style.display = "none";
+                }
+            }
+        });
+    }
+
+    function filterBookings() {
+        let filterValue = document.getElementById("filter").value;
+        let rows = document.querySelectorAll(".booking-row");
+
+        rows.forEach(row => {
+            let status = row.getAttribute("data-status");
+            if (filterValue === "all" || status === filterValue) {
+                row.style.display = "";
+            } else {
+                row.style.display = "none";
+            }
+        });
+    }
+</script>
+
+{% endblock booking %}

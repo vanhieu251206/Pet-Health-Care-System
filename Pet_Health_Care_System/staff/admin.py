@@ -1,4 +1,5 @@
 from django.contrib import admin
-from .models import Staff
-# Register your models here.
-admin.site.register(Staff)
+from .models import *
+
+admin.site.register(PhongLuuTru)
+admin.site.register(Booking)

@@ -1,6 +1,6 @@
 import os
-from dotenv import load_dotenv
 from pathlib import Path
+from dotenv import load_dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -32,9 +32,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'pets',
     'rest_framework',
+    'customer',
     'staff',
 ]
-
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -51,7 +51,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [],
-        'APP_DIRS': True,  # Django sẽ tự động tìm templates trong mỗi ứng dụng
+        'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
@@ -63,23 +63,27 @@ TEMPLATES = [
     },
 ]
 
-
 WSGI_APPLICATION = 'Pet_Health_Care_System.wsgi.application'
 
+AUTH_USER_MODEL = 'pets.CustomUser'
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
 load_dotenv()
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'cnpm',
-        'USER': 'root',
-        'PASSWORD': 'password',
-        'HOST': 'localhost',  # Địa chỉ máy chủ MySQL
-        'PORT': '3306',  # Cổng mặc định của MySQL
+        'ENGINE': 'django.db.backends.mysql',  # Use mysql backend
+        'NAME': 'cnpm',          # The name of your database
+        'USER': 'root',          # Your database username
+        'PASSWORD': 'password',  # Your database password
+        'HOST': 'localhost',                   # Set to empty string for localhost. Not used with sqlite3.
+        'PORT': '3306',                        # Set to empty string for default. Not used with sqlite3.
+        'OPTIONS': {
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
+            # Additional options like character set and collation can be set here.
+            'charset': 'utf8mb4',
+        },
     }
 }
 
@@ -118,10 +122,14 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
-STATIC_URL = '/static/'
-STATICFILES_DIRS = [
-    BASE_DIR / 'static',
-]
+# Đường dẫn URL để truy cập các tệp media (ảnh, video, v.v.)
+MEDIA_URL = '/media/'
+
+# Thư mục thực tế trên server nơi các tệp media được lưu
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+STATIC_URL = 'static/'
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field

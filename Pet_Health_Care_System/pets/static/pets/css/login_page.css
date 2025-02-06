@@ -1,0 +1,33 @@
+body {
+    background-color: #f8f9fa;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+.login-container {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+}
+.login-logo {
+    display: block;
+    margin: 0 auto 20px;
+    width: 80px;
+    height: 80px;
+}
+.form-control {
+    height: 45px;
+}
+.btn-primary {
+    height: 45px;
+    font-size: 16px;
+    font-weight: bold;
+}
+.forgot-password {
+    text-align: right;
+}

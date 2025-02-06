@@ -1,0 +1,155 @@
+{% extends 'staff/base.html' %}
+{% load static %}
+
+{% block page_title %}
+Phòng lưu trú
+{% endblock page_title %}
+
+{% block phong_luu_tru %}
+<style>
+    .dashboard {
+        margin-left: 270px;
+        padding: 20px;
+    }
+
+    .dashboard h2 {
+        font-size: 24px;
+        margin-bottom: 20px;
+    }
+
+    .cards-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+    }
+
+    .card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background: #ffffff;
+        border-radius: 10px;
+        padding: 20px;
+        text-align: center;
+        text-decoration: none;
+        color: #2c3e50;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .status-dot {
+        height: 10px;
+        width: 10px;
+        border-radius: 50%;
+        display: inline-block;
+        margin-right: 5px;
+    }
+
+    .empty { background-color: #e74c3c; }  /* Màu đỏ */
+    .occupied { background-color: #2ecc71; }  /* Màu xanh */
+
+    .card i {
+        font-size: 40px;
+        margin-bottom: 10px;
+    }
+
+    .card h3 {
+        font-size: 18px;
+        margin-bottom: 8px;
+    }
+
+    .card p {
+        font-size: 16px;
+        color: #7f8c8d;
+    }
+
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 15px;
+    }
+
+    th, td {
+        padding: 12px;
+        border: 1px solid #ddd;
+        text-align: left;
+    }
+
+    th {
+        background-color: #f4f4f4;
+        font-weight: bold;
+    }
+
+    td {
+        background-color: #ffffff;
+    }
+
+    .btn-group {
+        display: none;
+    }
+
+    .card:hover .btn-group {
+        display: flex;
+        gap: 10px;
+    }
+
+    a.no-underline {
+        text-decoration: none;
+    }
+
+</style>
+
+<div class="dashboard">
+    <div class="cards-container">
+        <!-- Card phòng lưu trú -->
+        {% for PhongLuuTru in rooms %}
+        <div class="card">
+            <h3>Mã phòng: <strong>{{ PhongLuuTru.ma_phong }}</strong></h3>
+            {% if PhongLuuTru.trang_thai == 'Trống' %}
+            <span class="status-dot empty"></span>{{ PhongLuuTru.trang_thai }}
+        {% else %}
+            <span class="status-dot occupied"></span>{{ PhongLuuTru.trang_thai }}
+        {% endif %}            <div class="collapse" id="collapseC001">
+                <div class="card-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Thông tin chi tiết</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Loại chuồng:</strong> {{ PhongLuuTru.loai_chuong }}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Tên thú cưng:</strong> {{ PhongLuuTru.ten_thu_cung }}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Ngày nhận:</strong> {{ PhongLuuTru.ngay_nhan }}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Ngày trả dự kiến:</strong> {{ PhongLuuTru.ngay_tra_du_kien }}</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="btn-group">
+                                        <a href="#" class="btn btn-primary btn-sm no-underline">✏️ Chỉnh sửa</a>
+                                        <a href="#" class="btn btn-danger btn-sm no-underline">❌ Xóa</a>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock phong_luu_tru %}
