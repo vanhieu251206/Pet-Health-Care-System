@@ -11,3 +11,7 @@ def tong_quan(request):
 def phong_luu_tru(request):
     context = {}
     return render(request, 'staff/phong_luu_tru.html', context)
+
+def booking(request):
+    context = {}
+    return render(request, 'staff/booking.html', context)

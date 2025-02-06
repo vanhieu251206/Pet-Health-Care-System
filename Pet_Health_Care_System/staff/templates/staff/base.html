@@ -113,7 +113,7 @@
    <ul>
     <li><a href="{% url "tong_quan" %}">🏠 Tổng quan</a></li>
     <li><a href="{% url "phong_luu_tru" %}">📦 Quản lý phòng lưu trú</a></li>
-    <li><a href="#">📅 Quản lý đặt chỗ (Booking)</a></li>
+    <li><a href="{% url "booking" %}">📅 Quản lý đặt chỗ (Booking)</a></li>
     <li><a href="#">🐾 Theo dõi thú cưng nhập viện</a></li>
     <li><a href="#">👩‍⚕️ Sắp lịch bác sĩ thú y</a></li>
     <li><a href="#">⚙️ Cài đặt & Quản lý tài khoản</a></li>
@@ -134,5 +134,6 @@
   <!-- main body -->
   {% block main-contain %}{% endblock main-contain %}
   {% block phong_luu_tru %}{% endblock phong_luu_tru %}
+  {% block booking %}{% endblock booking %}
  </body>
 </html>
