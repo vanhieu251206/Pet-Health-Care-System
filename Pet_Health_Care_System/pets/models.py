@@ -1,37 +1,19 @@
-from django.contrib.auth.models import AbstractUser, Group, Permission
+from django.contrib.auth.models import AbstractUser
 from django.db import models
+from django.utils import timezone
 
-# Create your models here.
-class Pet(models.Model):
-    name = models.CharField(max_length=100)
-    species = models.CharField(max_length=50)
-    age = models.IntegerField()
+class Role(models.Model):
+    name = models.CharField(max_length=50)
 
     def __str__(self):
         return self.name
-
-class User(AbstractUser):
-    USER_TYPE_CHOICES = (
-        ('guest', 'Guest'),
-        ('customer', 'Customer'),
-        ('staff', 'Staff'),
-        ('vet', 'Veterinarian'),
-        ('admin', 'Admin'),
-    )
-    user_type = models.CharField(
-        max_length = 20,
-        choices=USER_TYPE_CHOICES,
-        default='guest',
-    )
-
-    groups = models.ManyToManyField(
-        Group,
-        related_name='pets_user_groups',
-        blank=True
-    )
-
-    user_permissions = models.ManyToManyField(
-        Permission,
-        related_name='pet_user_permission',
-        blank=True
-    )
+    
+class CustomUser(AbstractUser):
+    role = models.ForeignKey(Role, on_delete=models.SET_NULL, null=True, blank=True)
+    
+class Product(models.Model):
+    name = models.CharField(max_length=255)
+    price = models.DecimalField(max_digits=10, decimal_places=2)
+    image = models.ImageField(upload_to='media/')
+    def __str__(self):
+        return self.name

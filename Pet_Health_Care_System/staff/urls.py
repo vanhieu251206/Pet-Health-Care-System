@@ -1,10 +1,11 @@
 from django.urls import path
+from django.shortcuts import redirect
 from . import views
 
 urlpatterns = [
-    path('', views.basehome, name='basehome'),  # Trang mặc định của home
-    path('Manage_cancellations/', views.Manage_cancellations, name='Manage_cancellations'),  # Liên kết lịch hủy
-    path('Manage_Doctor/', views.Manage_Doctor, name='Manage_Doctor'),  # Liên kết lịch làm
-    path('update_pet/', views.update_pet, name='update_pet'),
-    path('update_info/', views.update_info, name='update_info'),
+    path('', lambda request: redirect('tong_quan/')),
+    path('tong_quan/', views.tong_quan, name = "tong_quan"),
+    path('phong_luu_tru/', views.phong_luu_tru, name = "phong_luu_tru"),
+    path('lich_hen/', views.lich_hen, name = "lich_hen"),
+    path('booking/', views.booking, name = "booking"),
 ]

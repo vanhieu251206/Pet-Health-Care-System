@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Pet
+from .models import Product
 
 # Đăng ký model Pet với admin
-admin.site.register(Pet)
+admin.site.register(Product)

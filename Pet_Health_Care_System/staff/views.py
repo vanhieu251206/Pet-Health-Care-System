@@ -1,19 +1,17 @@
-from django.shortcuts import render
-from django.contrib.auth.decorators import login_required, user_passes_test
+from django.shortcuts import render, get_object_or_404, redirect
 
-def basehome(request):
-    return render(request, 'staff/basehome.html')  # Hiển thị giao diện base1
+def lich_hen(request):
+    context = {}
+    return render(request, 'staff/lich_hen.html', context)
 
-def Manage_cancellations(request):
-    return render(request, 'staff/Manage_cancellations.html')
+def tong_quan(request):
+    context = {}
+    return render(request, 'staff/tong_quan.html', context)
 
-def Manage_Doctor(request):
-    return render(request, 'staff/Manage_Doctor.html')
+def phong_luu_tru(request):
+    context = {}
+    return render(request, 'staff/phong_luu_tru.html', context)
 
-def update_pet(request):
-    return render(request, 'staff/update_pet.html')
-
-def update_info(request):
-    return render(request, 'staff/update_info.html')
-
-
+def booking(request):
+    context = {}
+    return render(request, 'staff/booking.html', context)
