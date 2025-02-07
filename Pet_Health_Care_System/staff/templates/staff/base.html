@@ -114,9 +114,9 @@
     <li><a href="{% url "tong_quan" %}">🏠 Tổng quan</a></li>
     <li><a href="{% url "phong_luu_tru" %}">📦 Quản lý phòng lưu trú</a></li>
     <li><a href="{% url "booking" %}">📅 Quản lý đặt chỗ (Booking)</a></li>
-    <li><a href="#">🐾 Theo dõi thú cưng nhập viện</a></li>
-    <li><a href="#">👩‍⚕️ Sắp lịch bác sĩ thú y</a></li>
-    <li><a href="#">⚙️ Cài đặt & Quản lý tài khoản</a></li>
+    <li><a href="{% url "theo_doi" %}">🐾 Theo dõi thú cưng nhập viện</a></li>
+    <li><a href="{% url "sap_lich" %}">👩‍⚕️ Sắp lịch bác sĩ thú y</a></li>
+    <li><a href="{% url "quan_ly_tai_khoan" %}">⚙️ Cài đặt & Quản lý tài khoản</a></li>
    </ul>
   </div>
   <div class="main-content">
@@ -135,5 +135,8 @@
   {% block main-contain %}{% endblock main-contain %}
   {% block phong_luu_tru %}{% endblock phong_luu_tru %}
   {% block booking %}{% endblock booking %}
+  {% block theo_doi %}{% endblock theo_doi %}
+  {% block sap_lich %}{% endblock sap_lich %}
+  {% block quan_ly_tai_khoan %}{% endblock quan_ly_tai_khoan %}
  </body>
 </html>

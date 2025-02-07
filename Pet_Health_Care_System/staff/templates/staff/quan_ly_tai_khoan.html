@@ -1,0 +1,160 @@
+{% extends 'staff/base.html' %}
+{% load static %}
+
+{% block page_title %}
+Quản lý tài khoản
+{% endblock page_title %}
+
+{% block quan_ly_tai_khoan %}
+<style>
+/* Container chính */
+.container {
+    max-width: 1200px; /* Giới hạn chiều rộng để tránh tràn */
+    margin: 0 auto;
+    padding-top: 20px;
+    padding-left: 275px; /* Thụt lề trái */
+}
+
+/* Tiêu đề trang */
+.page-title {
+    font-size: 28px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Khung tài khoản */
+.account-container {
+    background-color: #fff;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 1000px; /* Giữ độ rộng hợp lý */
+    margin: 0 auto;
+    overflow: hidden; /* Ngăn tràn màn hình */
+}
+
+/* Tiêu đề khung */
+.account-header {
+    font-size: 22px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Phần thông tin tài khoản */
+.account-details {
+    display: flex;
+    flex-direction: column;
+    font-size: 18px;
+}
+
+.account-details div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap; /* Khi nhỏ, nội dung sẽ tự co lại */
+    padding: 12px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+/* Cố định độ rộng của các label để không bị co ngắn */
+.account-details label {
+    font-weight: bold;
+    color: #333;
+    min-width: 150px; /* Đảm bảo label không bị co */
+}
+
+.account-details span {
+    color: #007BFF;
+    font-weight: bold;
+}
+
+/* Khu vực chứa nút */
+.button-group {
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+    flex-wrap: wrap; /* Khi màn hình nhỏ, nút sẽ tự xuống dòng */
+    margin-top: 20px;
+}
+
+/* Định dạng chung cho nút */
+.btn {
+    padding: 12px 20px;
+    border-radius: 8px;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+/* Màu nút */
+.edit-btn {
+    background-color: #007BFF;
+}
+
+.password-btn {
+    background-color: #FFC107;
+}
+
+.logout-btn {
+    background-color: #FF4D4D;
+}
+
+/* Hover effect */
+.btn:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+}
+
+/* Focus effect */
+.btn:focus {
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 0, 255, 0.5);
+}
+
+/* Icon styles */
+.btn i {
+    font-size: 18px;
+}
+</style>
+
+<div class="container">
+    <div class="account-container">
+        <div class="account-header">Thông tin cá nhân</div>
+
+        <div class="account-details">
+            <div>
+                <label for="name">Họ tên:</label>
+                <span id="name">Nguyễn Văn A</span>
+            </div>
+            <div>
+                <label for="email">Email:</label>
+                <span id="email">nguyenvana@example.com</span>
+            </div>
+            <div>
+                <label for="phone">Số điện thoại:</label>
+                <span id="phone">0987654321</span>
+            </div>
+            <div>
+                <label for="role">Vai trò:</label>
+                <span id="role">Nhân viên</span>
+            </div>
+        </div>
+
+        <div class="button-group">
+            <button class="btn edit-btn"><i class="fas fa-edit"></i> Chỉnh sửa</button>
+            <button class="btn password-btn"><i class="fas fa-key"></i> Đổi mật khẩu</button>
+            <button class="btn logout-btn"><i class="fas fa-sign-out-alt"></i> Đăng xuất</button>
+        </div>
+    </div>
+</div>
+
+{% endblock quan_ly_tai_khoan %}
