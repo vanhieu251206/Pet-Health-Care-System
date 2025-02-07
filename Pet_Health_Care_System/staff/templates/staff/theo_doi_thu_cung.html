@@ -1,0 +1,172 @@
+{% extends 'staff/base.html' %}
+{% load static %}
+
+{% block page_title %}
+Theo dõi thú cưng đang nhập viện
+{% endblock page_title %}
+
+{% block theo_doi %}
+<!-- Thêm CSS trực tiếp trong template -->
+<style>
+/* Container settings */
+.container {
+    width: 80%;
+    margin: 0 auto;
+    padding-top: 20px;
+    padding-left: 275px; /* Thụt lề trái 275px */
+}
+
+/* Page title */
+.page-title {
+    font-size: 24px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Pet list styling */
+.pet-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Pet item styling */
+.pet-item {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 15px; /* Bo tròn các góc */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Pet information section */
+.pet-info {
+    margin-bottom: 20px;
+}
+
+.pet-info h3 {
+    font-size: 22px;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.pet-info p {
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+
+/* Status styles */
+.status {
+    font-weight: bold;
+}
+
+.healthy {
+    color: green;
+}
+
+.sick {
+    color: red;
+}
+
+/* Pet actions buttons */
+.pet-actions {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.btn {
+    padding: 12px 20px;
+    border-radius: 25px; /* Bo tròn các góc nút */
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.update-btn {
+    background-color: #2196F3;
+}
+
+.upload-btn {
+    background-color: #FFC107;
+}
+
+.history-btn {
+    background-color: #9C27B0;
+}
+
+.transfer-btn {
+    background-color: #FF5722;
+}
+
+/* Hover effect for buttons */
+.btn:hover {
+    opacity: 0.8;
+    transform: translateY(-3px); /* Hiệu ứng nâng nút lên khi hover */
+}
+
+/* Focus effect for buttons */
+.btn:focus {
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 0, 255, 0.5); /* Thêm bóng khi focus */
+}
+</style>
+
+<!-- Nội dung giao diện -->
+<div class="container">
+    <h2 class="page-title">Danh sách thú cưng đang lưu trú</h2>
+
+    <!-- Danh sách thú cưng với dữ liệu giả -->
+    <div class="pet-list">
+        <div class="pet-item">
+            <div class="pet-info">
+                <h3>Lucky - Chó</h3>
+                <p><strong>Chuồng:</strong> A1</p>
+                <p><strong>Chủ sở hữu:</strong> Nguyễn Văn A</p>
+                <p><strong>Ngày nhập viện:</strong> 01/02/2025 - <strong>Dự kiến xuất viện:</strong> 05/02/2025</p>
+                <p><strong>Tình trạng sức khỏe:</strong> <span class="status healthy">🟢 Bình thường</span></p>
+            </div>
+            <div class="pet-actions">
+                <button class="btn update-btn">📝 Cập nhật tình trạng sức khỏe</button>
+                <button class="btn upload-btn">📸 Thêm hình ảnh/video</button>
+                <button class="btn history-btn">📄 Xem lịch sử điều trị</button>
+                <button class="btn transfer-btn">🚀 Chuyển chuồng</button>
+            </div>
+        </div>
+
+        <div class="pet-item">
+            <div class="pet-info">
+                <h3>Whiskers - Mèo</h3>
+                <p><strong>Chuồng:</strong> B2</p>
+                <p><strong>Chủ sở hữu:</strong> Trần Thị B</p>
+                <p><strong>Ngày nhập viện:</strong> 02/02/2025 - <strong>Dự kiến xuất viện:</strong> 06/02/2025</p>
+                <p><strong>Tình trạng sức khỏe:</strong> <span class="status sick">🔴 Đang điều trị</span></p>
+            </div>
+            <div class="pet-actions">
+                <button class="btn update-btn">📝 Cập nhật tình trạng sức khỏe</button>
+                <button class="btn upload-btn">📸 Thêm hình ảnh/video</button>
+                <button class="btn history-btn">📄 Xem lịch sử điều trị</button>
+                <button class="btn transfer-btn">🚀 Chuyển chuồng</button>
+            </div>
+        </div>
+
+        <div class="pet-item">
+            <div class="pet-info">
+                <h3>Fido - Chó</h3>
+                <p><strong>Chuồng:</strong> C3</p>
+                <p><strong>Chủ sở hữu:</strong> Lê Minh C</p>
+                <p><strong>Ngày nhập viện:</strong> 03/02/2025 - <strong>Dự kiến xuất viện:</strong> 07/02/2025</p>
+                <p><strong>Tình trạng sức khỏe:</strong> <span class="status healthy">🟢 Bình thường</span></p>
+            </div>
+            <div class="pet-actions">
+                <button class="btn update-btn">📝 Cập nhật tình trạng sức khỏe</button>
+                <button class="btn upload-btn">📸 Thêm hình ảnh/video</button>
+                <button class="btn history-btn">📄 Xem lịch sử điều trị</button>
+                <button class="btn transfer-btn">🚀 Chuyển chuồng</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock theo_doi %}

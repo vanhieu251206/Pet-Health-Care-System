@@ -2,10 +2,163 @@
 {% load static %}
 
 {% block page_title %}
-Quản lý phòng lưu trú
+Sắp lịch bác sĩ thú y
 {% endblock page_title %}
 
-{% block main-contain %}
-<h1>xincaho</h1>
-{% endblock main-contain %}
+{% block sap_lich %}
+<!-- Thêm CSS trực tiếp trong template -->
+<style>
+/* Container settings */
+.container {
+    width: 80%;
+    margin: 0 auto;
+    padding-top: 20px;
+    padding-left: 275px; /* Thụt lề trái 275px */
+}
 
+/* Page title */
+.page-title {
+    font-size: 24px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Customer list styling */
+.customer-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Customer item styling */
+.customer-item {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 15px; /* Bo tròn các góc */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Customer information section */
+.customer-info {
+    margin-bottom: 20px;
+}
+
+.customer-info h3 {
+    font-size: 22px;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.customer-info p {
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+
+/* Status styles */
+.status {
+    font-weight: bold;
+}
+
+.waiting {
+    color: #FF9800;
+}
+
+.in_process {
+    color: green;
+}
+
+.waiting_payment {
+    color: #FF5722;
+}
+
+/* Action buttons */
+.customer-actions {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.btn {
+    padding: 12px 20px;
+    border-radius: 25px; /* Bo tròn các góc nút */
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.assign-btn {
+    background-color: #2196F3;
+}
+
+.complete-btn {
+    background-color: #4CAF50;
+}
+
+.cancel-btn {
+    background-color: #F44336;
+}
+
+/* Hover effect for buttons */
+.btn:hover {
+    opacity: 0.8;
+    transform: translateY(-3px); /* Hiệu ứng nâng nút lên khi hover */
+}
+
+/* Focus effect for buttons */
+.btn:focus {
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 0, 255, 0.5); /* Thêm bóng khi focus */
+}
+</style>
+
+<!-- Nội dung giao diện -->
+<div class="container">
+    <h2 class="page-title">Lịch khám trực tiếp</h2>
+
+    <!-- Danh sách khách hàng đến khám không đặt trước -->
+    <div class="customer-list">
+        <!-- Customer item example -->
+        <div class="customer-item">
+            <div class="customer-info">
+                <h3>Nguyễn Văn A - Lucky</h3>
+                <p><strong>Tình trạng:</strong> <span class="status waiting">🟡 Chờ khám</span></p>
+                <p><strong>Bác sĩ phụ trách:</strong> Dr. Nguyễn</p>
+            </div>
+            <div class="customer-actions">
+                <button class="btn assign-btn">📅 Gán bác sĩ</button>
+                <button class="btn complete-btn">✅ Xác nhận khám xong</button>
+                <button class="btn cancel-btn">❌ Hủy / Hoãn</button>
+            </div>
+        </div>
+
+        <div class="customer-item">
+            <div class="customer-info">
+                <h3>Trần Thị B - Whiskers</h3>
+                <p><strong>Tình trạng:</strong> <span class="status in_process">✅ Đang khám</span></p>
+                <p><strong>Bác sĩ phụ trách:</strong> Dr. Lê</p>
+            </div>
+            <div class="customer-actions">
+                <button class="btn assign-btn">📅 Gán bác sĩ</button>
+                <button class="btn complete-btn">✅ Xác nhận khám xong</button>
+                <button class="btn cancel-btn">❌ Hủy / Hoãn</button>
+            </div>
+        </div>
+
+        <div class="customer-item">
+            <div class="customer-info">
+                <h3>Lê Minh C - Fido</h3>
+                <p><strong>Tình trạng:</strong> <span class="status waiting_payment">⏳ Chờ thanh toán</span></p>
+                <p><strong>Bác sĩ phụ trách:</strong> Dr. Mai</p>
+            </div>
+            <div class="customer-actions">
+                <button class="btn assign-btn">📅 Gán bác sĩ</button>
+                <button class="btn complete-btn">✅ Xác nhận khám xong</button>
+                <button class="btn cancel-btn">❌ Hủy / Hoãn</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock sap_lich %}

@@ -15,3 +15,15 @@ def phong_luu_tru(request):
 def booking(request):
     context = {}
     return render(request, 'staff/booking.html', context)
+
+def theo_doi(request):
+    context = {}
+    return render(request, 'staff/theo_doi_thu_cung.html', context)
+
+def sap_lich(request):
+    context = {}
+    return render(request, 'staff/sap_xep_lich.html', context)
+
+def quan_ly_tai_khoan(request):
+    context = {}
+    return render(request, 'staff/quan_ly_tai_khoan.html', context)
