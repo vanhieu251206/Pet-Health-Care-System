@@ -17,7 +17,7 @@
           <h5 class="card-title"><strong>{{ product.name }}</strong></h5>
         </div>
         <div class="card-footer">
-          <button class="btn btn-outline-secondary btn-sm add-btn">Thêm vào giỏ hàng</button>
+          <a href="{% url 'pets:add_to_cart' product.id %}" class="btn btn-outline-secondary btn-sm">Thêm vào giỏ hàng</a>
           <h5 class="mt-2"><strong>{{ product.price }} VNĐ</strong></h5>
         </div>
       </div>

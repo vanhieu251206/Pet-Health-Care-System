@@ -67,6 +67,8 @@ WSGI_APPLICATION = 'Pet_Health_Care_System.wsgi.application'
 
 AUTH_USER_MODEL = 'pets.CustomUser'
 
+LOGOUT_REDIRECT_URL = 'pets:login_page'
+
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 

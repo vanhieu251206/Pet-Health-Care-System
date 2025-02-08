@@ -103,6 +103,58 @@
     height: 30px;
     margin-right: 10px;
    }
+   /* Kiểu dáng của dropdown */
+.user-dropdown {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 500;
+    color: #333;
+    cursor: pointer;
+}
+
+.user-avatar {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 2px solid #ddd;
+}
+
+.user-name {
+    font-size: 16px;
+    font-weight: 500;
+    color: #333;
+}
+
+/* Dropdown menu */
+.dropdown-menu {
+    min-width: 180px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 5px 0;
+    display: none; /* Mặc định ẩn dropdown */
+}
+
+/* Hiển thị dropdown khi bấm vào */
+.show {
+    display: block !important;
+}
+
+/* Hiệu ứng hover */
+.dropdown-menu a:hover, .logout-button:hover {
+    background-color: #f8f9fa;
+}
+
+/* Định dạng nút đăng xuất */
+.logout-button {
+    width: 100%;
+    border: none;
+    background: none;
+    text-align: left;
+    cursor: pointer;
+}
+
   </style>
   {% block navbar %}
   <div class="sidebar">
@@ -122,10 +174,22 @@
   <div class="main-content">
    <div class="header">
      <h1>{% block page_title %}Danh sách Đơn hàng{% endblock page_title %}</h1>
-    <div class="user-info">
-     <img alt="User profile picture" height="30" src="" width="30"/>
-     <span>Nguyễn Văn Hiếu</span>
-    </div>
+     <div class="user-info dropdown">
+      <a class="nav-link dropdown-toggle d-flex align-items-center user-dropdown" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <img src="{% if user.avatar %}{{ user.avatar.url }}{% else %}{% static 'pets/images/default-avatar.png' %}{% endif %}" alt="Avatar" class="rounded-circle me-2 user-avatar">
+          <span class="user-name">{{ user.username }}</span>
+      </a>
+      <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+          <li><a class="dropdown-item" href="#">Thông tin tài khoản</a></li>
+          <li>
+              <form action="{% url 'pets:logout' %}" method="post" style="display: inline;">
+                  {% csrf_token %}
+                  <button type="submit" class="dropdown-item text-danger logout-button">Đăng xuất</button>
+              </form>
+          </li>
+      </ul>
+  </div>
+  
    </div>
   </div>
   {% endblock navbar %}

@@ -26,15 +26,24 @@
         <title>Pet Health Care System</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="">
     </head>
     <body>
+      {% if messages %}
+      <div class="container mt-3">
+          {% for message in messages %}
+          <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+              {{ message }}
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+          {% endfor %}
+      </div>
+      {% endif %}
         <!-- Header -->
         {% block navbar %}
         <nav class="navbar navbar-expand-lg bg-body-tertiary">
             <div class="container-fluid">
-              <a class="navbar-brand" href="{% url "pets:guest_dashboard" %}"> 
-                <img src=" {% static 'pets/images/logo1.png' %} " width="45" height="45" />
+              <a class="navbar-brand" href="{% url 'pets:guest_dashboard' %}"> 
+                <img src="{% static 'pets/images/logo1.png' %}" width="45" height="45" />
               </a>
               <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -42,53 +51,64 @@
               <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                   <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="{% url "pets:guest_dashboard" %}">Trang chủ</a>
+                    <a class="nav-link" aria-current="page" href="{% url 'pets:guest_dashboard' %}">Trang chủ</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="{% url "pets:shop" %}">Cửa hàng</a>
-                  </li>
+                    <a class="nav-link" aria-current="page" href="{% url 'pets:shop' %}">Cửa hàng</a>
                   </li>
                   <li class="nav-item dropdown">
-                    <a class="nav-link  dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                       Dịch vụ
                     </a>
                     <ul class="dropdown-menu">
-                      <li><a class="dropdown-item" href="{% url "pets:vaccination" %}">Tiêm phòng</a></li>
-                      <li><a class="dropdown-item" href="{% url "pets:periodic_health_checkups" %}">Khám sức khỏe định kỳ</a></li> 
+                      <li><a class="dropdown-item" href="{% url 'pets:vaccination' %}">Tiêm phòng</a></li>
+                      <li><a class="dropdown-item" href="{% url 'pets:periodic_health_checkups' %}">Khám sức khỏe định kỳ</a></li> 
                       <li><a class="dropdown-item" href="#">Chăm sóc thú cưng</a></li>
                     </ul>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="{% url "pets:about_us" %}">Giới thiệu</a>
+                    <a class="nav-link" href="{% url 'pets:about_us' %}">Giới thiệu</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="{% url "pets:contact" %}">Liên hệ</a>
+                    <a class="nav-link" href="{% url 'pets:contact' %}">Liên hệ</a>
                   </li>
                 </ul>
-                <form class="search-bar d-flex" role="search">
-                  <div class="input-group">
-                      <input type="text" class="form-control" placeholder="Tìm kiếm sản phẩm..." aria-label="Tìm kiếm sản phẩm">
-                      <button class="btn btn-success" type="submit">Tìm</button>
-                  </div>
-              </form>              
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0 d-flex align-items-center">
+                  {% if user.is_authenticated %}
+                    <li class="nav-item dropdown">
+                      <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <img src="{% if user.avatar %}{{ user.avatar.url }}{% else %}{% static 'pets/images/default-avatar.png' %}{% endif %}" alt="Avatar" class="rounded-circle me-2" width="35" height="35" style="object-fit: cover;">
+                        <span>{{ user.username }}</span>
+                      </a>
+                      <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">Thông tin tài khoản</a></li>
+                        <li>
+                          <form action="{% url 'pets:logout' %}" method="post" style="display: inline;">
+                              {% csrf_token %}
+                              <button type="submit" class="dropdown-item text-danger" onclick="clearNextUrl()">Đăng xuất</button>
+                          </form>
+                        </li>
+                      </ul>
+                    </li>
+                  {% else %}
+                    <li class="nav-item dropdown">
+                      <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Tài khoản
+                      </a>
+                      <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="{% url 'pets:register_page' %}">Đăng ký</a></li>
+                        <li><a class="dropdown-item" href="{% url 'pets:login_page' %}">Đăng nhập</a></li>
+                      </ul>
+                    </li>
+                  {% endif %}
+                  <li class="nav-item ms-3">
+                    <a class="nav-link" href="{% url 'pets:cart_view' %}">🛒 Giỏ hàng</a>
+                  </li>
+                </ul>
               </div>
-              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    Tài khoản
-                  </a>
-                  <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="{% url "pets:register_page" %}">Đăng ký</a></li>
-                    <li><a class="dropdown-item" href="{% url "pets:login_page" %}">Đăng nhập</a></li>
-                  </ul>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="{% url 'pets:cart' %}">Giỏ hàng</a>
-                </li>
-              </ul>
             </div>
-          </nav>
-          {% endblock navbar %}
+        </nav>
+        {% endblock navbar %}
         <!-- main body -->
         {% block banner_slider %} {% endblock banner_slider %}
         {% block guest_page %} {% endblock guest_page %}
@@ -128,6 +148,12 @@
           <div class="footer-bottom">
               <p>&copy; 2024 GroupOne. Tất cả các quyền được bảo lưu.</p>
           </div>
-        </footer>      
+        </footer> 
     </body>
+
+    <script>
+      function clearNextUrl() {
+          sessionStorage.removeItem('next_url'); 
+      }
+    </script>
 </html>
