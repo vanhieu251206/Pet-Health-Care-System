@@ -33,7 +33,7 @@
         {% block navbar %}
         <nav class="navbar navbar-expand-lg bg-body-tertiary">
             <div class="container-fluid">
-              <a class="navbar-brand" href="{% url "guest_dashboard" %}"> 
+              <a class="navbar-brand" href="{% url "pets:guest_dashboard" %}"> 
                 <img src=" {% static 'pets/images/logo1.png' %} " width="45" height="45" />
               </a>
               <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -42,10 +42,10 @@
               <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                   <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="{% url "guest_dashboard" %}">Trang chủ</a>
+                    <a class="nav-link" aria-current="page" href="{% url "pets:guest_dashboard" %}">Trang chủ</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="{% url "shop" %}">Cửa hàng</a>
+                    <a class="nav-link" aria-current="page" href="{% url "pets:shop" %}">Cửa hàng</a>
                   </li>
                   </li>
                   <li class="nav-item dropdown">
@@ -53,16 +53,16 @@
                       Dịch vụ
                     </a>
                     <ul class="dropdown-menu">
-                      <li><a class="dropdown-item" href="{% url "vaccination" %}">Tiêm phòng</a></li>
-                      <li><a class="dropdown-item" href="{% url "periodic_health_checkups" %}">Khám sức khỏe định kỳ</a></li> 
+                      <li><a class="dropdown-item" href="{% url "pets:vaccination" %}">Tiêm phòng</a></li>
+                      <li><a class="dropdown-item" href="{% url "pets:periodic_health_checkups" %}">Khám sức khỏe định kỳ</a></li> 
                       <li><a class="dropdown-item" href="#">Chăm sóc thú cưng</a></li>
                     </ul>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="{% url "about_us" %}">Giới thiệu</a>
+                    <a class="nav-link" href="{% url "pets:about_us" %}">Giới thiệu</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="{% url "contact" %}">Liên hệ</a>
+                    <a class="nav-link" href="{% url "pets:contact" %}">Liên hệ</a>
                   </li>
                 </ul>
                 <form class="search-bar d-flex" role="search">
@@ -78,12 +78,12 @@
                     Tài khoản
                   </a>
                   <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="#">Đăng ký</a></li>
-                    <li><a class="dropdown-item" href="{% url "select_role" %}">Đăng nhập</a></li>
+                    <li><a class="dropdown-item" href="{% url "pets:register_page" %}">Đăng ký</a></li>
+                    <li><a class="dropdown-item" href="{% url "pets:login_page" %}">Đăng nhập</a></li>
                   </ul>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="{% url 'cart' %}">Giỏ hàng</a>
+                  <a class="nav-link" href="{% url 'pets:cart' %}">Giỏ hàng</a>
                 </li>
               </ul>
             </div>
@@ -96,13 +96,13 @@
         {% block cart_content %} {% endblock cart_content %}
         {% block checkout_content %} {% endblock checkout_content %} 
         {% block login_page %}{% endblock login_page %}
-        {% block select_role %}{% endblock select_role %}
         {% block bashboard_customer %}{% endblock bashboard_customer %}
         {% block vaccination %}{% endblock vaccination %}
         {% block periodic_health_checkups %}{% endblock periodic_health_checkups %}
         {% block about_us %}{% endblock about_us %}
         {% block contact %}{% endblock contact %}
         {% block shop %}{% endblock shop %}
+        {% block register_page %}{% endblock register_page %}
         <!-- footer -->
         <footer>
           <div class="footer-container">
@@ -113,9 +113,9 @@
               <div class="footer-column">
                   <h3>Liên Kết Nhanh</h3>
                   <ul>
-                      <li><a href="{% url "guest_dashboard" %}">Trang Chủ</a></li>
-                      <li><a href="{% url "about_us" %}">Giới Thiệu</a></li>
-                      <li><a href="{% url "contact" %}">Liên Hệ</a></li>
+                      <li><a href="{% url "pets:guest_dashboard" %}">Trang Chủ</a></li>
+                      <li><a href="{% url "pets:about_us" %}">Giới Thiệu</a></li>
+                      <li><a href="{% url "pets:contact" %}">Liên Hệ</a></li>
                   </ul>
               </div>
               <div class="footer-column">
