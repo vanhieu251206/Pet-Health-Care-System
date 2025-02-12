@@ -2,92 +2,162 @@
 {% load static %}
 
 {% block cart_content %}
-<div class="offcanvas-body">
-  <div class="order-md-last">
-    <h4 class="d-flex justify-content-between align-items-center mb-4">
-      <span class="text-primary">Giỏ hàng</span>
-      <span class="badge bg-primary rounded-pill">Số lượng: 3</span>
-    </h4>
-    <table class="table">
-      <thead>
-        <tr>
-          <th scope="col">Sản phẩm</th>
-          <th scope="col">Đơn giá</th>
-          <th scope="col">Số lượng</th>
-          <th scope="col">Thành tiền</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td class="d-flex align-items-center">
-            <img src="{% static 'pets/images/zoi_dog.png' %}" alt="Growers Cider" class="img-thumbnail me-3" style="width: 50px; height: 50px; object-fit: cover;">
-            <div>
-              <h6 class="my-0">Thức ăn cho chó</h6>
-            </div>
-          </td>
-          <td>100.000VND</td>
-          <td>2</td>
-          <td>200.000VND</td>
-        </tr>
-        <tr>
-          <td class="d-flex align-items-center">
-            <img src="{% static 'pets/images/zoi_dog.png' %}" alt="Fresh Grapes" class="img-thumbnail me-3" style="width: 50px; height: 50px; object-fit: cover;">
-            <div>
-              <h6 class="my-0">Thức ăn cho chó</h6>
-            </div>
-          </td>
-          <td>100.000VND</td>
-          <td>2</td>
-          <td>200.000VND</td>
-        </tr>
-        <tr>
-          <td class="d-flex align-items-center">
-            <img src="{% static 'pets/images/zoi_dog.png' %}" alt="Heinz Tomato Ketchup" class="img-thumbnail me-3" style="width: 50px; height: 50px; object-fit: cover;">
-            <div>
-              <h6 class="my-0">Thức ăn cho chó</h6>
-              <small class="text-muted">Classic flavor</small>
-            </div>
-          </td>
-          <td>100.000VND</td>
-          <td>2</td>
-          <td>200.000VND</td>
-        </tr>
-      </tbody>
-      <tfoot>
-        <tr>
-          <td colspan="3" class="text-end fw-bold">TỔNG THANH TOÁN (VNĐ)</td>
-          <td class="fw-bold">600.000VND</td>
-        </tr>
-      </tfoot>
-    </table>
-
-    <button class="btn btn-primary w-100 btn-lg d-flex align-items-center justify-content-center" type="submit">
-      <i class="bi bi-arrow-right-circle me-2"></i> Tiếp tục thanh toán
-    </button>
-  </div>
-</div>
-
 <style>
-  .offcanvas-body {
-    background-color: #f8f9fa;
-    padding: 2rem;
-    border-radius: 0.5rem;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  .cart-container {
+    background-color: #ffffff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   }
-  .table th, .table td {
-    vertical-align: middle;
-  }
-  .img-thumbnail {
-    border-radius: 0.375rem;
-  }
-  .btn-primary {
-    background-color: #007bff;
-    border: none;
+
+  .cart-header {
+    background-color: #198754;
+    color: white;
+    padding: 15px;
+    border-radius: 5px;
     font-size: 1.2rem;
-    padding: 0.75rem;
+    font-weight: bold;
+    text-align: center;
   }
-  .btn-primary:hover {
-    background-color: #0056b3;
+
+  .table {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
   }
+
+  .table th {
+    background-color: #f8f9fa;
+    text-align: center;
+    vertical-align: middle;
+    padding: 10px;
+  }
+
+  .table td {
+    vertical-align: middle;
+    text-align: center;
+    padding: 12px;
+    border-bottom: 1px solid #dee2e6;
+  }
+
+  .cart-img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 8px;
+  }
+
+  .cart-quantity {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .cart-quantity button {
+    border: none;
+    background-color: transparent;
+    color: black;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 5px 10px;
+  }
+
+  .cart-quantity button:hover {
+    color: #198754;
+  }
+
+  .btn-remove {
+    background-color: #dc3545;
+    color: white;
+    border-radius: 5px;
+    padding: 5px 10px;
+    text-decoration: none;
+    font-size: 14px;
+  }
+
+  .btn-remove:hover {
+    background-color: #b02a37;
+  }
+
+  .total-price {
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: #198754;
+  }
+
+  .checkout-btn {
+    background-color: #198754;
+    color: white;
+    font-size: 1.1rem;
+    font-weight: bold;
+    border-radius: 5px;
+    padding: 10px 20px;
+    display: block;
+    text-align: center;
+    width: fit-content;
+    margin: 20px auto 0;
+    text-decoration: none;
+  }
+
+  .checkout-btn:hover {
+    background-color: #146c43;
+  }
+
 </style>
+
+<div class="container mt-4 cart-container">
+  <div class="cart-header">🛒 Giỏ hàng của bạn</div>
+
+  {% if cart_items %}
+  <table class="table mt-3">
+    <thead>
+      <tr>
+        <th style="width: 35%;">Sản phẩm</th>
+        <th style="width: 20%;">Đơn giá</th>
+        <th style="width: 20%;">Số lượng</th>
+        <th style="width: 20%;">Thành tiền</th>
+        <th style="width: 5%;"></th> <!-- Giữ chỗ cho nút xóa -->
+      </tr>
+    </thead>
+    <tbody>
+      {% for item in cart_items %}
+      <tr>
+        <td class="d-flex align-items-center">
+          <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}" class="cart-img me-3">
+          <div>
+            <h6 class="my-0">{{ item.product.name }}</h6>
+          </div>
+        </td>
+        <td>{{ item.product.price }} VND</td>
+        <td>
+          <form method="post" action="{% url 'pets:update_cart' item.id %}" class="cart-quantity">
+            {% csrf_token %}
+            <button type="submit" name="action" value="decrease">−</button>
+            <span class="mx-2">{{ item.quantity }}</span>
+            <button type="submit" name="action" value="increase">+</button>
+          </form>
+        </td>
+        <td class="total-price">{{ item.total_price }} VND</td>
+        <td>
+          <a href="{% url 'pets:remove_from_cart' item.id %}" class="btn-remove" onclick="return confirm('Bạn có chắc chắn muốn xóa sản phẩm này khỏi giỏ hàng không?')">X</a>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="3" class="text-end fw-bold">TỔNG THANH TOÁN (VNĐ)</td>
+        <td class="total-price">{{ total_price }} VND</td>
+        <td></td>
+      </tr>
+    </tfoot>
+  </table>
+
+  <a href="#" class="checkout-btn">🛍️ Tiếp tục thanh toán</a>
+
+  {% else %}
+  <p class="text-center mt-4">Giỏ hàng của bạn đang trống. <a href="{% url "pets:shop" %}">Quay lại mua sắm</a></p>
+  {% endif %}
+</div>
 {% endblock cart_content %}
