@@ -15,11 +15,23 @@
 
         <!-- Main Content -->
         <div class="flex-1 p-6">
-            <!-- Header -->
             <div class="bg-green-700 text-white p-4 rounded">
-              <h1 class="text-xl font-bold">{% block page_header %}Trang tổng quan{% endblock page_header %}</h1>
-          </div>
-
+                <div class="flex justify-between items-center">
+                    <!-- Phần tiêu đề có thể thay đổi -->
+                    <h1 class="text-xl font-bold">
+                        {% block page_header %}Trang tổng quan{% endblock %}
+                    </h1>
+            
+                    <!-- Phần ảnh đại diện và tên người dùng luôn cố định ở bên phải -->
+                    <div class="flex items-center">
+                        <span class="mr-2">
+                            Xin chào,
+                        </span>
+                        <img alt="User avatar" class="h-10 w-10 rounded-full" height="40" src="https://storage.googleapis.com/a1aa/image/CVc7dBVUTpjqiuz0csBsD6gLEGEKo_RtgVYQwp04Yec.jpg" width="40"/>
+                    </div>
+                </div>
+            </div>
+            
             <!-- Nội dung động -->
             <div class="content">
                 {% block content %}{% endblock content %}

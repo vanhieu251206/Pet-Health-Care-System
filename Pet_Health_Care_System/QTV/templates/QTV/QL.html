@@ -1,0 +1,277 @@
+{% extends "QTV/base.html" %}
+
+{% block page_title %}Trang Tổng Quan - Quản lý hệ thống{% endblock page_title %}
+
+{% block page_header %}
+Quản lí tài khoản 
+{% endblock page_header %}
+
+{% block content %}
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   Quản lý tài khoản
+  </title>
+  <script src="https://cdn.tailwindcss.com">
+  </script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <style>
+   .btn-animated {
+     transition: transform 0.2s, box-shadow 0.2s;
+   }
+   .btn-animated:hover {
+     transform: scale(1.05);
+     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+   }
+   .btn-animated:active {
+     transform: scale(0.95);
+   }
+  </style>
+  <script>
+   document.addEventListener('DOMContentLoaded', function () {
+     const users = [
+       {
+         name: 'Nguyễn Văn A',
+         email: 'nguyenvana@example.com',
+         role: 'Admin',
+         status: 'Đang hoạt động',
+         phone: '0123456789',
+         createdAt: '01/01/2022',
+       },
+       {
+         name: 'Trần Thị B',
+         email: 'tranthib@example.com',
+         role: 'Nhân viên',
+         status: 'Đang hoạt động',
+         phone: '0987654321',
+         createdAt: '02/02/2022',
+       },
+       {
+         name: 'Lê Văn C',
+         email: 'levanc@example.com',
+         role: 'Khách hàng',
+         status: 'Bị khóa',
+         phone: '0123987654',
+         createdAt: '03/03/2022',
+       },
+       {
+         name: 'Phạm Thị D',
+         email: 'phamthid@example.com',
+         role: 'Nhân viên',
+         status: 'Đang hoạt động',
+         phone: '0987123456',
+         createdAt: '04/04/2022',
+       },
+       {
+         name: 'Hoàng Văn E',
+         email: 'hoangvane@example.com',
+         role: 'Admin',
+         status: 'Đang hoạt động',
+         phone: '0123456789',
+         createdAt: '05/05/2022',
+       },
+       {
+         name: 'Nguyễn Thị F',
+         email: 'nguyenthif@example.com',
+         role: 'Khách hàng',
+         status: 'Đang hoạt động',
+         phone: '0987654321',
+         createdAt: '06/06/2022',
+       },
+       {
+         name: 'Trần Văn G',
+         email: 'tranvang@example.com',
+         role: 'Nhân viên',
+         status: 'Đang hoạt động',
+         phone: '0123987654',
+         createdAt: '07/07/2022',
+       },
+       {
+         name: 'Lê Thị H',
+         email: 'lethih@example.com',
+         role: 'Khách hàng',
+         status: 'Bị khóa',
+         phone: '0987123456',
+         createdAt: '08/08/2022',
+       },
+     ];
+
+     const userTable = document.getElementById('userTable');
+     const userInfo = document.getElementById('userInfo');
+     const userStatus = document.getElementById('userStatus');
+
+     function getRoleIcon(role) {
+       switch (role) {
+         case 'Admin':
+           return '<i class="fas fa-user-shield mr-2 text-red-500"></i>';
+         case 'Nhân viên':
+           return '<i class="fas fa-user-tie mr-2 text-blue-500"></i>';
+         case 'Khách hàng':
+           return '<i class="fas fa-user mr-2 text-green-500"></i>';
+         default:
+           return '<i class="fas fa-user mr-2 text-gray-500"></i>';
+       }
+     }
+
+     function displayUserInfo(user) {
+       userInfo.innerHTML = `
+         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+           <div>
+             <label class="block text-gray-700"><i class="fas fa-user mr-2 text-blue-500"></i>Tên</label>
+             <input type="text" class="w-full p-2 border rounded" value="${user.name}" disabled>
+           </div>
+           <div>
+             <label class="block text-gray-700"><i class="fas fa-envelope mr-2 text-green-500"></i>Email</label>
+             <input type="email" class="w-full p-2 border rounded" value="${user.email}" disabled>
+           </div>
+           <div>
+             <label class="block text-gray-700"><i class="fas fa-phone mr-2 text-yellow-500"></i>Số điện thoại</label>
+             <input type="text" class="w-full p-2 border rounded" value="${user.phone}" disabled>
+           </div>
+           <div>
+             <label class="block text-gray-700"><i class="fas fa-calendar-alt mr-2 text-red-500"></i>Ngày tạo tài khoản</label>
+             <input type="text" class="w-full p-2 border rounded" value="${user.createdAt}" disabled>
+           </div>
+         </div>
+       `;
+
+       userStatus.innerHTML = `
+         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+           <div>
+             <label class="block text-gray-700"><i class="fas fa-info-circle mr-2 text-purple-500"></i>Trạng thái</label>
+             <select class="w-full p-2 border rounded">
+               <option ${user.status === 'Đang làm việc' ? 'selected' : ''}>Đang làm việc</option>
+               <option ${user.status === 'Nghỉ' ? 'selected' : ''}>Nghỉ</option>
+               <option ${user.status === 'Bị khóa' ? 'selected' : ''}>Bị khóa</option>
+             </select>
+           </div>
+         </div>
+       `;
+     }
+
+     users.forEach((user, index) => {
+       const row = document.createElement('tr');
+       row.classList.add('hover:bg-gray-100', 'cursor-pointer');
+       row.innerHTML = `
+         <td class="py-2 px-4 border-b"><i class="fas fa-user mr-2 text-blue-500"></i>${user.name}</td>
+         <td class="py-2 px-4 border-b"><i class="fas fa-envelope mr-2 text-green-500"></i>${user.email}</td>
+         <td class="py-2 px-4 border-b">${getRoleIcon(user.role)}${user.role}</td>
+         <td class="py-2 px-4 border-b"><i class="fas fa-info-circle mr-2 text-purple-500"></i>${user.status}</td>
+         <td class="py-2 px-4 border-b text-red-500">
+           <button class="delete-user"><i class="fas fa-trash"></i></button>
+         </td>
+       `;
+       row.addEventListener('click', () => displayUserInfo(user));
+       userTable.appendChild(row);
+
+       if (index === 0) {
+         displayUserInfo(user);
+       }
+     });
+
+     document.querySelectorAll('.delete-user').forEach(button => {
+       button.addEventListener('click', (e) => {
+         e.stopPropagation();
+         const row = button.closest('tr');
+         row.remove();
+       });
+     });
+   });
+  </script>
+ </head>
+ <body class="bg-gray-100">
+  <div class="flex">
+   <!-- Main Content -->
+   <div class="flex-1 p-6">
+    <!-- Header với nút "Thêm tài khoản mới" nằm ở bên phải -->
+    <div class="mt-4 flex justify-between items-center mb-4">
+        <h2 class="text-lg font-bold">
+            Danh sách người dùng
+        </h2>
+        <!-- Nút "Thêm tài khoản mới" được căn lề phải -->
+        <button class="bg-blue-500 text-white px-4 py-2 rounded flex items-center btn-animated ml-auto">
+            <i class="fas fa-plus mr-2"></i>
+            Thêm tài khoản mới
+        </button>
+    </div>
+    
+    <!-- Nội dung tiếp theo -->
+    <div class="mt-4">
+        <!-- Nội dung danh sách người dùng sẽ được thêm ở đây -->
+    </div>
+</div>
+
+    
+    <!-- Nội dung tiếp theo -->
+    <div class="mt-4">
+        <!-- Nội dung danh sách người dùng sẽ được thêm ở đây -->
+    </div>
+</div>
+
+     <table class="min-w-full bg-white rounded shadow">
+      <thead>
+       <tr>
+        <th class="py-2 px-4 border-b">
+         Tên
+        </th>
+        <th class="py-2 px-4 border-b">
+         Email
+        </th>
+        <th class="py-2 px-4 border-b">
+         Vai trò
+        </th>
+        <th class="py-2 px-4 border-b">
+         Trạng thái
+        </th>
+        <th class="py-2 px-4 border-b">
+         Hành động
+        </th>
+       </tr>
+      </thead>
+      <tbody id="userTable">
+      </tbody>
+     </table>
+    </div>
+    <div class="mt-4">
+     <h2 class="text-lg font-bold">
+      Thông tin tài khoản
+     </h2>
+     <div class="bg-white p-4 rounded shadow mt-4" id="userInfo">
+     </div>
+    </div>
+    <div class="mt-4">
+     <h2 class="text-lg font-bold">
+      Trạng thái tài khoản
+     </h2>
+     <div class="bg-white p-4 rounded shadow mt-4" id="userStatus">
+     </div>
+    </div>
+    <div class="mt-4">
+     <h2 class="text-lg font-bold">
+      Chức năng
+     </h2>
+     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
+      <button class="bg-yellow-500 text-white px-4 py-2 rounded flex items-center btn-animated">
+       <i class="fas fa-edit mr-2">
+       </i>
+       Chỉnh sửa thông tin tài khoản
+      </button>
+      <button class="bg-green-500 text-white px-4 py-2 rounded flex items-center btn-animated">
+       <i class="fas fa-lock mr-2">
+       </i>
+       Cập nhật bảo mật
+      </button>
+      <button class="bg-red-500 text-white px-4 py-2 rounded flex items-center btn-animated">
+       <i class="fas fa-trash mr-2">
+       </i>
+       Xóa hoặc vô hiệu hóa tài khoản
+      </button>
+     </div>
+    </div>
+   </div>
+  </div>
+ </body>
+</html>
+{% endblock content %}

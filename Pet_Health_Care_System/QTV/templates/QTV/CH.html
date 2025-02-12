@@ -1,0 +1,72 @@
+{% extends "QTV/base.html" %}
+
+{% block page_title %}Trang Tổng Quan - Quản lý hệ thống{% endblock page_title %}
+
+{% block page_header %}
+Quản lí cấu hình hệ thốngthống 
+{% endblock page_header %}
+
+{% block content %}
+<html>
+<head>
+    <title>Quản lý cấu hình hệ thống</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+    <style>
+        .card {
+            transition: transform 0.2s ease-in-out;
+        }
+        .card:hover {
+            transform: translateY(-5px) scale(1.02);
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <div class="flex">
+        
+        <!-- Main Content -->
+        <div class="flex-1 p-6">
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6 mt-6">
+                <!-- Card 1 -->
+                <div class="bg-white p-4 rounded shadow card">
+                    <div class="flex items-center">
+                        <i class="fas fa-info-circle text-blue-500 text-2xl"></i>
+                        <h2 class="ml-2 text-lg font-semibold">Thông tin hệ thống</h2>
+                    </div>
+                    <p class="mt-2 text-gray-600">Tên hệ thống, logo, thông tin liên lạc.</p>
+                    <button class="mt-4 bg-blue-500 text-white py-2 px-4 rounded"><i class="fas fa-edit"></i> Chỉnh sửa thông tin hệ thống</button>
+                </div>
+                <!-- Card 2 -->
+                <div class="bg-white p-4 rounded shadow card">
+                    <div class="flex items-center">
+                        <i class="fas fa-lock text-orange-500 text-2xl"></i>
+                        <h2 class="ml-2 text-lg font-semibold">Cấu hình bảo mật</h2>
+                    </div>
+                    <p class="mt-2 text-gray-600">Các cài đặt bảo mật như yêu cầu mật khẩu mạnh, xác thực hai yếu tố.</p>
+                    <button class="mt-4 bg-orange-500 text-white py-2 px-4 rounded"><i class="fas fa-shield-alt"></i> Cấu hình bảo mật</button>
+                </div>
+                <!-- Card 3 -->
+                <div class="bg-white p-4 rounded shadow card">
+                    <div class="flex items-center">
+                        <i class="fas fa-envelope text-yellow-500 text-2xl"></i>
+                        <h2 class="ml-2 text-lg font-semibold">Cài đặt email và thông báo</h2>
+                    </div>
+                    <p class="mt-2 text-gray-600">Địa chỉ email, cấu hình gửi thông báo cho người dùng.</p>
+                    <button class="mt-4 bg-yellow-500 text-white py-2 px-4 rounded"><i class="fas fa-envelope-open-text"></i> Cài đặt email và thông báo</button>
+                </div>
+                <!-- Card 4 -->
+                <div class="bg-white p-4 rounded shadow card">
+                    <div class="flex items-center">
+                        <i class="fas fa-database text-red-500 text-2xl"></i>
+                        <h2 class="ml-2 text-lg font-semibold">Sao lưu và phục hồi dữ liệu</h2>
+                    </div>
+                    <p class="mt-2 text-gray-600">Thiết lập sao lưu tự động và khôi phục dữ liệu khi cần thiết.</p>
+                    <button class="mt-4 bg-red-500 text-white py-2 px-4 rounded"><i class="fas fa-tools"></i> Sao lưu và phục hồi dữ liệu</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+{% endblock content %}

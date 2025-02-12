@@ -1,0 +1,108 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block page_title %}Pet Health Care System{% endblock page_title %}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body class="bg-gray-100">
+    <div class="flex">
+        <!-- Sidebar -->
+        <style>
+            /* Tạo hiệu ứng làm nổi bật Sidebar */
+            .sidebar {
+              transition: transform 0.3s ease, background-color 0.3s ease;
+            }
+          
+            /* Đổi màu nền Sidebar khi hover */
+            .sidebar:hover {
+              background-color: #38a169; /* Màu xanh đậm hơn khi hover */
+            }
+          
+            /* Thêm bóng đổ cho Sidebar */
+            .sidebar {
+              box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.2); /* Bóng đổ nhẹ cho Sidebar */
+            }
+          
+            /* Tạo hiệu ứng hover cho các liên kết trong Sidebar */
+            .sidebar a {
+              transition: transform 0.3s ease, background-color 0.3s ease;
+            }
+          
+            .sidebar a:hover {
+              transform: translateX(5px); /* Dịch chuyển một chút sang phải */
+              background-color: #2f855a; /* Màu nền khi hover */
+            }
+          
+            /* Thêm hiệu ứng màu sắc cho logo và tên hệ thống */
+            .sidebar img {
+              transition: transform 0.3s ease;
+            }
+          
+            .sidebar img:hover {
+              transform: rotate(360deg); /* Xoay logo khi hover */
+            }
+          
+            /* Điều chỉnh khoảng cách và kiểu chữ cho tên hệ thống */
+            .sidebar span {
+              font-size: 1.25rem; /* Tăng kích thước chữ */
+              font-weight: 600;
+              letter-spacing: 1px; /* Khoảng cách giữa các chữ cái */
+            }
+          </style> 
+        <div class="w-64 bg-green-600 text-white min-h-screen">
+            <div class="flex items-center justify-center py-4">
+                <img alt="GroupOne logo" class="h-10 w-10" height="50" src="https://storage.googleapis.com/a1aa/image/804QB7BQ6klXPc4JhmXGI92lmvrO9Vtid4b5lHQlQnQ.jpg" width="50"/>
+                <span class="ml-2 text-xl font-bold">
+                    GroupOne
+                </span>
+            </div>
+            <nav class="mt-10">
+                <a class="flex items-center py-2 px-6 bg-green-700 text-white" href="{% url 'QTV:dashboard' %}">
+                    <i class="fas fa-tachometer-alt mr-3"></i>
+                    Trang tổng quan (Dashboard)
+                </a>
+                <a class="flex items-center py-2 px-6 hover:bg-green-700" href="{% url 'QTV:QL' %}">
+                    👤 Quản lý tài khoản
+                </a>
+                <a class="flex items-center py-2 px-6 hover:bg-green-700" href="{% url 'QTV:CH' %}">
+                    ⚙️ Quản lý cấu hình hệ thống
+                </a>
+                <a class="flex items-center py-2 px-6 hover:bg-green-700" href="{% url 'QTV:BC' %}">
+                    📊 Thống kê doanh thu của hệ thống theo tháng, tuần, ngày
+                </a>
+            </nav>
+        </div>
+
+        <!-- Main Content -->
+        <div class="flex-1 p-6">
+           <!-- Header -->
+           <div class="flex justify-between items-center bg-green-600 text-white p-4 rounded-lg">
+            <!-- Thay thế tiêu đề bằng block -->
+            <h1 class="text-xl font-bold">
+                {% block page_header %}Trang tổng quan{% endblock %}
+            </h1>
+            
+            <!-- Phần ảnh và tên người dùng không thay đổi -->
+            <div class="flex items-center">
+                <span class="mr-2">
+                    Xin chào,
+                </span>
+                <img alt="User avatar" class="h-10 w-10 rounded-full" height="40" src="https://storage.googleapis.com/a1aa/image/CVc7dBVUTpjqiuz0csBsD6gLEGEKo_RtgVYQwp04Yec.jpg" width="40"/>
+            </div>
+        </div>
+        
+
+            <!-- Nội dung động -->
+            <div class="content mt-6">
+                {% block content %}{% endblock content %}
+            </div>
+        </div>
+    </div>
+</body>
+</html>

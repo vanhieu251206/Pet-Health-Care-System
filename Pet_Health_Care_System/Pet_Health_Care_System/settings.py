@@ -27,6 +27,7 @@ INSTALLED_APPS = [
     'staff',
     'doctor',
     'media',
+    'QTV',
 ]
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

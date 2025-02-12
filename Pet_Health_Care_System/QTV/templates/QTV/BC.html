@@ -1,0 +1,132 @@
+{% extends "QTV/base.html" %}
+
+{% block page_title %}Trang Tổng Quan - Quản lý hệ thống{% endblock page_title %}
+
+{% block page_header %}
+Thống kê doanh thu của hệ thống 
+{% endblock page_header %}
+
+{% block content %}
+<html>
+<head>
+    <title>Thống kê doanh thu</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+    <style>
+        .card {
+            transition: transform 0.2s ease-in-out;
+        }
+        .card:hover {
+            transform: translateY(-5px) scale(1.02);
+        }
+    </style>
+    <script>
+        function showReport(reportId) {
+            document.getElementById('report-day').style.display = 'none';
+            document.getElementById('report-week').style.display = 'none';
+            document.getElementById('report-month').style.display = 'none';
+            document.getElementById('report-service').style.display = 'none';
+            document.getElementById(reportId).style.display = 'block';
+        }
+    </script>
+</head>
+<body class="bg-gray-100">
+    <div class="flex">
+        
+        <!-- Main Content -->
+        <div class="flex-1 p-6">
+           
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6 mt-6">
+                <!-- Card 1 -->
+                <div class="bg-white p-4 rounded shadow card" onclick="showReport('report-day')">
+                    <div class="flex items-center">
+                        <i class="fas fa-calendar-day text-blue-500 text-2xl"></i>
+                        <h2 class="ml-2 text-lg font-semibold">Doanh thu theo ngày</h2>
+                    </div>
+                    <p class="mt-2 text-gray-600">Tổng doanh thu của hệ thống trong ngày.</p>
+                    <button class="mt-4 bg-blue-500 text-white py-2 px-4 rounded"><i class="fas fa-chart-line"></i> Xem báo cáo doanh thu</button>
+                </div>
+                <!-- Card 2 -->
+                <div class="bg-white p-4 rounded shadow card" onclick="showReport('report-week')">
+                    <div class="flex items-center">
+                        <i class="fas fa-calendar-week text-orange-500 text-2xl"></i>
+                        <h2 class="ml-2 text-lg font-semibold">Doanh thu theo tuần</h2>
+                    </div>
+                    <p class="mt-2 text-gray-600">Báo cáo doanh thu trong tuần.</p>
+                    <button class="mt-4 bg-orange-500 text-white py-2 px-4 rounded"><i class="fas fa-chart-bar"></i> Xem báo cáo doanh thu</button>
+                </div>
+                <!-- Card 3 -->
+                <div class="bg-white p-4 rounded shadow card" onclick="showReport('report-month')">
+                    <div class="flex items-center">
+                        <i class="fas fa-calendar-alt text-yellow-500 text-2xl"></i>
+                        <h2 class="ml-2 text-lg font-semibold">Doanh thu theo tháng</h2>
+                    </div>
+                    <p class="mt-2 text-gray-600">Tổng hợp doanh thu trong tháng.</p>
+                    <button class="mt-4 bg-yellow-500 text-white py-2 px-4 rounded"><i class="fas fa-chart-pie"></i> Xem báo cáo doanh thu</button>
+                </div>
+                <!-- Card 4 -->
+                <div class="bg-white p-4 rounded shadow card" onclick="showReport('report-service')">
+                    <div class="flex items-center">
+                        <i class="fas fa-stethoscope text-red-500 text-2xl"></i>
+                        <h2 class="ml-2 text-lg font-semibold">Doanh thu theo dịch vụ</h2>
+                    </div>
+                    <p class="mt-2 text-gray-600">Doanh thu từ các dịch vụ khác nhau như khám bệnh, xét nghiệm, điều trị.</p>
+                    <button class="mt-4 bg-red-500 text-white py-2 px-4 rounded"><i class="fas fa-filter"></i> Lọc doanh thu theo dịch vụ</button>
+                </div>
+            </div>
+            <!-- Detailed Reports -->
+            <div id="report-day" class="mt-6 bg-white p-4 rounded shadow" style="display: none;">
+                <h2 class="text-lg font-semibold">Báo cáo doanh thu theo ngày</h2>
+                <p class="mt-2 text-gray-600">Chi tiết doanh thu của hệ thống trong ngày.</p>
+                <ul class="mt-4 text-gray-600">
+                    <li><i class="fas fa-calendar-day text-blue-500"></i> <strong>Ngày:</strong> 12/10/2023</li>
+                    <li><i class="fas fa-dollar-sign text-green-500"></i> <strong>Tổng doanh thu:</strong> 5,000,000 VND</li>
+                    <li><i class="fas fa-stethoscope text-red-500"></i> <strong>Dịch vụ khám bệnh:</strong> 2,000,000 VND</li>
+                    <li><i class="fas fa-vial text-purple-500"></i> <strong>Dịch vụ xét nghiệm:</strong> 1,500,000 VND</li>
+                    <li><i class="fas fa-pills text-pink-500"></i> <strong>Dịch vụ điều trị:</strong> 1,500,000 VND</li>
+                    <li><i class="fas fa-shopping-cart text-yellow-500"></i> <strong>Bán hàng sản phẩm thú cưng:</strong> 500,000 VND</li>
+                </ul>
+                <button class="mt-4 bg-green-500 text-white py-2 px-4 rounded"><i class="fas fa-file-export"></i> 📥 Xuất báo cáo</button>
+            </div>
+            <div id="report-week" class="mt-6 bg-white p-4 rounded shadow" style="display: none;">
+                <h2 class="text-lg font-semibold">Báo cáo doanh thu theo tuần</h2>
+                <p class="mt-2 text-gray-600">Chi tiết doanh thu của hệ thống trong tuần.</p>
+                <ul class="mt-4 text-gray-600">
+                    <li><i class="fas fa-calendar-week text-orange-500"></i> <strong>Tuần:</strong> 05/10/2023 - 11/10/2023</li>
+                    <li><i class="fas fa-dollar-sign text-green-500"></i> <strong>Tổng doanh thu:</strong> 35,000,000 VND</li>
+                    <li><i class="fas fa-stethoscope text-red-500"></i> <strong>Dịch vụ khám bệnh:</strong> 14,000,000 VND</li>
+                    <li><i class="fas fa-vial text-purple-500"></i> <strong>Dịch vụ xét nghiệm:</strong> 10,500,000 VND</li>
+                    <li><i class="fas fa-pills text-pink-500"></i> <strong>Dịch vụ điều trị:</strong> 10,500,000 VND</li>
+                    <li><i class="fas fa-shopping-cart text-yellow-500"></i> <strong>Bán hàng sản phẩm thú cưng:</strong> 2,000,000 VND</li>
+                </ul>
+                <button class="mt-4 bg-green-500 text-white py-2 px-4 rounded"><i class="fas fa-file-export"></i> 📥 Xuất báo cáo</button>
+            </div>
+            <div id="report-month" class="mt-6 bg-white p-4 rounded shadow" style="display: none;">
+                <h2 class="text-lg font-semibold">Báo cáo doanh thu theo tháng</h2>
+                <p class="mt-2 text-gray-600">Chi tiết doanh thu của hệ thống trong tháng.</p>
+                <ul class="mt-4 text-gray-600">
+                    <li><i class="fas fa-calendar-alt text-yellow-500"></i> <strong>Tháng:</strong> Tháng 10/2023</li>
+                    <li><i class="fas fa-dollar-sign text-green-500"></i> <strong>Tổng doanh thu:</strong> 150,000,000 VND</li>
+                    <li><i class="fas fa-stethoscope text-red-500"></i> <strong>Dịch vụ khám bệnh:</strong> 60,000,000 VND</li>
+                    <li><i class="fas fa-vial text-purple-500"></i> <strong>Dịch vụ xét nghiệm:</strong> 45,000,000 VND</li>
+                    <li><i class="fas fa-pills text-pink-500"></i> <strong>Dịch vụ điều trị:</strong> 45,000,000 VND</li>
+                    <li><i class="fas fa-shopping-cart text-yellow-500"></i> <strong>Bán hàng sản phẩm thú cưng:</strong> 10,000,000 VND</li>
+                </ul>
+                <button class="mt-4 bg-green-500 text-white py-2 px-4 rounded"><i class="fas fa-file-export"></i> 📥 Xuất báo cáo</button>
+            </div>
+            <div id="report-service" class="mt-6 bg-white p-4 rounded shadow" style="display: none;">
+                <h2 class="text-lg font-semibold">Báo cáo doanh thu theo dịch vụ</h2>
+                <p class="mt-2 text-gray-600">Chi tiết doanh thu từ các dịch vụ khác nhau như khám bệnh, xét nghiệm, điều trị.</p>
+                <ul class="mt-4 text-gray-600">
+                    <li><i class="fas fa-stethoscope text-red-500"></i> <strong>Dịch vụ khám bệnh:</strong> 60,000,000 VND</li>
+                    <li><i class="fas fa-vial text-purple-500"></i> <strong>Dịch vụ xét nghiệm:</strong> 45,000,000 VND</li>
+                    <li><i class="fas fa-pills text-pink-500"></i> <strong>Dịch vụ điều trị:</strong> 45,000,000 VND</li>
+                    <li><i class="fas fa-shopping-cart text-yellow-500"></i> <strong>Bán hàng sản phẩm thú cưng:</strong> 10,000,000 VND</li>
+                </ul>
+                <button class="mt-4 bg-green-500 text-white py-2 px-4 rounded"><i class="fas fa-file-export"></i> 📥 Xuất báo cáo</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+{% endblock content %}

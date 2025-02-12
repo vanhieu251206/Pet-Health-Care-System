@@ -1,0 +1,185 @@
+{% extends "QTV/base.html" %}
+
+{% block page_title %}Trang Tổng Quan - Quản lý hệ thống{% endblock page_title %}
+
+{% block page_header %}
+Trang tổng quan
+{% endblock page_header %}
+
+{% block content %}
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   Dashboard
+  </title>
+  <script src="https://cdn.tailwindcss.com">
+  </script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <style>
+   .hover-effect:hover {
+    transform: translateY(-5px) scale(1.05);
+    transition: transform 0.3s ease;
+   }
+  </style>
+ </head>
+ <body class="bg-gray-100">
+  <div class="flex">
+ 
+   <!-- Main Content -->
+   <div class="flex-1 p-6">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
+     <div class="bg-white p-4 rounded-lg shadow hover-effect">
+      <div class="flex items-center">
+       <i class="fas fa-calendar-alt text-blue-500 text-2xl mr-3">
+       </i>
+       <div>
+        <h2 class="text-lg font-bold">
+         📅 Lịch công việc hôm nay:
+        </h2>
+        <p>
+         Danh sách công việc trong ngày như thêm tài khoản mới, chỉnh sửa thông tin, xem báo cáo.
+        </p>
+        <p>
+         Trạng thái công việc: Chờ xử lý, đã hoàn thành, đã hủy.
+        </p>
+        <ul class="list-disc ml-6 mt-2">
+         <li>
+          09:00 AM - Thêm tài khoản mới cho nhân viên A
+         </li>
+         <li>
+          10:30 AM - Chỉnh sửa thông tin tài khoản khách hàng B
+         </li>
+         <li>
+          01:00 PM - Xem báo cáo doanh thu tháng 9
+         </li>
+         <li>
+          03:00 PM - Họp với bộ phận kỹ thuật về bảo mật hệ thống
+         </li>
+         <li>
+          04:30 PM - Kiểm tra và phê duyệt tài khoản mới
+         </li>
+        </ul>
+       </div>
+      </div>
+     </div>
+     <div class="bg-white p-4 rounded-lg shadow hover-effect">
+      <div class="flex items-center">
+       <i class="fas fa-user text-orange-500 text-2xl mr-3">
+       </i>
+       <div>
+        <h2 class="text-lg font-bold">
+         👤 Quản lý tài khoản:
+        </h2>
+        <p>
+         Tổng số tài khoản: 50
+        </p>
+        <p>
+         Trạng thái tài khoản:
+        </p>
+        <ul class="list-disc ml-6 mt-2">
+         <li>
+          Đang hoạt động: 40
+         </li>
+         <li>
+          Nghỉ: 5
+         </li>
+         <li>
+          Bị khóa: 5
+         </li>
+        </ul>
+        <p class="mt-4">
+         Thông tin chi tiết tài khoản:
+        </p>
+        <ul class="list-disc ml-6 mt-2">
+         <li>
+          Admin: 5
+         </li>
+         <li>
+          Nhân viên: 30
+         </li>
+         <li>
+          Khách hàng: 15
+         </li>
+        </ul>
+       </div>
+      </div>
+     </div>
+     <div class="bg-white p-4 rounded-lg shadow hover-effect">
+      <div class="flex items-center">
+       <i class="fas fa-cogs text-yellow-500 text-2xl mr-3">
+       </i>
+       <div>
+        <h2 class="text-lg font-bold">
+         ⚙️ Quản lý cấu hình hệ thống:
+        </h2>
+        <p>
+         Thông tin hệ thống:
+        </p>
+        <ul class="list-disc ml-6 mt-2">
+         <li>
+          Tên hệ thống: GroupOne
+         </li>
+         <li>
+          Logo: 
+          <img alt="System logo" class="inline h-6 w-6" height="24" src="https://storage.googleapis.com/a1aa/image/804QB7BQ6klXPc4JhmXGI92lmvrO9Vtid4b5lHQlQnQ.jpg" width="24"/>
+         </li>
+         <li>
+          Thông tin liên lạc: contact@groupone.com
+         </li>
+        </ul>
+        <p class="mt-4">
+         Cài đặt bảo mật:
+        </p>
+        <ul class="list-disc ml-6 mt-2">
+         <li>
+          Xác thực hai yếu tố: Bật
+         </li>
+         <li>
+          Yêu cầu mật khẩu mạnh: Bật
+         </li>
+        </ul>
+       </div>
+      </div>
+     </div>
+     <div class="bg-white p-4 rounded-lg shadow hover-effect">
+      <div class="flex items-center">
+       <i class="fas fa-chart-line text-red-500 text-2xl mr-3">
+       </i>
+       <div>
+        <h2 class="text-lg font-bold">
+         📊 Thống kê doanh thu:
+        </h2>
+        <p>
+         Doanh thu theo ngày: $500
+        </p>
+        <p>
+         Doanh thu theo tuần: $3500
+        </p>
+        <p>
+         Doanh thu theo tháng: $15000
+        </p>
+        <p class="mt-4">
+         Doanh thu theo dịch vụ:
+        </p>
+        <ul class="list-disc ml-6 mt-2">
+         <li>
+          Khám bệnh: $7000
+         </li>
+         <li>
+          Xét nghiệm: $5000
+         </li>
+         <li>
+          Dịch vụ khác: $3000
+         </li>
+        </ul>
+       </div>
+      </div>
+     </div>
+    </div>
+   </div>
+  </div>
+ </body>
+</html>
+{% endblock content %}

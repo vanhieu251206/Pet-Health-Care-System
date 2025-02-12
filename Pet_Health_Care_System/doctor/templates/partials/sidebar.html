@@ -5,27 +5,27 @@
     </div>
     <nav class="mt-4">
         <ul>
-            <li class="flex items-center p-2 hover:bg-green-600 transition-transform transform hover:scale-105 shadow-md">
+            <li class="flex items-center p-2 hover:bg-green-600 transition-transform transform hover:scale-105 shadow-md {% if request.resolver_match.url_name == 'dashboard' %}font-bold{% endif %}">
                 <i class="fas fa-home mr-2"></i>
                 <a href="{% url 'doctor:dashboard' %}" class="text-white">Trang tổng quan (Dashboard)</a>
             </li>
-            <li class="flex items-center p-2 hover:bg-green-600 transition-transform transform hover:scale-105 shadow-md">
+            <li class="flex items-center p-2 hover:bg-green-600 transition-transform transform hover:scale-105 shadow-md {% if request.resolver_match.url_name == 'lich' %}font-bold{% endif %}">
                 <i class="fas fa-calendar-alt mr-2 text-yellow-300"></i>
                 <a href="{% url 'doctor:lich' %}">Lịch làm việc của tôi</a>
             </li>
-            <li class="flex items-center p-2 hover:bg-green-600 transition-transform transform hover:scale-105 shadow-md">
+            <li class="flex items-center p-2 hover:bg-green-600 transition-transform transform hover:scale-105 shadow-md {% if request.resolver_match.url_name == 'hoso' %}font-bold{% endif %}">
                 <i class="fas fa-file-medical-alt mr-2 text-blue-300"></i>
                 <a href="{% url 'doctor:hoso' %}">Hồ sơ bệnh án thú cưng</a>
             </li>
-            <li class="flex items-center p-2 hover:bg-green-600 transition-transform transform hover:scale-105 shadow-md">
+            <li class="flex items-center p-2 hover:bg-green-600 transition-transform transform hover:scale-105 shadow-md {% if request.resolver_match.url_name == 'theodoi' %}font-bold{% endif %}">
                 <i class="fas fa-paw mr-2 text-orange-300"></i>
                 <a href="{% url 'doctor:theodoi' %}">Theo dõi & chăm sóc thú cưng</a>
             </li>
-            <li class="flex items-center p-2 hover:bg-green-600 transition-transform transform hover:scale-105 shadow-md">
+            <li class="flex items-center p-2 hover:bg-green-600 transition-transform transform hover:scale-105 shadow-md {% if request.resolver_match.url_name == 'baocao' %}font-bold{% endif %}">
                 <i class="fas fa-chart-bar mr-2 text-purple-300"></i>
                 <a href="{% url 'doctor:baocao' %}">Báo cáo & Thống kê</a>
             </li>
-            <li class="flex items-center p-2 hover:bg-green-600 transition-transform transform hover:scale-105 shadow-md">
+            <li class="flex items-center p-2 hover:bg-green-600 transition-transform transform hover:scale-105 shadow-md {% if request.resolver_match.url_name == 'setting' %}font-bold{% endif %}">
                 <i class="fas fa-cog mr-2 text-gray-300"></i>
                 <a href="{% url 'doctor:setting' %}">Cài đặt & Quản lý tài khoản</a>
             </li>
