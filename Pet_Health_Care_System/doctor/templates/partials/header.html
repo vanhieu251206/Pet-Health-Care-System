@@ -1,0 +1,11 @@
+<div class="bg-green-700 text-white p-4 rounded flex justify-between items-center">
+    <h1 class="text-xl font-bold">{% block page_header %}Trang tổng quan{% endblock page_header %}</h1>
+    
+    <!-- User profile icon -->
+    <div class="flex items-center space-x-4">
+        <span class="text-white">
+            Xin chào, {% if user.is_authenticated %}{{ user.username }}{% else %}Khách{% endif %}
+        </span>
+        <img src="{% static 'images/user-avatar.png' %}" alt="User avatar" class="w-10 h-10 rounded-full">
+    </div>
+</div>

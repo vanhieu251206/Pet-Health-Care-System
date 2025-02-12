@@ -1,0 +1,199 @@
+{% extends "doctor/base.html" %}
+{% block page_header %}theo dõi và chăm sóc thú cưngcưng{% endblock page_header %}
+{% block content %}
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Danh sách thú cưng nhập viện</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+    <style>
+        .hover-zoom:hover {
+            transform: scale(1.02);
+            transition: transform 0.2s;
+        }
+        .hover-bounce:hover {
+            transform: scale(1.05);
+            transition: transform 0.2s;
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <div class="flex">
+        
+        <!-- Main content -->
+        <div class="flex-1 p-6">
+            
+            <div class="mt-6">
+                <!-- Pet details -->
+                <div class="bg-white p-4 rounded shadow mb-6 hover-zoom">
+                    <div class="flex items-center justify-between">
+                        <h2 class="text-lg font-bold">Thông tin chi tiết từng thú cưng</h2>
+                        <div class="flex items-center">
+                            <span class="text-green-500">🟢 Bình thường</span>
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <p><i class="fas fa-home mr-2 text-blue-500"></i><strong>Chuồng đang ở:</strong> Chuồng số 5</p>
+                        <p><i class="fas fa-utensils mr-2 text-yellow-500"></i><strong>Chế độ ăn uống, thuốc đang sử dụng:</strong> Thức ăn hạt, Vitamin C</p>
+                        <p><i class="fas fa-notes-medical mr-2 text-red-500"></i><strong>Ghi chú điều trị của bác sĩ trước đó:</strong> Đang điều trị viêm da</p>
+                    </div>
+                    <div class="mt-4 flex space-x-4">
+                        <button class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 hover-bounce">
+                            ✅ Xác nhận đã chăm sóc xong
+                        </button>
+                        <button class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 hover-bounce">
+                            📝 Cập nhật tình trạng sức khỏe
+                        </button>
+                        <button class="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600 hover-bounce">
+                            🚀 Chuyển chuồng (nếu cần)
+                        </button>
+                        <button class="bg-purple-500 text-white px-4 py-2 rounded hover:bg-purple-600 hover-bounce">
+                            📸 Thêm hình ảnh cập nhật cho khách hàng
+                        </button>
+                    </div>
+                </div>
+                <!-- Repeat for each pet -->
+                <div class="bg-white p-4 rounded shadow mb-6 hover-zoom">
+                    <div class="flex items-center justify-between">
+                        <h2 class="text-lg font-bold">Thông tin chi tiết từng thú cưng</h2>
+                        <div class="flex items-center">
+                            <span class="text-red-500">🔴 Đang điều trị</span>
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <p><i class="fas fa-home mr-2 text-blue-500"></i><strong>Chuồng đang ở:</strong> Chuồng số 3</p>
+                        <p><i class="fas fa-utensils mr-2 text-yellow-500"></i><strong>Chế độ ăn uống, thuốc đang sử dụng:</strong> Thức ăn ướt, Thuốc kháng sinh</p>
+                        <p><i class="fas fa-notes-medical mr-2 text-red-500"></i><strong>Ghi chú điều trị của bác sĩ trước đó:</strong> Đang điều trị nhiễm trùng</p>
+                    </div>
+                    <div class="mt-4 flex space-x-4">
+                        <button class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 hover-bounce">
+                            ✅ Xác nhận đã chăm sóc xong
+                        </button>
+                        <button class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 hover-bounce">
+                            📝 Cập nhật tình trạng sức khỏe
+                        </button>
+                        <button class="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600 hover-bounce">
+                            🚀 Chuyển chuồng (nếu cần)
+                        </button>
+                        <button class="bg-purple-500 text-white px-4 py-2 rounded hover:bg-purple-600 hover-bounce">
+                            📸 Thêm hình ảnh cập nhật cho khách hàng
+                        </button>
+                    </div>
+                </div>
+                <!-- Add more pet details as needed -->
+                <div class="bg-white p-4 rounded shadow mb-6 hover-zoom">
+                    <div class="flex items-center justify-between">
+                        <h2 class="text-lg font-bold">Thông tin chi tiết từng thú cưng</h2>
+                        <div class="flex items-center">
+                            <span class="text-green-500">🟢 Bình thường</span>
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <p><i class="fas fa-home mr-2 text-blue-500"></i><strong>Chuồng đang ở:</strong> Chuồng số 7</p>
+                        <p><i class="fas fa-utensils mr-2 text-yellow-500"></i><strong>Chế độ ăn uống, thuốc đang sử dụng:</strong> Thức ăn hạt, Vitamin D</p>
+                        <p><i class="fas fa-notes-medical mr-2 text-red-500"></i><strong>Ghi chú điều trị của bác sĩ trước đó:</strong> Đang điều trị viêm khớp</p>
+                    </div>
+                    <div class="mt-4 flex space-x-4">
+                        <button class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 hover-bounce">
+                            ✅ Xác nhận đã chăm sóc xong
+                        </button>
+                        <button class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 hover-bounce">
+                            📝 Cập nhật tình trạng sức khỏe
+                        </button>
+                        <button class="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600 hover-bounce">
+                            🚀 Chuyển chuồng (nếu cần)
+                        </button>
+                        <button class="bg-purple-500 text-white px-4 py-2 rounded hover:bg-purple-600 hover-bounce">
+                            📸 Thêm hình ảnh cập nhật cho khách hàng
+                        </button>
+                    </div>
+                </div>
+                <div class="bg-white p-4 rounded shadow mb-6 hover-zoom">
+                    <div class="flex items-center justify-between">
+                        <h2 class="text-lg font-bold">Thông tin chi tiết từng thú cưng</h2>
+                        <div class="flex items-center">
+                            <span class="text-red-500">🔴 Đang điều trị</span>
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <p><i class="fas fa-home mr-2 text-blue-500"></i><strong>Chuồng đang ở:</strong> Chuồng số 2</p>
+                        <p><i class="fas fa-utensils mr-2 text-yellow-500"></i><strong>Chế độ ăn uống, thuốc đang sử dụng:</strong> Thức ăn ướt, Thuốc giảm đau</p>
+                        <p><i class="fas fa-notes-medical mr-2 text-red-500"></i><strong>Ghi chú điều trị của bác sĩ trước đó:</strong> Đang điều trị viêm phổi</p>
+                    </div>
+                    <div class="mt-4 flex space-x-4">
+                        <button class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 hover-bounce">
+                            ✅ Xác nhận đã chăm sóc xong
+                        </button>
+                        <button class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 hover-bounce">
+                            📝 Cập nhật tình trạng sức khỏe
+                        </button>
+                        <button class="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600 hover-bounce">
+                            🚀 Chuyển chuồng (nếu cần)
+                        </button>
+                        <button class="bg-purple-500 text-white px-4 py-2 rounded hover:bg-purple-600 hover-bounce">
+                            📸 Thêm hình ảnh cập nhật cho khách hàng
+                        </button>
+                    </div>
+                </div>
+                <div class="bg-white p-4 rounded shadow mb-6 hover-zoom">
+                    <div class="flex items-center justify-between">
+                        <h2 class="text-lg font-bold">Thông tin chi tiết từng thú cưng</h2>
+                        <div class="flex items-center">
+                            <span class="text-green-500">🟢 Bình thường</span>
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <p><i class="fas fa-home mr-2 text-blue-500"></i><strong>Chuồng đang ở:</strong> Chuồng số 8</p>
+                        <p><i class="fas fa-utensils mr-2 text-yellow-500"></i><strong>Chế độ ăn uống, thuốc đang sử dụng:</strong> Thức ăn hạt, Vitamin B</p>
+                        <p><i class="fas fa-notes-medical mr-2 text-red-500"></i><strong>Ghi chú điều trị của bác sĩ trước đó:</strong> Đang điều trị dị ứng</p>
+                    </div>
+                    <div class="mt-4 flex space-x-4">
+                        <button class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 hover-bounce">
+                            ✅ Xác nhận đã chăm sóc xong
+                        </button>
+                        <button class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 hover-bounce">
+                            📝 Cập nhật tình trạng sức khỏe
+                        </button>
+                        <button class="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600 hover-bounce">
+                            🚀 Chuyển chuồng (nếu cần)
+                        </button>
+                        <button class="bg-purple-500 text-white px-4 py-2 rounded hover:bg-purple-600 hover-bounce">
+                            📸 Thêm hình ảnh cập nhật cho khách hàng
+                        </button>
+                    </div>
+                </div>
+                <div class="bg-white p-4 rounded shadow mb-6 hover-zoom">
+                    <div class="flex items-center justify-between">
+                        <h2 class="text-lg font-bold">Thông tin chi tiết từng thú cưng</h2>
+                        <div class="flex items-center">
+                            <span class="text-red-500">🔴 Đang điều trị</span>
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <p><i class="fas fa-home mr-2 text-blue-500"></i><strong>Chuồng đang ở:</strong> Chuồng số 1</p>
+                        <p><i class="fas fa-utensils mr-2 text-yellow-500"></i><strong>Chế độ ăn uống, thuốc đang sử dụng:</strong> Thức ăn ướt, Thuốc chống viêm</p>
+                        <p><i class="fas fa-notes-medical mr-2 text-red-500"></i><strong>Ghi chú điều trị của bác sĩ trước đó:</strong> Đang điều trị viêm tai</p>
+                    </div>
+                    <div class="mt-4 flex space-x-4">
+                        <button class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 hover-bounce">
+                            ✅ Xác nhận đã chăm sóc xong
+                        </button>
+                        <button class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 hover-bounce">
+                            📝 Cập nhật tình trạng sức khỏe
+                        </button>
+                        <button class="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600 hover-bounce">
+                            🚀 Chuyển chuồng (nếu cần)
+                        </button>
+                        <button class="bg-purple-500 text-white px-4 py-2 rounded hover:bg-purple-600 hover-bounce">
+                            📸 Thêm hình ảnh cập nhật cho khách hàng
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+{% endblock content %}

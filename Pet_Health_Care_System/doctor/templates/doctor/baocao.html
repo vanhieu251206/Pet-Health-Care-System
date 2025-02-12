@@ -1,0 +1,119 @@
+{% extends "doctor/base.html" %}
+{% block page_header %}Báo cáo và thống kê{% endblock page_header %}
+{% block content %}
+
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   Báo cáo và Hệ thống
+  </title>
+  <script src="https://cdn.tailwindcss.com">
+  </script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <style>
+   .hover-zoom:hover {
+    transform: scale(1.05);
+    transition: transform 0.3s;
+   }
+   .hover-zoom {
+    transition: transform 0.3s;
+   }
+  </style>
+ </head>
+ <body class="bg-gray-100">
+  <div class="flex">
+   
+   <!-- Main content -->
+   <div class="flex-1 p-6">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6 mt-6">
+     <div class="bg-white p-4 rounded shadow hover-zoom">
+      <div class="flex items-center">
+       <i class="fas fa-calendar-week text-blue-500 text-2xl">
+       </i>
+       <h2 class="ml-2 text-lg font-semibold">
+        Tổng số ca khám trong tuần/tháng
+       </h2>
+      </div>
+      <p class="mt-2 text-gray-600">
+       Thống kê số ca khám trong tuần và tháng.
+      </p>
+      <div class="mt-4">
+       <p class="text-gray-800 font-bold">
+        Tuần: 50 ca
+       </p>
+       <p class="text-gray-800 font-bold">
+        Tháng: 200 ca
+       </p>
+      </div>
+     </div>
+     <div class="bg-white p-4 rounded shadow hover-zoom">
+      <div class="flex items-center">
+       <i class="fas fa-paw text-orange-500 text-2xl">
+       </i>
+       <h2 class="ml-2 text-lg font-semibold">
+        Số lượng thú cưng nhập viện &amp; đã xuất viện
+       </h2>
+      </div>
+      <p class="mt-2 text-gray-600">
+       Thông tin về số lượng thú cưng nhập viện và đã xuất viện.
+      </p>
+      <div class="mt-4">
+       <p class="text-gray-800 font-bold">
+        Nhập viện: 30 thú cưng
+       </p>
+       <p class="text-gray-800 font-bold">
+        Xuất viện: 25 thú cưng
+       </p>
+      </div>
+     </div>
+     <div class="bg-white p-4 rounded shadow hover-zoom">
+      <div class="flex items-center">
+       <i class="fas fa-stethoscope text-green-500 text-2xl">
+       </i>
+       <h2 class="ml-2 text-lg font-semibold">
+        Tình trạng bệnh phổ biến
+       </h2>
+      </div>
+      <p class="mt-2 text-gray-600">
+       Thống kê các tình trạng bệnh phổ biến.
+      </p>
+      <div class="mt-4">
+       <p class="text-gray-800 font-bold">
+        Cảm cúm: 15 ca
+       </p>
+       <p class="text-gray-800 font-bold">
+        Viêm da: 10 ca
+       </p>
+       <p class="text-gray-800 font-bold">
+        Tiêu chảy: 5 ca
+       </p>
+      </div>
+     </div>
+     <div class="bg-white p-4 rounded shadow hover-zoom">
+      <div class="flex items-center">
+       <i class="fas fa-chart-line text-purple-500 text-2xl">
+       </i>
+       <h2 class="ml-2 text-lg font-semibold">
+        Hiệu suất làm việc cá nhân
+       </h2>
+      </div>
+      <p class="mt-2 text-gray-600">
+       Số ca khám, đánh giá từ khách hàng.
+      </p>
+      <div class="mt-4">
+       <p class="text-gray-800 font-bold">
+        Số ca khám: 40 ca
+       </p>
+       <p class="text-gray-800 font-bold">
+        Đánh giá từ khách hàng: 4.5/5
+       </p>
+      </div>
+     </div>
+    </div>
+   </div>
+  </div>
+ </body>
+</html>
+{% endblock content %}

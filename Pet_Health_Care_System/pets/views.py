@@ -28,14 +28,11 @@ def select_role(request):
 def dashboard_customer(request):
     return render(request, 'pets/dashboard_customer.html')
 
-<<<<<<< HEAD
 # Shopping cart view
 def cart(request):
     return render(request, 'pets/cart.html')
 
 # Checkout page view
-=======
->>>>>>> 927201223001eafd636eaa067001a9707c342f22
 def checkout(request):
     return render(request, 'pets/checkout.html')
 

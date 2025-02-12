@@ -1,0 +1,213 @@
+{% extends "doctor/base.html" %}
+{% block page_header %}hồ sơ bệnh án mới{% endblock page_header %}
+{% block page_title %}
+    Hồ sơ bệnh án mới  
+{% endblock page_title %}
+{% block content %}
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   Hồ sơ bệnh án thú cưng
+  </title>
+  <script src="https://cdn.tailwindcss.com">
+  </script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <script>
+   document.addEventListener('DOMContentLoaded', function () {
+     const petListItems = document.querySelectorAll('.pet-list-item');
+     const petDetails = document.getElementById('pet-details');
+     const petName = document.getElementById('pet-name');
+     const petType = document.getElementById('pet-type');
+     const owner = document.getElementById('owner');
+     const history = document.getElementById('history');
+     const notes = document.getElementById('notes');
+
+     petListItems.forEach(item => {
+       item.addEventListener('click', function () {
+         const petData = JSON.parse(this.dataset.pet);
+         petName.value = petData.name;
+         petType.value = petData.type;
+         owner.value = petData.owner;
+         history.value = petData.history;
+         notes.value = petData.notes;
+         petDetails.classList.remove('hidden');
+       });
+     });
+
+     const addNewRecordButton = document.getElementById('add-new-record');
+     addNewRecordButton.addEventListener('click', function () {
+       petName.value = '';
+       petType.value = '';
+       owner.value = '';
+       history.value = '';
+       notes.value = '';
+       petDetails.classList.remove('hidden');
+     });
+   });
+  </script>
+  <style>
+   .pet-list-item:hover {
+     transform: scale(1.05);
+     transition: transform 0.2s;
+   }
+   .button:hover {
+     transform: scale(1.05);
+     transition: transform 0.2s;
+   }
+  </style>
+ </head>
+ <body class="bg-gray-100">
+  <div class="flex">
+
+   <!-- Main content -->
+    <div class="mt-6">
+     <div class="flex justify-between items-center mb-4">
+      <h2 class="text-lg font-bold">
+       Danh sách thú cưng đã khám / đang điều trị
+      </h2>
+      <button class="flex items-center justify-center bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 button" id="add-new-record">
+       <i class="fas fa-plus mr-2">
+       </i>
+       Thêm hồ sơ bệnh án mới
+      </button>
+     </div>
+     <div class="bg-white p-4 rounded shadow mb-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+       <div class="bg-gray-100 p-4 rounded shadow pet-list-item cursor-pointer" data-pet='{"name": "Bella", "type": "Chó", "owner": "John Doe", "history": "Khám định kỳ, Tiêm phòng", "notes": "Không có"}'>
+        <div class="flex items-center mb-2">
+         <img alt="Pet avatar" class="h-12 w-12 rounded-full" height="48" src="https://storage.googleapis.com/a1aa/image/JNAenJBosSzoDJfWR87N6K9D1iVbRU5EE9ePPOh84eY.jpg" width="48"/>
+         <div class="ml-4">
+          <h4 class="text-lg font-bold">
+           Bella
+          </h4>
+          <p class="text-gray-600">
+           Chó
+          </p>
+         </div>
+        </div>
+        <p class="text-gray-600">
+         Chủ sở hữu: John Doe
+        </p>
+        <p class="text-gray-600">
+         Lịch sử bệnh án: Khám định kỳ, Tiêm phòng
+        </p>
+       </div>
+       <div class="bg-gray-100 p-4 rounded shadow pet-list-item cursor-pointer" data-pet='{"name": "Luna", "type": "Mèo", "owner": "Jane Smith", "history": "Điều trị viêm da, Khám định kỳ", "notes": "Không có"}'>
+        <div class="flex items-center mb-2">
+         <img alt="Pet avatar" class="h-12 w-12 rounded-full" height="48" src="https://storage.googleapis.com/a1aa/image/JNAenJBosSzoDJfWR87N6K9D1iVbRU5EE9ePPOh84eY.jpg" width="48"/>
+         <div class="ml-4">
+          <h4 class="text-lg font-bold">
+           Luna
+          </h4>
+          <p class="text-gray-600">
+           Mèo
+          </p>
+         </div>
+        </div>
+        <p class="text-gray-600">
+         Chủ sở hữu: Jane Smith
+        </p>
+        <p class="text-gray-600">
+         Lịch sử bệnh án: Điều trị viêm da, Khám định kỳ
+        </p>
+       </div>
+       <div class="bg-gray-100 p-4 rounded shadow pet-list-item cursor-pointer" data-pet='{"name": "Max", "type": "Chó", "owner": "Emily Johnson", "history": "Phẫu thuật, Khám định kỳ", "notes": "Không có"}'>
+        <div class="flex items-center mb-2">
+         <img alt="Pet avatar" class="h-12 w-12 rounded-full" height="48" src="https://storage.googleapis.com/a1aa/image/JNAenJBosSzoDJfWR87N6K9D1iVbRU5EE9ePPOh84eY.jpg" width="48"/>
+         <div class="ml-4">
+          <h4 class="text-lg font-bold">
+           Max
+          </h4>
+          <p class="text-gray-600">
+           Chó
+          </p>
+         </div>
+        </div>
+        <p class="text-gray-600">
+         Chủ sở hữu: Emily Johnson
+        </p>
+        <p class="text-gray-600">
+         Lịch sử bệnh án: Phẫu thuật, Khám định kỳ
+        </p>
+       </div>
+      </div>
+     </div>
+     <div class="bg-white p-4 rounded shadow mb-6 hidden" id="pet-details">
+      <h3 class="text-lg font-bold mb-2">
+       Hồ sơ bệnh án chi tiết
+      </h3>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+       <div>
+        <label class="block text-gray-700 font-bold mb-2" for="pet-name">
+         <i class="fas fa-paw text-pink-500 mr-2">
+         </i>
+         Tên thú cưng
+        </label>
+        <input class="w-full p-2 border rounded" id="pet-name" type="text"/>
+       </div>
+       <div>
+        <label class="block text-gray-700 font-bold mb-2" for="pet-type">
+         <i class="fas fa-dog text-yellow-500 mr-2">
+         </i>
+         Loại thú cưng (Chó/Mèo/Khác)
+        </label>
+        <input class="w-full p-2 border rounded" id="pet-type" type="text"/>
+       </div>
+       <div>
+        <label class="block text-gray-700 font-bold mb-2" for="owner">
+         <i class="fas fa-user text-blue-500 mr-2">
+         </i>
+         Chủ sở hữu
+        </label>
+        <input class="w-full p-2 border rounded" id="owner" type="text"/>
+       </div>
+       <div>
+        <label class="block text-gray-700 font-bold mb-2" for="history">
+         <i class="fas fa-notes-medical text-red-500 mr-2">
+         </i>
+         Lịch sử bệnh án, đơn thuốc
+        </label>
+        <textarea class="w-full p-2 border rounded" id="history" rows="4">
+        </textarea>
+       </div>
+       <div class="col-span-1 md:col-span-2">
+        <label class="block text-gray-700 font-bold mb-2" for="notes">
+         <i class="fas fa-sticky-note text-green-500 mr-2">
+         </i>
+         Ghi chú &amp; Hình ảnh kèm theo
+        </label>
+        <textarea class="w-full p-2 border rounded" id="notes" rows="4">
+        </textarea>
+       </div>
+      </div>
+     </div>
+     <div class="bg-white p-4 rounded shadow">
+      <h3 class="text-lg font-bold mb-2">
+       Chức năng
+      </h3>
+      <div class="flex flex-col md:flex-row gap-4">
+       <button class="flex items-center justify-center bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 button">
+        <i class="fas fa-file-alt mr-2">
+        </i>
+        📄 Xem hồ sơ bệnh án cũ
+       </button>
+       <button class="flex items-center justify-center bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600 button">
+        <i class="fas fa-edit mr-2">
+        </i>
+        ✏️ Cập nhật bệnh án mới
+       </button>
+       <button class="flex items-center justify-center bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 button">
+        <i class="fas fa-camera mr-2">
+        </i>
+        📸 Thêm hình ảnh / X-quang / Kết quả xét nghiệm
+       </button>
+      </div>
+     </div>
+    </div>
+   </div>
+  </div>
+ </body>
+</html>
+{% endblock content %}

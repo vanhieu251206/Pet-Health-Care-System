@@ -1,136 +1,58 @@
-{% extends 'doctor/base.html' %}
-{% load static %}
+{% extends "doctor/base.html" %}
+{% block page_header %}Dashboard - Tổng quan{% endblock page_header %}
 
-{% block page_title %}
-Tổng quan
-{% endblock page_title %}
-
-{% block main-contain %}
-<style>
-    .dashboard {
-        margin-left: 270px;
-        padding: 20px;
-    }
-
-    .dashboard h2 {
-        font-size: 24px;
-        margin-bottom: 20px;
-    }
-
-    .cards-container {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        gap: 20px;
-    }
-
-    .card {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        background: #ffffff;
-        border-radius: 10px;
-        padding: 20px;
-        text-align: center;
-        text-decoration: none;
-        color: #2c3e50;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
-
-    .card i {
-        font-size: 40px;
-        margin-bottom: 10px;
-    }
-
-    .card h3 {
-        font-size: 18px;
-        margin-bottom: 8px;
-    }
-
-    .card p {
-        font-size: 16px;
-        color: #7f8c8d;
-    }
-
-    .card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
-    }
-
-    /* Màu sắc cho từng icon */
-    .card:nth-child(1) i { color: #2ecc71; }  /* Phòng lưu trú - Xanh lá */
-    .card:nth-child(2) i { color: #3498db; }  /* Booking - Xanh dương */
-    .card:nth-child(3) i { color: #f39c12; }  /* Nhập viện - Cam */
-    .card:nth-child(4) i { color: #9b59b6; }  /* Lịch bác sĩ - Tím */
-    .card:nth-child(5) i { color: #e74c3c; }  /* Thông báo - Đỏ */
-</style>
-            <!-- Lịch hẹn hôm nay -->
-            <div class="bg-white rounded-lg shadow-lg p-6">
-                <h3 class="text-xl font-semibold mb-4"><i class="fas fa-calendar-alt text-blue-500 mr-2"></i>Lịch hẹn hôm nay</h3>
-                <ul class="space-y-2">
-                    <li class="flex items-center justify-between">
-                        <span>Ca khám 1</span>
-                        <span>09:00 AM</span>
-                    </li>
-                    <li class="flex items-center justify-between">
-                        <span>Ca khám 2</span>
-                        <span>10:00 AM</span>
-                    </li>
-                    <li class="flex items-center justify-between">
-                        <span>Ca khám 3</span>
-                        <span>11:00 AM</span>
-                    </li>
-                    <li class="flex items-center justify-between">
-                        <span>Ca chăm sóc 1</span>
-                        <span>01:00 PM</span>
-                    </li>
-                    <li class="flex items-center justify-between">
-                        <span>Ca chăm sóc 2</span>
-                        <span>02:00 PM</span>
-                    </li>
-                </ul>
-            </div>
-
-            <!-- Số lượng thú cưng nhập viện cần chăm sóc -->
-            <div class="bg-white rounded-lg shadow-lg p-6">
-                <h3 class="text-xl font-semibold mb-4"><i class="fas fa-paw text-yellow-500 mr-2"></i>Thú cưng nhập viện</h3>
-                <p class="text-gray-600">7 thú cưng đang lưu trú</p>
-            </div>
-
-            <!-- Trạng thái ca khám -->
-            <div class="bg-white rounded-lg shadow-lg p-6">
-                <h3 class="text-xl font-semibold mb-4"><i class="fas fa-stethoscope text-green-500 mr-2"></i>Trạng thái ca khám</h3>
-                <ul class="space-y-2">
-                    <li class="flex items-center justify-between">
-                        <span>Đang chờ khám</span>
-                        <span>3 thú cưng</span>
-                    </li>
-                    <li class="flex items-center justify-between">
-                        <span>Đã khám xong</span>
-                        <span>5 thú cưng</span>
-                    </li>
-                </ul>
-            </div>
-
-            <!-- Thông báo quan trọng -->
-            <div class="bg-white rounded-lg shadow-lg p-6 col-span-1 md:col-span-2 lg:col-span-1">
-                <h3 class="text-xl font-semibold mb-4"><i class="fas fa-bell text-red-500 mr-2"></i>Thông báo quan trọng</h3>
-                <ul class="space-y-2">
-                    <li class="flex items-center justify-between">
-                        <span>Hủy lịch</span>
-                        <span>1 thông báo</span>
-                    </li>
-                    <li class="flex items-center justify-between">
-                        <span>Lịch khám thay đổi</span>
-                        <span>2 thông báo</span>
-                    </li>
-                    <li class="flex items-center justify-between">
-                        <span>Tin nhắn từ khách hàng</span>
-                        <span>3 tin nhắn</span>
-                    </li>
-                </ul>
-            </div>
-        </div>
+{% block content %}
+<div class="flex-1 p-6">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+     <div class="bg-white p-6 rounded-lg shadow-lg transition-transform transform hover:scale-105">
+      <div class="flex items-center mb-4">
+       <i class="fas fa-calendar-alt text-blue-500 text-2xl mr-2">
+       </i>
+       <h2 class="text-lg font-semibold">
+        Lịch hẹn hôm nay
+       </h2>
+      </div>
+      <p>
+       Danh sách ca khám &amp; chăm sóc thú cưng.
+      </p>
+     </div>
+     <div class="bg-white p-6 rounded-lg shadow-lg transition-transform transform hover:scale-105">
+      <div class="flex items-center mb-4">
+       <i class="fas fa-paw text-orange-500 text-2xl mr-2">
+       </i>
+       <h2 class="text-lg font-semibold">
+        Số lượng thú cưng nhập viện cần chăm sóc
+       </h2>
+      </div>
+      <p>
+       Thông tin về số lượng thú cưng nhập viện.
+      </p>
+     </div>
+     <div class="bg-white p-6 rounded-lg shadow-lg transition-transform transform hover:scale-105">
+      <div class="flex items-center mb-4">
+       <i class="fas fa-hourglass-half text-yellow-500 text-2xl mr-2">
+       </i>
+       <h2 class="text-lg font-semibold">
+        Trạng thái ca khám
+       </h2>
+      </div>
+      <p>
+       Số lượng thú cưng đang chờ khám, đã khám xong.
+      </p>
+     </div>
+     <div class="bg-white p-6 rounded-lg shadow-lg transition-transform transform hover:scale-105">
+      <div class="flex items-center mb-4">
+       <i class="fas fa-bullhorn text-red-500 text-2xl mr-2">
+       </i>
+       <h2 class="text-lg font-semibold">
+        Thông báo quan trọng
+       </h2>
+      </div>
+      <p>
+       Hủy lịch, lịch khám thay đổi, tin nhắn từ khách hàng.
+      </p>
+     </div>
     </div>
-{% endblock main-contain %}
+   </div>
+  </div>
+  {% endblock content %}

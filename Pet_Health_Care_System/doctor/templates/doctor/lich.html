@@ -1,0 +1,143 @@
+{% extends "doctor/base.html" %}
+{% block page_header %}Lịch làm việc của tôi{% endblock page_header %}
+{% block page_title %}
+    Lịch làm việc của tôi 
+{% endblock page_title %}
+{% block content %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lịch làm việc của tôi</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        .zoom:hover {
+            transform: scale(1.05);
+            transition: transform 0.2s;
+        }
+        .bounce {
+            animation: bounce 0.3s;
+        }
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-5px) scale(1.05);
+            }
+        }
+        .active {
+            transform: scale(1.05);
+            transition: transform 0.2s;
+        }
+        .button-zoom:hover {
+            transform: scale(1.05);
+            transition: transform 0.2s;
+            filter: brightness(1.2);
+        }
+        .button-zoom:active {
+            transform: scale(1.05);
+            transition: transform 0.2s;
+        }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            document.querySelectorAll('.zoom').forEach(function (element) {
+                element.addEventListener('click', function () {
+                    document.querySelectorAll('.zoom').forEach(function (el) {
+                        el.classList.remove('active');
+                    });
+                    element.classList.add('active');
+                });
+            });
+
+            document.querySelectorAll('.bounce').forEach(function (element) {
+                element.addEventListener('click', function () {
+                    document.querySelectorAll('.bounce').forEach(function (el) {
+                        el.classList.remove('active');
+                    });
+                    element.classList.add('active');
+                });
+            });
+        });
+    </script>
+</head>
+<body class="bg-gray-100">
+    <div class="flex">
+     
+        <!-- Main Content -->
+        <div class="flex-1 p-6">
+            <div class="mt-6">
+                <h2 class="text-lg font-semibold mb-4">Danh sách lịch hẹn cá nhân</h2>
+                <div class="bg-white p-4 rounded shadow mb-4 zoom cursor-pointer">
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <p><strong>Thời gian:</strong> 10:00 AM</p>
+                            <p><strong>Tên khách hàng:</strong> Nguyễn Văn A</p>
+                            <p><strong>Tên thú cưng:</strong> Mèo Tom</p>
+                            <p><strong>Lý do khám:</strong> Khám bệnh</p>
+                            <p><strong>Trạng thái:</strong> ⏳ Chờ khám</p>
+                        </div>
+                        <div class="flex space-x-2">
+                            <button class="bg-blue-500 text-white px-4 py-2 rounded button-zoom"><i class="fas fa-calendar-alt"></i> Xem lịch chi tiết</button>
+                            <button class="bg-yellow-500 text-white px-4 py-2 rounded button-zoom"><i class="fas fa-edit"></i> Chỉnh sửa lịch</button>
+                            <button class="bg-red-500 text-white px-4 py-2 rounded button-zoom"><i class="fas fa-bullhorn"></i> Nhắc lịch hẹn</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Repeat the above block for each appointment -->
+                <div class="bg-white p-4 rounded shadow mb-4 zoom cursor-pointer">
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <p><strong>Thời gian:</strong> 2:00 PM</p>
+                            <p><strong>Tên khách hàng:</strong> Trần Thị B</p>
+                            <p><strong>Tên thú cưng:</strong> Chó Max</p>
+                            <p><strong>Lý do khám:</strong> Tiêm phòng</p>
+                            <p><strong>Trạng thái:</strong> ✅ Đã khám</p>
+                        </div>
+                        <div class="flex space-x-2">
+                            <button class="bg-blue-500 text-white px-4 py-2 rounded button-zoom"><i class="fas fa-calendar-alt"></i> Xem lịch chi tiết</button>
+                            <button class="bg-yellow-500 text-white px-4 py-2 rounded button-zoom"><i class="fas fa-edit"></i> Chỉnh sửa lịch</button>
+                            <button class="bg-red-500 text-white px-4 py-2 rounded button-zoom"><i class="fas fa-bullhorn"></i> Nhắc lịch hẹn</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- End of repeat -->
+                <h2 class="text-lg font-semibold mb-4">Danh sách thú cưng nhập viện cần chăm sóc</h2>
+                <div class="bg-white p-4 rounded shadow mb-4 zoom cursor-pointer">
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <p><strong>Tên thú cưng:</strong> Chó Max</p>
+                            <p><strong>Lý do nhập viện:</strong> Phẫu thuật</p>
+                            <p><strong>Trạng thái:</strong> Đang điều trị</p>
+                        </div>
+                        <div class="flex space-x-2">
+                            <button class="bg-blue-500 text-white px-4 py-2 rounded button-zoom"><i class="fas fa-calendar-alt"></i> Xem chi tiết</button>
+                            <button class="bg-yellow-500 text-white px-4 py-2 rounded button-zoom"><i class="fas fa-edit"></i> Chỉnh sửa</button>
+                            <button class="bg-red-500 text-white px-4 py-2 rounded button-zoom"><i class="fas fa-bullhorn"></i> Nhắc nhở</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Repeat the above block for each pet in care -->
+                <div class="bg-white p-4 rounded shadow mb-4 zoom cursor-pointer">
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <p><strong>Tên thú cưng:</strong> Mèo Tom</p>
+                            <p><strong>Lý do nhập viện:</strong> Điều trị bệnh</p>
+                            <p><strong>Trạng thái:</strong> Đang điều trị</p>
+                        </div>
+                        <div class="flex space-x-2">
+                            <button class="bg-blue-500 text-white px-4 py-2 rounded button-zoom"><i class="fas fa-calendar-alt"></i> Xem chi tiết</button>
+                            <button class="bg-yellow-500 text-white px-4 py-2 rounded button-zoom"><i class="fas fa-edit"></i> Chỉnh sửa</button>
+                            <button class="bg-red-500 text-white px-4 py-2 rounded button-zoom"><i class="fas fa-bullhorn"></i> Nhắc nhở</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- End of repeat -->
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+{% endblock content %}

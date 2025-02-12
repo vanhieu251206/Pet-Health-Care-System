@@ -1,0 +1,71 @@
+{% extends "doctor/base.html" %}
+{% block page_header %}Cài đặt & quản lí tài khoản {% endblock page_header %}
+{% block content %}
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Cài đặt & Quản lý tài khoản</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+    <style>
+        .hover-effect:hover {
+            transform: scale(1.05);
+            transition: transform 0.2s;
+        }
+    </style>
+    <script>
+        function toggleStatus() {
+            const workingStatus = document.getElementById('working-status');
+            const offStatus = document.getElementById('off-status');
+            workingStatus.classList.toggle('hidden');
+            offStatus.classList.toggle('hidden');
+        }
+    </script>
+</head>
+<body class="bg-gray-100">
+<div class="flex">
+   
+    <!-- Main Content -->
+    <div class="flex-1 p-6">
+        <div class="bg-white p-6 mt-6 rounded shadow">
+            <h2 class="text-lg font-bold mb-4">Thông tin cá nhân</h2>
+            <div class="mb-4">
+                <label class="block text-gray-700">Họ tên</label>
+                <input class="w-full p-2 border border-gray-300 rounded mt-1" placeholder="Nguyễn Văn A" type="text"/>
+            </div>
+            <div class="mb-4">
+                <label class="block text-gray-700">Email</label>
+                <input class="w-full p-2 border border-gray-300 rounded mt-1" placeholder="email@example.com" type="email"/>
+            </div>
+            <div class="mb-4">
+                <label class="block text-gray-700">Số điện thoại</label>
+                <input class="w-full p-2 border border-gray-300 rounded mt-1" placeholder="0123456789" type="text"/>
+            </div>
+            <div class="mb-4">
+                <label class="block text-gray-700">Trạng thái hoạt động</label>
+                <div class="flex items-center mt-1">
+                    <span id="working-status" class="text-green-500 mr-2 cursor-pointer" onclick="toggleStatus()">🟢 Đang làm việc</span>
+                    <span id="off-status" class="text-red-500 hidden cursor-pointer" onclick="toggleStatus()">🔴 Nghỉ</span>
+                </div>
+            </div>
+            <div class="flex space-x-4 mt-6">
+                <button class="flex items-center bg-blue-500 text-white px-4 py-2 rounded hover-effect">
+                    <i class="fas fa-edit mr-2"></i>
+                    ✏️ Chỉnh sửa thông tin cá nhân
+                </button>
+                <button class="flex items-center bg-yellow-500 text-white px-4 py-2 rounded hover-effect">
+                    <i class="fas fa-lock mr-2"></i>
+                    🔒 Đổi mật khẩu
+                </button>
+                <button class="flex items-center bg-red-500 text-white px-4 py-2 rounded hover-effect">
+                    <i class="fas fa-sign-out-alt mr-2"></i>
+                    🚪 Đăng xuất
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+{% endblock content %}
