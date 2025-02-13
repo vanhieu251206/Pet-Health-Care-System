@@ -9,9 +9,9 @@ class CustomUser(AbstractUser):
         ('admin', 'Admin'),
     )
     phone = models.CharField(max_length=10, blank=True, null=True)
-    avatar = models.ImageField(upload_to='avatars/')
+    avatar = models.ImageField(upload_to='avatars/', blank=True, null=True) 
     role = models.CharField(max_length=20, choices=ROLE_CHOICES, default='customer')
-    
+
     def __str__(self):
         return self.username
 

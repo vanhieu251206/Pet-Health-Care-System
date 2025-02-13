@@ -28,9 +28,9 @@
         margin-bottom: 30px;
     }
 
-    .form-label {
-        font-weight: 600;
-        color: #555;
+    .form-group {
+        position: relative;
+        margin-bottom: 15px;
     }
 
     .form-control {
@@ -40,7 +40,27 @@
         font-size: 16px;
         color: #333;
         width: 100%;
-        margin-bottom: 10px;
+        transition: 0.3s;
+    }
+
+    .form-control:focus {
+        border-color: #007bff;
+        box-shadow: 0 0 5px rgba(0, 123, 255, 0.2);
+    }
+
+    .is-invalid {
+        border-color: red !important;
+    }
+
+    .is-valid {
+        border-color: green !important;
+    }
+
+    .error-message {
+        color: red;
+        font-size: 14px;
+        margin-top: 5px;
+        display: none;
     }
 
     .btn-primary {
@@ -52,37 +72,27 @@
         color: white;
         cursor: pointer;
         width: 100%;
+        transition: 0.3s;
     }
 
     .btn-primary:hover {
         background-color: #0056b3;
     }
 
-    .error-message {
-        color: red;
-        font-size: 14px;
+    .text-center a {
+        color: #007bff;
+        text-decoration: none;
+        transition: 0.3s;
     }
 
-    .success-message {
-        color: green;
-        font-size: 16px;
-        text-align: center;
-        margin-bottom: 15px;
+    .text-center a:hover {
+        text-decoration: underline;
     }
 </style>
 
 <div id="register-page-container">
     <div id="register-container">
         <h2>Đăng Ký</h2>
-
-        <!-- Hiển thị thông báo nếu có -->
-        {% if messages %}
-            <div>
-                {% for message in messages %}
-                    <p class="{% if message.tags == 'error' %}error-message{% else %}success-message{% endif %}">{{ message }}</p>
-                {% endfor %}
-            </div>
-        {% endif %}
 
         <form id="register-form" method="post" action="{% url 'pets:register_view' %}" novalidate>
             {% csrf_token %}
@@ -119,56 +129,152 @@
 </div>
 
 <script>
-document.addEventListener("DOMContentLoaded", function () {
-    const registerForm = document.getElementById("register-form");
-
-    registerForm.addEventListener("submit", function (event) {
-        event.preventDefault(); // Ngăn chặn form gửi đi ngay lập tức
-
-        let isValid = true;
-
-        const username = document.getElementById("username");
-        const email = document.getElementById("email");
-        const password = document.getElementById("password");
-        const passwordConfirm = document.getElementById("password_confirm");
-
-        // Xóa thông báo lỗi cũ
-        document.querySelectorAll(".error-message").forEach(el => el.innerText = "");
-
-        // Kiểm tra tên đăng nhập
-        if (username.value.trim().length < 3) {
-            document.getElementById("username-error").innerText = "Tên đăng nhập phải có ít nhất 3 ký tự.";
-            isValid = false;
+    document.addEventListener("DOMContentLoaded", function () {
+        const registerForm = document.getElementById("register-form");
+    
+        const passwordInput = document.getElementById("password");
+        const passwordConfirmInput = document.getElementById("password_confirm");
+    
+        let typingTimer; // Biến kiểm tra khi ngừng nhập
+        let hasClickedPasswordConfirm = false; // Biến kiểm tra người dùng đã click vào ô xác nhận mật khẩu
+    
+        const debounceDelay = 500; // Độ trễ trước khi hiển thị lỗi (ms)
+    
+        const fields = [
+            { 
+                id: "username", 
+                pattern: /^[a-zA-Z0-9]+$/, 
+                minLength: 3,
+                requiredMsg: "Tên đăng nhập không được để trống.",
+                errorMsg: "Tên đăng nhập phải có ít nhất 3 ký tự, không chứa dấu hoặc khoảng trắng." 
+            },
+            { 
+                id: "email", 
+                pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/, 
+                requiredMsg: "Email không được để trống.",
+                errorMsg: "Email không hợp lệ." 
+            },
+            { 
+                id: "password", 
+                minLength: 6, 
+                requiredMsg: "Mật khẩu không được để trống.",
+                errorMsg: "Mật khẩu phải có ít nhất 6 ký tự." 
+            }
+        ];
+    
+        // Kiểm tra khi nhập vào các ô (debounce)
+        fields.forEach(field => {
+            const input = document.getElementById(field.id);
+            
+            input.addEventListener("input", function () {
+                clearTimeout(typingTimer);
+                typingTimer = setTimeout(() => {
+                    validateField(input, field);
+                    if (field.id === "password") validatePasswordConfirm(); // Kiểm tra lại xác nhận mật khẩu khi mật khẩu thay đổi
+                }, debounceDelay);
+            });
+    
+            // Nếu click vào ô rồi rời đi mà không nhập gì → Hiển thị lỗi ngay
+            input.addEventListener("blur", function () {
+                if (!input.value.trim()) {
+                    showError(input, field.requiredMsg);
+                }
+            });
+        });
+    
+        // Kiểm tra khi người dùng click vào ô xác nhận mật khẩu lần đầu tiên
+        passwordConfirmInput.addEventListener("focus", function () {
+            hasClickedPasswordConfirm = true; // Đánh dấu người dùng đã click vào ô
+        });
+    
+        // Kiểm tra ô xác nhận mật khẩu khi người dùng nhập (debounce)
+        passwordConfirmInput.addEventListener("input", function () {
+            clearTimeout(typingTimer);
+            typingTimer = setTimeout(validatePasswordConfirm, debounceDelay);
+        });
+    
+        passwordInput.addEventListener("input", function () {
+            clearTimeout(typingTimer);
+            typingTimer = setTimeout(validatePasswordConfirm, debounceDelay);
+        });
+    
+        // Kiểm tra khi rời khỏi ô xác nhận mật khẩu (chỉ khi đã click vào trước đó)
+        passwordConfirmInput.addEventListener("blur", function () {
+            if (hasClickedPasswordConfirm && !passwordConfirmInput.value.trim()) {
+                showError(passwordConfirmInput, "Xác nhận mật khẩu không được để trống.");
+            }
+        });
+    
+        registerForm.addEventListener("submit", function (event) {
+            event.preventDefault();
+            let isValid = true;
+    
+            fields.forEach(field => {
+                const input = document.getElementById(field.id);
+                if (!validateField(input, field)) isValid = false;
+            });
+    
+            if (!validatePasswordConfirm()) isValid = false;
+    
+            if (isValid) {
+                console.log("Dữ liệu hợp lệ. Đang gửi form...");
+                registerForm.submit();
+            } else {
+                console.log("Có lỗi trong form. Không gửi đi.");
+            }
+        });
+    
+        function validateField(input, field) {
+            const value = input.value.trim();
+            const errorDiv = document.getElementById(`${field.id}-error`);
+    
+            if (!value) {
+                showError(input, field.requiredMsg);
+                return false;
+            } else if ((field.minLength && value.length < field.minLength) || (field.pattern && !field.pattern.test(value))) {
+                showError(input, field.errorMsg);
+                return false;
+            } else {
+                hideError(input);
+                return true;
+            }
         }
-
-        // Kiểm tra email
-        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailPattern.test(email.value.trim())) {
-            document.getElementById("email-error").innerText = "Email không hợp lệ.";
-            isValid = false;
+    
+        function validatePasswordConfirm() {
+            const password = passwordInput.value.trim();
+            const passwordConfirm = passwordConfirmInput.value.trim();
+            const passwordConfirmError = document.getElementById("password_confirm-error");
+    
+            if (!passwordConfirm) {
+                if (hasClickedPasswordConfirm) {
+                    showError(passwordConfirmInput, "Xác nhận mật khẩu không được để trống.");
+                }
+                return false;
+            } else if (password !== passwordConfirm) {
+                showError(passwordConfirmInput, "Mật khẩu xác nhận không khớp.");
+                return false;
+            } else {
+                hideError(passwordConfirmInput);
+                return true;
+            }
         }
-
-        // Kiểm tra mật khẩu
-        if (password.value.trim().length < 6) {
-            document.getElementById("password-error").innerText = "Mật khẩu phải có ít nhất 6 ký tự.";
-            isValid = false;
+    
+        function showError(input, message) {
+            const errorDiv = document.getElementById(`${input.id}-error`);
+            input.classList.add("is-invalid");
+            input.classList.remove("is-valid");
+            errorDiv.innerText = message;
+            errorDiv.style.display = "block";
         }
-
-        // Kiểm tra xác nhận mật khẩu
-        if (password.value.trim() !== passwordConfirm.value.trim()) {
-            document.getElementById("password_confirm-error").innerText = "Mật khẩu xác nhận không khớp.";
-            isValid = false;
-        }
-
-        // Nếu tất cả đều hợp lệ, gửi form
-        if (isValid) {
-            console.log("Dữ liệu hợp lệ. Đang gửi form...");
-            registerForm.submit();
-        } else {
-            console.log("Có lỗi trong form. Không gửi đi.");
+    
+        function hideError(input) {
+            const errorDiv = document.getElementById(`${input.id}-error`);
+            input.classList.remove("is-invalid");
+            input.classList.add("is-valid");
+            errorDiv.style.display = "none";
         }
     });
-});
+    
 </script>
 
 {% endblock register_page %}
