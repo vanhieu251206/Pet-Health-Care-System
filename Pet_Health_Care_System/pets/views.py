@@ -7,8 +7,11 @@ from django.contrib import messages
 from .models import Product, Cart, CartItem
 from staff.views import tong_quan
 from django.urls import reverse
+import logging
 
 CustomUser = get_user_model()
+
+logger = logging.getLogger(__name__)
 
 # Create your views here.
 def guest_dashboard(request):
@@ -83,44 +86,68 @@ def login_view(request):
             return redirect("pets:login_page")
 
     return render(request, "pets/login_page.html")
-        
+
 def register_view(request):
     if request.method == "POST":
-        username = request.POST["username"]
-        email = request.POST["email"]
-        password = request.POST["password"]
-        password_confirm = request.POST["password_confirm"]
-        role = request.POST["role"]
+        # Lấy dữ liệu từ form
+        username = request.POST.get("username", "").strip()
+        email = request.POST.get("email", "").strip()
+        password = request.POST.get("password", "").strip()
+        password_confirm = request.POST.get("password_confirm", "").strip()
 
-        errors = []
+        # Ghi log dữ liệu nhận được
+        logger.info(f"🔹 Dữ liệu nhận được - Username: {username}, Email: {email}")
 
+        # Kiểm tra trường trống
+        if not username or not email or not password or not password_confirm:
+            messages.error(request, "Vui lòng điền đầy đủ thông tin.")
+            return redirect("pets:register_page")
+
+        # Kiểm tra độ dài username
+        if len(username) < 3:
+            messages.error(request, "Tên đăng nhập phải có ít nhất 3 ký tự.")
+            return redirect("pets:register_page")
+
+        # Kiểm tra định dạng email
+        if "@" not in email or "." not in email:
+            messages.error(request, "Email không hợp lệ.")
+            return redirect("pets:register_page")
+
+        # Kiểm tra mật khẩu có đủ dài không
+        if len(password) < 6:
+            messages.error(request, "Mật khẩu phải có ít nhất 6 ký tự.")
+            return redirect("pets:register_page")
+
+        # Kiểm tra mật khẩu xác nhận
         if password != password_confirm:
-            errors.append("Mật khẩu xác nhận không khớp.")
+            messages.error(request, "Mật khẩu xác nhận không khớp.")
+            return redirect("pets:register_page")
 
+        # Kiểm tra username đã tồn tại chưa
         if CustomUser.objects.filter(username=username).exists():
-            errors.append("Tên đăng nhập đã tồn tại.")
+            messages.error(request, "Tên đăng nhập đã tồn tại.")
+            return redirect("pets:register_page")
 
+        # Kiểm tra email đã tồn tại chưa
         if CustomUser.objects.filter(email=email).exists():
-            errors.append("Email đã được sử dụng.")
+            messages.error(request, "Email đã được sử dụng.")
+            return redirect("pets:register_page")
 
-        if errors:
-            return render(request, "pets/register_page.html", {
-                "errors": errors,
-                "username": username,
-                "email": email,
-                "role": role
-            })
+        # Tạo tài khoản mới
+        try:
+            user = CustomUser.objects.create_user(username=username, email=email, password=password)
+            user.save()
+            messages.success(request, "Đăng ký thành công! Vui lòng đăng nhập.")
+            logger.info(f"✅ Người dùng {username} đã được tạo thành công!")
+            return redirect("pets:login_page")
 
-        user = CustomUser.objects.create_user(username=username, email=email, password=password, role=role)
-        user.save()
-
-        messages.success(request, "Đăng ký thành công! Vui lòng đăng nhập.")
-        return redirect("pets:login_page")  
+        except Exception as e:
+            logger.error(f"❌ Lỗi khi tạo người dùng: {str(e)}")
+            messages.error(request, f"Có lỗi xảy ra: {str(e)}")
+            return redirect("pets:register_page")
 
     return render(request, "pets/register_page.html")
 
-
-    return render(request, "pets/login_page.html")
 
 def logout_view(request):
     logout(request)
