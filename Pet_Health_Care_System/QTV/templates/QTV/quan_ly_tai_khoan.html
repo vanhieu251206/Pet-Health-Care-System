@@ -1,0 +1,393 @@
+{% extends 'QTV/base.html' %}
+
+{% block page_title %}Quản lí tài khoản{% endblock page_title %}
+
+{% block quan_ly_tai_khoan %}
+<style>
+    body {
+        font-family: 'Roboto', sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+    }
+
+    .main-content {
+        margin-left: 275px; /* Offset for sidebar */
+        padding: 20px;
+    }
+
+    .header-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+
+    .header-container h2 {
+        margin: 0;
+        font-size: 24px;
+        font-weight: bold;
+    }
+
+    .header-actions {
+        display: flex;
+        gap: 20px;
+        align-items: center;
+    }
+
+    .add-account-btn {
+        background-color: #10b981;
+        color: white;
+        padding: 10px 15px;
+        font-size: 16px;
+        border-radius: 8px;
+        border: none;
+        cursor: pointer;
+    }
+
+    .add-account-btn:hover {
+        background-color: #2ed88a;
+    }
+
+    .filter-container {
+        display: flex;
+        gap: 15px;
+        align-items: center;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+
+    .filter-container select, .filter-container input {
+        padding: 10px;
+        font-size: 16px;
+        border-radius: 8px;
+        border: 1px solid #ccc;
+    }
+
+    .table-container {
+        width: 100%;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        overflow-x: auto;
+        z-index: 1; /* Ensure table is on the lower layer */
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    th, td {
+        padding: 12px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+        white-space: nowrap;
+    }
+
+    th {
+        background-color: #198754;
+        color: white;
+    }
+
+    td {
+        color: #333;
+    }
+
+    .action-column {
+        text-align: center;
+    }
+
+    .view-column {
+        text-align: center;
+    }
+
+    .sticky-header {
+        position: sticky;
+        top: 0;
+        background-color: #198754;
+        z-index: 2; /* Keep header on top */
+    }
+
+    .btn-view {
+        background-color: #4e73df;
+        color: white;
+        padding: 6px 12px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    .btn-view:hover {
+        background-color: #2e59d9;
+    }
+
+    .btn-delete {
+        background-color: #e74a3b;
+        color: white;
+        padding: 6px 12px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    .btn-delete:hover {
+        background-color: #d43f3a;
+    }
+
+    .status {
+        color: #f1c40f;
+    }
+
+    .active {
+        color: #2ecc71;
+    }
+
+    .inactive {
+        color: #e74c3c;
+    }
+
+    /* Modal Styles */
+    .modal {
+        display: none; /* Hidden by default */
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+        justify-content: center;
+        align-items: center;
+        z-index: 3; /* Ensure modal is on top */
+    }
+
+    .modal-content {
+        background-color: white;
+        padding: 20px;
+        border-radius: 8px;
+        width: 500px;
+        max-width: 100%;
+        z-index: 4;
+    }
+
+    .modal-header h3 {
+        margin: 0;
+        font-size: 24px;
+        text-align: center;
+    }
+
+    .modal-content .form-group {
+        margin-bottom: 15px;
+        margin-right: 20px;
+    }
+
+    .modal-content .form-group input,
+    .modal-content .form-group select {
+        width: 100%;
+        padding: 10px;
+        font-size: 16px;
+        border-radius: 8px;
+        border: 1px solid #ccc;
+    }
+
+    .modal-content .form-group label {
+        font-weight: bold;
+    }
+
+    .modal-content .btn-submit {
+        background-color: #10b981;
+        color: white;
+        padding: 10px 15px;
+        font-size: 16px;
+        border-radius: 8px;
+        border: none;
+        cursor: pointer;
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    .modal-content .btn-submit:hover {
+        background-color: #2ed88a;
+    }
+
+    /* Close button for modal */
+    .close {
+        color: #aaa;
+        font-size: 28px;
+        font-weight: bold;
+        position: absolute;
+        right: 15px;
+        top: 10px;
+        cursor: pointer;
+    }
+
+    .close:hover,
+    .close:focus {
+        color: black;
+        text-decoration: none;
+    }
+
+    /* Cancel button */
+    .cancel-btn {
+        background-color: #e74a3b;
+        color: white;
+        padding: 10px 15px;
+        font-size: 16px;
+        border-radius: 8px;
+        border: none;
+        cursor: pointer;
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    .cancel-btn:hover {
+        background-color: #d43f3a;
+    }
+
+    /* Ensure the select element has the same width as input fields */
+    .modal-content .form-group select,
+    .modal-content .form-group input {
+        width: 100%; /* Ensure both input and select elements have the same width */
+        padding: 12px;
+        font-size: 16px;
+        border-radius: 8px;
+        border: 1px solid #ccc;
+        margin-top: 8px;
+    }
+
+    .modal-content .form-group label {
+        font-weight: bold;
+    }
+</style>
+
+<div class="main-content">
+    <!-- Title and Add Account Button -->
+    <div class="header-container">
+        <h2>Danh sách người dùng</h2>
+        <div class="header-actions">
+            <input type="text" id="searchInput" placeholder="Tìm kiếm người dùng..." onkeyup="searchTable()" />
+            <select id="roleFilter" onchange="filterTable()">
+                <option value="">Tất cả vai trò</option>
+                <option value="Admin">Admin</option>
+                <option value="Nhân viên">Nhân viên</option>
+                <option value="Khách hàng">Khách hàng</option>
+                <option value="Bác sĩ">Bác sĩ</option>
+            </select>
+            <button class="add-account-btn" onclick="openModal()">+ Thêm tài khoản mới</button>
+        </div>
+    </div>
+
+    <!-- Table of users -->
+    <div class="table-container">
+        <table id="userTable">
+            <thead>
+                <tr>
+                    <th class="sticky-header">Tên</th>
+                    <th class="sticky-header">Email</th>
+                    <th class="sticky-header">Vai trò</th>
+                    <th class="sticky-header">Trạng thái</th>
+                    <th class="sticky-header action-column">Hành động</th>
+                    <th class="sticky-header view-column">Xem chi tiết</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><i class="fas fa-user"></i> Nguyễn Văn A</td>
+                    <td>nguyenvana@example.com</td>
+                    <td><i class="fas fa-cogs text-red-500"></i> Admin</td>
+                    <td><span class="status active">Đang hoạt động</span></td>
+                    <td class="action-column">
+                        <button class="btn-delete">Xóa</button>
+                    </td>
+                    <td class="view-column"><button class="btn-view">Xem chi tiết</button></td>
+                </tr>
+                <!-- More rows can be added here -->
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Modal for Adding Account -->
+<div id="addAccountModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <div class="modal-header">
+            <h3>Thêm Tài Khoản Mới</h3>
+        </div>
+        <form method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="username">Tên đăng nhập:</label>
+                <input type="text" name="username" id="username" required />
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" name="email" id="email" required />
+            </div>
+            <div class="form-group">
+                <label for="password">Mật khẩu:</label>
+                <input type="password" name="password" id="password" required />
+            </div>
+            <div class="form-group">
+                <label for="role">Vai trò:</label>
+                <select name="role" id="role" required>
+                    <option value="admin">Admin</option>
+                    <option value="doctor">Bác sĩ</option>
+                    <option value="staff">Nhân viên</option>
+                </select>
+            </div>
+            <button type="submit" class="btn-submit">Thêm tài khoản</button>
+        </form>
+        <button class="cancel-btn" onclick="closeModal()">Hủy</button>
+    </div>
+</div>
+
+<script>
+    // Open the modal
+    function openModal() {
+        document.getElementById('addAccountModal').style.display = 'flex';
+    }
+
+    // Close the modal
+    function closeModal() {
+        document.getElementById('addAccountModal').style.display = 'none';
+    }
+
+    // Function to filter table rows based on role
+    function filterTable() {
+        var filter = document.getElementById("roleFilter").value.toLowerCase();
+        var rows = document.getElementById("userTable").getElementsByTagName("tr");
+        for (var i = 1; i < rows.length; i++) {
+            var cells = rows[i].getElementsByTagName("td");
+            var role = cells[2].innerText.toLowerCase();
+            if (filter === "" || role.indexOf(filter) > -1) {
+                rows[i].style.display = "";
+            } else {
+                rows[i].style.display = "none";
+            }
+        }
+    }
+
+    // Function to search in the table based on input
+    function searchTable() {
+        var input = document.getElementById("searchInput");
+        var filter = input.value.toLowerCase();
+        var rows = document.getElementById("userTable").getElementsByTagName("tr");
+
+        for (var i = 1; i < rows.length; i++) {
+            var cells = rows[i].getElementsByTagName("td");
+            var found = false;
+
+            for (var j = 0; j < cells.length; j++) {
+                if (cells[j].innerText.toLowerCase().indexOf(filter) > -1) {
+                    found = true;
+                    break;
+                }
+            }
+
+            rows[i].style.display = found ? "" : "none";
+        }
+    }
+</script>
+
+{% endblock quan_ly_tai_khoan %}

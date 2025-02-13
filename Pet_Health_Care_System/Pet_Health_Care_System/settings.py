@@ -32,8 +32,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'pets',
     'rest_framework',
-    'customer',
     'staff',
+    'doctor',
+    'QTV',
 ]
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -50,7 +51,7 @@ ROOT_URLCONF = 'Pet_Health_Care_System.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],  
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -62,6 +63,7 @@ TEMPLATES = [
         },
     },
 ]
+
 
 WSGI_APPLICATION = 'Pet_Health_Care_System.wsgi.application'
 
