@@ -8,6 +8,7 @@ urlpatterns = [
     path('', include('pets.urls')),
     path('staff/', include('staff.urls')),
     path('QTV/', include('QTV.urls')),
+    path('doctor/', include('doctor.urls')),
 ]
 
 if settings.DEBUG:

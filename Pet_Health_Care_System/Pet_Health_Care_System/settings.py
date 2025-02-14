@@ -33,8 +33,8 @@ INSTALLED_APPS = [
     'pets',
     'rest_framework',
     'staff',
-    'doctor',
     'QTV',
+    'doctor',
 ]
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

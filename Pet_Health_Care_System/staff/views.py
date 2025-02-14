@@ -1,4 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
+from pets.models import Product
 
 def lich_hen(request):
     context = {}
@@ -27,3 +28,7 @@ def sap_lich(request):
 def quan_ly_tai_khoan(request):
     context = {}
     return render(request, 'staff/quan_ly_tai_khoan.html', context)
+
+def product_list(request):
+    products = Product.objects.all()
+    return render(request, 'staff/quan_ly_san_pham.html', {'products': products})

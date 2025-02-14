@@ -2,29 +2,108 @@
 {% load static %}
 
 {% block shop %}
+<style>
+  /* Chỉnh sửa phần container chính */
+  .product-container {
+    margin-top: 20px;
+    padding: 20px;
+  }
+
+  /* Thiết lập card sản phẩm */
+  .product-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  }
+
+  /* Hiệu ứng hover để nổi bật */
+  .product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+  }
+
+  /* Hình ảnh sản phẩm */
+  .product-card img {
+    width: 100%;
+    height: 220px; /* Định chiều cao cố định */
+    aspect-ratio: 1 / 1; /* Giữ tỷ lệ vuông */
+    object-fit: cover; /* Đảm bảo ảnh không bị méo */
+    border-radius: 8px;
+  }
+
+  /* Phần thông tin sản phẩm */
+  .product-card .card-body {
+    padding: 10px 0;
+  }
+
+  /* Tiêu đề sản phẩm */
+  .product-title {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 5px;
+  }
+
+  /* Giá sản phẩm */
+  .product-price {
+    font-size: 18px;
+    font-weight: bold;
+    color:rgb(0, 0, 0);
+    margin-top: 10px;
+  }
+
+  /* Nút thêm vào giỏ hàng */
+  .add-to-cart-btn {
+    margin-top: 10px;
+    width: 100%;
+    padding: 8px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: none;
+    background-color: #198754;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+  }
+
+  /* Hover cho nút */
+  .add-to-cart-btn:hover {
+    background-color: #146c43;
+  }
+
+</style>
+
+<!-- Tiêu đề -->
 <div style="background-color: #198754; color: white; text-align: center; padding: 15px;">
     <h3 class="mb-0" style="color: white;">Tất cả sản phẩm</h3>
 </div>
-  
-<div class="container mt-4">
+
+<!-- Danh sách sản phẩm -->
+<div class="container product-container">
   <div class="row">
-    <!-- Product -->
-     {% for product in products %}
-     <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
-      <div class="card h-100 text-center">
-        <img class="card-img-top img-fluid" src="{{ product.image.url }}" alt="{{ product.name }}">
+    {% for product in products %}
+    <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+      <div class="product-card">
+        <img src="{{ product.image.url }}" alt="{{ product.name }}">
         <div class="card-body">
-          <h5 class="card-title"><strong>{{ product.name }}</strong></h5>
+          <h5 class="product-title">{{ product.name }}</h5>
         </div>
         <div class="card-footer">
-          <a href="{% url 'pets:add_to_cart' product.id %}" class="btn btn-outline-secondary btn-sm">Thêm vào giỏ hàng</a>
-          <h5 class="mt-2"><strong>{{ product.price }} VNĐ</strong></h5>
+          <button class="add-to-cart-btn" onclick="window.location.href='{% url 'pets:add_to_cart' product.id %}'">
+            Thêm vào giỏ hàng
+          </button>
+          <h5 class="product-price">{{ product.price }} VNĐ</h5>
         </div>
       </div>
-    </div >
+    </div>
     {% endfor %}
   </div>
-    
-    
 </div>
+
 {% endblock shop %}

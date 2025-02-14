@@ -1,0 +1,109 @@
+{% extends "doctor/base.html" %}
+{% load static %}
+
+{% block page_title %}Tổng quan{% endblock page_title %}
+
+{% block main-contain %}
+  <div class="dashboard">
+    <div class="cards-container">
+      <!-- Calendar Section (Appointments) -->
+      <a href="#" class="card">
+        <i class="fas fa-calendar-alt"></i>
+        <h3>📅 Lịch hẹn hôm nay</h3>
+        <p>2 ca khám đã đặt</p>
+      </a>
+
+      <!-- Pets in Hospital Section -->
+      <a href="#" class="card">
+        <i class="fas fa-paw"></i>
+        <h3>🐾 Số lượng thú cưng nhập viện cần chăm sóc</h3>
+        <p>3 thú cưng đang cần chăm sóc</p>
+      </a>
+
+      <!-- Appointment Status Section -->
+      <a href="#" class="card">
+        <i class="fas fa-clock"></i>
+        <h3>⏳ Trạng thái ca khám</h3>
+        <p>Đang chờ khám: 5 </br> Đã khám xong: 8</p>
+      </a>
+
+      <!-- Important Notifications Section -->
+      <a href="#" class="card">
+        <i class="fas fa-bell"></i>
+        <h3>📢 Thông báo quan trọng</h3>
+        <p>3 thông báo chưa đọc</p>
+      </a>
+    </div>
+  </div>
+
+  <style>
+    /* Dashboard container */
+    .dashboard {
+      margin-left: 270px;
+      padding: 20px;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    /* Title of the dashboard */
+    .dashboard h2 {
+      font-size: 24px;
+      margin-bottom: 20px;
+      color: #2c3e50;
+      font-weight: bold;
+    }
+
+    /* Cards container with grid layout */
+    .cards-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+
+    /* Common card styling */
+    .card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: #ffffff;
+      border-radius: 10px;
+      padding: 20px;
+      text-align: center;
+      text-decoration: none;
+      color: #2c3e50;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    /* Icon style inside the card */
+    .card i {
+      font-size: 40px;
+      margin-bottom: 10px;
+    }
+
+    /* Card title (h3) */
+    .card h3 {
+      font-size: 18px;
+      margin-bottom: 8px;
+    }
+
+    /* Card paragraph */
+    .card p {
+      font-size: 16px;
+      color: #7f8c8d;
+    }
+
+    /* Hover effect for cards */
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+    }
+
+    /* Colors for each card icon */
+    .card:nth-child(1) i { color: #3498db; }  /* Lịch hẹn hôm nay */
+    .card:nth-child(2) i { color: #2ecc71; }  /* Số lượng thú cưng nhập viện */
+    .card:nth-child(3) i { color: #f39c12; }  /* Trạng thái ca khám */
+    .card:nth-child(4) i { color: #e74c3c; }  /* Thông báo quan trọng */
+  </style>
+
+{% endblock main-contain %}

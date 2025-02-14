@@ -1,0 +1,210 @@
+{% extends "doctor/base.html" %}
+{% load static %}
+
+{% block page_title %}Hồ sơ bệnh án{% endblock page_title %}
+
+{% block ho_so_benh_an %}
+  <div class="medical-record">
+    <!-- Filter Section -->
+    <div class="filter-section">
+      <h3>🔍 Tìm kiếm hồ sơ bệnh án:</h3>
+      <form method="GET" action="" class="filter-form">
+        <div class="filter-input">
+          <!-- Search by pet name -->
+          <label for="pet-name">Tên thú cưng:</label>
+          <input type="text" id="pet-name" name="pet-name" placeholder="Nhập tên thú cưng">
+        </div>
+        <div class="filter-input">
+          <!-- Filter by date of visit -->
+          <label for="visit-date">Chọn ngày khám:</label>
+          <input type="date" id="visit-date" name="visit-date">
+        </div>
+        <!-- Submit button -->
+        <button type="submit" class="btn-search">Tìm kiếm</button>
+      </form>
+    </div>
+
+    <!-- Pet List Section -->
+    <div class="pet-list-section">
+      <h3>Danh sách thú cưng đã khám:</h3>
+      <table class="pets-table">
+        <thead>
+          <tr>
+            <th>Tên thú cưng</th>
+            <th>Loại thú cưng</th>
+            <th>Chủ sở hữu</th>
+            <th>Số điện thoại</th>
+            <th>Ngày khám</th>
+            <th>Chức năng</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Sample Data -->
+          <tr>
+            <td>Bella</td>
+            <td>Chó</td>
+            <td>Nguyễn Thị Lan</td>
+            <td>0901234567</td>
+            <td>2025-01-15</td>
+            <td>
+              <a href="#" class="btn-view-record">📄 Xem hồ sơ bệnh án</a>
+              <a href="#" class="btn-update-record">✏️ Cập nhật bệnh án</a>
+            </td>
+          </tr>
+          <tr>
+            <td>Max</td>
+            <td>Chó</td>
+            <td>Trần Minh Tú</td>
+            <td>0912345678</td>
+            <td>2025-02-02</td>
+            <td>
+              <a href="#" class="btn-view-record">📄 Xem hồ sơ bệnh án</a>
+              <a href="#" class="btn-update-record">✏️ Cập nhật bệnh án</a>
+            </td>
+          </tr>
+          <tr>
+            <td>Luna</td>
+            <td>Mèo</td>
+            <td>Phạm Thị Mai</td>
+            <td>0923456789</td>
+            <td>2025-01-28</td>
+            <td>
+              <a href="#" class="btn-view-record">📄 Xem hồ sơ bệnh án</a>
+              <a href="#" class="btn-update-record">✏️ Cập nhật bệnh án</a>
+            </td>
+          </tr>
+          <tr>
+            <td>Whiskers</td>
+            <td>Mèo</td>
+            <td>Nguyễn Văn A</td>
+            <td>0934567890</td>
+            <td>2025-02-10</td>
+            <td>
+              <a href="#" class="btn-view-record">📄 Xem hồ sơ bệnh án</a>
+              <a href="#" class="btn-update-record">✏️ Cập nhật bệnh án</a>
+            </td>
+          </tr>
+          <tr>
+            <td>Charlie</td>
+            <td>Chó</td>
+            <td>Trần Đăng Khoa</td>
+            <td>0945678901</td>
+            <td>2025-01-12</td>
+            <td>
+              <a href="#" class="btn-view-record">📄 Xem hồ sơ bệnh án</a>
+              <a href="#" class="btn-update-record">✏️ Cập nhật bệnh án</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <style>
+    /* Main container */
+    .medical-record {
+      margin-left: 275px;
+      padding: 20px;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    /* Title for the medical record section */
+    .medical-record h2 {
+      font-size: 28px;
+      margin-bottom: 20px;
+      color: #2c3e50;
+      font-weight: bold;
+    }
+
+    /* Filter section */
+    .filter-section {
+      margin-bottom: 20px;
+    }
+
+    .filter-form {
+      display: flex;
+      gap: 15px;
+    }
+
+    .filter-input {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .filter-form label {
+      font-size: 16px;
+      color: #34495e;
+    }
+
+    .filter-form input[type="text"], .filter-form input[type="date"] {
+      padding: 8px;
+      font-size: 16px;
+      width: 250px;
+      margin: 5px 0;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    .filter-form .btn-search {
+      padding: 10px 15px;
+      background-color: #3498db;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin: 5px 0;
+      margin-top: 27px;
+      margin-bottom: 17px;
+    }
+
+    .filter-form .btn-search:hover {
+      opacity: 0.8;
+    }
+
+    /* Pet list section */
+    .pet-list-section h3 {
+      font-size: 22px;
+      margin-bottom: 15px;
+      color: #34495e;
+    }
+
+    /* Table styling */
+    .pets-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    .pets-table th, .pets-table td {
+      padding: 10px;
+      text-align: center;
+      border: 1px solid #ddd;
+    }
+
+    .pets-table th {
+      background-color: #f2f2f2;
+      font-weight: bold;
+    }
+
+    /* Add hover effect for table rows */
+    .pets-table tr:hover {
+      background-color: #f9f9f9;
+    }
+
+    /* Button styling */
+    .btn-view-record, .btn-update-record {
+      display: inline-block;
+      padding: 6px 12px;
+      margin: 5px;
+      text-decoration: none;
+      border-radius: 5px;
+      background-color: #3498db;
+      color: #fff;
+    }
+
+    .btn-view-record:hover, .btn-update-record:hover {
+      opacity: 0.8;
+    }
+  </style>
+
+{% endblock ho_so_benh_an %}

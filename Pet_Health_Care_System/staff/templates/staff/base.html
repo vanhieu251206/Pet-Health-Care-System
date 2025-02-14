@@ -168,6 +168,7 @@
     <li><a href="{% url "staff:booking" %}">📅 Quản lý đặt chỗ (Booking)</a></li>
     <li><a href="{% url "staff:theo_doi" %}">🐾 Theo dõi thú cưng nhập viện</a></li>
     <li><a href="{% url "staff:sap_lich" %}">👩‍⚕️ Sắp lịch bác sĩ thú y</a></li>
+    <li><a href="{% url 'staff:quan_ly_san_pham' %}">📦 Quản lý sản phẩm</a></li>
     <li><a href="{% url "staff:quan_ly_tai_khoan" %}">⚙️ Cài đặt & Quản lý tài khoản</a></li>
    </ul>
   </div>
@@ -202,5 +203,6 @@
   {% block theo_doi %}{% endblock theo_doi %}
   {% block sap_lich %}{% endblock sap_lich %}
   {% block quan_ly_tai_khoan %}{% endblock quan_ly_tai_khoan %}
+  {% block quan_ly_san_pham %}{% endblock quan_ly_san_pham %}
  </body>
 </html>

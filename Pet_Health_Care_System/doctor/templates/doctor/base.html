@@ -163,11 +163,13 @@
     <h2>GroupOne</h2>
    </div>
    <ul>
-    <li><a href="{% url 'QTV:tong_quan' %}">🏠 Tổng quan</a></li>
-    <li><a href="{% url "QTV:quan_ly_tai_khoan" %}">👤 Quản lý tài khoản hệ thống</a></li>
-    <li><a href="{% url "QTV:cau_hinh" %}">🔧 Cấu hình hệ thống</a></li>
-    <li><a href="{% url "QTV:doanh_thu" %}">📊 Thống kê doanh thu</a></li>
-   </ul>
+    <li><a href="{% url 'doctor:tong_quan' %}">🏠 Tổng quan</a></li>
+    <li><a href="{% url "doctor:lich_lam_viec" %}">📅 Lịch làm việc của tôi</a></li>
+    <li><a href="{% url "doctor:ho_so_benh_an" %}">📝 Hồ sơ bệnh án thú cưng</a></li>
+    <li><a href="#">🐾 Theo dõi & chăm sóc thú cưng nhập viện</a></li>
+    <li><a href="#">📊 Báo cáo & Thống kê</a></li>
+    <li><a href="#">⚙️ Cài đặt & Quản lý tài khoản</a></li>
+</ul>
   </div>
   <div class="main-content">
    <div class="header">
@@ -195,8 +197,7 @@
  <body>
   <!-- main body -->
   {% block main-contain %}{% endblock main-contain %}
-  {% block quan_ly_tai_khoan %}{% endblock quan_ly_tai_khoan %}
-  {% block cau_hinh %}{% endblock cau_hinh %}
-  {% block doanh_thu %}{% endblock doanh_thu %}
+  {% block lich_lam_viec %}{% endblock lich_lam_viec %}
+  {% block ho_so_benh_an %}{% endblock ho_so_benh_an %}
  </body>
 </html>

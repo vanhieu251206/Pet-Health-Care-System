@@ -10,17 +10,12 @@ def quan_ly_tai_khoan(request):
     context = {}
     return render(request, 'QTV/quan_ly_tai_khoan.html', context)
 
-def add_account(request):
-    if request.method == 'POST':
-        form = CustomUserForm(request.POST)
-        if form.is_valid():
-            form.save()
-            messages.success(request, 'Tạo tài khoản thành công!')
-            return redirect('QTV:quan_ly_tai_khoan') 
-        else:
-            messages.error(request, 'Có lỗi xảy ra. Vui lòng thử lại.')
-    else:
-        form = CustomUserForm()
+def cau_hinh(request):
+    context = {}
+    return render(request, 'QTV/cau_hinh.html', context)
 
-    return render(request, 'QTV/add_account.html', {'form': form})
+def doanh_thu(request):
+    context = {}
+    return render(request, 'QTV/doanh_thu.html', context)
+
 
