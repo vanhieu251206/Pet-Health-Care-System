@@ -5,7 +5,151 @@
 Quản lý lịch hẹn
 {% endblock page_title %}
 
-{% block main-contain %}
-<h1>xincaho</h1>
-{% endblock main-contain %}
+{% block lich_hen %}
+<style>
+    /* General Styles */
+    .appointment-list {
+        max-width: 90%;
+        margin: 40px auto;
+        padding: 20px;
+        background-color: #ffffff;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        margin-left: 275px; /* Add left indentation */
+    }
 
+    h2 {
+        text-align: center;
+        font-size: 28px;
+        color: #333;
+        margin-bottom: 20px;
+    }
+
+    .message {
+        font-size: 16px;
+        margin-bottom: 20px;
+        text-align: center;
+        color: green;
+    }
+
+    /* Table Styles */
+    .appointment-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+        table-layout: fixed; /* Fix the column width */
+    }
+
+    .appointment-table th, .appointment-table td {
+        padding: 12px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+        word-wrap: break-word; /* Wrap long content */
+    }
+
+    .appointment-table th {
+        background-color: #f4f4f4;
+        color: #333;
+        border-top-left-radius: 10px; /* Rounded top left corner */
+        border-top-right-radius: 10px; /* Rounded top right corner */
+    }
+
+    .appointment-table tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+
+    .appointment-table tr:hover {
+        background-color: #f1f1f1;
+    }
+
+    /* Action Buttons */
+    .action-btn {
+        padding: 8px 15px;
+        font-size: 14px;
+        color: white;
+        background-color: #4CAF50;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        margin-top: 5px;
+    }
+
+    .action-btn:hover {
+        background-color: #45a049;
+    }
+
+    .action-btn.cancel {
+        background-color: #f44336;
+    }
+
+    .action-btn.cancel:hover {
+        background-color: #e53935;
+    }
+
+    .action-btn.confirm {
+        background-color: #2196F3;
+    }
+
+    .action-btn.confirm:hover {
+        background-color: #1976D2;
+    }
+
+    .action-btn.complete {
+        background-color: #FF9800;
+    }
+
+    .action-btn.complete:hover {
+        background-color: #FB8C00;
+    }
+</style>
+
+<div class="appointment-list">
+    <h2>Danh sách Lịch Hẹn</h2>
+
+    <!-- Hiển thị thông báo nếu có -->
+    {% if messages %}
+        {% for message in messages %}
+            <p class="message" style="color: green;">{{ message }}</p>
+        {% endfor %}
+    {% endif %}
+
+    <!-- Hiển thị danh sách lịch hẹn -->
+    <table class="appointment-table">
+        <thead>
+            <tr>
+                <th>Họ và tên</th>
+                <th>Số điện thoại</th>
+                <th>Ngày</th>
+                <th>Giờ</th>
+                <th>Dịch vụ</th>
+                <th>Chi nhánh</th>
+                <th>Bác sĩ</th>
+                <th>Trạng thái</th>
+                <th>Hành động</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for appointment in appointments %}
+            <tr>
+                <td>{{ appointment.name }}</td>
+                <td>{{ appointment.phone }}</td>
+                <td>{{ appointment.date }}</td>
+                <td>{{ appointment.time }}</td>
+                <td>{{ appointment.service }}</td>
+                <td>{{ appointment.branch }}</td>
+                <td>{{ appointment.doctor }}</td>
+                <td>{{ appointment.status }}</td>
+                <td>
+                    <form method="post" action="{% url 'staff:update_appointment_status' appointment.id %}">
+                        {% csrf_token %}
+                        <button type="submit" name="status" value="Confirmed" class="action-btn confirm">Xác nhận</button>
+                        <button type="submit" name="status" value="Completed" class="action-btn complete">Hoàn thành</button>
+                        <button type="submit" name="status" value="Cancelled" class="action-btn cancel">Hủy</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock lich_hen %}

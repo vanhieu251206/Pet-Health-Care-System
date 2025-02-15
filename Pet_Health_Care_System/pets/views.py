@@ -4,7 +4,7 @@ from django.utils.http import urlencode
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, get_user_model, logout
 from django.contrib import messages
-from .models import Product, Cart, CartItem
+from .models import Product, Cart, CartItem, Appointment
 from staff.views import tong_quan
 from django.urls import reverse
 import logging
@@ -49,6 +49,10 @@ def contact(request):
 def register_page(request):
     context ={}
     return render(request, 'pets/register_page.html', context)
+
+def dat_lich(request):
+    context ={}
+    return render(request, 'pets/dat_lich.html', context)
 
 def shop(request):
     products =  Product.objects.all()
@@ -189,5 +193,34 @@ def update_cart(request, item_id):
         item.save()
 
     return redirect("pets:cart_view")
+
+def create_appointment(request):
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        phone = request.POST.get('phone')
+        date = request.POST.get('date')
+        time = request.POST.get('time')
+        service = request.POST.get('service')
+        branch = request.POST.get('branch')
+        doctor = request.POST.get('doctor')
+
+        if name and phone and date and time and service and branch and doctor:
+            Appointment.objects.create(
+                name=name,
+                phone=phone,
+                date=date,
+                time=time,
+                service=service,
+                branch=branch,
+                doctor=doctor
+            )
+            messages.success(request, 'Lịch hẹn đã được đặt thành công!')
+            return redirect('pets:create_appointment')  
+        else:
+            messages.error(request, 'Vui lòng điền đầy đủ thông tin.')
+
+    return render(request, 'pets/dat_lich.html')
+
+
 
 

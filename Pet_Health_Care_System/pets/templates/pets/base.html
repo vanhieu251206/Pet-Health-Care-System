@@ -67,6 +67,9 @@
                     </ul>
                   </li>
                   <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="{% url 'pets:dat_lich' %}">Đặt lịch</a>
+                  </li>
+                  <li class="nav-item">
                     <a class="nav-link" href="{% url 'pets:about_us' %}">Giới thiệu</a>
                   </li>
                   <li class="nav-item">
@@ -123,6 +126,7 @@
         {% block contact %}{% endblock contact %}
         {% block shop %}{% endblock shop %}
         {% block register_page %}{% endblock register_page %}
+        {% block dat_lich %}{% endblock dat_lich %}
         <!-- footer -->
         <footer>
           <div class="footer-container">
