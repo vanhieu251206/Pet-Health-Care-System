@@ -9,13 +9,14 @@ Quản lý lịch hẹn
 <style>
     /* General Styles */
     .appointment-list {
-        max-width: 90%;
+        max-width: 100%;
         margin: 40px auto;
         padding: 20px;
         background-color: #ffffff;
-        border-radius: 10px;
+        border-radius: 10px; /* Round corners of the table container */
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         margin-left: 275px; /* Add left indentation */
+        overflow-x: auto; /* Enable horizontal scrolling */
     }
 
     h2 {
@@ -35,13 +36,14 @@ Quản lý lịch hẹn
     /* Table Styles */
     .appointment-table {
         width: 100%;
-        border-collapse: collapse;
+        border-collapse: collapse; /* Ensure borders collapse */
         margin-top: 20px;
-        table-layout: fixed; /* Fix the column width */
+        border-radius: 10px; /* Round corners of the entire table */
+        overflow: hidden; /* Hide overflow */
     }
 
     .appointment-table th, .appointment-table td {
-        padding: 12px;
+        padding: 15px 20px; /* Add uniform padding */
         text-align: left;
         border-bottom: 1px solid #ddd;
         word-wrap: break-word; /* Wrap long content */
@@ -50,8 +52,11 @@ Quản lý lịch hẹn
     .appointment-table th {
         background-color: #f4f4f4;
         color: #333;
-        border-top-left-radius: 10px; /* Rounded top left corner */
-        border-top-right-radius: 10px; /* Rounded top right corner */
+    }
+
+    /* Center the Trạng thái column */
+    .appointment-table th:nth-child(8), .appointment-table td:nth-child(8) {
+        text-align: center; /* Center the content in the Trạng thái column */
     }
 
     .appointment-table tr:nth-child(even) {
@@ -62,7 +67,7 @@ Quản lý lịch hẹn
         background-color: #f1f1f1;
     }
 
-    /* Action Buttons */
+    /* Action Button Styles */
     .action-btn {
         padding: 8px 15px;
         font-size: 14px;
@@ -94,13 +99,44 @@ Quản lý lịch hẹn
         background-color: #1976D2;
     }
 
-    .action-btn.complete {
-        background-color: #FF9800;
+    /* Status Styles */
+    .status-cancelled {
+        color: white;
+        background-color: #f44336; /* Red background for cancelled */
+        padding: 5px 10px;
+        border-radius: 5px;
     }
 
-    .action-btn.complete:hover {
-        background-color: #FB8C00;
+    .status-confirmed {
+        color: white;
+        background-color: #4CAF50; /* Green background for confirmed */
+        padding: 5px 10px;
+        border-radius: 5px;
     }
+
+    .status-pending {
+        color: white;
+        background-color: #2196F3; /* Blue background for pending */
+        padding: 5px 10px;
+        border-radius: 5px;
+    }
+
+    /* Custom Styles for "Đã hoàn thành" */
+    .status-completed {
+        color: white;
+        background-color: #FF9800; /* Orange background for completed */
+        padding: 5px 10px;
+        border-radius: 5px;
+        text-transform: uppercase;
+    }
+
+    /* For non-button status text (no background) */
+    .status-text {
+        color: #333;
+        background-color: transparent;
+        padding: 0;
+    }
+
 </style>
 
 <div class="appointment-list">
@@ -124,8 +160,7 @@ Quản lý lịch hẹn
                 <th>Dịch vụ</th>
                 <th>Chi nhánh</th>
                 <th>Bác sĩ</th>
-                <th>Trạng thái</th>
-                <th>Hành động</th>
+                <th>Trạng thái</th> <!-- Action Buttons column -->
             </tr>
         </thead>
         <tbody>
@@ -138,13 +173,23 @@ Quản lý lịch hẹn
                 <td>{{ appointment.service }}</td>
                 <td>{{ appointment.branch }}</td>
                 <td>{{ appointment.doctor }}</td>
-                <td>{{ appointment.status }}</td>
                 <td>
                     <form method="post" action="{% url 'staff:update_appointment_status' appointment.id %}">
                         {% csrf_token %}
-                        <button type="submit" name="status" value="Confirmed" class="action-btn confirm">Xác nhận</button>
-                        <button type="submit" name="status" value="Completed" class="action-btn complete">Hoàn thành</button>
-                        <button type="submit" name="status" value="Cancelled" class="action-btn cancel">Hủy</button>
+                        
+                        <!-- Show action buttons or status text depending on the current status -->
+                        {% if appointment.status == 'Pending' %}
+                            <button type="submit" name="status" value="Confirmed" class="action-btn confirm">Xác nhận</button>
+                            <button type="submit" name="status" value="Cancelled" class="action-btn cancel">Hủy</button>
+                        {% elif appointment.status == 'Confirmed' %}
+                            <button type="submit" name="status" value="Cancelled" class="action-btn cancel">Hủy</button>
+                        {% elif appointment.status == 'Cancelled' %}
+                            <span class="status-cancelled">Đã hủy</span>
+                        {% elif appointment.status == 'Completed' %}
+                            <span class="status-completed">Hoàn thành</span>
+                        {% else %}
+                            <span class="status-text">Chưa xác nhận</span>
+                        {% endif %}
                     </form>
                 </td>
             </tr>
