@@ -28,22 +28,42 @@
         margin-bottom: 30px;
     }
 
-    #register-container .form-label {
-        font-weight: 600;
-        color: #555;
+    .form-group {
+        position: relative;
+        margin-bottom: 15px;
     }
 
-    #register-container .form-control {
+    .form-control {
         border-radius: 8px;
         border: 1px solid #ccc;
         padding: 12px;
         font-size: 16px;
         color: #333;
         width: 100%;
-        margin-bottom: 20px;
+        transition: 0.3s;
     }
 
-    #register-container .btn-primary {
+    .form-control:focus {
+        border-color: #007bff;
+        box-shadow: 0 0 5px rgba(0, 123, 255, 0.2);
+    }
+
+    .is-invalid {
+        border-color: red !important;
+    }
+
+    .is-valid {
+        border-color: green !important;
+    }
+
+    .error-message {
+        color: red;
+        font-size: 14px;
+        margin-top: 5px;
+        display: none;
+    }
+
+    .btn-primary {
         background-color: #007bff;
         border: none;
         border-radius: 8px;
@@ -52,126 +72,209 @@
         color: white;
         cursor: pointer;
         width: 100%;
+        transition: 0.3s;
     }
 
-    #register-container .btn-primary:hover {
+    .btn-primary:hover {
         background-color: #0056b3;
     }
 
-    .is-valid {
-        border-color: green !important;
-        background-image: url('https://cdn-icons-png.flaticon.com/512/845/845646.png');
-        background-position: right 10px center;
-        background-size: 20px;
-        background-repeat: no-repeat;
+    .text-center a {
+        color: #007bff;
+        text-decoration: none;
+        transition: 0.3s;
     }
-    
-    .is-invalid {
-        border-color: red !important;
-    }
-    
-    .invalid-feedback {
-        color: red;
-        font-size: 14px;
+
+    .text-center a:hover {
+        text-decoration: underline;
     }
 </style>
 
 <div id="register-page-container">
     <div id="register-container">
         <h2>Đăng Ký</h2>
-        <form id="register-form" method="post">
+
+        <form id="register-form" method="post" action="{% url 'pets:register_view' %}" novalidate>
             {% csrf_token %}
-            
+
             <div class="form-group">
                 <label for="username">Tên đăng nhập:</label>
                 <input type="text" id="username" name="username" class="form-control">
-                <div id="username-error" class="error-message text-danger"></div>
+                <div id="username-error" class="error-message"></div>
             </div>
-        
+
             <div class="form-group">
                 <label for="email">Email:</label>
                 <input type="email" id="email" name="email" class="form-control">
-                <div id="email-error" class="error-message text-danger"></div>
+                <div id="email-error" class="error-message"></div>
             </div>
-        
+
             <div class="form-group">
                 <label for="password">Mật khẩu:</label>
                 <input type="password" id="password" name="password" class="form-control">
-                <div id="password-error" class="error-message text-danger"></div>
+                <div id="password-error" class="error-message"></div>
             </div>
-        
+
             <div class="form-group">
                 <label for="password_confirm">Xác nhận mật khẩu:</label>
                 <input type="password" id="password_confirm" name="password_confirm" class="form-control">
-                <div id="password_confirm-error" class="error-message text-danger"></div>
+                <div id="password_confirm-error" class="error-message"></div>
             </div>
-        
+
             <button type="submit" class="btn btn-primary">Đăng ký</button>
-        </form>        
-        
+        </form>
+
         <p class="text-center mt-3">Đã có tài khoản? <a href="{% url 'pets:login_page' %}">Đăng nhập</a></p>
     </div>
 </div>
+
 <script>
     document.addEventListener("DOMContentLoaded", function () {
-        // Lấy tất cả input có trong form
-        const formInputs = document.querySelectorAll("#register-form input");
+        const registerForm = document.getElementById("register-form");
     
-        formInputs.forEach(input => {
+        const passwordInput = document.getElementById("password");
+        const passwordConfirmInput = document.getElementById("password_confirm");
+    
+        let typingTimer; // Biến kiểm tra khi ngừng nhập
+        let hasClickedPasswordConfirm = false; // Biến kiểm tra người dùng đã click vào ô xác nhận mật khẩu
+    
+        const debounceDelay = 500; // Độ trễ trước khi hiển thị lỗi (ms)
+    
+        const fields = [
+            { 
+                id: "username", 
+                pattern: /^[a-zA-Z0-9]+$/, 
+                minLength: 3,
+                requiredMsg: "Tên đăng nhập không được để trống.",
+                errorMsg: "Tên đăng nhập phải có ít nhất 3 ký tự, không chứa dấu hoặc khoảng trắng." 
+            },
+            { 
+                id: "email", 
+                pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/, 
+                requiredMsg: "Email không được để trống.",
+                errorMsg: "Email không hợp lệ." 
+            },
+            { 
+                id: "password", 
+                minLength: 6, 
+                requiredMsg: "Mật khẩu không được để trống.",
+                errorMsg: "Mật khẩu phải có ít nhất 6 ký tự." 
+            }
+        ];
+    
+        // Kiểm tra khi nhập vào các ô (debounce)
+        fields.forEach(field => {
+            const input = document.getElementById(field.id);
+            
+            input.addEventListener("input", function () {
+                clearTimeout(typingTimer);
+                typingTimer = setTimeout(() => {
+                    validateField(input, field);
+                    if (field.id === "password") validatePasswordConfirm(); // Kiểm tra lại xác nhận mật khẩu khi mật khẩu thay đổi
+                }, debounceDelay);
+            });
+    
+            // Nếu click vào ô rồi rời đi mà không nhập gì → Hiển thị lỗi ngay
             input.addEventListener("blur", function () {
-                validateField(input);
+                if (!input.value.trim()) {
+                    showError(input, field.requiredMsg);
+                }
             });
         });
     
-        function validateField(input) {
+        // Kiểm tra khi người dùng click vào ô xác nhận mật khẩu lần đầu tiên
+        passwordConfirmInput.addEventListener("focus", function () {
+            hasClickedPasswordConfirm = true; // Đánh dấu người dùng đã click vào ô
+        });
+    
+        // Kiểm tra ô xác nhận mật khẩu khi người dùng nhập (debounce)
+        passwordConfirmInput.addEventListener("input", function () {
+            clearTimeout(typingTimer);
+            typingTimer = setTimeout(validatePasswordConfirm, debounceDelay);
+        });
+    
+        passwordInput.addEventListener("input", function () {
+            clearTimeout(typingTimer);
+            typingTimer = setTimeout(validatePasswordConfirm, debounceDelay);
+        });
+    
+        // Kiểm tra khi rời khỏi ô xác nhận mật khẩu (chỉ khi đã click vào trước đó)
+        passwordConfirmInput.addEventListener("blur", function () {
+            if (hasClickedPasswordConfirm && !passwordConfirmInput.value.trim()) {
+                showError(passwordConfirmInput, "Xác nhận mật khẩu không được để trống.");
+            }
+        });
+    
+        registerForm.addEventListener("submit", function (event) {
+            event.preventDefault();
+            let isValid = true;
+    
+            fields.forEach(field => {
+                const input = document.getElementById(field.id);
+                if (!validateField(input, field)) isValid = false;
+            });
+    
+            if (!validatePasswordConfirm()) isValid = false;
+    
+            if (isValid) {
+                console.log("Dữ liệu hợp lệ. Đang gửi form...");
+                registerForm.submit();
+            } else {
+                console.log("Có lỗi trong form. Không gửi đi.");
+            }
+        });
+    
+        function validateField(input, field) {
             const value = input.value.trim();
-            const id = input.id;
-            const errorElement = document.getElementById(id + "-error");
+            const errorDiv = document.getElementById(`${field.id}-error`);
     
-            if (id === "username") {
-                if (value.length < 3) {
-                    showError(input, errorElement, "Tên đăng nhập phải có ít nhất 3 ký tự.");
-                } else {
-                    showSuccess(input, errorElement);
-                }
-            }
-    
-            if (id === "email") {
-                const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                if (!emailPattern.test(value)) {
-                    showError(input, errorElement, "Email không hợp lệ.");
-                } else {
-                    showSuccess(input, errorElement);
-                }
-            }
-    
-            if (id === "password") {
-                if (value.length < 6) {
-                    showError(input, errorElement, "Mật khẩu phải có ít nhất 6 ký tự.");
-                } else {
-                    showSuccess(input, errorElement);
-                }
-            }
-    
-            if (id === "password_confirm") {
-                const passwordValue = document.getElementById("password").value.trim();
-                if (value !== passwordValue) {
-                    showError(input, errorElement, "Mật khẩu xác nhận không khớp.");
-                } else {
-                    showSuccess(input, errorElement);
-                }
+            if (!value) {
+                showError(input, field.requiredMsg);
+                return false;
+            } else if ((field.minLength && value.length < field.minLength) || (field.pattern && !field.pattern.test(value))) {
+                showError(input, field.errorMsg);
+                return false;
+            } else {
+                hideError(input);
+                return true;
             }
         }
     
-        function showError(input, errorElement, message) {
-            input.style.border = "2px solid red";
-            errorElement.innerText = message;
+        function validatePasswordConfirm() {
+            const password = passwordInput.value.trim();
+            const passwordConfirm = passwordConfirmInput.value.trim();
+            const passwordConfirmError = document.getElementById("password_confirm-error");
+    
+            if (!passwordConfirm) {
+                if (hasClickedPasswordConfirm) {
+                    showError(passwordConfirmInput, "Xác nhận mật khẩu không được để trống.");
+                }
+                return false;
+            } else if (password !== passwordConfirm) {
+                showError(passwordConfirmInput, "Mật khẩu xác nhận không khớp.");
+                return false;
+            } else {
+                hideError(passwordConfirmInput);
+                return true;
+            }
         }
     
-        function showSuccess(input, errorElement) {
-            input.style.border = "2px solid green";
-            errorElement.innerText = "";
+        function showError(input, message) {
+            const errorDiv = document.getElementById(`${input.id}-error`);
+            input.classList.add("is-invalid");
+            input.classList.remove("is-valid");
+            errorDiv.innerText = message;
+            errorDiv.style.display = "block";
+        }
+    
+        function hideError(input) {
+            const errorDiv = document.getElementById(`${input.id}-error`);
+            input.classList.remove("is-invalid");
+            input.classList.add("is-valid");
+            errorDiv.style.display = "none";
         }
     });
+    
 </script>
+
 {% endblock register_page %}

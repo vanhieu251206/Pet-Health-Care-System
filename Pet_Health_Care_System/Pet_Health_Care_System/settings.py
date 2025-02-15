@@ -23,7 +23,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'pets',
     'rest_framework',
-    'customer',
     'staff',
     'doctor',
     'media',

@@ -1,2 +1,6 @@
 Django==4.1.7
 djangorestframework==3.13.1
+python-dotenv
+mysqlclient
+Pillow
+logger

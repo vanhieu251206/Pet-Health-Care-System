@@ -1,6 +1,7 @@
 from django.urls import path
 from django.shortcuts import redirect
 from . import views
+from .views import product_list
 
 app_name = "staff"
 
@@ -13,4 +14,7 @@ urlpatterns = [
     path('theo_doi/', views.theo_doi, name = "theo_doi"),
     path('sap_lich/', views.sap_lich, name = "sap_lich"),
     path('quan_ly_tai_khoan/', views.quan_ly_tai_khoan, name = "quan_ly_tai_khoan"),
+    path('quan_ly_san_pham/', product_list, name='quan_ly_san_pham'),
+    path('appointments/', views.appointment_list, name='appointment_list'),
+    path('appointments/update/<int:appointment_id>/', views.update_appointment_status, name='update_appointment_status'),
 ]

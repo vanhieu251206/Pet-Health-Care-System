@@ -5,7 +5,196 @@
 Quản lý lịch hẹn
 {% endblock page_title %}
 
-{% block main-contain %}
-<h1>xincaho</h1>
-{% endblock main-contain %}
+{% block lich_hen %}
+<style>
+    /* General Styles */
+    .appointment-list {
+        max-width: 100%;
+        margin: 40px auto;
+        padding: 20px;
+        background-color: #ffffff;
+        border-radius: 10px; /* Round corners of the table container */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        margin-left: 275px; /* Add left indentation */
+        overflow-x: auto; /* Enable horizontal scrolling */
+    }
 
+    h2 {
+        text-align: center;
+        font-size: 28px;
+        color: #333;
+        margin-bottom: 20px;
+    }
+
+    .message {
+        font-size: 16px;
+        margin-bottom: 20px;
+        text-align: center;
+        color: green;
+    }
+
+    /* Table Styles */
+    .appointment-table {
+        width: 100%;
+        border-collapse: collapse; /* Ensure borders collapse */
+        margin-top: 20px;
+        border-radius: 10px; /* Round corners of the entire table */
+        overflow: hidden; /* Hide overflow */
+    }
+
+    .appointment-table th, .appointment-table td {
+        padding: 15px 20px; /* Add uniform padding */
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+        word-wrap: break-word; /* Wrap long content */
+    }
+
+    .appointment-table th {
+        background-color: #f4f4f4;
+        color: #333;
+    }
+
+    /* Center the Trạng thái column */
+    .appointment-table th:nth-child(8), .appointment-table td:nth-child(8) {
+        text-align: center; /* Center the content in the Trạng thái column */
+    }
+
+    .appointment-table tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+
+    .appointment-table tr:hover {
+        background-color: #f1f1f1;
+    }
+
+    /* Action Button Styles */
+    .action-btn {
+        padding: 8px 15px;
+        font-size: 14px;
+        color: white;
+        background-color: #4CAF50;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        margin-top: 5px;
+    }
+
+    .action-btn:hover {
+        background-color: #45a049;
+    }
+
+    .action-btn.cancel {
+        background-color: #f44336;
+    }
+
+    .action-btn.cancel:hover {
+        background-color: #e53935;
+    }
+
+    .action-btn.confirm {
+        background-color: #2196F3;
+    }
+
+    .action-btn.confirm:hover {
+        background-color: #1976D2;
+    }
+
+    /* Status Styles */
+    .status-cancelled {
+        color: white;
+        background-color: #f44336; /* Red background for cancelled */
+        padding: 5px 10px;
+        border-radius: 5px;
+    }
+
+    .status-confirmed {
+        color: white;
+        background-color: #4CAF50; /* Green background for confirmed */
+        padding: 5px 10px;
+        border-radius: 5px;
+    }
+
+    .status-pending {
+        color: white;
+        background-color: #2196F3; /* Blue background for pending */
+        padding: 5px 10px;
+        border-radius: 5px;
+    }
+
+    /* Custom Styles for "Đã hoàn thành" */
+    .status-completed {
+        color: white;
+        background-color: #FF9800; /* Orange background for completed */
+        padding: 5px 10px;
+        border-radius: 5px;
+        text-transform: uppercase;
+    }
+
+    /* For non-button status text (no background) */
+    .status-text {
+        color: #333;
+        background-color: transparent;
+        padding: 0;
+    }
+
+</style>
+
+<div class="appointment-list">
+    <h2>Danh sách Lịch Hẹn</h2>
+
+    <!-- Hiển thị thông báo nếu có -->
+    {% if messages %}
+        {% for message in messages %}
+            <p class="message" style="color: green;">{{ message }}</p>
+        {% endfor %}
+    {% endif %}
+
+    <!-- Hiển thị danh sách lịch hẹn -->
+    <table class="appointment-table">
+        <thead>
+            <tr>
+                <th>Họ và tên</th>
+                <th>Số điện thoại</th>
+                <th>Ngày</th>
+                <th>Giờ</th>
+                <th>Dịch vụ</th>
+                <th>Chi nhánh</th>
+                <th>Bác sĩ</th>
+                <th>Trạng thái</th> <!-- Action Buttons column -->
+            </tr>
+        </thead>
+        <tbody>
+            {% for appointment in appointments %}
+            <tr>
+                <td>{{ appointment.name }}</td>
+                <td>{{ appointment.phone }}</td>
+                <td>{{ appointment.date }}</td>
+                <td>{{ appointment.time }}</td>
+                <td>{{ appointment.service }}</td>
+                <td>{{ appointment.branch }}</td>
+                <td>{{ appointment.doctor }}</td>
+                <td>
+                    <form method="post" action="{% url 'staff:update_appointment_status' appointment.id %}">
+                        {% csrf_token %}
+                        
+                        <!-- Show action buttons or status text depending on the current status -->
+                        {% if appointment.status == 'Pending' %}
+                            <button type="submit" name="status" value="Confirmed" class="action-btn confirm">Xác nhận</button>
+                            <button type="submit" name="status" value="Cancelled" class="action-btn cancel">Hủy</button>
+                        {% elif appointment.status == 'Confirmed' %}
+                            <button type="submit" name="status" value="Cancelled" class="action-btn cancel">Hủy</button>
+                        {% elif appointment.status == 'Cancelled' %}
+                            <span class="status-cancelled">Đã hủy</span>
+                        {% elif appointment.status == 'Completed' %}
+                            <span class="status-completed">Hoàn thành</span>
+                        {% else %}
+                            <span class="status-text">Chưa xác nhận</span>
+                        {% endif %}
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock lich_hen %}

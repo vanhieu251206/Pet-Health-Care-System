@@ -4,11 +4,14 @@ from django.utils.http import urlencode
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, get_user_model, logout
 from django.contrib import messages
-from .models import Product, Cart, CartItem
+from .models import Product, Cart, CartItem, Appointment
 from staff.views import tong_quan
 from django.urls import reverse
+import logging
 
 CustomUser = get_user_model()
+
+logger = logging.getLogger(__name__)
 
 # Create your views here.
 def guest_dashboard(request):
@@ -56,6 +59,10 @@ def register_page(request):
     context ={}
     return render(request, 'pets/register_page.html', context)
 
+def dat_lich(request):
+    context ={}
+    return render(request, 'pets/dat_lich.html', context)
+
 def shop(request):
     products =  Product.objects.all()
     return render(request, 'pets/shop.html', {'products': products})
@@ -92,44 +99,48 @@ def login_view(request):
             return redirect("pets:login_page")
 
     return render(request, "pets/login_page.html")
-        
+
 def register_view(request):
     if request.method == "POST":
-        username = request.POST["username"]
-        email = request.POST["email"]
-        password = request.POST["password"]
-        password_confirm = request.POST["password_confirm"]
-        role = request.POST["role"]
+        username = request.POST.get("username", "").strip()
+        email = request.POST.get("email", "").strip()
+        password = request.POST.get("password", "").strip()
+        password_confirm = request.POST.get("password_confirm", "").strip()
 
-        errors = []
+        logger.info(f"🔹 Dữ liệu nhận được - Username: {username}, Email: {email}")
+
+        if not username or not email or not password or not password_confirm:
+            messages.error(request, "Vui lòng điền đầy đủ thông tin.")
+            return redirect("pets:register_page")
 
         if password != password_confirm:
-            errors.append("Mật khẩu xác nhận không khớp.")
+            messages.error(request, "Mật khẩu xác nhận không khớp.")
+            return redirect("pets:register_page")
 
         if CustomUser.objects.filter(username=username).exists():
-            errors.append("Tên đăng nhập đã tồn tại.")
+            messages.error(request, "Tên đăng nhập đã tồn tại.")
+            return redirect("pets:register_page")
 
         if CustomUser.objects.filter(email=email).exists():
-            errors.append("Email đã được sử dụng.")
+            messages.error(request, "Email đã được sử dụng.")
+            return redirect("pets:register_page")
 
-        if errors:
-            return render(request, "pets/register_page.html", {
-                "errors": errors,
-                "username": username,
-                "email": email,
-                "role": role
-            })
+        try:
+            user = CustomUser.objects.create_user(username=username, email=email, password=password)
+            user.role = "customer"  
+            user.save()
+            messages.success(request, "Đăng ký thành công! Vui lòng đăng nhập.")
+            logger.info(f"✅ Người dùng {username} đã được tạo thành công!")
+            return redirect("pets:login_page")
 
-        user = CustomUser.objects.create_user(username=username, email=email, password=password, role=role)
-        user.save()
-
-        messages.success(request, "Đăng ký thành công! Vui lòng đăng nhập.")
-        return redirect("pets:login_page")  
+        except Exception as e:
+            logger.error(f"❌ Lỗi khi tạo người dùng: {str(e)}")
+            messages.error(request, f"Có lỗi xảy ra: {str(e)}")
+            return redirect("pets:register_page")
 
     return render(request, "pets/register_page.html")
 
 
-    return render(request, "pets/login_page.html")
 
 def logout_view(request):
     logout(request)
@@ -191,5 +202,34 @@ def update_cart(request, item_id):
         item.save()
 
     return redirect("pets:cart_view")
+
+def create_appointment(request):
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        phone = request.POST.get('phone')
+        date = request.POST.get('date')
+        time = request.POST.get('time')
+        service = request.POST.get('service')
+        branch = request.POST.get('branch')
+        doctor = request.POST.get('doctor')
+
+        if name and phone and date and time and service and branch and doctor:
+            Appointment.objects.create(
+                name=name,
+                phone=phone,
+                date=date,
+                time=time,
+                service=service,
+                branch=branch,
+                doctor=doctor
+            )
+            messages.success(request, 'Lịch hẹn đã được đặt thành công!')
+            return redirect('pets:create_appointment')  
+        else:
+            messages.error(request, 'Vui lòng điền đầy đủ thông tin.')
+
+    return render(request, 'pets/dat_lich.html')
+
+
 
 

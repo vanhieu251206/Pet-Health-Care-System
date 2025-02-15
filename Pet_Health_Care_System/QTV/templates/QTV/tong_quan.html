@@ -1,0 +1,162 @@
+{% extends 'QTV/base.html' %}
+{% load static %}
+
+{% block page_title %}
+Tổng quan
+{% endblock page_title %}
+
+{% block main-contain %}
+<style>
+    body {
+        font-family: 'Roboto', sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+    }
+
+    .main-content {
+        margin-left: 275px; /* Offset for sidebar */
+        padding: 20px;
+    }
+
+    .grid-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 20px;
+        padding-top: 20px;
+    }
+
+    .card {
+        background-color: white;
+        border-radius: 8px;
+        padding: 20px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease-in-out;
+        text-decoration: none;
+    }
+
+    .card:hover {
+        transform: translateY(-10px);
+    }
+
+    .card-header {
+        font-size: 1.25rem;
+        font-weight: bold;
+        margin-bottom: 10px;
+        color: #4c4c4c; /* Dark gray color for the header */
+    }
+
+    .card-body {
+        font-size: 1rem;
+        color: #333; /* Dark color for the text */
+    }
+
+    .list-disc {
+        margin-left: 20px;
+        list-style-type: disc;
+    }
+
+    .card-header i {
+        font-size: 24px;
+        margin-right: 10px;
+    }
+
+    .text-blue-500 {
+        color: #3b82f6;
+    }
+
+    .text-orange-500 {
+        color: #f97316;
+    }
+
+    .text-green-500 {
+        color: #10b981;
+    }
+
+    .text-red-500 {
+        color: #ef4444;
+    }
+
+    /* Center align the logo and text */
+    .logo-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+    }
+
+    .logo-container img {
+        width: 24px;
+        height: 24px;
+        object-fit: cover;
+    }
+</style>
+
+
+<div class="main-content">
+    <div class="grid-container">
+
+        <!-- Card 2: Quản lý tài khoản -->
+        <a href="#" class="card">
+            <div class="card-header text-orange-500">
+                👤 Quản lý tài khoản:
+            </div>
+            <div class="card-body">
+                <p>Tổng số tài khoản: 50</p>
+                <p>Trạng thái tài khoản:</p>
+                <ul class="list-disc">
+                    <li>Đang hoạt động: 40</li>
+                    <li>Nghỉ: 5</li>
+                    <li>Bị khóa: 5</li>
+                </ul>
+                <p class="mt-4">Thông tin chi tiết tài khoản:</p>
+                <ul class="list-disc">
+                    <li>Admin: 5</li>
+                    <li>Nhân viên: 30</li>
+                    <li>Khách hàng: 15</li>
+                </ul>
+            </div>
+        </a>
+
+        <!-- Card 3: Quản lý cấu hình hệ thống -->
+        <a href="#" class="card">
+            <div class="card-header text-green-500">
+                ⚙️ Quản lý cấu hình hệ thống:
+            </div>
+            <div class="card-body">
+                <p>Thông tin hệ thống:</p>
+                <ul class="list-disc">
+                    <li>Tên hệ thống: GroupOne</li>
+                    <li>Logo: 
+                        <img alt="System logo" class="inline h-6 w-6" height="24" src="https://storage.googleapis.com/a1aa/image/804QB7BQ6klXPc4JhmXGI92lmvrO9Vtid4b5lHQlQnQ.jpg" width="24"/>
+                    </li>
+                    <li>Thông tin liên lạc: contact@groupone.com</li>
+                </ul>
+                <p class="mt-4">Cài đặt bảo mật:</p>
+                <ul class="list-disc">
+                    <li>Xác thực hai yếu tố: Bật</li>
+                    <li>Yêu cầu mật khẩu mạnh: Bật</li>
+                </ul>
+            </div>
+        </a>
+
+        <!-- Card 4: Thống kê doanh thu -->
+        <a href="#" class="card">
+            <div class="card-header text-red-500">
+                📊 Thống kê doanh thu:
+            </div>
+            <div class="card-body">
+                <p>Doanh thu theo ngày: $500</p>
+                <p>Doanh thu theo tuần: $3500</p>
+                <p>Doanh thu theo tháng: $15000</p>
+                <p class="mt-4">Doanh thu theo dịch vụ:</p>
+                <ul class="list-disc">
+                    <li>Khám bệnh: $7000</li>
+                    <li>Xét nghiệm: $5000</li>
+                    <li>Dịch vụ khác: $3000</li>
+                </ul>
+            </div>
+        </a>
+    </div>
+</div>
+{% endblock main-contain %}

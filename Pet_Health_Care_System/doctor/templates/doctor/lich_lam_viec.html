@@ -1,0 +1,140 @@
+{% extends "doctor/base.html" %}
+{% load static %}
+
+{% block page_title %}Lịch làm việc của tôi{% endblock page_title %}
+
+{% block lich_lam_viec %}
+  <div class="work-schedule">
+    <!-- Appointment List Section -->
+    <div class="schedule-section">
+      <table class="appointment-table">
+        <thead>
+          <tr>
+            <th>Thời gian</th>
+            <th>Tên khách hàng</th>
+            <th>Loại thú cưng</th>
+            <th>Lý do khám</th>
+            <th>Chức năng</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Example of an appointment -->
+          <tr>
+            <td>8:00 AM</td>
+            <td>Nguyễn Văn A</td>
+            <td>Chó</td>
+            <td>Khám bệnh</td>
+            <td>
+              <a href="#" class="btn-view-history">📜 Lịch sử khám chữa bệnh</a>
+            </td>
+          </tr>
+          <tr>
+            <td>10:00 AM</td>
+            <td>Trần Thị B</td>
+            <td>Mèo</td>
+            <td>Tiêm phòng</td>
+            <td>
+              <a href="#" class="btn-view-history">📜 Lịch sử khám chữa bệnh</a>
+            </td>
+          </tr>
+          <!-- More rows can be dynamically added here -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <style>
+    /* Main container */
+    .work-schedule {
+      margin-left: 275px;
+      padding: 20px;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    /* Title for the work schedule section */
+    .work-schedule h2 {
+      font-size: 26px;
+      margin-bottom: 20px;
+      color: #2c3e50;
+      font-weight: bold;
+    }
+
+    /* Section title styling */
+    .schedule-section h3 {
+      font-size: 22px;
+      margin-bottom: 15px;
+      color: #34495e;
+    }
+
+    /* Appointment table styling */
+    .appointment-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+    }
+
+    .appointment-table th, .appointment-table td {
+      padding: 10px;
+      text-align: center;
+      border: 1px solid #ddd;
+    }
+
+    .appointment-table th {
+      background-color: #f2f2f2;
+      font-weight: bold;
+    }
+
+    /* Add hover effect for table rows */
+    .appointment-table tr:hover {
+      background-color: #f9f9f9;
+    }
+
+    /* Styling for the "Chức năng" column (buttons) */
+    .appointment-table .btn-view, .appointment-table .btn-reminder, .appointment-table .btn-view-history {
+      display: inline-block;
+      padding: 6px 12px;
+      margin: 5px;
+      text-decoration: none;
+      border-radius: 5px;
+    }
+
+    .btn-view {
+      background-color: #3498db;
+      color: #fff;
+    }
+
+    .btn-reminder {
+      background-color: #e74c3c;
+      color: #fff;
+    }
+
+    .btn-view-history {
+      background-color: #9b59b6;
+      color: #fff;
+    }
+
+    /* Add hover effect for buttons */
+    .btn-view:hover, .btn-reminder:hover, .btn-view-history:hover {
+      opacity: 0.8;
+    }
+
+    /* List style for pets needing care */
+    .pets-list {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    .pets-list li {
+      font-size: 16px;
+      margin-bottom: 10px;
+      color: #7f8c8d;
+      border-bottom: 1px solid #f0f0f0;
+      padding-bottom: 8px;
+    }
+
+    .pets-list li:last-child {
+      border-bottom: none;
+    }
+  </style>
+
+{% endblock lich_lam_viec %}

@@ -19,10 +19,12 @@ urlpatterns = [
     path('about_us/', views.about_us, name='about_us'),
     path('contact/', views.contact, name='contact'),
     path('shop/', views.shop, name='shop'),
+    path('dat_lich/', views.dat_lich, name='dat_lich'),
     path("login/", login_view, name="login_view"),
     path("register/", register_view, name="register_view"),
     path('logout/', auth_views.LogoutView.as_view(next_page='pets:login_page'), name='logout'),
     path("add_to_cart/<int:product_id>/", add_to_cart, name="add_to_cart"),
     path("remove_from_cart/<int:item_id>/", remove_from_cart, name="remove_from_cart"),
     path('update_cart/<int:item_id>/', update_cart, name="update_cart"),
+    path('create/', views.create_appointment, name='create_appointment'),
 ]
