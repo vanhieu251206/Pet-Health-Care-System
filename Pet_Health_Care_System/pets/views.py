@@ -48,23 +48,23 @@ def periodic_health_checkups(request):
     return render(request, 'pets/periodic_health_checkups.html', context)
 
 def about_us(request):
-    context ={}
+    context = {}
     return render(request, 'pets/about_us.html', context)
 
 def contact(request):
-    context ={}
+    context = {}
     return render(request, 'pets/contact.html', context)
 
 def register_page(request):
-    context ={}
+    context = {}
     return render(request, 'pets/register_page.html', context)
 
 def dat_lich(request):
-    context ={}
+    context = {}
     return render(request, 'pets/dat_lich.html', context)
 
 def shop(request):
-    products =  Product.objects.all()
+    products = Product.objects.all()
     return render(request, 'pets/shop.html', {'products': products})
 
 def login_view(request):
@@ -79,7 +79,6 @@ def login_view(request):
         if user is not None:
             if user.role == role:
                 login(request, user)
-
 
                 if next_url:
                     return redirect(next_url)
@@ -140,8 +139,6 @@ def register_view(request):
 
     return render(request, "pets/register_page.html")
 
-
-
 def logout_view(request):
     logout(request)
     return redirect('pets:login_page')
@@ -169,7 +166,6 @@ def add_to_cart(request, product_id):
 
     # Nếu đã đăng nhập, kiểm tra vai trò
     if request.user.role != "customer":
-        #messages.warning(request, "Bạn không thể thêm sản phẩm vào giỏ hàng.")
         return redirect("staff:tong_quan")  
 
     product = get_object_or_404(Product, id=product_id)
@@ -229,7 +225,3 @@ def create_appointment(request):
             messages.error(request, 'Vui lòng điền đầy đủ thông tin.')
 
     return render(request, 'pets/dat_lich.html')
-
-
-
-
