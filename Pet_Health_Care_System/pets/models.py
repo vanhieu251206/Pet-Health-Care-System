@@ -1,3 +1,4 @@
+# pets/models.py
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 
@@ -8,7 +9,11 @@ class CustomUser(AbstractUser):
         ('doctor', 'Bác sĩ'),
         ('admin', 'Admin'),
     )
-    phone = models.CharField(max_length=10, blank=True, null=True)
+    full_name = models.CharField(max_length=255, blank=True, null=True)
+    dob = models.DateField(blank=True, null=True) 
+    phone = models.CharField(max_length=10, blank=True, null=True) 
+    email = models.EmailField(blank=True, null=True)  
+    address = models.TextField(blank=True, null=True)  
     avatar = models.ImageField(upload_to='avatars/', blank=True, null=True) 
     role = models.CharField(max_length=20, choices=ROLE_CHOICES, default='customer')
 
@@ -40,9 +45,8 @@ class CartItem(models.Model):
     
     def __str__(self):
         return f"{self.quantity} x {self.product.name} trong giỏ hàng của {self.cart.user.username}"
-    
-from django.db import models
 
+# Mô hình Appointment
 class Appointment(models.Model):
     name = models.CharField(max_length=100)  
     phone = models.CharField(max_length=15)  
@@ -60,4 +64,21 @@ class Appointment(models.Model):
 
     def __str__(self):
         return f"Lịch hẹn cho {self.name} vào ngày {self.date} lúc {self.time}"
+
+# pets/models.py
+from django.contrib.auth.models import User
+
+class Pet(models.Model):
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name="pets")
+    name = models.CharField(max_length=100)
+    age = models.IntegerField()
+    gender = models.CharField(max_length=10)
+    species = models.CharField(
+        max_length=100,
+        choices=[('cat', 'Mèo'), ('dog', 'Chó')],
+        default='cat'  
+    )
+
+    def __str__(self):
+        return self.name
 

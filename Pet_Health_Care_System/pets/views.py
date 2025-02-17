@@ -1,10 +1,11 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse, HttpResponseBadRequest
 from django.utils.http import urlencode
+from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, get_user_model, logout
 from django.contrib import messages
-from .models import Product, Cart, CartItem, Appointment
+from .models import Product, Cart, CartItem, Appointment, Pet
 from staff.views import tong_quan
 from django.urls import reverse
 import logging
@@ -57,6 +58,10 @@ def dat_lich(request):
 def shop(request):
     products =  Product.objects.all()
     return render(request, 'pets/shop.html', {'products': products})
+
+def my_pets(request):
+    pets = Pet.objects.all()  
+    return render(request, 'pets/my_pets.html', {'pets': pets})
 
 def login_view(request):
     if request.method == "POST":
@@ -221,6 +226,94 @@ def create_appointment(request):
 
     return render(request, 'pets/dat_lich.html')
 
+@login_required
+def update_profile(request):
+    if request.method == 'POST':
+        user = request.user
+        full_name = request.POST.get('full_name')
+        dob = request.POST.get('dob')
+        phone = request.POST.get('phone')
+        email = request.POST.get('email')
+        address = request.POST.get('address')
+        avatar = request.FILES.get('avatar')
+
+        try:
+            # Cập nhật thông tin người dùng
+            user.full_name = full_name
+            user.dob = dob
+            user.phone = phone
+            user.email = email
+            user.address = address
+            if avatar:
+                user.avatar = avatar
+            user.save()
+
+            return JsonResponse({"status": "success"})
+        except Exception as e:
+            return JsonResponse({"status": "error", "message": str(e)})
+    return render(request, 'pets/profile.html')
+
+def profile_view(request):
+    user = request.user
+
+    if request.method == 'POST':
+        full_name = request.POST.get('full_name')
+        dob = request.POST.get('dob')
+        phone = request.POST.get('phone')
+        email = request.POST.get('email')
+        address = request.POST.get('address')
+        avatar = request.FILES.get('avatar')
+        role = request.POST.get('role') 
+
+        user.full_name = full_name
+        user.dob = dob
+        user.phone = phone
+        user.email = email
+        user.address = address
+        if avatar:
+            user.avatar = avatar
+        if role:  
+            user.role = role 
+        user.save()
+
+        return JsonResponse({'status': 'success'})
+
+    return render(request, 'pets/profile.html', {'user': user})
+
+def my_pets(request):
+    if request.method == 'POST':
+        # Kiểm tra nếu người dùng đã đăng nhập
+        if request.user.is_authenticated:
+            # Lấy thông tin từ form
+            name = request.POST.get('name')
+            age = request.POST.get('age')
+            gender = request.POST.get('gender')
+            species = request.POST.get('species')  # Lấy loài từ form
+
+            # Kiểm tra nếu dữ liệu đầy đủ
+            if name and age and gender and species:
+                # Tạo đối tượng Pet và lưu vào cơ sở dữ liệu
+                pet = Pet.objects.create(
+                    user=request.user,  # Lưu ID của người dùng hiện tại
+                    name=name,
+                    age=age,
+                    gender=gender,
+                    species=species  # Lưu loài vào cơ sở dữ liệu
+                )
+                return redirect('pets:my_pets')  # Sau khi thêm, chuyển hướng lại trang danh sách thú cưng
+
+            else:
+                return render(request, 'pets/my_pets.html', {'error': 'Vui lòng điền đầy đủ thông tin thú cưng.'})
+        else:
+            return redirect('login')  # Nếu người dùng chưa đăng nhập, chuyển hướng đến trang đăng nhập
+
+    pets = Pet.objects.filter(user=request.user)  # Lấy tất cả thú cưng của người dùng hiện tại
+    return render(request, 'pets/my_pets.html', {'pets': pets})
+
+def delete_pet(request, pet_id):
+    pet = get_object_or_404(Pet, id=pet_id, user=request.user)  # Lấy thú cưng theo ID và người dùng
+    pet.delete()  # Xóa thú cưng
+    return redirect('pets:my_pets')  # Quay lại trang danh sách thú cưng
 
 
 

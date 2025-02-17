@@ -84,7 +84,8 @@
                         <span>{{ user.username }}</span>
                       </a>
                       <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Thông tin tài khoản</a></li>
+                        <li><a class="dropdown-item" href="{% url "pets:profile" %}">Thông tin tài khoản</a></li>
+                        <li><a class="dropdown-item" href="{% url "pets:my_pets" %}">Thú cưng của tôi</a></li>
                         <li>
                           <form action="{% url 'pets:logout' %}" method="post" style="display: inline;">
                               {% csrf_token %}
@@ -127,6 +128,8 @@
         {% block shop %}{% endblock shop %}
         {% block register_page %}{% endblock register_page %}
         {% block dat_lich %}{% endblock dat_lich %}
+        {% block profile %}{% endblock profile %}
+        {% block my_pets %}{% endblock my_pets %}
         <!-- footer -->
         <footer>
           <div class="footer-container">

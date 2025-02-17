@@ -1,0 +1,233 @@
+{% extends "pets/base.html" %}
+{% load static %}
+
+{% block my_pets %}
+<!-- Thêm liên kết tới FontAwesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+<style>
+    .pets-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+        font-family: Arial, sans-serif;
+    }
+
+    .pets-container h1 {
+        text-align: center;
+        color: #4CAF50;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+
+    table, th, td {
+        border: 1px solid #ccc;
+    }
+
+    th, td {
+        padding: 10px;
+        text-align: left;
+    }
+
+    th {
+        background-color: #4CAF50;
+        color: white;
+    }
+
+    .add-pet-btn {
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+        border-radius: 5px;
+        display: block;
+        margin: 20px 0;
+        margin-left: auto;
+        margin-right: 0;
+    }
+
+    .add-pet-btn:hover {
+        background-color: #45a049;
+    }
+
+    /* Modal Style */
+    .modal {
+        display: none; /* Ẩn modal mặc định */
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.6); /* Nền mờ đậm hơn */
+        overflow: auto;
+    }
+
+    .modal-content {
+        background-color: #fefefe;
+        margin: 10% auto;
+        padding: 30px;
+        border: 1px solid #888;
+        width: 80%;
+        max-width: 600px;  /* Giới hạn chiều rộng */
+        border-radius: 15px;  /* Bo tròn các góc */
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);  /* Hiệu ứng bóng đổ */
+        animation: fadeIn 0.5s ease-out;  /* Thêm hiệu ứng mờ dần khi mở modal */
+    }
+
+    /* Animation khi mở modal */
+    @keyframes fadeIn {
+        0% { opacity: 0; }
+        100% { opacity: 1; }
+    }
+
+    .close {
+        color: #aaa;
+        font-size: 28px;
+        font-weight: bold;
+        position: absolute;
+        top: 10px;
+        right: 20px;
+        cursor: pointer;
+    }
+
+    .close:hover,
+    .close:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    .pet-form input, .pet-form select {
+        margin-bottom: 12px;
+        padding: 12px;
+        width: 100%;
+        max-width: 320px;
+        border-radius: 8px;
+        border: 1px solid #ccc;
+        font-size: 16px;
+        box-sizing: border-box;
+    }
+
+    .pet-form button {
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        padding: 12px 20px;
+        font-size: 16px;
+        cursor: pointer;
+        border-radius: 8px;
+        width: 100%;
+        max-width: 320px;
+    }
+
+    .pet-form button:hover {
+        background-color: #45a049;
+    }
+
+    .delete-btn {
+        color: red;
+        cursor: pointer;
+        font-size: 24px;
+        text-decoration: none;  /* Xóa gạch chân (nếu có) */
+    }
+
+    .delete-btn:hover {
+        color: darkred;
+    }
+
+    .delete-container {
+        margin-top: 20px;
+        text-align: right;
+    }
+
+    #X {
+        border: none; /* Loại bỏ viền */
+    }
+</style>
+<!-- Thêm liên kết tới FontAwesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+<div class="pets-container">
+    <h1>Thông tin về thú cưng của tôi</h1>
+
+    <!-- Nút Thêm thú cưng mở modal -->
+    <button class="add-pet-btn" id="addPetBtn">Thêm thú cưng</button>
+
+    <table>
+        <thead>
+            <tr>
+                <th>#</th>  <!-- Số thứ tự -->
+                <th>Tên</th>
+                <th>Tuổi</th>
+                <th>Giới tính</th>
+                <th>Loài</th>  <!-- Thuộc tính loài -->
+            </tr>
+        </thead>
+        <tbody>
+            {% for pet in pets %}
+            <tr>
+                <td>{{ forloop.counter }}</td>  <!-- Hiển thị số thứ tự -->
+                <td>{{ pet.name }}</td>
+                <td>{{ pet.age }}</td>
+                <td>{{ pet.gender }}</td>
+                <td>{{ pet.get_species_display }}</td>  <!-- Hiển thị tên loài -->
+                <td id="X"><a href="{% url 'pets:delete_pet' pet.id %}" class="delete-btn"><i class="fas fa-times"></i></a></td>  <!-- Hiển thị nút xóa -->
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<!-- Modal cho form Thêm thú cưng -->
+<div id="petModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Thêm thú cưng mới</h2>
+        <form method="POST">
+            {% csrf_token %}
+            <input type="text" name="name" placeholder="Tên thú cưng" required>
+            <input type="number" name="age" placeholder="Tuổi" required>
+            <input type="text" name="gender" placeholder="Giới tính" required>
+            <select name="species" required>
+                <option value="cat">Mèo</option>
+                <option value="dog">Chó</option>
+            </select>
+            <button type="submit">Thêm thú cưng</button>
+        </form>
+    </div>
+</div>
+
+<!-- Javascript để mở và đóng modal -->
+<script>
+    // Lấy modal và nút "Thêm thú cưng"
+    var modal = document.getElementById("petModal");
+    var btn = document.getElementById("addPetBtn");
+    var span = document.getElementsByClassName("close")[0];
+
+    // Mở modal khi nhấn nút "Thêm thú cưng"
+    btn.onclick = function() {
+        modal.style.display = "block";
+    }
+
+    // Đóng modal khi nhấn "X"
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    // Đóng modal khi nhấn ra ngoài modal
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+</script>
+
+{% endblock my_pets %}
+
