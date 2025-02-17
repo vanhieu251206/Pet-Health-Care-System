@@ -36,4 +36,7 @@ urlpatterns = [
 
     # Tạo lịch hẹn
     path('create/', views.create_appointment, name='create_appointment'),
+    path('profile/', views.update_profile, name='profile'),
+    path('my_pets/', views.my_pets, name='my_pets'),
+    path('delete-pet/<int:pet_id>/', views.delete_pet, name='delete_pet'),
 ]

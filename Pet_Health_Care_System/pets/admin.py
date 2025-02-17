@@ -1,9 +1,10 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from .models import Product, CustomUser
+from .models import Product, CustomUser, Pet
 
 # Đăng ký model Pet với admin
 admin.site.register(Product)
+admin.site.register(Pet)
 
 class CustomUserAdmin(UserAdmin):
     model = CustomUser
@@ -30,3 +31,4 @@ class CustomUserAdmin(UserAdmin):
     )
 
 admin.site.register(CustomUser, CustomUserAdmin)
+

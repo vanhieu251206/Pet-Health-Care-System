@@ -1,3 +1,4 @@
+# pets/models.py
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 
@@ -9,8 +10,12 @@ class CustomUser(AbstractUser):
         ('doctor', 'Bác sĩ'),
         ('admin', 'Admin'),
     )
-    phone = models.CharField(max_length=10, blank=True, null=True)
-    avatar = models.ImageField(upload_to='avatars/', blank=True, null=True)
+    full_name = models.CharField(max_length=255, blank=True, null=True)
+    dob = models.DateField(blank=True, null=True) 
+    phone = models.CharField(max_length=10, blank=True, null=True) 
+    email = models.EmailField(blank=True, null=True)  
+    address = models.TextField(blank=True, null=True)  
+    avatar = models.ImageField(upload_to='avatars/', blank=True, null=True) 
     role = models.CharField(max_length=20, choices=ROLE_CHOICES, default='customer')
 
     def __str__(self):
@@ -45,7 +50,7 @@ class CartItem(models.Model):
     def __str__(self):
         return f"{self.quantity} x {self.product.name} trong giỏ hàng của {self.cart.user.username}"
 
-# Mô hình Appointment (Cuộc hẹn)
+# Mô hình Appointment
 class Appointment(models.Model):
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)  # Liên kết với người dùng
     pet_name = models.CharField(max_length=100)  # Tên thú cưng
@@ -67,36 +72,20 @@ class Appointment(models.Model):
     def __str__(self):
         return f"Lịch hẹn cho {self.pet_name} vào ngày {self.date} lúc {self.time}"
 
-    def confirm_appointment(self):
-        """
-        Phương thức xác nhận cuộc hẹn, tạo lịch làm việc cho bác sĩ.
-        """
-        if self.status == 'Confirmed':
-            # Kiểm tra nếu lịch làm việc của bác sĩ đã có, nếu chưa tạo mới
-            existing_schedule = WorkSchedule.objects.filter(
-                doctor=self.doctor,
-                pet_name=self.pet_name,
-                date=self.date,
-                time=self.time
-            )
+# pets/models.py
+from django.contrib.auth.models import User
 
-            if not existing_schedule.exists():
-                # Tạo lịch làm việc mới cho bác sĩ
-                self.doctor.schedule_set.create(
-                    pet_name=self.pet_name,
-                    service=self.service,
-                    date=self.date,
-                    time=self.time
-                )
-            self.save()
-
-# Mô hình WorkSchedule (Lịch làm việc của bác sĩ)
-class WorkSchedule(models.Model):
-    doctor = models.ForeignKey(CustomUser, related_name="schedule_set", on_delete=models.CASCADE)  # Bác sĩ
-    pet_name = models.CharField(max_length=100)  # Tên thú cưng
-    service = models.CharField(max_length=100)  # Dịch vụ
-    date = models.DateField()  # Ngày
-    time = models.TimeField()  # Giờ
+class Pet(models.Model):
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name="pets")
+    name = models.CharField(max_length=100)
+    age = models.IntegerField()
+    gender = models.CharField(max_length=10)
+    species = models.CharField(
+        max_length=100,
+        choices=[('cat', 'Mèo'), ('dog', 'Chó')],
+        default='cat'  
+    )
 
     def __str__(self):
-        return f"Lịch làm việc của {self.doctor.username} - {self.pet_name} vào ngày {self.date} lúc {self.time}"
+        return self.name
+
