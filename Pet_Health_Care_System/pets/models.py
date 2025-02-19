@@ -65,9 +65,6 @@ class Appointment(models.Model):
     def __str__(self):
         return f"Lịch hẹn cho {self.name} vào ngày {self.date} lúc {self.time}"
 
-# pets/models.py
-from django.contrib.auth.models import User
-
 class Pet(models.Model):
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name="pets")
     name = models.CharField(max_length=100)

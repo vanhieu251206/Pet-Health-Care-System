@@ -1,0 +1,143 @@
+{% extends "pets/base.html" %}
+{% load static %}
+
+{% block edit_pet %}
+<style>
+    /* Định dạng toàn bộ trang */
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+    }
+
+    .container {
+        width: 50%;
+        margin: 30px auto;
+        background-color: #ffffff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border: 1px solid #ddd;
+    }
+
+    /* Sử dụng Flexbox để căn giữa tiêu đề và nút quay lại */
+    .header-container {
+        display: flex;
+        justify-content: space-between;  /* Căn lề trái phải cho tiêu đề và nút quay lại */
+        align-items: center;  /* Căn giữa theo chiều dọc */
+        margin-bottom: 20px;
+    }
+
+    h1 {
+        color: #333;
+        font-size: 24px;
+        margin: 0;  /* Xóa khoảng cách dưới tiêu đề */
+        flex-grow: 1;  /* Đảm bảo tiêu đề chiếm hết không gian còn lại */
+        text-align: center;  /* Căn giữa tiêu đề */
+    }
+
+ 
+    .back-link {
+        position: absolute;
+        left: 27%;  /* Di chuyển icon về phía trái */
+        top: 130px;   /* Căn vào vị trí cao hơn một chút nếu cần */
+    }   
+
+
+    .back-link a {
+        color: #black;
+        text-decoration: none;
+        display: flex;
+        align-items: center;  /* Căn icon và text vào cùng một hàng */
+    }
+
+    .back-link a i {
+        font-size: 20px;
+        margin-right: 8px;  /* Tạo khoảng cách giữa icon và chữ */
+    }
+
+    .back-link a:hover {
+        text-decoration: underline;
+    }
+
+    label {
+        font-weight: bold;
+        margin-bottom: 10px;
+        display: block;
+        color: #333;
+    }
+
+    input, select {
+        width: 100%;
+        padding: 12px 15px;
+        margin-bottom: 15px;
+        border-radius: 8px;
+        border: 1px solid #ddd;
+        box-sizing: border-box;
+        font-size: 14px;
+    }
+
+    input:focus, select:focus {
+        outline: none;
+        border-color: #28a745;
+    }
+
+    button {
+        background-color: #28a745;
+        color: white;
+        border: none;
+        padding: 12px 20px;
+        font-size: 16px;
+        border-radius: 8px;
+        cursor: pointer;
+        width: 100%;
+        transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+        background-color: #218838;
+    }
+</style>
+
+<div class="container">
+    <!-- Tiêu đề và nút quay lại -->
+    <div class="header-container">
+        <h1>Chỉnh sửa thông tin thú cưng</h1>
+        <div class="back-link">
+            <a href="{% url 'pets:my_pets' %}">
+                <i class="fa fa-arrow-left"></i> 
+            </a>
+        </div>
+    </div>
+
+    <!-- Form chỉnh sửa thú cưng -->
+    <form method="POST" action="{% url 'pets:edit_pet' pet.id %}">
+        {% csrf_token %}
+        <div>
+            <label for="name">Tên thú cưng:</label>
+            <input type="text" id="name" name="name" value="{{ pet.name }}" required>
+        </div>
+        <div>
+            <label for="age">Tuổi:</label>
+            <input type="number" id="age" name="age" value="{{ pet.age }}" required>
+        </div>
+        <div>
+            <label for="gender">Giới tính:</label>
+            <select id="gender" name="gender" required>
+                <option value="Đực" {% if pet.gender == 'Đực' %}selected{% endif %}>Đực</option>
+                <option value="Cái" {% if pet.gender == 'Cái' %}selected{% endif %}>Cái</option>
+            </select>
+        </div>
+        <div>
+            <label for="species">Loài:</label>
+            <select id="species" name="species" required>
+                <option value="cat" {% if pet.species == 'cat' %}selected{% endif %}>Mèo</option>
+                <option value="dog" {% if pet.species == 'dog' %}selected{% endif %}>Chó</option>
+            </select>
+        </div>
+        <button type="submit">Lưu thay đổi</button>
+    </form>
+</div>
+
+{% endblock edit_pet %}

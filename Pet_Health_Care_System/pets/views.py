@@ -311,9 +311,29 @@ def my_pets(request):
     return render(request, 'pets/my_pets.html', {'pets': pets})
 
 def delete_pet(request, pet_id):
-    pet = get_object_or_404(Pet, id=pet_id, user=request.user)  # Lấy thú cưng theo ID và người dùng
-    pet.delete()  # Xóa thú cưng
-    return redirect('pets:my_pets')  # Quay lại trang danh sách thú cưng
+    pet = get_object_or_404(Pet, id=pet_id, user=request.user) 
+    pet.delete() 
+    return redirect('pets:my_pets')  
+
+def edit_pet(request, pet_id):
+    pet = get_object_or_404(Pet, id=pet_id)
+
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        age = request.POST.get('age')
+        gender = request.POST.get('gender')
+        species = request.POST.get('species')
+
+        pet.name = name
+        pet.age = age
+        pet.gender = gender
+        pet.species = species
+        pet.save()
+
+        return redirect('pets:my_pets')
+
+    return render(request, 'pets/edit_pet.html', {'pet': pet})
+
 
 
 

@@ -2,232 +2,260 @@
 {% load static %}
 
 {% block my_pets %}
-<!-- Thêm liên kết tới FontAwesome -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-
 <style>
-    .pets-container {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 20px;
+    /* CSS chung */
+    body {
         font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
     }
 
-    .pets-container h1 {
+    .container {
+        width: 80%;
+        margin: 20px auto;
+        background-color: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h1, h3 {
         text-align: center;
-        color: #4CAF50;
+        color: #333;
     }
 
-    table {
+    .alert {
+        padding: 10px;
+        background-color: #f8d7da;
+        color: #721c24;
+        border: 1px solid #f5c6cb;
+        border-radius: 5px;
+        margin-bottom: 20px;
+    }
+
+    .pets-table-wrapper {
+        overflow: visible; /* Cho phép menu tràn ra ngoài bảng */
+        border: 1px solid #ddd;
+        position: relative;
+    }
+
+    .pets-table {
         width: 100%;
         border-collapse: collapse;
         margin-top: 20px;
-    }
-
-    table, th, td {
-        border: 1px solid #ccc;
-    }
-
-    th, td {
-        padding: 10px;
         text-align: left;
     }
 
-    th {
-        background-color: #4CAF50;
-        color: white;
+    .pets-table th, .pets-table td {
+        padding: 12px 15px;
+        border: 1px solid #ddd;
     }
 
-    .add-pet-btn {
-        background-color: #4CAF50;
+    .pets-table th {
+        background-color: #28a745;
+        color: white;
+        position: sticky;
+        top: 0;
+    }
+
+    .pets-table td {
+        background-color: #fff;
+    }
+
+    /* Dấu ba chấm sẽ nằm cùng dòng với nội dung hàng */
+    .pet-row {
+        position: relative;
+    }
+
+    .action-column {
+        font-size: 20px;
+        cursor: pointer;
+        position: absolute;
+        top: 30%;
+        right: 10px;
+        transform: translateY(-50%); /* Đặt dấu ba chấm vào giữa hàng */
+        display: none; /* Ẩn dấu ba chấm ban đầu */
+    }
+
+    /* Hiển thị dấu ba chấm khi hover vào hàng */
+    .pet-row:hover .action-column {
+        display: block; /* Hiển thị dấu ba chấm khi hover */
+    }
+
+    .action-buttons {
+        display: none;
+        position: absolute;
+        top: 25px;
+        right: 0;
+        background-color: #fff;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        z-index: 1000;
+        width: 150px;
+    }
+
+    .action-buttons a {
+        color: #333;
+        font-size: 16px;
+        text-decoration: none;
+        padding: 5px;
+        display: block;
+        border-bottom: 1px solid #ddd;
+        transition: background-color 0.3s ease;
+    }
+
+    .action-buttons a:last-child {
+        border-bottom: none;
+    }
+
+    .action-buttons a:hover {
+        background-color: #28a745;
+        color: white;
+        border-radius: 5px;
+    }
+
+    .pet-row.active .action-buttons {
+        display: block;
+    }
+
+    form div {
+        margin-bottom: 15px;
+    }
+
+    form label {
+        font-weight: bold;
+        margin-bottom: 5px;
+        display: block;
+    }
+
+    form input, form select {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 14px;
+    }
+
+    form button {
+        background-color: #28a745;
         color: white;
         border: none;
         padding: 10px 20px;
         font-size: 16px;
-        cursor: pointer;
         border-radius: 5px;
-        display: block;
-        margin: 20px 0;
-        margin-left: auto;
-        margin-right: 0;
-    }
-
-    .add-pet-btn:hover {
-        background-color: #45a049;
-    }
-
-    /* Modal Style */
-    .modal {
-        display: none; /* Ẩn modal mặc định */
-        position: fixed;
-        z-index: 1;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.6); /* Nền mờ đậm hơn */
-        overflow: auto;
-    }
-
-    .modal-content {
-        background-color: #fefefe;
-        margin: 10% auto;
-        padding: 30px;
-        border: 1px solid #888;
-        width: 80%;
-        max-width: 600px;  /* Giới hạn chiều rộng */
-        border-radius: 15px;  /* Bo tròn các góc */
-        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);  /* Hiệu ứng bóng đổ */
-        animation: fadeIn 0.5s ease-out;  /* Thêm hiệu ứng mờ dần khi mở modal */
-    }
-
-    /* Animation khi mở modal */
-    @keyframes fadeIn {
-        0% { opacity: 0; }
-        100% { opacity: 1; }
-    }
-
-    .close {
-        color: #aaa;
-        font-size: 28px;
-        font-weight: bold;
-        position: absolute;
-        top: 10px;
-        right: 20px;
         cursor: pointer;
+        transition: background-color 0.3s ease;
     }
 
-    .close:hover,
-    .close:focus {
-        color: black;
-        text-decoration: none;
-        cursor: pointer;
-    }
-
-    .pet-form input, .pet-form select {
-        margin-bottom: 12px;
-        padding: 12px;
-        width: 100%;
-        max-width: 320px;
-        border-radius: 8px;
-        border: 1px solid #ccc;
-        font-size: 16px;
-        box-sizing: border-box;
-    }
-
-    .pet-form button {
-        background-color: #4CAF50;
-        color: white;
-        border: none;
-        padding: 12px 20px;
-        font-size: 16px;
-        cursor: pointer;
-        border-radius: 8px;
-        width: 100%;
-        max-width: 320px;
-    }
-
-    .pet-form button:hover {
-        background-color: #45a049;
-    }
-
-    .delete-btn {
-        color: red;
-        cursor: pointer;
-        font-size: 24px;
-        text-decoration: none;  /* Xóa gạch chân (nếu có) */
-    }
-
-    .delete-btn:hover {
-        color: darkred;
-    }
-
-    .delete-container {
-        margin-top: 20px;
-        text-align: right;
-    }
-
-    #X {
-        border: none; /* Loại bỏ viền */
+    form button:hover {
+        background-color: #218838;
     }
 </style>
-<!-- Thêm liên kết tới FontAwesome -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
-<div class="pets-container">
-    <h1>Thông tin về thú cưng của tôi</h1>
+<div class="container">
+    <h1>Danh sách thú cưng của tôi</h1>
 
-    <!-- Nút Thêm thú cưng mở modal -->
-    <button class="add-pet-btn" id="addPetBtn">Thêm thú cưng</button>
-
-    <table>
-        <thead>
-            <tr>
-                <th>#</th>  <!-- Số thứ tự -->
-                <th>Tên</th>
-                <th>Tuổi</th>
-                <th>Giới tính</th>
-                <th>Loài</th>  <!-- Thuộc tính loài -->
-            </tr>
-        </thead>
-        <tbody>
-            {% for pet in pets %}
-            <tr>
-                <td>{{ forloop.counter }}</td>  <!-- Hiển thị số thứ tự -->
-                <td>{{ pet.name }}</td>
-                <td>{{ pet.age }}</td>
-                <td>{{ pet.gender }}</td>
-                <td>{{ pet.get_species_display }}</td>  <!-- Hiển thị tên loài -->
-                <td id="X"><a href="{% url 'pets:delete_pet' pet.id %}" class="delete-btn"><i class="fas fa-times"></i></a></td>  <!-- Hiển thị nút xóa -->
-            </tr>
+    {% if error %}
+        <div class="alert">{{ error }}</div>
+    {% endif %}
+    {% if messages %}
+        <ul>
+            {% for message in messages %}
+                <li>{{ message }}</li>
             {% endfor %}
-        </tbody>
-    </table>
-</div>
+        </ul>
+    {% endif %}
 
-<!-- Modal cho form Thêm thú cưng -->
-<div id="petModal" class="modal">
-    <div class="modal-content">
-        <span class="close">&times;</span>
-        <h2>Thêm thú cưng mới</h2>
-        <form method="POST">
-            {% csrf_token %}
-            <input type="text" name="name" placeholder="Tên thú cưng" required>
-            <input type="number" name="age" placeholder="Tuổi" required>
-            <input type="text" name="gender" placeholder="Giới tính" required>
-            <select name="species" required>
+    <!-- Form thêm thú cưng mới -->
+    <form method="post" action="{% url 'pets:my_pets' %}">
+        {% csrf_token %}
+        <div>
+            <label for="name">Tên thú cưng:</label>
+            <input type="text" id="name" name="name" required>
+        </div>
+        <div>
+            <label for="age">Tuổi:</label>
+            <input type="number" id="age" name="age" required>
+        </div>
+        <div>
+            <label for="gender">Giới tính:</label>
+            <select id="gender" name="gender">
+                <option value="Đực">Đực</option>
+                <option value="Cái">Cái</option>
+            </select>
+        </div>
+        <div>
+            <label for="species">Loài:</label>
+            <select id="species" name="species">
                 <option value="cat">Mèo</option>
                 <option value="dog">Chó</option>
             </select>
-            <button type="submit">Thêm thú cưng</button>
-        </form>
+            <!-- Dấu ba chấm nằm ở đây cùng cột Loài -->
+            <span class="action-column">...</span>
+        </div>
+        <button type="submit">Thêm thú cưng</button>
+    </form>
+
+    <!-- Hiển thị danh sách thú cưng -->
+    <div class="pets-table-wrapper">
+        <table class="pets-table">
+            <thead>
+                <tr>
+                    <th>STT</th>
+                    <th>Tên</th>
+                    <th>Tuổi</th>
+                    <th>Giới tính</th>
+                    <th>Loại</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for pet in pets %}
+                <tr class="pet-row">
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ pet.name }}</td>
+                    <td>{{ pet.age }}</td>
+                    <td>{{ pet.gender }}</td>
+                    <td>
+                        {{ pet.get_species_display|default:"Chưa xác định" }}
+                        <span class="action-column">...</span>
+                    </td>
+
+                    <td class="action-buttons">
+                        <a href="{% url 'pets:edit_pet' pet.id %}" class="edit-btn">Chỉnh sửa</a>
+                        <a href="{% url 'pets:delete_pet' pet.id %}" class="delete-btn">Xóa</a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="5">Bạn chưa có thú cưng nào.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     </div>
 </div>
 
-<!-- Javascript để mở và đóng modal -->
 <script>
-    // Lấy modal và nút "Thêm thú cưng"
-    var modal = document.getElementById("petModal");
-    var btn = document.getElementById("addPetBtn");
-    var span = document.getElementsByClassName("close")[0];
+    // Thêm sự kiện click vào dấu ba chấm để hiển thị hoặc ẩn các nút menu
+    document.querySelectorAll('.action-column').forEach(function(column) {
+        column.addEventListener('click', function(event) {
+            event.stopPropagation(); // Ngừng truyền sự kiện để tránh hover
+            const petRow = this.closest('.pet-row');
+            petRow.classList.toggle('active');
+        });
+    });
 
-    // Mở modal khi nhấn nút "Thêm thú cưng"
-    btn.onclick = function() {
-        modal.style.display = "block";
-    }
-
-    // Đóng modal khi nhấn "X"
-    span.onclick = function() {
-        modal.style.display = "none";
-    }
-
-    // Đóng modal khi nhấn ra ngoài modal
-    window.onclick = function(event) {
-        if (event.target == modal) {
-            modal.style.display = "none";
-        }
-    }
+    // Đảm bảo các nút bị ẩn khi click ra ngoài
+    document.addEventListener('click', function(event) {
+        const actionButtons = document.querySelectorAll('.action-buttons');
+        actionButtons.forEach(function(buttons) {
+            if (!buttons.contains(event.target) && !buttons.previousElementSibling.contains(event.target)) {
+                buttons.classList.remove('active');
+            }
+        });
+    });
 </script>
 
 {% endblock my_pets %}
-
