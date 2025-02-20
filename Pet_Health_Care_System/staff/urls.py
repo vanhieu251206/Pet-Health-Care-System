@@ -8,7 +8,7 @@ app_name = "staff"
 urlpatterns = [
     path('', lambda request: redirect('tong_quan/')),
     path('tong_quan/', views.tong_quan, name = "tong_quan"),
-    path('phong_luu_tru/', views.phong_luu_tru, name = "phong_luu_tru"),
+    path('phong_luu_tru/', views.phong_luu_tru, name='phong_luu_tru'),
     path('lich_hen/', views.lich_hen, name = "lich_hen"),
     path('booking/', views.booking, name = "booking"),
     path('theo_doi/', views.theo_doi, name = "theo_doi"),
@@ -17,4 +17,6 @@ urlpatterns = [
     path('quan_ly_san_pham/', product_list, name='quan_ly_san_pham'),
     path('appointments/', views.appointment_list, name='appointment_list'),
     path('appointments/update/<int:appointment_id>/', views.update_appointment_status, name='update_appointment_status'),
+    path('add_room/', views.add_room, name = "add_room"),
+    path('enter_room/', views.enter_room, name = "enter_room"),
 ]

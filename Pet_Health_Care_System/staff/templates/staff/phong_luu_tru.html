@@ -19,7 +19,7 @@ Phòng lưu trú
 
     .cards-container {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        grid-template-columns: repeat(4, 1fr); /* Thay đổi ở đây để có 4 cột */
         gap: 20px;
     }
 
@@ -88,8 +88,13 @@ Phòng lưu trú
     }
 
     /* Nút ẩn ban đầu, chỉ hiển thị khi hover */
-    .btn-group {
+    .btn-group{
         display: none;
+    }
+
+    .btn-group a{
+        font-size: 15px;
+        padding: 10px;
     }
 
     .card:hover .btn-group {
@@ -101,15 +106,249 @@ a.no-underline {
     text-decoration: none;
 }
     
+.button-container {
+    display: flex;
+    justify-content: flex-end; /* Căn phải */
+    gap: 10px; /* Khoảng cách giữa các nút */
+    margin-bottom: 20px;
+}
+
+.btn {
+    padding: 10px 20px;
+    background-color: #198754;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: #45a049;
+}
+
+/* Modal */
+.modal {
+    display: none; /* Ẩn modal mặc định */
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4); /* Màu nền mờ */
+    transition: all 0.3s ease-in-out; /* Hiệu ứng mờ */
+}
+
+.modal-content {
+    background-color: #fff;
+    margin: 10% auto;
+    padding: 30px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 500px; /* Đảm bảo kích thước modal không quá rộng */
+    border-radius: 15px; /* Bo tròn các góc */
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1); /* Thêm bóng cho modal */
+    animation: fadeIn 0.4s; /* Hiệu ứng fade-in khi mở modal */
+}
+
+/* Hiệu ứng fade-in */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Modal */
+.modal {
+    display: none; /* Ẩn modal mặc định */
+    position: fixed; /* Vị trí cố định trên màn hình */
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4); /* Màu nền mờ */
+    display: flex; /* Dùng flex để căn giữa nội dung */
+    justify-content: center; /* Căn giữa theo chiều ngang */
+    align-items: center; /* Căn giữa theo chiều dọc */
+    transition: all 0.3s ease-in-out; /* Hiệu ứng mờ */
+}
+
+/* Modal content */
+.modal-content {
+    background-color: #fff;
+    padding: 30px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 500px; /* Đảm bảo modal không quá rộng */
+    border-radius: 15px; /* Bo tròn các góc */
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1); /* Thêm bóng cho modal */
+    animation: fadeIn 0.4s; /* Hiệu ứng fade-in khi mở modal */
+}
+
+/* Hiệu ứng fade-in */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Cải thiện giao diện của form trong modal */
+.modal {
+    display: none; /* Modal ẩn mặc định */
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4); /* Màu nền mờ */
+    transition: all 0.3s ease-in-out;
+}
+
+
+.modal form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Khoảng cách giữa các trường nhập */
+}
+
+.modal input,
+.modal select {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    font-size: 16px;
+}
+
+.modal button {
+    padding: 12px;
+    background-color: #198754;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.modal button:hover {
+    background-color: #45a049;
+}
+
+/* Đảm bảo modal có padding và không bị cắt */
+.modal-content h3 {
+    text-align: center;
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+
 
 </style>
 
 <div class="dashboard">
+
+    <div class="button-container">
+        <button class="btn" id="openAddRoomModalBtn">Thêm chuồng</button>
+        <button class="btn" id="openEnterRoomModalBtn">Nhập chuồng</button>
+    </div>
+
+    <!-- Modal Thêm Chuồng -->
+    <div id="addRoomModal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="closeAddRoomModalBtn">&times;</span>
+            <h3>Thêm Chuồng</h3>
+            <form method="POST" action="{% url 'staff:add_room' %}">
+                {% csrf_token %}
+                <label for="room_code">Mã chuồng:</label>
+                <input type="text" id="room_code" name="room_code" required>
+                <button type="submit" class="btn">Thêm chuồng</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal Nhập Chuồng -->
+    <div id="enterRoomModal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="closeEnterRoomModalBtn">&times;</span>
+            <h3>Nhập Chuồng</h3>
+            <form method="POST" action="{% url 'staff:enter_room' %}">
+                {% csrf_token %}
+                
+                <label for="room_code">Chọn phòng trống:</label>
+                <select id="room_code" name="room_code" required>
+                    <option value="">Chọn phòng</option>
+                    {% for room in available_rooms %}
+                        <option value="{{ room.room_code }}">{{ room.room_code }}</option>
+                    {% empty %}
+                        <option value="">Không có phòng trống</option>
+                    {% endfor %}
+                </select>
+
+                <label for="owner_name">Khách hàng:</label>
+                <input type="text" id="owner_name" name="owner_name" required>
+
+                <label for="pet_name">Tên thú cưng:</label>
+                <input type="text" id="pet_name" name="pet_name" required>
+
+                <label for="check_in_date">Ngày nhận:</label>
+                <input type="text" id="check_in_date" name="check_in_date" placeholder="dd/mm/yyyy" required>
+
+                <label for="expected_check_out_date">Ngày trả dự kiến:</label>
+                <input type="text" id="expected_check_out_date" name="expected_check_out_date" placeholder="dd/mm/yyyy" required>
+
+
+                <button type="submit" class="btn">Nhập chuồng</button>
+            </form>
+        </div>
+    </div>
+
+
     <div class="cards-container">
-        <!-- Card phòng lưu trú -->
+        {% for room in rooms %}
         <div class="card">
-            <h3>Mã phòng: C001</h3>
-            <p>Trạng thái: 🟢 Trống</p>
+            <h3>Mã phòng: {{ room.room_code }}</h3>
+            <p>Trạng thái: {{ room.get_status_display }}</p>
             <div class="collapse" id="collapseC001">
                 <div class="card-body">
                     <table class="table">
@@ -120,22 +359,23 @@ a.no-underline {
                         </thead>
                         <tbody>
                             <tr>
-                                <td><strong>Loại chuồng:</strong> Nhỏ</td>
+                                <td><strong>Khách hàng:</strong> {{ room.owner_name }}</td>
                             </tr>
                             <tr>
-                                <td><strong>Tên thú cưng:</strong> Không có</td>
+                                <td><strong>Tên thú cưng:</strong> {{ room.pet_name }}</td>
                             </tr>
                             <tr>
-                                <td><strong>Ngày nhận:</strong> 2025-02-01</td>
+                                <td><strong>Ngày nhận:</strong> {{ room.check_in_date|date:"d/m/Y"}}</td>
                             </tr>
                             <tr>
-                                <td><strong>Ngày trả dự kiến:</strong> 2025-02-07</td>
+                                <td><strong>Ngày trả dự kiến:</strong> {{ room.expected_check_out_date|date:"d/m/Y" }}</td>
                             </tr>
                             <tr>
                                 <td>
                                     <div class="btn-group">
-                                        <a href="#" class="btn btn-primary btn-sm no-underline">✏️ Chỉnh sửa</a>
-                                        <a href="#" class="btn btn-danger btn-sm no-underline">❌ Xóa</a>
+                                        <a href="#" class="btn btn-primary btn-sm no-underline">Sửa</a>
+                                        <a href="#" class="btn btn-danger btn-sm no-underline">Xóa</a>
+                                        <a href="#" class="btn btn-danger btn-sm no-underline">Xuất chuồng</a>
                                     </div>
                                 </td>
                             </tr>
@@ -144,123 +384,47 @@ a.no-underline {
                 </div>
             </div>
         </div>
-
-        <!-- Card booking -->
-        <div class="card">
-            <h3>Mã phòng: C002</h3>
-            <p>Trạng thái: 🔴 Đã có thú cưng</p>
-            <div class="collapse" id="collapseC002">
-                <div class="card-body">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th scope="col">Thông tin chi tiết</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><strong>Loại chuồng:</strong> Trung bình</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Tên thú cưng:</strong> Meo</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Ngày nhận:</strong> 2025-01-15</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Ngày trả dự kiến:</strong> 2025-02-10</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="btn-group">
-                                        <a href="#" class="btn btn-primary btn-sm no-underline">✏️ Chỉnh sửa</a>
-                                        <a href="#" class="btn btn-danger btn-sm no-underline">❌ Xóa</a>
-                                    </div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-
-        <!-- Card thú cưng nhập viện -->
-        <div class="card">
-            <h3>Mã phòng: C003</h3>
-            <p>Trạng thái: 🟢 Trống</p>
-            <div class="collapse" id="collapseC003">
-                <div class="card-body">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th scope="col">Thông tin chi tiết</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><strong>Loại chuồng:</strong> Lớn</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Tên thú cưng:</strong> Không có</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Ngày nhận:</strong> 2025-02-02</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Ngày trả dự kiến:</strong> 2025-02-09</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="btn-group">
-                                        <a href="#" class="btn btn-primary btn-sm no-underline">✏️ Chỉnh sửa</a>
-                                        <a href="#" class="btn btn-danger btn-sm no-underline">❌ Xóa</a>
-                                    </div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-
-        <!-- Card lịch bác sĩ -->
-        <div class="card">
-            <h3>Mã phòng: C004</h3>
-            <p>Trạng thái: 🔴 Đã có thú cưng</p>
-            <div class="collapse" id="collapseC004">
-                <div class="card-body">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th scope="col">Thông tin chi tiết</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><strong>Loại chuồng:</strong> Nhỏ</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Tên thú cưng:</strong> Chó</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Ngày nhận:</strong> 2025-02-01</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Ngày trả dự kiến:</strong> 2025-02-15</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="btn-group">
-                                        <a href="#" class="btn btn-primary btn-sm no-underline">✏️ Chỉnh sửa</a>
-                                        <a href="#" class="btn btn-danger btn-sm no-underline">❌ Xóa</a>
-                                    </div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
+        {% endfor %}
+    </div>    
 </div>
+
+<script>
+    // Mở modal cho "Thêm Chuồng"
+    document.getElementById("openAddRoomModalBtn").onclick = function() {
+        document.getElementById("addRoomModal").style.display = "block";
+    }
+
+    // Đóng modal khi nhấn vào nút đóng
+    document.getElementById("closeAddRoomModalBtn").onclick = function() {
+        document.getElementById("addRoomModal").style.display = "none";
+    }
+
+    // Đóng modal nếu nhấp ra ngoài modal
+    window.onclick = function(event) {
+        if (event.target == document.getElementById("addRoomModal")) {
+            document.getElementById("addRoomModal").style.display = "none";
+        }
+    }
+
+    // Mở modal cho "Nhập Chuồng"
+    document.getElementById("openEnterRoomModalBtn").onclick = function() {
+        document.getElementById("enterRoomModal").style.display = "block";
+    }
+
+    // Đóng modal khi nhấn vào nút đóng
+    document.getElementById("closeEnterRoomModalBtn").onclick = function() {
+        document.getElementById("enterRoomModal").style.display = "none";
+    }
+
+    // Đóng modal nếu nhấp ra ngoài modal
+    window.onclick = function(event) {
+        if (event.target == document.getElementById("enterRoomModal")) {
+            document.getElementById("enterRoomModal").style.display = "none";
+        }
+    }
+
+
+    
+</script>
+
 {% endblock phong_luu_tru %}

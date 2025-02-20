@@ -1,5 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
+from django.http import HttpResponse
 from pets.models import Product, Appointment
+from .models import Room
 from django.contrib import messages
 
 def lich_hen(request):
@@ -51,3 +53,45 @@ def update_appointment_status(request, appointment_id):
             messages.error(request, 'Trạng thái không hợp lệ.')
 
     return redirect('staff:appointment_list')  
+
+def phong_luu_tru(request):
+    rooms = Room.objects.all()
+    available_rooms =  Room.objects.filter(status='available')
+    return render(request, 'staff/phong_luu_tru.html', {'rooms': rooms, 'available_rooms': available_rooms})
+
+def add_room(request):
+    if request.method == 'POST':
+        room_code = request.POST.get('room_code') 
+        if Room.objects.filter(room_code=room_code).exists():
+            return render(request, 'staff/phong_luu_tru.html', {'error': 'Mã chuồng đã tồn tại'})
+        else:
+            new_room = Room(room_code=room_code)
+            new_room.save()
+            return redirect('staff:phong_luu_tru') 
+
+    return render(request, 'staff/phong_luu_tru.html')  
+
+def enter_room(request):
+    available_rooms = Room.objects.filter(status='available')
+    
+    if request.method == 'POST':
+        room_code = request.POST.get('room_code')
+        owner_name = request.POST.get('owner_name')
+        pet_name = request.POST.get('pet_name')
+        check_in_date = request.POST.get('check_in_date')
+        expected_check_out_date = request.POST.get('expected_check_out_date')
+
+        try:
+            room = Room.objects.get(room_code=room_code)
+            room.owner_name = owner_name
+            room.pet_name = pet_name
+            room.check_in_date = check_in_date
+            room.expected_check_out_date = expected_check_out_date
+            room.status = 'booked'  
+            room.save()
+
+            return redirect('staff:phong_luu_tru') 
+        except Room.DoesNotExist:
+            return render(request, 'staff/phong_luu_tru.html', {'error': 'Mã chuồng không tồn tại'})
+
+    return render(request, 'staff/phong_luu_tru.html', {'available_rooms': available_rooms})
