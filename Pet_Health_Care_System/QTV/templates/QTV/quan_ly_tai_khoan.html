@@ -271,7 +271,7 @@
                 <option value="">Tất cả vai trò</option>
                 <option value="Admin">Admin</option>
                 <option value="Nhân viên">Nhân viên</option>
-                <option value="Khách hàng">Khách hàng</option>
+                <option value="Khách">Khách</option>
                 <option value="Bác sĩ">Bác sĩ</option>
             </select>
             <button class="add-account-btn" onclick="openModal()">+ Thêm tài khoản mới</button>
@@ -279,31 +279,34 @@
     </div>
 
     <!-- Table of users -->
+     
     <div class="table-container">
         <table id="userTable">
             <thead>
                 <tr>
-                    <th class="sticky-header">Tên</th>
+                    <th class="sticky-header">Tên tài khoản</th>
                     <th class="sticky-header">Email</th>
                     <th class="sticky-header">Vai trò</th>
-                    <th class="sticky-header">Trạng thái</th>
                     <th class="sticky-header action-column">Hành động</th>
                     <th class="sticky-header view-column">Xem chi tiết</th>
                 </tr>
             </thead>
+            {% for user in users %}
             <tbody>
                 <tr>
-                    <td><i class="fas fa-user"></i> Nguyễn Văn A</td>
-                    <td>nguyenvana@example.com</td>
-                    <td><i class="fas fa-cogs text-red-500"></i> Admin</td>
-                    <td><span class="status active">Đang hoạt động</span></td>
+                    <td><i class="fas fa-user"></i> {{ user.username }} </td>
+                    <td>{{ user.email }}</td>
+                    <td><i class="fas fa-cogs text-red-500"></i> {{ user.get_role_display }}</td>
                     <td class="action-column">
-                        <button class="btn-delete">Xóa</button>
+                        <a href="{% url 'QTV:delete_account' user.id %}" class="btn-delete" style="text-decoration: none;" onclick="return confirm('Bạn có chắc chắn muốn xóa tài khoản này không?')">
+                            Xóa
+                        </a>
                     </td>
                     <td class="view-column"><button class="btn-view">Xem chi tiết</button></td>
                 </tr>
                 <!-- More rows can be added here -->
             </tbody>
+            {% endfor %}
         </table>
     </div>
 </div>
@@ -315,7 +318,7 @@
         <div class="modal-header">
             <h3>Thêm Tài Khoản Mới</h3>
         </div>
-        <form method="POST">
+        <form method="POST" action="{% url "QTV:add_account" %}">
             {% csrf_token %}
             <div class="form-group">
                 <label for="username">Tên đăng nhập:</label>

@@ -7,6 +7,8 @@ from django.contrib.auth import authenticate, login, get_user_model, logout
 from django.contrib import messages
 from .models import Product, Cart, CartItem, Appointment, Pet
 from staff.views import tong_quan
+from doctor.views import tong_quan
+from QTV.views import tong_quan
 from django.urls import reverse
 import logging
 
@@ -73,6 +75,7 @@ def login_view(request):
         user = authenticate(request, username=username, password=password)
 
         if user is not None:
+
             if user.role == role:
                 login(request, user)
 
@@ -82,8 +85,12 @@ def login_view(request):
 
                 if role == "customer":
                     return redirect("pets:guest_dashboard")
-                elif role in ["staff", "doctor", "admin"]:
+                elif role == "staff":
                     return redirect("staff:tong_quan")
+                elif role == "doctor":
+                    return redirect("doctor:tong_quan")
+                elif role == "admin":
+                    return redirect("QTV:tong_quan")
                 else:
                     messages.error(request, "Vai trò không hợp lệ.")
                     return redirect("pets:login_page")
