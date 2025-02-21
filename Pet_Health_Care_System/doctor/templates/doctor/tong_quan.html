@@ -6,28 +6,24 @@
 {% block main-contain %}
   <div class="dashboard">
     <div class="cards-container">
-      <!-- Calendar Section (Appointments) -->
-      <a href="#" class="card">
+      <a href="{% url "doctor:lich_lam_viec" %}" class="card">
         <i class="fas fa-calendar-alt"></i>
         <h3>📅 Lịch hẹn hôm nay</h3>
         <p>2 ca khám đã đặt</p>
       </a>
 
-      <!-- Pets in Hospital Section -->
       <a href="#" class="card">
         <i class="fas fa-paw"></i>
         <h3>🐾 Số lượng thú cưng nhập viện cần chăm sóc</h3>
         <p>3 thú cưng đang cần chăm sóc</p>
       </a>
 
-      <!-- Appointment Status Section -->
       <a href="#" class="card">
         <i class="fas fa-clock"></i>
         <h3>⏳ Trạng thái ca khám</h3>
         <p>Đang chờ khám: 5 </br> Đã khám xong: 8</p>
       </a>
 
-      <!-- Important Notifications Section -->
       <a href="#" class="card">
         <i class="fas fa-bell"></i>
         <h3>📢 Thông báo quan trọng</h3>
