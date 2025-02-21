@@ -64,7 +64,7 @@
     /* Container của bộ lọc */
 .filter-container {
     display: flex;
-    justify-content: center;
+    justify-content: end;
     align-items: center;
     margin-bottom: 20px;
 }
@@ -105,6 +105,48 @@
     outline: none;
     border-color: #007bff;
     box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+/* Định dạng cho div chứa các nút hành động */
+.action-buttons {
+    display: flex;
+    gap: 10px; /* Khoảng cách giữa các nút */
+    justify-content: flex-start;
+    margin-top: 10px;
+}
+
+/* Định dạng cho nút xác nhận */
+.action-buttons .btn-primary {
+    background-color: #007bff; /* Màu nền xanh dương */
+    color: white;
+    border: 1px solid #007bff;
+    padding: 5px 15px;
+    font-size: 14px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.action-buttons .btn-primary:hover {
+    background-color: #0056b3; /* Màu nền khi hover */
+    transform: scale(1.05); /* Hiệu ứng phóng to nhẹ khi hover */
+}
+
+/* Định dạng cho nút hủy */
+.action-buttons .btn-danger {
+    background-color: #dc3545; /* Màu nền đỏ */
+    color: white;
+    border: 1px solid #dc3545;
+    padding: 5px 15px;
+    font-size: 14px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.action-buttons .btn-danger:hover {
+    background-color: #c82333; /* Màu nền khi hover */
+    transform: scale(1.05); /* Hiệu ứng phóng to nhẹ khi hover */
 }
 
 </style>
