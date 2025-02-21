@@ -138,9 +138,9 @@
         <div class="form-group">
             <label for="doctor">Chọn bác sĩ</label>
             <select id="doctor" name="doctor" required>
-                <option value="Phan Khánh Thảo">Phan Khánh Thảo</option>
-                <option value="Mai Thùy Dương">Mai Thùy Dương</option>
-                <option value="Nguyễn Xuân Hoàng">Nguyễn Xuân Hoàng</option>
+                {% for doctor in doctors %}
+                <option value="{{doctor.full_name}}">{{doctor.full_name}}</option>
+                {% endfor %}
             </select>
         </div>
         <button type="submit" class="submit-button">ĐẶT LỊCH NGAY</button>

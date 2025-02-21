@@ -11,7 +11,7 @@ def lich_lam_viec(request):
         user_id = request.user.id
         user = CustomUser.objects.get(id=user_id)
 
-        appointments = Appointment.objects.filter(doctor=user.full_name)
+        appointments = Appointment.objects.filter(doctor=user.full_name, status='confirmed')
     return render(request, 'doctor/lich_lam_viec.html', {"appointments": appointments})
 
 def ho_so_benh_an(request):

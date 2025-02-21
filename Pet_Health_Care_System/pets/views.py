@@ -54,8 +54,8 @@ def register_page(request):
     return render(request, 'pets/register_page.html', context)
 
 def dat_lich(request):
-    context ={}
-    return render(request, 'pets/dat_lich.html', context)
+    doctors = CustomUser.objects.filter(role = 'doctor')
+    return render(request, 'pets/dat_lich.html', {'doctors': doctors})
 
 def shop(request):
     products =  Product.objects.all()
@@ -208,6 +208,9 @@ def update_cart(request, item_id):
 
 @login_required(login_url="pets:login_page")
 def create_appointment(request):
+    # Lọc các bác sĩ có vai trò 'doctor'
+    doctors = CustomUser.objects.filter(role='doctor')
+
     if request.method == 'POST':
         name = request.POST.get('name')
         phone = request.POST.get('phone')
@@ -215,9 +218,9 @@ def create_appointment(request):
         time = request.POST.get('time')
         service = request.POST.get('service')
         branch = request.POST.get('branch')
-        doctor = request.POST.get('doctor')
+        doctor_name = request.POST.get('doctor')
 
-        if name and phone and date and time and service and branch and doctor:
+        if name and phone and date and time and service and branch and doctor_name:
             Appointment.objects.create(
                 name=name,
                 phone=phone,
@@ -225,14 +228,15 @@ def create_appointment(request):
                 time=time,
                 service=service,
                 branch=branch,
-                doctor=doctor
+                doctor=doctor_name  
             )
+
             messages.success(request, 'Lịch hẹn đã được đặt thành công!')
             return redirect('pets:create_appointment')  
         else:
             messages.error(request, 'Vui lòng điền đầy đủ thông tin.')
 
-    return render(request, 'pets/dat_lich.html')
+    return render(request, 'pets/dat_lich.html', {"doctors": doctors})
 
 @login_required
 def update_profile(request):

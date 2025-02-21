@@ -17,8 +17,8 @@ class CustomUserAdmin(UserAdmin):
     ordering = ('date_joined',)
     
     fieldsets = (
-        (None, {'fields': ('username', 'password')}),
-        ('Thông tin cá nhân', {'fields': ('first_name', 'last_name', 'email', 'phone', 'avatar', 'role')}),
+        (None, {'fields': ('username', 'password')}),  
+        ('Thông tin cá nhân', {'fields': ('full_name', 'email', 'phone', 'avatar', 'role')}),  
         ('Permissions', {'fields': ('is_active', 'is_staff', 'is_superuser', 'groups', 'user_permissions')}),
         ('Important dates', {'fields': ('last_login', 'date_joined')}),
     )
@@ -26,7 +26,7 @@ class CustomUserAdmin(UserAdmin):
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
-            'fields': ('username', 'password1', 'password2', 'email', 'first_name', 'last_name', 'phone', 'avatar', 'role', 'is_staff', 'is_active'),
+            'fields': ('username', 'password1', 'password2', 'email', 'full_name', 'phone', 'avatar', 'role', 'is_staff', 'is_active'),
         }),
     )
 
