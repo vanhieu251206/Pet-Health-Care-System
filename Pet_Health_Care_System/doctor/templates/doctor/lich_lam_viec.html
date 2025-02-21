@@ -17,28 +17,19 @@
             <th>Chức năng</th>
           </tr>
         </thead>
+        {% for appointment in appointments %}
         <tbody>
-          <!-- Example of an appointment -->
           <tr>
-            <td>8:00 AM</td>
-            <td>Nguyễn Văn A</td>
+            <td>{{ appointment.time }}</td>
+            <td> {{ appointment.name }} </td>
             <td>Chó</td>
             <td>Khám bệnh</td>
             <td>
               <a href="#" class="btn-view-history">📜 Lịch sử khám chữa bệnh</a>
             </td>
           </tr>
-          <tr>
-            <td>10:00 AM</td>
-            <td>Trần Thị B</td>
-            <td>Mèo</td>
-            <td>Tiêm phòng</td>
-            <td>
-              <a href="#" class="btn-view-history">📜 Lịch sử khám chữa bệnh</a>
-            </td>
-          </tr>
-          <!-- More rows can be dynamically added here -->
         </tbody>
+        {% endfor %}
       </table>
     </div>
   </div>
