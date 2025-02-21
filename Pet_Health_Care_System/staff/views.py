@@ -12,10 +12,6 @@ def tong_quan(request):
     context = {}
     return render(request, 'staff/tong_quan.html', context)
 
-def phong_luu_tru(request):
-    context = {}
-    return render(request, 'staff/phong_luu_tru.html', context)
-
 def booking(request):
     bookings = Appointment.objects.filter(service="Lưu trú")
     return render(request, 'staff/booking.html', {"bookings": bookings})
