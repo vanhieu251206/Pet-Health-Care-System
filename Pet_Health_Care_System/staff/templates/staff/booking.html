@@ -61,67 +61,51 @@
     th:nth-child(6), td:nth-child(6) { width: 10%; }  /* Thanh toán */
     th:nth-child(7), td:nth-child(7) { width: 20%; }  /* Hành động */
 
-    /* Trạng thái */
-    .status {
-        font-weight: bold;
-    }
+    /* Container của bộ lọc */
+.filter-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
 
-    /* Bộ lọc trạng thái */
-    .filter-container {
-        display: flex;
-        justify-content: center;
-        margin-bottom: 10px;
-    }
+/* Label cho bộ lọc */
+.filter-container .form-label {
+    font-size: 16px;
+    font-weight: bold;
+    margin-right: 10px;
+    color: #333;
+}
 
-    select {
-        width: 200px;
-        text-align: center;
-    }
+/* Select cho bộ lọc trạng thái */
+.filter-container .form-select {
+    padding: 8px 12px;
+    font-size: 14px;
+    font-weight: 500;
+    border: 2px solid #ddd;
+    border-radius: 20px;  /* Bo tròn */
+    background-color: #f8f9fa;  /* Màu nền */
+    transition: border-color 0.3s ease-in-out;  /* Hiệu ứng khi di chuột vào */
+    width: 220px;
+}
 
-    /* Các nút */
-    .btn {
-        padding: 8px 12px;
-        font-size: 14px;
-        font-weight: 500;
-        border-radius: 20px;  /* Bo tròn */
-        transition: all 0.3s ease-in-out;
-        display: inline-flex;
-        align-items: center;
-        gap: 5px;
-        text-align: center;
-        justify-content: center;
-        border: 2px solid transparent;
-        min-width: 120px;
-    }
+/* Hiệu ứng khi hover */
+.filter-container .form-select:hover {
+    border-color: #007bff;  /* Màu viền khi hover */
+    cursor: pointer;
+}
 
-    /* Khoảng cách giữa các nút */
-    .action-buttons {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 10px;
-    }
+/* Tùy chỉnh các option trong select */
+.filter-container .form-select option {
+    padding: 10px;
+}
 
-    /* Hiệu ứng hover cho nút */
-    .btn-success:hover {
-        background-color: #218838;
-        border-color: #1e7e34;
-    }
-
-    .btn-danger:hover {
-        background-color: #c82333;
-        border-color: #bd2130;
-    }
-
-    .btn-primary:hover {
-        background-color: #0056b3;
-        border-color: #004085;
-    }
-
-    .btn-info:hover {
-        background-color: #138496;
-        border-color: #117a8b;
-    }
+/* Style khi chọn một option */
+.filter-container .form-select:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
 
 </style>
 
@@ -137,7 +121,6 @@
         </select>
     </div>
     
-
     <!-- Khung bảng cố định -->
     <div class="table-container">
         <table class="table table-bordered">
@@ -152,16 +135,25 @@
             </thead>
             {% for booking in bookings %}
             <tbody>
-                <tr class="booking-row" data-status="confirmed">
+                <tr class="booking-row" data-status="{{ booking.status }}">
                     <td> {{ booking.id }} </td>
                     <td> {{ booking.name }} </td>
                     <td>{{ booking.date | date:"d/m/Y" }} - {{ booking.time }}</td>
                     <td class="status">{{ booking.get_status_display }}</td>
                     <td>
                         <div class="action-buttons">
-                            <button class="btn btn-danger btn-sm" onclick="cancelBooking(this)">❌ Hủy</button>
+                            {% if booking.status == 'Pending' %}
+                                <form action="{% url 'staff:confirm_booking' booking.id %}" method="POST">
+                                    {% csrf_token %}
+                                    <button class="btn btn-primary btn-sm" type="submit">✅ Xác nhận</button>
+                                </form>
+                            {% endif %}
+                            <form action="{% url 'staff:cancel_booking' booking.id %}" method="POST">
+                                {% csrf_token %}
+                                <button class="btn btn-danger btn-sm" type="submit">❌ Hủy</button>
+                            </form>
                         </div>
-                    </td>                    
+                    </td>
                 </tr>
             </tbody>
             {% endfor %}
@@ -169,45 +161,12 @@
     </div>
 </div>
 
-<!-- JavaScript để xử lý hành động -->
 <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        // Ẩn nút "Xác nhận" nếu không phải "Chờ xác nhận"
-        document.querySelectorAll(".booking-row").forEach(row => {
-            let status = row.getAttribute("data-status");
-            let confirmBtn = row.querySelector(".confirm-btn");
-            if (status !== "pending" && confirmBtn) {
-                confirmBtn.style.display = "none";
-            }
-        });
-    });
-    
-    function confirmBooking(button) {
-        let row = button.closest("tr");
-        row.querySelector(".status").innerHTML = "✅ Đã xác nhận";
-        row.setAttribute("data-status", "confirmed");
-    
-        // Ẩn nút xác nhận sau khi nhấn
-        button.style.display = "none";
-    }
-    
-    function cancelBooking(button) {
-        let row = button.closest("tr");
-        row.querySelector(".status").innerHTML = "❌ Đã hủy";
-        row.setAttribute("data-status", "cancelled");
-    
-        // Ẩn nút xác nhận nếu đã hủy
-        let confirmBtn = row.querySelector(".confirm-btn");
-        if (confirmBtn) {
-            confirmBtn.style.display = "none";
-        }
-    }
-    
     // Cập nhật bộ lọc trạng thái
     function filterBookings() {
         let filterValue = document.getElementById("filter").value;
         let rows = document.querySelectorAll(".booking-row");
-    
+
         rows.forEach(row => {
             let status = row.getAttribute("data-status");
             if (filterValue === "all" || status === filterValue) {
@@ -217,6 +176,6 @@
             }
         });
     }
-    
 </script>
+
 {% endblock booking %}

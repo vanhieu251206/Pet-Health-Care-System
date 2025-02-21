@@ -19,4 +19,6 @@ urlpatterns = [
     path('appointments/update/<int:appointment_id>/', views.update_appointment_status, name='update_appointment_status'),
     path('add_room/', views.add_room, name = "add_room"),
     path('enter_room/', views.enter_room, name = "enter_room"),
+    path('booking/confirm/<int:booking_id>/', views.confirm_booking, name='confirm_booking'),
+    path('booking/cancel/<int:booking_id>/', views.cancel_booking, name='cancel_booking'),
 ]

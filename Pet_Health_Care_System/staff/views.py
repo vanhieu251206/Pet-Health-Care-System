@@ -3,6 +3,8 @@ from django.http import HttpResponse
 from pets.models import Product, Appointment
 from .models import Room
 from django.contrib import messages
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
 
 def lich_hen(request):
     context = {}
@@ -91,3 +93,28 @@ def enter_room(request):
             return render(request, 'staff/phong_luu_tru.html', {'error': 'Mã chuồng không tồn tại'})
 
     return render(request, 'staff/phong_luu_tru.html', {'available_rooms': available_rooms})
+
+@csrf_exempt
+def confirm_booking(request, booking_id):
+    if request.method == 'POST':
+        try:
+            booking = Appointment.objects.get(id=booking_id)
+            booking.status = 'Confirmed' 
+            booking.save()
+
+            return redirect('staff:booking') 
+        except Appointment.DoesNotExist:
+            return JsonResponse({'success': False, 'error': 'Booking not found'})
+
+@csrf_exempt
+def cancel_booking(request, booking_id):
+    if request.method == 'POST':
+        try:
+            booking = Appointment.objects.get(id=booking_id)
+            booking.status = 'Cancelled' 
+            booking.save()
+
+            return redirect('staff:booking')  
+        except Appointment.DoesNotExist:
+            return JsonResponse({'success': False, 'error': 'Booking not found'})
+
