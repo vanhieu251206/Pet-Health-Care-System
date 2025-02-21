@@ -69,25 +69,25 @@ Tổng quan
 <div class="dashboard">
     <div class="cards-container">
 
-        <a href="#" class="card">
+        <a href="{% url "staff:phong_luu_tru" %}" class="card">
             <i class="fas fa-home"></i>
             <h3>Tổng số phòng (chuồng)</h3>
             <p>10 trống / 5 đang sử dụng</p>
         </a>
 
-        <a href="#" class="card">
+        <a href="{% url "staff:booking" %}" class="card">
             <i class="fas fa-calendar-check"></i>
             <h3>Số lượng booking hôm nay</h3>
             <p>8 booking đã đặt</p>
         </a>
 
-        <a href="#" class="card">
+        <a href="{% url "staff:theo_doi" %}" class="card">
             <i class="fas fa-paw"></i>
             <h3>Thú cưng nhập viện</h3>
             <p>7 thú cưng đang lưu trú</p>
         </a>
 
-        <a href="#" class="card">
+        <a href="{% url "staff:sap_lich" %}" class="card">
             <i class="fas fa-user-md"></i>
             <h3>Lịch hẹn bác sĩ hôm nay</h3>
             <p>5 ca khám đã đặt</p>
