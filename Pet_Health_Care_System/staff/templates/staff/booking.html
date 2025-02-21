@@ -61,67 +61,93 @@
     th:nth-child(6), td:nth-child(6) { width: 10%; }  /* Thanh toán */
     th:nth-child(7), td:nth-child(7) { width: 20%; }  /* Hành động */
 
-    /* Trạng thái */
-    .status {
-        font-weight: bold;
-    }
+    /* Container của bộ lọc */
+.filter-container {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    margin-bottom: 20px;
+}
 
-    /* Bộ lọc trạng thái */
-    .filter-container {
-        display: flex;
-        justify-content: center;
-        margin-bottom: 10px;
-    }
+/* Label cho bộ lọc */
+.filter-container .form-label {
+    font-size: 16px;
+    font-weight: bold;
+    margin-right: 10px;
+    color: #333;
+}
 
-    select {
-        width: 200px;
-        text-align: center;
-    }
+/* Select cho bộ lọc trạng thái */
+.filter-container .form-select {
+    padding: 8px 12px;
+    font-size: 14px;
+    font-weight: 500;
+    border: 2px solid #ddd;
+    border-radius: 20px;  /* Bo tròn */
+    background-color: #f8f9fa;  /* Màu nền */
+    transition: border-color 0.3s ease-in-out;  /* Hiệu ứng khi di chuột vào */
+    width: 220px;
+}
 
-    /* Các nút */
-    .btn {
-        padding: 8px 12px;
-        font-size: 14px;
-        font-weight: 500;
-        border-radius: 20px;  /* Bo tròn */
-        transition: all 0.3s ease-in-out;
-        display: inline-flex;
-        align-items: center;
-        gap: 5px;
-        text-align: center;
-        justify-content: center;
-        border: 2px solid transparent;
-        min-width: 120px;
-    }
+/* Hiệu ứng khi hover */
+.filter-container .form-select:hover {
+    border-color: #007bff;  /* Màu viền khi hover */
+    cursor: pointer;
+}
 
-    /* Khoảng cách giữa các nút */
-    .action-buttons {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 10px;
-    }
+/* Tùy chỉnh các option trong select */
+.filter-container .form-select option {
+    padding: 10px;
+}
 
-    /* Hiệu ứng hover cho nút */
-    .btn-success:hover {
-        background-color: #218838;
-        border-color: #1e7e34;
-    }
+/* Style khi chọn một option */
+.filter-container .form-select:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
 
-    .btn-danger:hover {
-        background-color: #c82333;
-        border-color: #bd2130;
-    }
+/* Định dạng cho div chứa các nút hành động */
+.action-buttons {
+    display: flex;
+    gap: 10px; /* Khoảng cách giữa các nút */
+    justify-content: flex-start;
+    margin-top: 10px;
+}
 
-    .btn-primary:hover {
-        background-color: #0056b3;
-        border-color: #004085;
-    }
+/* Định dạng cho nút xác nhận */
+.action-buttons .btn-primary {
+    background-color: #007bff; /* Màu nền xanh dương */
+    color: white;
+    border: 1px solid #007bff;
+    padding: 5px 15px;
+    font-size: 14px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
 
-    .btn-info:hover {
-        background-color: #138496;
-        border-color: #117a8b;
-    }
+.action-buttons .btn-primary:hover {
+    background-color: #0056b3; /* Màu nền khi hover */
+    transform: scale(1.05); /* Hiệu ứng phóng to nhẹ khi hover */
+}
+
+/* Định dạng cho nút hủy */
+.action-buttons .btn-danger {
+    background-color: #dc3545; /* Màu nền đỏ */
+    color: white;
+    border: 1px solid #dc3545;
+    padding: 5px 15px;
+    font-size: 14px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.action-buttons .btn-danger:hover {
+    background-color: #c82333; /* Màu nền khi hover */
+    transform: scale(1.05); /* Hiệu ứng phóng to nhẹ khi hover */
+}
 
 </style>
 
@@ -131,13 +157,12 @@
         <label for="filter" class="form-label me-2">Trạng thái:</label>
         <select id="filter" class="form-select" onchange="filterBookings()">
             <option value="all">Tất cả</option>
-            <option value="pending">🟡 Chờ xác nhận</option>
-            <option value="confirmed">✅ Đã xác nhận</option>
-            <option value="cancelled">❌ Đã hủy</option>
+            <option value="Pending">Chờ xác nhận</option>
+            <option value="Confirmed">Đã xác nhận</option>
+            <option value="Cancelled">Đã hủy</option>
         </select>
     </div>
     
-
     <!-- Khung bảng cố định -->
     <div class="table-container">
         <table class="table table-bordered">
@@ -145,88 +170,45 @@
                 <tr>
                     <th>Mã booking</th>
                     <th>Tên khách hàng</th>
-                    <th>Tên thú cưng</th>
-                    <th>Check-in & Check-out</th>
+                    <th>Thời gian</th>
                     <th>Trạng thái</th>
-                    <th>Thanh toán</th>
                     <th>Hành động</th>
                 </tr>
             </thead>
+            {% for booking in bookings %}
             <tbody>
-                <!-- Dữ liệu nhập sẵn -->
-                <tr class="booking-row" data-status="pending">
-                    <td>BK001</td>
-                    <td>Nguyễn Văn A</td>
-                    <td>Milu</td>
-                    <td>10/02/2025 - 15/02/2025</td>
-                    <td class="status">🟡 Chờ xác nhận</td>
-                    <td>0 VND</td>
+                <tr class="booking-row" data-status="{{ booking.status }}">
+                    <td> {{ booking.id }} </td>
+                    <td> {{ booking.name }} </td>
+                    <td>{{ booking.date | date:"d/m/Y" }} - {{ booking.time }}</td>
+                    <td class="status">{{ booking.get_status_display }}</td>
                     <td>
                         <div class="action-buttons">
-                            <button class="btn btn-success btn-sm confirm-btn" onclick="confirmBooking(this)">✅ Xác nhận</button>
-                            <button class="btn btn-danger btn-sm" onclick="cancelBooking(this)">❌ Hủy</button>
-                            <button class="btn btn-primary btn-sm">📝 Chỉnh sửa</button>
+                            {% if booking.status == 'Pending' %}
+                                <form action="{% url 'staff:confirm_booking' booking.id %}" method="POST">
+                                    {% csrf_token %}
+                                    <button class="btn btn-primary btn-sm" type="submit">Xác nhận</button>
+                                </form>
+                            {% endif %}
+                            <form action="{% url 'staff:cancel_booking' booking.id %}" method="POST">
+                                {% csrf_token %}
+                                <button class="btn btn-danger btn-sm" type="submit">Hủy</button>
+                            </form>
                         </div>
-                    </td>                    
-                </tr>
-                <tr class="booking-row" data-status="confirmed">
-                    <td>BK002</td>
-                    <td>Trần Thị B</td>
-                    <td>Momo</td>
-                    <td>12/02/2025 - 16/02/2025</td>
-                    <td class="status">✅ Đã xác nhận</td>
-                    <td>500,000 VND</td>
-                    <td>
-                        <div class="action-buttons">
-                            <button class="btn btn-danger btn-sm" onclick="cancelBooking(this)">❌ Hủy</button>
-                            <button class="btn btn-primary btn-sm">📝 Chỉnh sửa</button>
-                        </div>
-                    </td>                    
+                    </td>
                 </tr>
             </tbody>
+            {% endfor %}
         </table>
     </div>
 </div>
 
-<!-- JavaScript để xử lý hành động -->
 <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        // Ẩn nút "Xác nhận" nếu không phải "Chờ xác nhận"
-        document.querySelectorAll(".booking-row").forEach(row => {
-            let status = row.getAttribute("data-status");
-            let confirmBtn = row.querySelector(".confirm-btn");
-            if (status !== "pending" && confirmBtn) {
-                confirmBtn.style.display = "none";
-            }
-        });
-    });
-    
-    function confirmBooking(button) {
-        let row = button.closest("tr");
-        row.querySelector(".status").innerHTML = "✅ Đã xác nhận";
-        row.setAttribute("data-status", "confirmed");
-    
-        // Ẩn nút xác nhận sau khi nhấn
-        button.style.display = "none";
-    }
-    
-    function cancelBooking(button) {
-        let row = button.closest("tr");
-        row.querySelector(".status").innerHTML = "❌ Đã hủy";
-        row.setAttribute("data-status", "cancelled");
-    
-        // Ẩn nút xác nhận nếu đã hủy
-        let confirmBtn = row.querySelector(".confirm-btn");
-        if (confirmBtn) {
-            confirmBtn.style.display = "none";
-        }
-    }
-    
     // Cập nhật bộ lọc trạng thái
     function filterBookings() {
         let filterValue = document.getElementById("filter").value;
         let rows = document.querySelectorAll(".booking-row");
-    
+
         rows.forEach(row => {
             let status = row.getAttribute("data-status");
             if (filterValue === "all" || status === filterValue) {
@@ -236,6 +218,6 @@
             }
         });
     }
-    
 </script>
+
 {% endblock booking %}

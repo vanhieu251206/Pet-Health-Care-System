@@ -3,6 +3,8 @@ from django.http import HttpResponse
 from pets.models import Product, Appointment
 from .models import Room
 from django.contrib import messages
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
 
 def lich_hen(request):
     context = {}
@@ -12,13 +14,9 @@ def tong_quan(request):
     context = {}
     return render(request, 'staff/tong_quan.html', context)
 
-def phong_luu_tru(request):
-    context = {}
-    return render(request, 'staff/phong_luu_tru.html', context)
-
 def booking(request):
-    context = {}
-    return render(request, 'staff/booking.html', context)
+    bookings = Appointment.objects.filter(service="Lưu trú")
+    return render(request, 'staff/booking.html', {"bookings": bookings})
 
 def theo_doi(request):
     context = {}
@@ -37,7 +35,7 @@ def product_list(request):
     return render(request, 'staff/quan_ly_san_pham.html', {'products': products})
 
 def appointment_list(request):
-    appointments = Appointment.objects.all()  
+    appointments = Appointment.objects.exclude(service="Lưu trú")  
     return render(request, 'staff/lich_hen.html', {'appointments': appointments})
 
 def update_appointment_status(request, appointment_id):
@@ -95,3 +93,28 @@ def enter_room(request):
             return render(request, 'staff/phong_luu_tru.html', {'error': 'Mã chuồng không tồn tại'})
 
     return render(request, 'staff/phong_luu_tru.html', {'available_rooms': available_rooms})
+
+@csrf_exempt
+def confirm_booking(request, booking_id):
+    if request.method == 'POST':
+        try:
+            booking = Appointment.objects.get(id=booking_id)
+            booking.status = 'Confirmed' 
+            booking.save()
+
+            return redirect('staff:booking') 
+        except Appointment.DoesNotExist:
+            return JsonResponse({'success': False, 'error': 'Booking not found'})
+
+@csrf_exempt
+def cancel_booking(request, booking_id):
+    if request.method == 'POST':
+        try:
+            booking = Appointment.objects.get(id=booking_id)
+            booking.status = 'Cancelled' 
+            booking.save()
+
+            return redirect('staff:booking')  
+        except Appointment.DoesNotExist:
+            return JsonResponse({'success': False, 'error': 'Booking not found'})
+

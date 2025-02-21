@@ -206,6 +206,7 @@ def update_cart(request, item_id):
 
     return redirect("pets:cart_view")
 
+@login_required(login_url="pets:login_page")
 def create_appointment(request):
     if request.method == 'POST':
         name = request.POST.get('name')
