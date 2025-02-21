@@ -18,5 +18,10 @@ def ho_so_benh_an(request):
     context = {}
     return render(request,'doctor/ho_so_benh_an.html', context)
 
+def quan_ly_tai_khoan(request):
+    context = {}
+    return render(request, 'doctor/quan_ly_tai_khoan.html', context)
+
+
 
 

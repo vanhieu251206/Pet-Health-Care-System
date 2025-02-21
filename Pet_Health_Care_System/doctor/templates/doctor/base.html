@@ -168,7 +168,7 @@
     <li><a href="{% url "doctor:ho_so_benh_an" %}">📝 Hồ sơ bệnh án thú cưng</a></li>
     <li><a href="#">🐾 Theo dõi & chăm sóc thú cưng nhập viện</a></li>
     <li><a href="#">📊 Báo cáo & Thống kê</a></li>
-    <li><a href="#">⚙️ Cài đặt & Quản lý tài khoản</a></li>
+    <li><a href="{% url "doctor:quan_ly_tai_khoan" %}">⚙️ Cài đặt & Quản lý tài khoản</a></li>
 </ul>
   </div>
   <div class="main-content">
@@ -199,5 +199,6 @@
   {% block main-contain %}{% endblock main-contain %}
   {% block lich_lam_viec %}{% endblock lich_lam_viec %}
   {% block ho_so_benh_an %}{% endblock ho_so_benh_an %}
+  {% block quan_ly_tai_khoan %}{% endblock quan_ly_tai_khoan %}
  </body>
 </html>
