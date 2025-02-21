@@ -168,7 +168,7 @@ Quản lý lịch hẹn
             <tr>
                 <td>{{ appointment.name }}</td>
                 <td>{{ appointment.phone }}</td>
-                <td>{{ appointment.date }}</td>
+                <td>{{ appointment.date | date:"d/m/Y" }}</td>
                 <td>{{ appointment.time }}</td>
                 <td>{{ appointment.service }}</td>
                 <td>{{ appointment.branch }}</td>

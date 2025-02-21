@@ -17,8 +17,8 @@ def phong_luu_tru(request):
     return render(request, 'staff/phong_luu_tru.html', context)
 
 def booking(request):
-    context = {}
-    return render(request, 'staff/booking.html', context)
+    bookings = Appointment.objects.filter(service="Lưu trú")
+    return render(request, 'staff/booking.html', {"bookings": bookings})
 
 def theo_doi(request):
     context = {}
@@ -37,7 +37,7 @@ def product_list(request):
     return render(request, 'staff/quan_ly_san_pham.html', {'products': products})
 
 def appointment_list(request):
-    appointments = Appointment.objects.all()  
+    appointments = Appointment.objects.exclude(service="Lưu trú")  
     return render(request, 'staff/lich_hen.html', {'appointments': appointments})
 
 def update_appointment_status(request, appointment_id):

@@ -145,45 +145,26 @@
                 <tr>
                     <th>Mã booking</th>
                     <th>Tên khách hàng</th>
-                    <th>Tên thú cưng</th>
-                    <th>Check-in & Check-out</th>
+                    <th>Thời gian</th>
                     <th>Trạng thái</th>
-                    <th>Thanh toán</th>
                     <th>Hành động</th>
                 </tr>
             </thead>
+            {% for booking in bookings %}
             <tbody>
-                <!-- Dữ liệu nhập sẵn -->
-                <tr class="booking-row" data-status="pending">
-                    <td>BK001</td>
-                    <td>Nguyễn Văn A</td>
-                    <td>Milu</td>
-                    <td>10/02/2025 - 15/02/2025</td>
-                    <td class="status">🟡 Chờ xác nhận</td>
-                    <td>0 VND</td>
-                    <td>
-                        <div class="action-buttons">
-                            <button class="btn btn-success btn-sm confirm-btn" onclick="confirmBooking(this)">✅ Xác nhận</button>
-                            <button class="btn btn-danger btn-sm" onclick="cancelBooking(this)">❌ Hủy</button>
-                            <button class="btn btn-primary btn-sm">📝 Chỉnh sửa</button>
-                        </div>
-                    </td>                    
-                </tr>
                 <tr class="booking-row" data-status="confirmed">
-                    <td>BK002</td>
-                    <td>Trần Thị B</td>
-                    <td>Momo</td>
-                    <td>12/02/2025 - 16/02/2025</td>
-                    <td class="status">✅ Đã xác nhận</td>
-                    <td>500,000 VND</td>
+                    <td> {{ booking.id }} </td>
+                    <td> {{ booking.name }} </td>
+                    <td>{{ booking.date | date:"d/m/Y" }} - {{ booking.time }}</td>
+                    <td class="status">{{ booking.get_status_display }}</td>
                     <td>
                         <div class="action-buttons">
                             <button class="btn btn-danger btn-sm" onclick="cancelBooking(this)">❌ Hủy</button>
-                            <button class="btn btn-primary btn-sm">📝 Chỉnh sửa</button>
                         </div>
                     </td>                    
                 </tr>
             </tbody>
+            {% endfor %}
         </table>
     </div>
 </div>

@@ -46,7 +46,6 @@ class CartItem(models.Model):
     def __str__(self):
         return f"{self.quantity} x {self.product.name} trong giỏ hàng của {self.cart.user.username}"
 
-# Mô hình Appointment
 class Appointment(models.Model):
     name = models.CharField(max_length=100)  
     phone = models.CharField(max_length=15)  
@@ -57,8 +56,7 @@ class Appointment(models.Model):
     doctor = models.CharField(max_length=100)  
     status = models.CharField(
         max_length=20,
-        choices=[('Pending', 'Chờ xác nhận'), ('Confirmed', 'Đã xác nhận'), 
-                 ('Completed', 'Đã hoàn thành'), ('Cancelled', 'Hủy')],
+        choices=[('Pending', 'Chờ xác nhận'), ('Confirmed', 'Đã xác nhận'), ('Cancelled', 'Hủy')],
         default='Pending'
     )
 
