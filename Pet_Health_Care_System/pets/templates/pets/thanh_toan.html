@@ -215,7 +215,10 @@
     align-items: center; /* Căn giữa theo chiều dọc */
     margin-top: 20px;
   }
-  
+  .edit-address-icon i {
+    font-size: 20px;
+    cursor: pointer;
+  }
   
 
 </style>
@@ -232,7 +235,7 @@
       <p>{{ address.district }}, {{ address.city }}, {{ address.province }}</p>
      
       <!-- Nút sửa địa chỉ -->
-      <span class="edit-address-icon" onclick="showModal()">✏️</span>
+      <span class="edit-address-icon" onclick="showModal()"><i class="fas fa-edit"></i></span>
     </div>
   {% else %}
     <!-- Nút thêm địa chỉ nếu chưa có địa chỉ -->

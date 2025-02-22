@@ -117,4 +117,17 @@ def cancel_booking(request, booking_id):
             return redirect('staff:booking')  
         except Appointment.DoesNotExist:
             return JsonResponse({'success': False, 'error': 'Booking not found'})
+        
+def add_product(request):
+    if request.method == "POST":
+        name = request.POST.get('name')
+        price = request.POST.get('price')
+        image = request.FILES.get('image')
+
+        if name and price and image:
+            product = Product(name=name, price=price, image=image)
+            product.save()
+            return redirect('staff:quan_ly_san_pham')
+
+    return render(request, 'staff/add_product.html')
 

@@ -179,7 +179,7 @@
             <tbody>
                 {% for appointment in appointments %}
                 <tr>
-                    <td>{{ appointment.name }}</td>
+                    <td>{{ appointment.booked_by }}</td>
                     <td>{{ appointment.phone }}</td>
                     <td>{{ appointment.date | date:"d/m/Y" }} - {{ appointment.time | time:"H:i" }}</td>
                     <td>{{ appointment.service }}</td>
