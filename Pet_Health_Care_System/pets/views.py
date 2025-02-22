@@ -5,7 +5,7 @@ from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, get_user_model, logout
 from django.contrib import messages
-from .models import Product, Cart, CartItem, Appointment, Pet, CustomUser
+from .models import Product, Cart, CartItem, Appointment, Pet, CustomUser, Address
 from staff.views import tong_quan
 from doctor.views import tong_quan
 from QTV.views import tong_quan
@@ -53,6 +53,28 @@ def register_page(request):
     context ={}
     return render(request, 'pets/register_page.html', context)
 
+@login_required(login_url="pets:login_page")
+def thanh_toan(request):
+    cart, created = Cart.objects.get_or_create(user=request.user)
+    cart_items = CartItem.objects.filter(cart=cart)
+    total_price = sum(item.total_price() for item in cart_items)
+
+    address = Address.objects.filter(user=request.user).first()
+
+    if not cart_items:
+        messages.error(request, "Giỏ hàng của bạn đang trống. Vui lòng thêm sản phẩm vào giỏ hàng.")
+        return redirect("pets:shop")
+
+    context = {
+        'cart_items': cart_items,
+        'total_price': total_price,
+        'address': address
+    }
+
+    return render(request, 'pets/thanh_toan.html', context)
+
+
+
 def dat_lich(request):
     doctors = CustomUser.objects.filter(role = 'doctor')
     return render(request, 'pets/dat_lich.html', {'doctors': doctors})
@@ -68,6 +90,8 @@ def my_pets(request):
 def lich_hen_cua_toi(request):
     appointments = Appointment.objects.filter(customer_id = request.user.id)
     return render(request, 'pets/lich_hen_cua_toi.html', {'appointments': appointments})
+
+
 
 def login_view(request):
     if request.method == "POST":
@@ -357,6 +381,39 @@ def edit_pet(request, pet_id):
         return redirect('pets:my_pets')
 
     return render(request, 'pets/edit_pet.html', {'pet': pet})
+
+@login_required(login_url="pets:login_page")
+def add_address(request):
+    if request.method == "POST":
+        full_name = request.POST.get("full_name")
+        phone = request.POST.get("phone")
+        street_address = request.POST.get("street_address")
+        city = request.POST.get("city")
+        district = request.POST.get("district")
+        province = request.POST.get("province")
+
+        # Kiểm tra nếu có dữ liệu cũ
+        address, created = Address.objects.get_or_create(user=request.user)
+        address.full_name = full_name
+        address.phone = phone
+        address.street_address = street_address
+        address.city = city
+        address.district = district
+        address.province = province 
+        address.save()
+
+        # Trả về JSON sau khi lưu thành công
+        if created:
+            message = "Địa chỉ đã được tạo thành công!"
+        else:
+            message = "Địa chỉ đã được cập nhật thành công!"
+
+        return JsonResponse({"status": "success", "message": message})
+
+    return JsonResponse({"status": "error", "message": "Đã có lỗi xảy ra!"})
+
+
+
 
 
 

@@ -1,0 +1,381 @@
+{% extends "pets/base.html" %}
+{% load static %}
+
+{% block thanh_toan %}
+<style>
+  /* Container chính của trang thanh toán */
+  .checkout-container {
+    background-color: #ffffff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Tiêu đề phần thanh toán */
+  .checkout-header {
+    background-color: #198754;
+    color: white;
+    padding: 15px;
+    border-radius: 5px;
+    font-size: 1.4rem;
+    font-weight: bold;
+    text-align: center;
+  }
+
+  /* Bảng sản phẩm */
+  .table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+
+  .table th {
+    background-color: #f8f9fa;
+    text-align: center;
+    vertical-align: middle;
+    padding: 12px;
+    font-weight: bold;
+    font-size: 1rem;
+  }
+
+  .table td {
+    vertical-align: middle;
+    text-align: center;
+    padding: 12px;
+    border-bottom: 1px solid #dee2e6;
+  }
+
+  /* Cột sản phẩm với ảnh */
+  .cart-img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 8px;
+  }
+
+  .total-price {
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: #198754;
+  }
+
+  /* Nút thanh toán */
+  .checkout-btn {
+    background-color: #198754;
+    color: white;
+    font-size: 1.1rem;
+    font-weight: bold;
+    border-radius: 5px;
+    padding: 10px 20px;
+    display: block;
+    text-align: center;
+    width: fit-content;
+    margin: 20px auto;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+  }
+
+  .checkout-btn:hover {
+    background-color: #146c43;
+  }
+
+  .form-control {
+    border-radius: 5px;
+  }
+
+  .form-group {
+    margin-bottom: 15px;
+  }
+
+  .btn-remove {
+    background-color: #dc3545;
+    color: white;
+    border-radius: 5px;
+    padding: 5px 10px;
+    text-decoration: none;
+    font-size: 14px;
+  }
+
+  .btn-remove:hover {
+    background-color: #b02a37;
+  }
+
+  .text-end {
+    text-align: right;
+  }
+
+  /* Định dạng khung địa chỉ */
+  .address-box {
+    background-color: #f8f9fa;
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 20px;
+    font-size: 1rem;
+    color: #333;
+    position: relative;
+  }
+
+  .address-box h6 {
+    font-size: 1.3rem;
+    font-weight: bold;
+  }
+
+  .edit-address-icon {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 1.5rem;
+    color: #198754;
+    cursor: pointer;
+  }
+
+  .edit-address-icon:hover {
+    color: #146c43;
+  }
+
+  /* Modal */
+  .modal {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1050;
+    width: 90%;
+    max-width: 600px;
+  }
+
+  .modal.show {
+    display: block;
+  }
+
+  .modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1040;
+  }
+
+  .modal-content {
+    padding: 20px;
+  }
+
+  .btn-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #dc3545;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .btn-close:hover {
+    background-color: #b02a37;
+  }
+
+  .modal form input,
+  .modal form textarea,
+  .modal form select {
+    margin-bottom: 10px;
+    
+  }
+
+  #payment-btn {
+    background-color: #198754;
+    color: white;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    padding: 12px 24px;
+    display: block; /* Giúp căn giữa với margin auto */
+    width: fit-content; /* Định kích thước theo nội dung */
+    margin: 20px auto; /* Căn giữa theo chiều ngang */
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+  }
+  
+  #payment-btn:hover {
+    background-color: #146c43;
+  }
+
+  .payment-container {
+    display: flex;
+    justify-content: center; /* Căn giữa theo chiều ngang */
+    align-items: center; /* Căn giữa theo chiều dọc */
+    margin-top: 20px;
+  }
+  
+  
+
+</style>
+
+<div class="container mt-4 checkout-container">
+  <div class="checkout-header">🛒 Thanh toán đơn hàng</div>
+  
+  {% if address %}
+    <!-- Hiển thị địa chỉ của khách hàng nếu có -->
+    <div class="address-box">
+      <h6>Địa chỉ giao hàng</h6>
+      <p><strong>{{ address.full_name }} </strong>{{ address.phone }}</p>
+      <p>{{ address.street_address }}</p>
+      <p>{{ address.district }}, {{ address.city }}, {{ address.province }}</p>
+     
+      <!-- Nút sửa địa chỉ -->
+      <span class="edit-address-icon" onclick="showModal()">✏️</span>
+    </div>
+  {% else %}
+    <!-- Nút thêm địa chỉ nếu chưa có địa chỉ -->
+    <button class="checkout-btn" onclick="showModal()">Thêm địa chỉ giao hàng</button>
+  {% endif %}
+
+  <!-- Bảng giỏ hàng -->
+  <table class="table mt-3">
+    <thead>
+      <tr>
+        <th style="width: 35%;">Sản phẩm</th>
+        <th style="width: 20%;">Đơn giá</th>
+        <th style="width: 20%;">Số lượng</th>
+        <th style="width: 20%;">Thành tiền</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for item in cart_items %}
+      <tr>
+        <td class="d-flex align-items-center product-name">
+          <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}" class="cart-img me-3">
+          <div>
+            <h6 class="my-0">{{ item.product.name }}</h6>
+          </div>
+        </td>
+        <td>{{ item.product.price }} VND</td>
+        <td>{{ item.quantity }}</td>
+        <td class="total-price">{{ item.total_price }} VND</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="3" class="text-end fw-bold">TỔNG THANH TOÁN (VNĐ)</td>
+        <td class="total-price">{{ total_price }} VND</td>
+      </tr>
+    </tfoot>
+  </table>
+
+  <!-- Modal Thêm/Sửa địa chỉ -->
+  <div class="modal" id="addressModal">
+    <div class="modal-content">
+      <span class="btn-close" onclick="closeModal()">X</span>
+      <h4>Thêm/Sửa địa chỉ</h4>
+      <form id="addressForm">
+        {% csrf_token %}
+        <div class="form-group">
+          <label>Họ và tên</label>
+          <input type="text" class="form-control" name="full_name" value="{{ address.full_name }}" required>
+        </div>
+        <div class="form-group">
+          <label>Số điện thoại</label>
+          <input type="text" class="form-control" name="phone" value="{{ address.phone }}" required>
+        </div>
+        <div class="form-group">
+          <label>Địa chỉ</label>
+          <input type="text" class="form-control" name="street_address" value="{{ address.street_address }}" required>
+        </div>
+        <div class="form-group">
+          <label>Xã/Phường</label>
+          <input type="text" class="form-control" name="district" value="{{ address.district }}" required>
+        </div>
+        <div class="form-group">
+          <label>Quận/Huyện</label>
+          <input type="text" class="form-control" name="city" value="{{ address.city }}" required>
+        </div>
+        <div class="form-group">
+          <label>Tỉnh/Thành Phố</label>
+          <input type="text" class="form-control" name="province" value="{{ address.province }}" required>
+        </div>
+        <button type="submit" class="btn btn-success">Lưu địa chỉ</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="payment-container">
+    <button id="payment-btn">Thanh toán</button>
+  </div>
+
+</div>
+
+<script>
+  // Hiển thị modal
+  function showModal() {
+    document.getElementById('addressModal').classList.add('show');
+    document.querySelector('.modal-backdrop').classList.add('show');
+  }
+
+  // Đóng modal
+  function closeModal() {
+    document.getElementById('addressModal').classList.remove('show');
+    document.querySelector('.modal-backdrop').classList.remove('show');
+  }
+
+  // Gửi dữ liệu địa chỉ qua AJAX
+  document.getElementById("addressForm").addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    var formData = new FormData(this);
+    
+    fetch("{% url 'pets:add_address' %}", {
+      method: 'POST',
+      body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (data.status === 'success') {
+        alert(data.message);
+        location.reload();  // Làm mới trang để hiển thị địa chỉ mới
+        closeModal();
+      } else {
+        alert('Đã có lỗi xảy ra!');
+      }
+    })
+    .catch(error => {
+      console.error('Error:', error);
+      alert('Đã có lỗi xảy ra!');
+    });
+  });
+  document.getElementById("addressForm").addEventListener("submit", function(event) {
+    event.preventDefault();  // Ngừng hành động mặc định của form
+  
+    var formData = new FormData(this);  // Lấy dữ liệu từ form
+    
+    fetch("{% url 'pets:add_address' %}", {
+      method: 'POST',
+      body: formData
+    })
+    .then(response => response.json())  // Chuyển đổi dữ liệu nhận về thành JSON
+    .then(data => {
+      if (data.status === 'success') {
+        alert(data.message);  // Hiển thị thông báo thành công
+        location.reload();  // Làm mới trang để cập nhật địa chỉ mới
+        closeModal();  // Đóng modal sau khi lưu địa chỉ
+      } else {
+        alert('Đã có lỗi xảy ra!');
+      }
+    })
+    .catch(error => {
+      console.error('Error:', error);
+      alert('Đã có lỗi xảy ra!');
+    });
+  });
+</script>
+
+{% endblock thanh_toan %}

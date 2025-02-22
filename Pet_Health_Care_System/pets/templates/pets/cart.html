@@ -154,7 +154,7 @@
     </tfoot>
   </table>
 
-  <a href="#" class="checkout-btn">🛍️ Tiếp tục thanh toán</a>
+  <a href="{% url "pets:thanh_toan" %}" class="checkout-btn">🛍️ Thanh toán</a>
 
   {% else %}
   <p class="text-center mt-4">Giỏ hàng của bạn đang trống. <a href="{% url "pets:shop" %}">Quay lại mua sắm</a></p>

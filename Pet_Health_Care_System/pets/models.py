@@ -76,4 +76,19 @@ class Pet(models.Model):
 
     def __str__(self):
         return self.name
+    
+class Address(models.Model):
+    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, related_name='user_address')  
+    full_name = models.CharField(max_length=255)  
+    phone = models.CharField(max_length=15)  
+    street_address = models.CharField(max_length=255)  
+    city = models.CharField(max_length=100)  
+    district = models.CharField(max_length=100)  
+    province = models.CharField(max_length=100)  
+    
+    def __str__(self):
+        return f"{self.full_name} - {self.street_address}, {self.city}, {self.province}"
 
+    class Meta:
+        verbose_name = 'Địa chỉ'
+        verbose_name_plural = 'Địa chỉ'

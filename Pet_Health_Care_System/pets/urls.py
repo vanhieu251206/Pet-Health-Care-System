@@ -10,7 +10,7 @@ urlpatterns = [
     path('', lambda request: redirect('guest_dashboard/')),
     path('guest_dashboard/', views.guest_dashboard, name = "guest_dashboard"),
     path('cart/', cart_view, name="cart_view"),
-    path('checkout/', views.checkout, name="checkout"),
+    path('thanh_toan/', views.thanh_toan, name="thanh_toan"),
     path('login_page/', views.login_page, name="login_page"),
     path('register_page/', views.register_page, name="register_page"),
     path('dashboard_customer/', views.dashboard_customer, name='customer_dashboard'),
@@ -32,5 +32,5 @@ urlpatterns = [
     path('my_pets/', views.my_pets, name='my_pets'),
     path('delete_pet/<int:pet_id>/', views.delete_pet, name='delete_pet'),
     path('edit_pet/<int:pet_id>/', views.edit_pet, name='edit_pet'),
-    
+    path('add_address/', views.add_address, name="add_address"),
 ]
