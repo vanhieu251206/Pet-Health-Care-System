@@ -5,7 +5,7 @@ from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, get_user_model, logout
 from django.contrib import messages
-from .models import Product, Cart, CartItem, Appointment, Pet
+from .models import Product, Cart, CartItem, Appointment, Pet, CustomUser
 from staff.views import tong_quan
 from doctor.views import tong_quan
 from QTV.views import tong_quan
@@ -64,6 +64,10 @@ def shop(request):
 def my_pets(request):
     pets = Pet.objects.all()  
     return render(request, 'pets/my_pets.html', {'pets': pets})
+
+def lich_hen_cua_toi(request):
+    appointments = Appointment.objects.filter(customer_id = request.user.id)
+    return render(request, 'pets/lich_hen_cua_toi.html', {'appointments': appointments})
 
 def login_view(request):
     if request.method == "POST":
@@ -206,13 +210,17 @@ def update_cart(request, item_id):
 
     return redirect("pets:cart_view")
 
-@login_required(login_url="pets:login_page")
+@login_required(login_url="pets:login_page") 
 def create_appointment(request):
-    # Lọc các bác sĩ có vai trò 'doctor'
     doctors = CustomUser.objects.filter(role='doctor')
 
+    if request.user.is_authenticated:
+        customer_id = request.user.id  
+    else:
+        customer_id = None  
+
     if request.method == 'POST':
-        name = request.POST.get('name')
+        booked_by = request.POST.get('booked_by', '').strip()  
         phone = request.POST.get('phone')
         date = request.POST.get('date')
         time = request.POST.get('time')
@@ -220,23 +228,27 @@ def create_appointment(request):
         branch = request.POST.get('branch')
         doctor_name = request.POST.get('doctor')
 
-        if name and phone and date and time and service and branch and doctor_name:
+        print(f"booked_by: {booked_by}, phone: {phone}, date: {date}, time: {time}, service: {service}, branch: {branch}, doctor_name: {doctor_name}")
+
+        if booked_by and phone and date and time and service and branch and doctor_name:
             Appointment.objects.create(
-                name=name,
+                booked_by=booked_by,
                 phone=phone,
                 date=date,
                 time=time,
                 service=service,
                 branch=branch,
-                doctor=doctor_name  
+                doctor=doctor_name,
+                customer_id=customer_id if request.user.is_authenticated else None, 
             )
 
             messages.success(request, 'Lịch hẹn đã được đặt thành công!')
-            return redirect('pets:create_appointment')  
+            return redirect('pets:create_appointment')
         else:
             messages.error(request, 'Vui lòng điền đầy đủ thông tin.')
 
     return render(request, 'pets/dat_lich.html', {"doctors": doctors})
+
 
 @login_required
 def update_profile(request):

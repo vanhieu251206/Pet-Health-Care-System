@@ -182,17 +182,7 @@
           <img src="{% if user.avatar %}{{ user.avatar.url }}{% else %}{% static 'pets/images/default-avatar.png' %}{% endif %}" alt="Avatar" class="rounded-circle me-2 user-avatar">
           <span class="user-name">{{ user.username }}</span>
       </a>
-      <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-          <li><a class="dropdown-item" href="#">Thông tin tài khoản</a></li>
-          <li>
-              <form action="{% url 'pets:logout' %}" method="post" style="display: inline;">
-                  {% csrf_token %}
-                  <button type="submit" class="dropdown-item text-danger logout-button">Đăng xuất</button>
-              </form>
-          </li>
-      </ul>
-  </div>
-  
+    </div>
    </div>
   </div>
   {% endblock navbar %}

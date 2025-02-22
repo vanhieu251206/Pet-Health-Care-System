@@ -21,6 +21,7 @@ urlpatterns = [
     path('shop/', views.shop, name='shop'),
     path('dat_lich/', views.dat_lich, name='dat_lich'),
     path("login/", login_view, name="login_view"),
+    path("lich_hen_cua_toi/", views.lich_hen_cua_toi, name="lich_hen_cua_toi"),
     path("register/", register_view, name="register_view"),
     path('logout/', auth_views.LogoutView.as_view(next_page='pets:login_page'), name='logout'),
     path("add_to_cart/<int:product_id>/", add_to_cart, name="add_to_cart"),
@@ -31,4 +32,5 @@ urlpatterns = [
     path('my_pets/', views.my_pets, name='my_pets'),
     path('delete_pet/<int:pet_id>/', views.delete_pet, name='delete_pet'),
     path('edit_pet/<int:pet_id>/', views.edit_pet, name='edit_pet'),
+    
 ]

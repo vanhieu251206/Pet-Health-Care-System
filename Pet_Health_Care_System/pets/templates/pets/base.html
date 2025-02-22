@@ -90,6 +90,7 @@
                       <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="{% url "pets:profile" %}">Thông tin tài khoản</a></li>
                         <li><a class="dropdown-item" href="{% url "pets:my_pets" %}">Thú cưng của tôi</a></li>
+                        <li><a class="dropdown-item" href="{% url "pets:lich_hen_cua_toi" %}">Lịch hẹn</a></li>
                         <li>
                           <form action="{% url 'pets:logout' %}" method="post" style="display: inline;">
                               {% csrf_token %}
@@ -135,6 +136,7 @@
         {% block profile %}{% endblock profile %}
         {% block my_pets %}{% endblock my_pets %}
         {% block edit_pet %}{% endblock edit_pet %}
+        {% block lich_hen_cua_toi %}{% endblock lich_hen_cua_toi %}
         <!-- footer -->
         <footer>
           <div class="footer-container">

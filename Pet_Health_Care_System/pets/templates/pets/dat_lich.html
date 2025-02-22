@@ -4,7 +4,7 @@
 <style>
     .appointment-form {
         max-width: 600px;
-        margin: 40px auto; /* Adds space above and below the form */
+        margin: 40px auto;
         padding: 20px;
         background-color: #f4f4f4;
         border-radius: 8px;
@@ -36,7 +36,6 @@
         border: 1px solid #ccc;
     }
 
-    /* Adjust layout for Họ và tên and Số điện thoại to be on the same row */
     .form-row {
         display: flex;
         justify-content: space-between;
@@ -47,7 +46,6 @@
         flex: 1;
     }
 
-    /* Adjust layout for Ngày and Giờ to be on the same row */
     .form-date-time {
         display: flex;
         justify-content: space-between;
@@ -58,7 +56,6 @@
         flex: 1;
     }
 
-    /* Adjust layout for Dịch vụ and Chi nhánh to be on the same row */
     .form-service-branch {
         display: flex;
         justify-content: space-between;
@@ -90,13 +87,14 @@
 </style>
 
 <div class="appointment-form">
-    <h2>ĐẶT LỊCH KHÁM SỨC KHỎE DỊCH VỤ CHĂM SÓC THÚ CUNG</h2>
+    <h2>ĐẶT LỊCH KHÁM SỨC KHỎE DỊCH VỤ CHĂM SÓC THÚ CƯNG</h2>
     <form action="{% url "pets:create_appointment" %}" method="post">
         {% csrf_token %}
+        
         <div class="form-row">
             <div class="form-group">
-                <label for="name">Họ và tên</label>
-                <input type="text" id="name" name="name" placeholder="Nhập họ và tên" required>
+                <label for="booked_by">Họ và tên</label>
+                <input type="text" id="booked_by" name="booked_by" placeholder="Nhập họ và tên" required>
             </div>
             <div class="form-group">
                 <label for="phone">Số điện thoại</label>
@@ -139,10 +137,11 @@
             <label for="doctor">Chọn bác sĩ</label>
             <select id="doctor" name="doctor" required>
                 {% for doctor in doctors %}
-                <option value="{{doctor.full_name}}">{{doctor.full_name}}</option>
+                <option value="{{ doctor.full_name }}">{{ doctor.full_name }}</option>
                 {% endfor %}
             </select>
         </div>
+
         <button type="submit" class="submit-button">ĐẶT LỊCH NGAY</button>
     </form>
 </div>

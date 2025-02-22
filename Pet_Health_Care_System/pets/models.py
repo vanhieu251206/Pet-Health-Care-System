@@ -1,4 +1,3 @@
-# pets/models.py
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 
@@ -47,13 +46,14 @@ class CartItem(models.Model):
         return f"{self.quantity} x {self.product.name} trong giỏ hàng của {self.cart.user.username}"
 
 class Appointment(models.Model):
-    name = models.CharField(max_length=100)  
-    phone = models.CharField(max_length=15)  
-    date = models.DateField()  
-    time = models.TimeField()  
-    service = models.CharField(max_length=100) 
-    branch = models.CharField(max_length=100)   
-    doctor = models.CharField(max_length=100)  
+    customer = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name="appointments", null=True, blank=True)
+    booked_by = models.CharField(max_length=255, null=True, blank=True)  
+    phone = models.CharField(max_length=15)
+    date = models.DateField()
+    time = models.TimeField()
+    service = models.CharField(max_length=100)
+    branch = models.CharField(max_length=100)
+    doctor = models.CharField(max_length=100)
     status = models.CharField(
         max_length=20,
         choices=[('Pending', 'Chờ xác nhận'), ('Confirmed', 'Đã xác nhận'), ('Cancelled', 'Hủy')],
@@ -61,7 +61,7 @@ class Appointment(models.Model):
     )
 
     def __str__(self):
-        return f"Lịch hẹn cho {self.name} vào ngày {self.date} lúc {self.time}"
+        return f"Lịch hẹn của {self.customer.full_name} vào {self.date} lúc {self.time}"
 
 class Pet(models.Model):
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name="pets")
